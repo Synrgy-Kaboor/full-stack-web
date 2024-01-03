@@ -1,4 +1,3 @@
-import Button from "../../components/ui/button";
 import {
   Box,
   Grid,
@@ -11,18 +10,18 @@ import {
   Link,
   CardActions,
   IconButton,
-} from "@mui/material";
-import HealthAndSafetyOutlinedIcon from "@mui/icons-material/HealthAndSafetyOutlined";
-import CheckCircleIcon from "@mui/icons-material/CheckCircle";
-import ControlPointOutlinedIcon from "@mui/icons-material/ControlPointOutlined";
+} from '@mui/material';
+import HealthAndSafetyOutlinedIcon from '@mui/icons-material/HealthAndSafetyOutlined';
+import CheckCircleIcon from '@mui/icons-material/CheckCircle';
+import ControlPointOutlinedIcon from '@mui/icons-material/ControlPointOutlined';
 
-function AddOnsCard({ title }) {
+function AddOnsCard({ title }: { title: string }) {
   return (
     <Card variant="outlined">
       <CardContent sx={{ padding: 0 }}>
         <Stack direction="row" m={2} alignItems="center">
           <HealthAndSafetyOutlinedIcon fontSize="medium" />
-          <Typography sx={{ fontWeight: "bold" }} ml={1}>
+          <Typography sx={{ fontWeight: 'bold' }} ml={1}>
             {title}
           </Typography>
         </Stack>
@@ -45,7 +44,7 @@ function AddOnsCard({ title }) {
           </Link>
         </Box>
       </CardContent>
-      <CardActions disableSpacing sx={{ padding: "0" }}>
+      <CardActions disableSpacing sx={{ padding: '0' }}>
         <Stack
           direction="row"
           px={2}
@@ -53,18 +52,18 @@ function AddOnsCard({ title }) {
           m={0}
           alignItems="center"
           sx={{
-            backgroundColor: "#7B52AB",
-            width: "100%",
-            display: "flex",
-            flexDirection: "row",
-            justifyContent: "space-between",
+            backgroundColor: '#7B52AB',
+            width: '100%',
+            display: 'flex',
+            flexDirection: 'row',
+            justifyContent: 'space-between',
           }}
         >
-          <Typography sx={{ fontWeight: "bold", color: "white" }}>
+          <Typography sx={{ fontWeight: 'bold', color: 'white' }}>
             Rp 65.000/pax
           </Typography>
           <IconButton>
-            <ControlPointOutlinedIcon sx={{ color: "white" }} />
+            <ControlPointOutlinedIcon sx={{ color: 'white' }} />
           </IconButton>
         </Stack>
       </CardActions>
@@ -75,17 +74,17 @@ function AddOnsCard({ title }) {
 export default function LayananTambahan() {
   return (
     <Container>
-      <Typography variant="h6" sx={{ fontWeight: "bold" }}>
+      <Typography variant="h6" sx={{ fontWeight: 'bold' }}>
         Layanan Tambahan
       </Typography>
       <Grid container mt={0} spacing={2}>
         <Grid item xs={6}>
-          <AddOnsCard title={"Asuransi Perjalanan"} />
-          <AddOnsCard title={"Asuransi Bagasi"} />
-          <AddOnsCard title={"Proteksi Keterlambatan"} />
+          <AddOnsCard title={'Asuransi Perjalanan'} />
+          <AddOnsCard title={'Asuransi Bagasi'} />
+          <AddOnsCard title={'Proteksi Keterlambatan'} />
         </Grid>
         <Grid item xs={6}>
-          <AddOnsCard title={"Asuransi Perjalanan"} />
+          <AddOnsCard title={'Asuransi Perjalanan'} />
         </Grid>
       </Grid>
     </Container>
