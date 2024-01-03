@@ -1,20 +1,17 @@
-import { useState } from 'react'
-import { RouterProvider, createBrowserRouter } from 'react-router-dom'
+import { useState } from "react";
+import { RouterProvider, createBrowserRouter } from "react-router-dom";
 
-import { LayananTambahan } from './pages/Checkout'
+import { LayananTambahan } from "./pages/LayananTambahan";
 
 const router = createBrowserRouter([
   {
     path: "/layanan-tambahan",
-    element: <LayananTambahan />
-  }
-])
+    element: <LayananTambahan />,
+  },
+]);
 
 function App() {
-  
-  return (
-    <RouterProvider router={router} />
-  )
+  return <RouterProvider router={router} />;
 }
 
-export default App
+export default App;
