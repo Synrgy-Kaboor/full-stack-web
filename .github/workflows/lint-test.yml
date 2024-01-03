@@ -4,6 +4,7 @@ on:
     branches:
       - main
       - develop
+  workflow_call:
 jobs:
   lint-test:
     name: Lint and Test
