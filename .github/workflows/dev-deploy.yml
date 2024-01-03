@@ -5,7 +5,7 @@ on:
       - develop
 jobs:
   lint-test:
-    uses: Synrgy-Kaboor/full-stack-web/.github/workflows/lint-test.yml
+    uses: Synrgy-Kaboor/full-stack-web/.github/workflows/lint-test.yml@develop
   deploy:
     name: Build and Deploy
     runs-on: ubuntu-latest
