@@ -1,8 +1,6 @@
 import {
   Box,
-  Grid,
   Typography,
-  Container,
   Card,
   CardContent,
   Divider,
@@ -15,14 +13,22 @@ import HealthAndSafetyOutlinedIcon from '@mui/icons-material/HealthAndSafetyOutl
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import ControlPointOutlinedIcon from '@mui/icons-material/ControlPointOutlined';
 
-function AddOnsCard({ title }: { title: string }) {
+export default function AddOnsCard(props: { title: string; price: number }) {
+  const rupiah = new Intl.NumberFormat('en-ID', {
+    style: 'currency',
+    currency: 'IDR',
+    maximumSignificantDigits: 3,
+  });
+
+  const formattedPrice = rupiah.format(props.price);
+
   return (
     <Card variant="outlined">
       <CardContent sx={{ padding: 0 }}>
         <Stack direction="row" m={2} alignItems="center">
           <HealthAndSafetyOutlinedIcon fontSize="medium" />
           <Typography sx={{ fontWeight: 'bold' }} ml={1}>
-            {title}
+            {props.title}
           </Typography>
         </Stack>
         <Divider />
@@ -60,7 +66,7 @@ function AddOnsCard({ title }: { title: string }) {
           }}
         >
           <Typography sx={{ fontWeight: 'bold', color: 'white' }}>
-            Rp 65.000/pax
+            {formattedPrice}/pax
           </Typography>
           <IconButton>
             <ControlPointOutlinedIcon sx={{ color: 'white' }} />
@@ -68,25 +74,5 @@ function AddOnsCard({ title }: { title: string }) {
         </Stack>
       </CardActions>
     </Card>
-  );
-}
-
-export default function LayananTambahan() {
-  return (
-    <Container>
-      <Typography variant="h6" sx={{ fontWeight: 'bold' }}>
-        Layanan Tambahan
-      </Typography>
-      <Grid container mt={0} spacing={2}>
-        <Grid item xs={6}>
-          <AddOnsCard title={'Asuransi Perjalanan'} />
-          <AddOnsCard title={'Asuransi Bagasi'} />
-          <AddOnsCard title={'Proteksi Keterlambatan'} />
-        </Grid>
-        <Grid item xs={6}>
-          <AddOnsCard title={'Asuransi Perjalanan'} />
-        </Grid>
-      </Grid>
-    </Container>
   );
 }
