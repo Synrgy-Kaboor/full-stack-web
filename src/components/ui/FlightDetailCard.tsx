@@ -7,15 +7,16 @@ import {
   Typography,
   Divider,
   IconButton,
-} from '@mui/material';
+} from "@mui/material";
 
-import BusinessCenterOutlinedIcon from '@mui/icons-material/BusinessCenterOutlined';
-import HealthAndSafetyOutlinedIcon from '@mui/icons-material/HealthAndSafetyOutlined';
-import RestaurantOutlinedIcon from '@mui/icons-material/RestaurantOutlined';
+import BusinessCenterOutlinedIcon from "@mui/icons-material/BusinessCenterOutlined";
+import HealthAndSafetyOutlinedIcon from "@mui/icons-material/HealthAndSafetyOutlined";
+import RestaurantOutlinedIcon from "@mui/icons-material/RestaurantOutlined";
 
-import FlightLogo from '../../assets/Logo Maskapai.png';
-import PlaneIcon from '../../assets/plane icon.png';
+import FlightLogo from "../../assets/Logo Maskapai.png";
+import PlaneIcon from "../../assets/plane icon.png";
 
+// Card detail penerbangan
 export default function FlightDetailCard() {
   return (
     <Card variant="outlined">
@@ -28,8 +29,8 @@ export default function FlightDetailCard() {
           <Box>
             <img src={FlightLogo} alt="Garuda Indonesia" />
           </Box>
-          <Box sx={{ textAlign: 'end' }}>
-            <Typography variant="body1" sx={{ fontWeight: 'bold' }}>
+          <Box sx={{ textAlign: "end" }}>
+            <Typography variant="body1" sx={{ fontWeight: "bold" }}>
               Garuda Indonesia
             </Typography>
             <Typography variant="body2">Ekonomi</Typography>
@@ -38,36 +39,36 @@ export default function FlightDetailCard() {
         <Stack direction="row" justifyContent="center" mt={2}>
           <Box>
             <Typography variant="body2">Surabaya</Typography>
-            <Typography variant="body1" sx={{ fontWeight: 'bold' }}>
+            <Typography variant="body1" sx={{ fontWeight: "bold" }}>
               05.00 WIB
             </Typography>
           </Box>
-          <Box sx={{ width: '40%', textAlign: 'center' }} mx={2}>
-            <Divider sx={{ borderStyle: 'dashed' }}>
+          <Box sx={{ width: "40%", textAlign: "center" }} mx={2}>
+            <Divider sx={{ borderStyle: "dashed" }}>
               <img src={PlaneIcon} alt="" />
             </Divider>
-            <Typography variant="subtitle2" sx={{ color: 'gray' }}>
+            <Typography variant="subtitle2" sx={{ color: "gray" }}>
               Durasi 4 Jam
             </Typography>
-            <Typography variant="subtitle2" sx={{ color: 'gray' }}>
+            <Typography variant="subtitle2" sx={{ color: "gray" }}>
               Sen, 24 Des 2023
             </Typography>
           </Box>
-          <Box sx={{ textAlign: 'end' }}>
+          <Box sx={{ textAlign: "end" }}>
             <Typography variant="body2">Jakarta</Typography>
-            <Typography variant="body1" sx={{ fontWeight: 'bold' }}>
+            <Typography variant="body1" sx={{ fontWeight: "bold" }}>
               09.00 WIB
             </Typography>
           </Box>
         </Stack>
       </CardContent>
       <Divider></Divider>
-      <CardActions sx={{ paddingInline: '1rem' }}>
+      <CardActions sx={{ paddingInline: "1rem" }}>
         <Stack
           direction="row"
           justifyContent="space-between"
           alignItems="center"
-          sx={{ width: '100%' }}
+          sx={{ width: "100%" }}
         >
           <Stack direction="row">
             <IconButton>
@@ -81,7 +82,7 @@ export default function FlightDetailCard() {
             </IconButton>
           </Stack>
           <Stack>
-            <Typography variant="h6" sx={{ fontWeight: 'bold' }}>
+            <Typography variant="h6" sx={{ fontWeight: "bold" }}>
               Rp 1.230.000
             </Typography>
           </Stack>
