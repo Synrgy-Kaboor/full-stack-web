@@ -1,11 +1,17 @@
 import {
   Card,
   CardContent,
+  CardActions,
   Stack,
   Box,
   Typography,
   Divider,
+  IconButton,
 } from '@mui/material';
+
+import BusinessCenterOutlinedIcon from '@mui/icons-material/BusinessCenterOutlined';
+import HealthAndSafetyOutlinedIcon from '@mui/icons-material/HealthAndSafetyOutlined';
+import RestaurantOutlinedIcon from '@mui/icons-material/RestaurantOutlined';
 
 import FlightLogo from '../../assets/Logo Maskapai.png';
 import PlaneIcon from '../../assets/plane icon.png';
@@ -55,6 +61,32 @@ export default function FlightDetailCard() {
           </Box>
         </Stack>
       </CardContent>
+      <Divider></Divider>
+      <CardActions sx={{ paddingInline: '1rem' }}>
+        <Stack
+          direction="row"
+          justifyContent="space-between"
+          alignItems="center"
+          sx={{ width: '100%' }}
+        >
+          <Stack direction="row">
+            <IconButton>
+              <BusinessCenterOutlinedIcon />
+            </IconButton>
+            <IconButton>
+              <HealthAndSafetyOutlinedIcon />
+            </IconButton>
+            <IconButton>
+              <RestaurantOutlinedIcon />
+            </IconButton>
+          </Stack>
+          <Stack>
+            <Typography variant="h6" sx={{ fontWeight: 'bold' }}>
+              Rp 1.230.000
+            </Typography>
+          </Stack>
+        </Stack>
+      </CardActions>
     </Card>
   );
 }

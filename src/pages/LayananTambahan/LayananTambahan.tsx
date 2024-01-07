@@ -30,7 +30,9 @@ export default function LayananTambahan() {
             >
               <Box>
                 <Typography variant="subtitle2">Total Harga</Typography>
-                <Typography variant="h5">Rp 2.350.000</Typography>
+                <Typography variant="h6" sx={{ fontWeight: 'bold' }}>
+                  Rp 2.350.000
+                </Typography>
               </Box>
               <Box sx={{ width: '40%' }}>
                 <Button
