@@ -1,10 +1,10 @@
-import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 
-import { LayananTambahan } from "./pages/LayananTambahan";
+import { LayananTambahan } from './pages/LayananTambahan';
 
 const router = createBrowserRouter([
   {
-    path: "/layanan-tambahan",
+    path: '/layanan-tambahan',
     element: <LayananTambahan />,
   },
 ]);
