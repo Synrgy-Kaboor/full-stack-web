@@ -12,6 +12,6 @@ describe('Halaman Detail Penumpang', () => {
             <DetailPenumpang/>
         );
 
-        expect(screen.queryByText('Detail Penumpang')).not.toBeNull();
+        expect(screen.queryByText('Fasilitas Ekstra')).not.toBeNull();
     });
 });
