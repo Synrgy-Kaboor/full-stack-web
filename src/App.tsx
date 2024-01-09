@@ -1,18 +1,18 @@
-import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 
-import DetailPenumpang from "./pages/DetailPenumpang/DetailPenumpang";
-import { LayananTambahan } from "./pages/LayananTambahan";
+import DetailPenumpang from './pages/DetailPenumpang/DetailPenumpang';
+import { LayananTambahan } from './pages/LayananTambahan';
 
-import { ThemeProvider } from "@mui/material/styles";
-import theme from "./config/theme";
+import { ThemeProvider } from '@mui/material/styles';
+import theme from './config/theme';
 
 const router = createBrowserRouter([
   {
-    path: "/layanan-tambahan",
+    path: '/layanan-tambahan',
     element: <LayananTambahan />,
   },
   {
-    path: "/detail-penumpang",
+    path: '/detail-penumpang',
     element: <DetailPenumpang />,
   },
 ]);
