@@ -70,19 +70,42 @@ export default function FlightDetailCard() {
           alignItems="center"
           sx={{ width: "100%" }}
         >
-          <Stack direction="row">
-            <IconButton>
+          <Stack direction="row" gap={1}>
+            <IconButton
+              sx={{
+                backgroundImage: `linear-gradient(90deg, #7B52AB, #3A42FF)`,
+                color: "white",
+              }}
+            >
               <BusinessCenterOutlinedIcon />
             </IconButton>
-            <IconButton>
+            <IconButton
+              sx={{
+                backgroundImage: `linear-gradient(90deg, #7B52AB, #3A42FF)`,
+                color: "white",
+              }}
+            >
               <HealthAndSafetyOutlinedIcon />
             </IconButton>
-            <IconButton>
+            <IconButton
+              sx={{
+                backgroundImage: `linear-gradient(90deg, #7B52AB, #3A42FF)`,
+                color: "white",
+              }}
+            >
               <RestaurantOutlinedIcon />
             </IconButton>
           </Stack>
           <Stack>
-            <Typography variant="h6" sx={{ fontWeight: "bold" }}>
+            <Typography
+              variant="h6"
+              sx={{
+                background: `linear-gradient(90deg, #7B52AB, #3A42FF)`,
+                backgroundClip: "text",
+                color: "transparent",
+                fontWeight: "bold",
+              }}
+            >
               Rp 1.230.000
             </Typography>
           </Stack>
