@@ -9,6 +9,7 @@ import {
   CardActions,
   IconButton,
 } from '@mui/material';
+
 import HealthAndSafetyOutlinedIcon from '@mui/icons-material/HealthAndSafetyOutlined';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import ControlPointOutlinedIcon from '@mui/icons-material/ControlPointOutlined';
@@ -26,7 +27,10 @@ export default function AddOnsCard(props: { title: string; price: number }) {
     <Card variant="outlined">
       <CardContent sx={{ padding: 0 }}>
         <Stack direction="row" m={2} alignItems="center">
-          <HealthAndSafetyOutlinedIcon fontSize="medium" />
+          <HealthAndSafetyOutlinedIcon
+            fontSize="medium"
+            sx={{ color: 'kaboor.main' }}
+          />
           <Typography sx={{ fontWeight: 'bold' }} ml={1}>
             {props.title}
           </Typography>
@@ -58,7 +62,7 @@ export default function AddOnsCard(props: { title: string; price: number }) {
           m={0}
           alignItems="center"
           sx={{
-            backgroundColor: '#7B52AB',
+            bgcolor: 'kaboor.main',
             width: '100%',
             display: 'flex',
             flexDirection: 'row',

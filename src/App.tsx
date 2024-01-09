@@ -1,7 +1,10 @@
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 
-import { LayananTambahan } from './pages/LayananTambahan';
 import DetailPenumpang from './pages/DetailPenumpang/DetailPenumpang';
+import { LayananTambahan } from './pages/LayananTambahan';
+
+import { ThemeProvider } from '@mui/material/styles';
+import theme from './config/theme';
 
 const router = createBrowserRouter([
   {
@@ -10,12 +13,16 @@ const router = createBrowserRouter([
   },
   {
     path: '/detail-penumpang',
-    element: <DetailPenumpang/>
-  }
+    element: <DetailPenumpang />,
+  },
 ]);
 
 function App() {
-  return <RouterProvider router={router} />;
+  return (
+    <ThemeProvider theme={theme}>
+      <RouterProvider router={router} />;
+    </ThemeProvider>
+  );
 }
 
 export default App;

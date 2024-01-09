@@ -1,15 +1,22 @@
 import {
   Card,
   CardContent,
+  CardActions,
   Stack,
   Box,
   Typography,
   Divider,
+  IconButton,
 } from '@mui/material';
+
+import BusinessCenterOutlinedIcon from '@mui/icons-material/BusinessCenterOutlined';
+import HealthAndSafetyOutlinedIcon from '@mui/icons-material/HealthAndSafetyOutlined';
+import RestaurantOutlinedIcon from '@mui/icons-material/RestaurantOutlined';
 
 import FlightLogo from '../../assets/Logo Maskapai.png';
 import PlaneIcon from '../../assets/plane icon.png';
 
+// Card detail penerbangan
 export default function FlightDetailCard() {
   return (
     <Card variant="outlined">
@@ -55,6 +62,55 @@ export default function FlightDetailCard() {
           </Box>
         </Stack>
       </CardContent>
+      <Divider></Divider>
+      <CardActions sx={{ paddingInline: '1rem' }}>
+        <Stack
+          direction="row"
+          justifyContent="space-between"
+          alignItems="center"
+          sx={{ width: '100%' }}
+        >
+          <Stack direction="row" gap={1}>
+            <IconButton
+              sx={{
+                backgroundImage: `linear-gradient(90deg, #7B52AB, #3A42FF)`,
+                color: 'white',
+              }}
+            >
+              <BusinessCenterOutlinedIcon />
+            </IconButton>
+            <IconButton
+              sx={{
+                backgroundImage: `linear-gradient(90deg, #7B52AB, #3A42FF)`,
+                color: 'white',
+              }}
+            >
+              <HealthAndSafetyOutlinedIcon />
+            </IconButton>
+            <IconButton
+              sx={{
+                backgroundImage: `linear-gradient(90deg, #7B52AB, #3A42FF)`,
+                color: 'white',
+              }}
+            >
+              <RestaurantOutlinedIcon />
+            </IconButton>
+          </Stack>
+          <Stack>
+            <Typography
+              variant="h6"
+              sx={{
+                background: `linear-gradient(90deg, #7B52AB, #3A42FF)`,
+                backgroundClip: 'text',
+                color: 'transparent',
+                fontWeight: 'bold',
+              }}
+            >
+              Rp 1.230.000
+            </Typography>
+          </Stack>
+        </Stack>
+      </CardActions>
     </Card>
   );
 }
