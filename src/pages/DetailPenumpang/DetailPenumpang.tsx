@@ -3,6 +3,8 @@ import ExtraFacilityCard from '../../components/ui/ExtraFacilityCard';
 import DetailPemesan from './DetailPemesan';
 import DaftarPenumpang from './DaftarPenumpang';
 import { FlightDetailCard } from '../../components/ui';
+import ModalFormPemesan from './ModalFormPemesan';
+import ModalFormPenumpang from './ModalFormPenumpang';
 
 export default function DetailPenumpang() {
     const theme = useTheme();
@@ -37,6 +39,8 @@ export default function DetailPenumpang() {
                         </Typography>
                         <DetailPemesan name="Mr. Andre Hutshon" phone="+62 82140520771" email="andrehosthon234@gmail.com"/>
                     </Box>
+                    {/* Detail Pemesan Modal */}
+                    <ModalFormPemesan/>
                     {/* Penumpang */}
                     <Box>
                         <Typography variant="h6" mb={2} fontWeight={'bold'}>
@@ -44,6 +48,7 @@ export default function DetailPenumpang() {
                         </Typography>
                         <DaftarPenumpang penumpang={['Orang 1', 'Orang 2']}/>
                     </Box>
+                    <ModalFormPenumpang/>
                     {/* Fasilitas Ekstra */}
                     <Box>
                         <Typography variant="h6" mb={2} fontWeight={'bold'}>
