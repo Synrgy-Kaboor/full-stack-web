@@ -1,10 +1,10 @@
-import { Button } from "@mui/material";
-import { styled } from "@mui/material/styles";
+import { Button } from '@mui/material';
+import { styled } from '@mui/material/styles';
 
 interface ButtonProps {
   label: string;
   handleOnClick?: () => void;
-  type: "button" | "submit";
+  type: 'button' | 'submit';
 }
 
 const PrimaryButtonStyle = styled(Button)`

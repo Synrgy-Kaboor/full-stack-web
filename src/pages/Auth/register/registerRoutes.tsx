@@ -1,10 +1,10 @@
-import { Routes, Route } from "react-router-dom";
-import Register from "./auth.register";
-import FillRegister from "./auth.fillRegister";
-import { useState } from "react";
+import { Routes, Route } from 'react-router-dom';
+import Register from './auth.register';
+import FillRegister from './auth.fillRegister';
+import { useState } from 'react';
 
 export default function RegisterRoute() {
-  const [email, setEmail] = useState("");
+  const [email, setEmail] = useState('');
   return (
     <>
       <Routes>

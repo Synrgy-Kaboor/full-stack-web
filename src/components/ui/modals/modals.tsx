@@ -1,9 +1,9 @@
-import * as React from "react";
-import Dialog from "@mui/material/Dialog";
-import DialogContent from "@mui/material/DialogContent";
-import { DialogTitle, styled as muiStyled } from "@mui/material";
-import styled from "styled-components";
-import ChevronRight from "./../../../assets/chevron-right.svg";
+import * as React from 'react';
+import Dialog from '@mui/material/Dialog';
+import DialogContent from '@mui/material/DialogContent';
+import { DialogTitle, styled as muiStyled } from '@mui/material'; 
+import styled from 'styled-components';
+import ChevronRight from './../../../assets/chevron-right.svg';
 
 const OtpDialog = muiStyled(Dialog)`
   & .MuiDialog-paper {

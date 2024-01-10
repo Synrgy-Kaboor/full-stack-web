@@ -8,7 +8,7 @@ import theme from './config/theme';
 
 const router = createBrowserRouter([
   {
-    path: "/layanan-tambahan",
+    path: '/layanan-tambahan',
     element: <LayananTambahan />,
   },
   {
@@ -16,7 +16,11 @@ const router = createBrowserRouter([
     element: <DetailPenumpang />,
   },
   {
-    path: "/register/*",
+    path: '/detail-penumpang',
+    element: <DetailPenumpang />,
+  },
+  {
+    path: '/register/*',
     element: <RegisterRoute />,
   },
 ]);

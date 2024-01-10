@@ -1,8 +1,8 @@
-import Button from "@mui/material/Button";
-import { useState, useRef, ChangeEvent } from "react";
-import { styled as muiStyled } from "@mui/material/styles";
-import styled from "styled-components";
-import Countdown from "./timer";
+import Button from '@mui/material/Button';
+import { useState, useRef, ChangeEvent } from 'react';
+import { styled as muiStyled } from '@mui/material/styles';
+import styled from 'styled-components';
+import Countdown from './timer';
 
 const FirstButton = styled(Button)`
   color: var(--shadow, #fff);
@@ -151,7 +151,7 @@ const Wrapper = styled(ModalsContainer)`
 `;
 
 export default function OtpModals() {
-  const [otp, setOtp] = useState(["", "", "", ""]);
+  const [otp, setOtp] = useState(['', '', '', '']);
   const inputRefs = [
     useRef<HTMLInputElement>(null),
     useRef<HTMLInputElement>(null),
@@ -159,7 +159,7 @@ export default function OtpModals() {
     useRef<HTMLInputElement>(null),
   ];
   const handleTimeout = () => {
-    window.alert("waktu habis. Kirim ulang OTP");
+    window.alert('waktu habis. Kirim ulang OTP');
   };
   const handleChange = (e: ChangeEvent<HTMLInputElement>, index: number) => {
     const newOtp = [...otp];
@@ -172,8 +172,8 @@ export default function OtpModals() {
       if (index < inputRefs.length - 1 && inputRefs[index + 1].current) {
         inputRefs[index + 1].current?.focus();
       }
-    } else if (inputChar === "") {
-      newOtp[index] = "";
+    } else if (inputChar === '') {
+      newOtp[index] = '';
       setOtp(newOtp);
 
       if (index > 0 && inputRefs[index - 1].current) {
@@ -202,7 +202,7 @@ export default function OtpModals() {
             ))}
           </OtpContainer>
           <OtpDesc>
-            Kode OTP kadaluwarsa pada{" "}
+            Kode OTP kadaluwarsa pada{' '}
             <Countdown initialTime={180} onTimeout={handleTimeout} />
           </OtpDesc>
         </Wrapper>

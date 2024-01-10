@@ -1,9 +1,9 @@
-import styled from "styled-components";
-import { useNavigate } from "react-router-dom";
-import Cover from "./../../../assets/Rectangle_319.png";
-import PrimaryButton from "../../../components/ui/registerForm/primaryButton";
-import { Dialog, DialogContent } from "@mui/material";
-import { useState } from "react";
+import styled from 'styled-components';
+import { useNavigate } from 'react-router-dom';
+import Cover from './../../../assets/Rectangle_319.png';
+import PrimaryButton from '../../../components/ui/registerForm/primaryButton';
+import { Dialog, DialogContent } from '@mui/material';
+import { useState } from 'react';
 
 const Main = styled.main`
   max-width: 1440px;
@@ -143,11 +143,11 @@ export default function Register({ setEmail }: RegisterProps) {
     };
     alert(`${formData.email} is valid`);
     setEmail(formData.email);
-    // setOpen(true);
-    // setTimeout(() => {
-    //   setOpen(false);
-    // }, 1000);
-    navigate("/register/detail-akun");
+    setOpen(true);
+    setTimeout(() => {
+      setOpen(false);
+    }, 1000);
+    navigate('/register/detail-akun');
   };
   return (
     <Main>

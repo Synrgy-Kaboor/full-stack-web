@@ -1,11 +1,11 @@
-import { useState } from "react";
-import styled from "styled-components";
-import { Button, styled as muiStyled } from "@mui/material";
-import Visible from "./../../../assets/eye-line.svg";
-import UnVisible from "./../../../assets/eye-off.svg";
-import ChevronRight from "./../../../assets/chevron-right.svg";
-import GlobalModals from "../modals/modals";
-import OtpModals from "../modals/otpModals";
+import { useState } from 'react';
+import styled from 'styled-components';
+import Visible from './../../../assets/eye-line.svg';
+import UnVisible from './../../../assets/eye-off.svg';
+import ChevronRight from './../../../assets/chevron-right.svg';
+import GlobalModals from '../modals/modals';
+import OtpModals from '../modals/otpModals';
+import PrimaryButton from './primaryButton';
 
 const FormContainer = styled.div`
   position: relative;
@@ -142,33 +142,6 @@ const FormTitle = styled.p`
   }
 `;
 
-const SubmitButton = muiStyled(Button)`
-color: var(--shadow, #fff);
-width: 100%;
-font-family: Manrope;
-font-size: 16px;
-font-style: normal;
-font-weight: 700;
-line-height: 150%; /* 18px */
-border-radius: 8px;
-text-transform: none;
-background: var(
-  --Primary-01,
-  linear-gradient(270deg, #3a42ff 0%, #7b52ab 100%)
-);
-&:hover {
-  border-radius: 8px;
-  background: var(
-    --Primary-02,
-    linear-gradient(
-      270deg,
-      rgba(58, 66, 255, 0.8) 0%,
-      rgba(123, 82, 171, 0.8) 100%
-    )
-  );
-}
-`;
-
 const PolicyContainer = styled.div`
   margin-top: 60px;
   @media (max-width: 616px) {
@@ -247,7 +220,7 @@ export default function RegisterForm({ email }: RegisterFormProps) {
                 name="password"
                 required
                 placeholder="Masukkan sandi"
-                type={visibility ? "text" : "password"}
+                type={visibility ? 'text' : 'password'}
                 minLength={7}
               />
               <div onClick={() => setVisibility(!visibility)}>
@@ -264,7 +237,7 @@ export default function RegisterForm({ email }: RegisterFormProps) {
               kecil
             </Description>
           </InputContainer>
-          <SubmitButton type="submit">Buat Akun</SubmitButton>
+          <PrimaryButton type="submit" label='Buat Akun'/>
           <GlobalModals open={open} onClose={() => setOpen(false)}>
             <OtpModals />
           </GlobalModals>
