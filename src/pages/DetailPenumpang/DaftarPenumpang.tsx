@@ -1,7 +1,7 @@
 import { Card, CardContent, Divider, Stack, Switch, Typography } from '@mui/material';
 import EditIcon from '@mui/icons-material/Edit';
 
-export default function Penumpang(props: { penumpang: string[] }) {
+export default function DaftarPenumpang(props: { penumpang: string[] }) {
     return (
         <Card variant="outlined">
             <CardContent sx={{ p: 2 }}>

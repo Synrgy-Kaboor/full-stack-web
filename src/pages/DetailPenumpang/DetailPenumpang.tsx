@@ -1,7 +1,7 @@
 import { Box, Button, Container, Grid, Stack, Typography, useMediaQuery, useTheme } from '@mui/material';
 import ExtraFacilityCard from '../../components/ui/ExtraFacilityCard';
 import DetailPemesan from './DetailPemesan';
-import Penumpang from './Penumpang';
+import DaftarPenumpang from './DaftarPenumpang';
 import { FlightDetailCard } from '../../components/ui';
 
 export default function DetailPenumpang() {
@@ -42,7 +42,7 @@ export default function DetailPenumpang() {
                         <Typography variant="h6" mb={2} fontWeight={'bold'}>
                             Penumpang
                         </Typography>
-                        <Penumpang penumpang={['Orang 1', 'Orang 2']}/>
+                        <DaftarPenumpang penumpang={['Orang 1', 'Orang 2']}/>
                     </Box>
                     {/* Fasilitas Ekstra */}
                     <Box>
