@@ -1,5 +1,5 @@
-import { useState, useEffect } from "react";
-import styled from "styled-components";
+import { useState, useEffect } from 'react';
+import styled from 'styled-components';
 
 const Timer = styled.p`
   background: var(
@@ -43,7 +43,7 @@ export default function Countdown({ initialTime, onTimeout }: TimerProps) {
   const formatTime = (seconds: number) => {
     const minutes = Math.floor(seconds / 60);
     const remainingSeconds = seconds % 60;
-    return `${minutes}:${remainingSeconds < 10 ? "0" : ""}${remainingSeconds}`;
+    return `${minutes}:${remainingSeconds < 10 ? '0' : ''}${remainingSeconds}`;
   };
   return <Timer>{formatTime(time)}</Timer>;
 }

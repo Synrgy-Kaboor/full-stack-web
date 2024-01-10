@@ -1,6 +1,6 @@
-import styled from "styled-components";
-import Cover from "./../../../assets/Rectangle_319.png";
-import RegisterForm from "../../../components/ui/registerForm/registerForm";
+import styled from 'styled-components';
+import Cover from './../../../assets/Rectangle_319.png';
+import RegisterForm from '../../../components/ui/registerForm/registerForm';
 
 const Main = styled.main`
   max-width: 1440px;

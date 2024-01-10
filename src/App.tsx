@@ -1,15 +1,14 @@
-import { useState } from "react";
-import { RouterProvider, createBrowserRouter } from "react-router-dom";
-import { LayananTambahan } from "./pages/Checkout";
-import RegisterRoute from "./pages/Auth/register/registerRoutes";
+import { RouterProvider, createBrowserRouter } from 'react-router-dom';
+import { LayananTambahan } from './pages/Checkout';
+import RegisterRoute from './pages/Auth/register/registerRoutes';
 
 const router = createBrowserRouter([
   {
-    path: "/layanan-tambahan",
+    path: '/layanan-tambahan',
     element: <LayananTambahan />,
   },
   {
-    path: "/register/*",
+    path: '/register/*',
     element: <RegisterRoute />,
   },
 ]);
