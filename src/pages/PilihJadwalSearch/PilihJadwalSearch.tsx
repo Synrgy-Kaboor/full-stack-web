@@ -6,20 +6,77 @@ import {
   Input,
   Box,
   Switch,
-  Container,
   Card,
   CardContent,
-  Button
+  Button,
+  SwitchProps,
 } from "@mui/material";
+import { styled } from "@mui/material/styles";
 import bgPesawat from "../../assets/ikhroma-bg-pesawat.jpg";
 import { useState } from "react";
 import {
   FlightTakeoffOutlined,
   FlightLandOutlined,
   SwapVertOutlined,
+  CalendarMonthOutlined,
+  Person2Outlined,
 } from "@mui/icons-material";
-
+const IOSSwitch = styled((props: SwitchProps) => (
+  <Switch focusVisibleClassName=".Mui-focusVisible" disableRipple {...props} />
+))(({ theme }) => ({
+  width: 42,
+  height: 26,
+  padding: 0,
+  "& .MuiSwitch-switchBase": {
+    padding: 0,
+    margin: 2,
+    transitionDuration: "300ms",
+    "&.Mui-checked": {
+      transform: "translateX(16px)",
+      color: "#fff",
+      "& + .MuiSwitch-track": {
+        background: theme.palette.mode === "dark" ? `linear-gradient(270deg, #3A42FF 0%, #7B52AB 100%)` : `linear-gradient(270deg, #3A42FF 0%, #7B52AB 100%)`,
+        opacity: 1,
+        border: 0,
+      },
+      "&.Mui-disabled + .MuiSwitch-track": {
+        opacity: 0.5,
+      },
+    },
+    "&.Mui-focusVisible .MuiSwitch-thumb": {
+      color: "#33cf4d",
+      border: "6px solid #fff",
+    },
+    "&.Mui-disabled .MuiSwitch-thumb": {
+      color:
+        theme.palette.mode === "light"
+          ? theme.palette.grey[100]
+          : theme.palette.grey[600],
+    },
+    "&.Mui-disabled + .MuiSwitch-track": {
+      opacity: theme.palette.mode === "light" ? 0.7 : 0.3,
+    },
+  },
+  "& .MuiSwitch-thumb": {
+    boxSizing: "border-box",
+    width: 22,
+    height: 22,
+  },
+  "& .MuiSwitch-track": {
+    borderRadius: 26 / 2,
+    backgroundColor: theme.palette.mode === "light" ? "#E9E9EA" : "#39393D",
+    opacity: 1,
+    transition: theme.transitions.create(["background-color"], {
+      duration: 500,
+    }),
+  },
+}));
 const PilihJadwalSearch = () => {
+  const  [KepulanganVisible, setKepulanganVisible] = useState(false);
+  const HandleKepulanganVisible = () => {
+    setKepulanganVisible(!KepulanganVisible);
+  }
+
   return (
     <Grid
       container
@@ -27,7 +84,7 @@ const PilihJadwalSearch = () => {
         background: `
     linear-gradient(270deg, rgba(58, 66, 255, 0.50) 0%, rgba(123, 82, 171, 0.50) 100%),
     url(${bgPesawat})`,
-    paddingBlock: "4rem"
+        paddingBlock: "4rem",
       }}
       rowSpacing={2}
       alignItems={"center"}
@@ -58,7 +115,12 @@ const PilihJadwalSearch = () => {
                 border={"1px solid #C2C2C2"}
                 sx={{ padding: "1rem 1.5rem" }}
               >
-                <Grid container justifyContent={"center"} alignItems={"center"}>
+                <Grid
+                  container
+                  justifyContent={"center"}
+                  alignItems={"center"}
+                  spacing={2.5}
+                >
                   <Grid
                     container
                     item
@@ -72,7 +134,14 @@ const PilihJadwalSearch = () => {
                         alignItems={"center"}
                         spacing={2}
                       >
-                        <FlightTakeoffOutlined></FlightTakeoffOutlined>
+                        <FlightTakeoffOutlined
+                          sx={{
+                            borderRadius: "50%",
+                            background: `linear-gradient(270deg, #3A42FF 0%, #7B52AB 100%)`,
+                            padding: "0.5rem",
+                            color: "white",
+                          }}
+                        ></FlightTakeoffOutlined>
                         <Stack direction={"column"}>
                           <Typography
                             variant="subtitle1"
@@ -103,7 +172,14 @@ const PilihJadwalSearch = () => {
                         alignItems={"center"}
                         spacing={2}
                       >
-                        <FlightTakeoffOutlined></FlightTakeoffOutlined>
+                        <FlightLandOutlined
+                          sx={{
+                            borderRadius: "50%",
+                            background: `linear-gradient(270deg, #3A42FF 0%, #7B52AB 100%)`,
+                            padding: "0.5rem",
+                            color: "white",
+                          }}
+                        ></FlightLandOutlined>
                         <Stack direction={"column"}>
                           <Typography
                             variant="subtitle1"
@@ -132,7 +208,14 @@ const PilihJadwalSearch = () => {
                     </Stack>
                   </Grid>
                   <Grid container item xs={2} justifyContent={"center"}>
-                    <SwapVertOutlined></SwapVertOutlined>
+                    <SwapVertOutlined
+                      sx={{
+                        borderRadius: "50%",
+                        background: `linear-gradient(270deg, #3A42FF 0%, #7B52AB 100%)`,
+                        padding: "0.5rem",
+                        color: "white",
+                      }}
+                    ></SwapVertOutlined>
                   </Grid>
                 </Grid>
               </Box>
@@ -141,7 +224,12 @@ const PilihJadwalSearch = () => {
                 border={"1px solid #C2C2C2"}
                 sx={{ padding: "1rem 1.5rem" }}
               >
-                <Grid container justifyContent={"center"} alignItems={"center"}>
+                <Grid
+                  container
+                  justifyContent={"center"}
+                  alignItems={"center"}
+                  spacing={2.5}
+                >
                   <Grid
                     container
                     item
@@ -155,7 +243,14 @@ const PilihJadwalSearch = () => {
                         alignItems={"center"}
                         spacing={2}
                       >
-                        <FlightTakeoffOutlined></FlightTakeoffOutlined>
+                        <CalendarMonthOutlined
+                          sx={{
+                            borderRadius: "50%",
+                            background: `linear-gradient(270deg, #3A42FF 0%, #7B52AB 100%)`,
+                            padding: "0.5rem",
+                            color: "white",
+                          }}
+                        ></CalendarMonthOutlined>
                         <Stack direction={"column"}>
                           <Typography
                             variant="subtitle1"
@@ -185,8 +280,16 @@ const PilihJadwalSearch = () => {
                         direction={"row"}
                         alignItems={"center"}
                         spacing={2}
+                        display={KepulanganVisible ? { display: "flex" } : { display: "none" }}
                       >
-                        <FlightTakeoffOutlined></FlightTakeoffOutlined>
+                        <CalendarMonthOutlined
+                          sx={{
+                            borderRadius: "50%",
+                            background: `linear-gradient(270deg, #3A42FF 0%, #7B52AB 100%)`,
+                            padding: "0.5rem",
+                            color: "white",
+                          }}
+                        ></CalendarMonthOutlined>
                         <Stack direction={"column"}>
                           <Typography
                             variant="subtitle1"
@@ -215,7 +318,7 @@ const PilihJadwalSearch = () => {
                     </Stack>
                   </Grid>
                   <Grid container item xs={2} justifyContent={"center"}>
-                    <SwapVertOutlined></SwapVertOutlined>
+                    <IOSSwitch onChange={HandleKepulanganVisible}></IOSSwitch>
                   </Grid>
                 </Grid>
               </Box>
@@ -232,7 +335,14 @@ const PilihJadwalSearch = () => {
                         spacing={2}
                         alignItems={"center"}
                       >
-                        <FlightTakeoffOutlined></FlightTakeoffOutlined>
+                        <FlightTakeoffOutlined
+                          sx={{
+                            borderRadius: "50%",
+                            background: `linear-gradient(270deg, #3A42FF 0%, #7B52AB 100%)`,
+                            padding: "0.5rem",
+                            color: "white",
+                          }}
+                        ></FlightTakeoffOutlined>
                         <Stack>
                           <Typography
                             variant="subtitle1"
@@ -273,7 +383,14 @@ const PilihJadwalSearch = () => {
                         spacing={2}
                         alignItems={"center"}
                       >
-                        <FlightTakeoffOutlined></FlightTakeoffOutlined>
+                        <Person2Outlined
+                          sx={{
+                            borderRadius: "50%",
+                            background: `linear-gradient(270deg, #3A42FF 0%, #7B52AB 100%)`,
+                            padding: "0.5rem",
+                            color: "white",
+                          }}
+                        ></Person2Outlined>
                         <Stack>
                           <Typography
                             variant="subtitle1"
@@ -306,7 +423,15 @@ const PilihJadwalSearch = () => {
                 </Grid>
               </Box>
               <Box>
-                <Button variant="contained" sx={{background: `linear-gradient(270deg, #3A42FF 0%, #7B52AB 100%)`, width: "100%"}}>Cari</Button>
+                <Button
+                  variant="contained"
+                  sx={{
+                    background: `linear-gradient(270deg, #3A42FF 0%, #7B52AB 100%)`,
+                    width: "100%",
+                  }}
+                >
+                  Cari
+                </Button>
               </Box>
             </Stack>
           </CardContent>
