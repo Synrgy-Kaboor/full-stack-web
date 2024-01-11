@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 import {
   Container,
   AppBar,
@@ -7,20 +7,20 @@ import {
   Stack,
   Link,
   Avatar,
-} from "@mui/material";
+} from '@mui/material';
 
-import KaboorIcon from "../../assets/kaboor.svg";
-import PlaneIcon from "../../assets/plane icon.png";
-import NotificationsNoneOutlinedIcon from "@mui/icons-material/NotificationsNoneOutlined";
+import KaboorIcon from '../../assets/kaboor.svg';
+import PlaneIcon from '../../assets/plane icon.png';
+import NotificationsNoneOutlinedIcon from '@mui/icons-material/NotificationsNoneOutlined';
 
 export default function Navbar() {
   return (
     <AppBar
       position="static"
       sx={{
-        backgroundColor: "white",
-        boxShadow: "none",
-        marginBottom: "1rem",
+        backgroundColor: 'white',
+        boxShadow: 'none',
+        marginBottom: '1rem',
       }}
     >
       <Container>
@@ -33,7 +33,7 @@ export default function Navbar() {
             <Stack direction="row" spacing={1} alignItems="center">
               <NotificationsNoneOutlinedIcon
                 fontSize="large"
-                sx={{ color: "kaboor.main" }}
+                sx={{ color: 'kaboor.main' }}
               />
               <Typography color="black">Notifikasi</Typography>
             </Stack>
@@ -41,7 +41,7 @@ export default function Navbar() {
               <img src={PlaneIcon} alt="" />
               <Typography color="black">Pesanan</Typography>
             </Stack>
-            <Avatar sx={{ bgcolor: "kaboor.main" }}>A</Avatar>
+            <Avatar sx={{ bgcolor: 'kaboor.main' }}>A</Avatar>
           </Stack>
         </Toolbar>
       </Container>

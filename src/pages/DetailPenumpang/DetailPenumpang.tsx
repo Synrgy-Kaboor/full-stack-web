@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 import {
   Box,
   Button,
@@ -8,22 +8,22 @@ import {
   Typography,
   useMediaQuery,
   useTheme,
-} from "@mui/material";
-import ExtraFacilityCard from "../../components/ui/ExtraFacilityCard";
-import DetailPemesan from "./DetailPemesan";
-import Penumpang from "./Penumpang";
-import { FlightDetailCard, Navbar } from "../../components/ui";
-import { useNavigate } from "react-router";
+} from '@mui/material';
+import ExtraFacilityCard from '../../components/ui/ExtraFacilityCard';
+import DetailPemesan from './DetailPemesan';
+import Penumpang from './Penumpang';
+import { FlightDetailCard, Navbar } from '../../components/ui';
+import { useNavigate } from 'react-router';
 
 export default function DetailPenumpang() {
   const theme = useTheme();
-  const isSmallScreen = useMediaQuery(theme.breakpoints.down("md"));
+  const isSmallScreen = useMediaQuery(theme.breakpoints.down('md'));
   const navigate = useNavigate();
 
   return (
     <>
       <Navbar />
-      <Container sx={{ paddingBlock: "2rem", backgroundColor: "kaboor.light" }}>
+      <Container sx={{ paddingBlock: '2rem', backgroundColor: 'kaboor.light' }}>
         <Typography variant="h5" fontWeight="bold">
           Detail Penumpang
         </Typography>
@@ -36,8 +36,8 @@ export default function DetailPenumpang() {
               {!isSmallScreen && (
                 <Button
                   variant="contained"
-                  onClick={() => navigate("/layanan-tambahan")}
-                  sx={{ backgroundColor: "#7B52AB", width: "100%" }}
+                  onClick={() => navigate('/layanan-tambahan')}
+                  sx={{ backgroundColor: '#7B52AB', width: '100%' }}
                 >
                   Lanjutkan Pemesanan
                 </Button>
@@ -47,7 +47,7 @@ export default function DetailPenumpang() {
           <Grid item xs={12} md={6} order={{ xs: 1, md: 0 }}>
             {/* Detail Pemesan */}
             <Box>
-              <Typography variant="h6" mb={2} fontWeight={"bold"}>
+              <Typography variant="h6" mb={2} fontWeight={'bold'}>
                 Detail Pemesan
               </Typography>
               <DetailPemesan
@@ -58,14 +58,14 @@ export default function DetailPenumpang() {
             </Box>
             {/* Penumpang */}
             <Box>
-              <Typography variant="h6" mb={2} fontWeight={"bold"}>
+              <Typography variant="h6" mb={2} fontWeight={'bold'}>
                 Penumpang
               </Typography>
-              <Penumpang penumpang={["Orang 1", "Orang 2"]} />
+              <Penumpang penumpang={['Orang 1', 'Orang 2']} />
             </Box>
             {/* Fasilitas Ekstra */}
             <Box>
-              <Typography variant="h6" mb={2} fontWeight={"bold"}>
+              <Typography variant="h6" mb={2} fontWeight={'bold'}>
                 Fasilitas Ekstra
               </Typography>
               <Stack spacing={2}>
@@ -92,8 +92,8 @@ export default function DetailPenumpang() {
             {isSmallScreen && (
               <Button
                 variant="contained"
-                onClick={() => navigate("/layanan-tambahan")}
-                sx={{ backgroundColor: "#7B52AB", width: "100%" }}
+                onClick={() => navigate('/layanan-tambahan')}
+                sx={{ backgroundColor: '#7B52AB', width: '100%' }}
               >
                 Lanjutkan Pemesanan
               </Button>
