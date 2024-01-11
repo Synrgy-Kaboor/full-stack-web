@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import {
   Grid,
   Stack,
@@ -9,6 +8,7 @@ import {
   Card,
   CardContent,
   Button,
+  IconButton,
   SwitchProps,
 } from '@mui/material';
 import { styled } from '@mui/material/styles';
@@ -35,7 +35,10 @@ const IOSSwitch = styled((props: SwitchProps) => (
       transform: 'translateX(16px)',
       color: '#fff',
       '& + .MuiSwitch-track': {
-        background: theme.palette.mode === 'dark' ? `linear-gradient(270deg, #3A42FF 0%, #7B52AB 100%)` : `linear-gradient(270deg, #3A42FF 0%, #7B52AB 100%)`,
+        background:
+          theme.palette.mode === 'dark'
+            ? `linear-gradient(270deg, #3A42FF 0%, #7B52AB 100%)`
+            : `linear-gradient(270deg, #3A42FF 0%, #7B52AB 100%)`,
         opacity: 1,
         border: 0,
       },
@@ -72,10 +75,18 @@ const IOSSwitch = styled((props: SwitchProps) => (
   },
 }));
 const PilihJadwalSearch = () => {
-  const  [KepulanganVisible, setKepulanganVisible] = useState(false);
+  const [KepulanganVisible, setKepulanganVisible] = useState(false);
+  const [from, setFrom] = useState<string>();
+  const [destination, setDestination] = useState<string>();
+
   const HandleKepulanganVisible = () => {
     setKepulanganVisible(!KepulanganVisible);
-  }
+  };
+
+  const HandleSwapFromDestination = () => {
+    setFrom(destination);
+    setDestination(from);
+  };
 
   return (
     <Grid
@@ -85,6 +96,7 @@ const PilihJadwalSearch = () => {
     linear-gradient(270deg, rgba(58, 66, 255, 0.50) 0%, rgba(123, 82, 171, 0.50) 100%),
     url(${bgPesawat})`,
         paddingBlock: '4rem',
+        height: '100vh'
       }}
       rowSpacing={2}
       alignItems={'center'}
@@ -156,13 +168,17 @@ const PilihJadwalSearch = () => {
                             Dari
                           </Typography>
                           <Input
-                            defaultValue="Surabaya, SUB"
+                            value={from}
                             sx={{
                               width: '100%',
                               color: '#1C1C1E',
                               fontWeight: 600,
                               fontStyle: 'normal',
                               lineHeight: '1.5rem',
+                            }}
+                            placeholder="Masukkan kota asal"
+                            onChange={(event) => {
+                              setFrom(event.target.value);
                             }}
                           />
                         </Stack>
@@ -194,7 +210,7 @@ const PilihJadwalSearch = () => {
                             Ke
                           </Typography>
                           <Input
-                            defaultValue="Surabaya, SUB"
+                            value={destination}
                             sx={{
                               width: '100%',
                               color: '#1C1C1E',
@@ -202,20 +218,28 @@ const PilihJadwalSearch = () => {
                               fontStyle: 'normal',
                               lineHeight: '1.5rem',
                             }}
+                            onChange={(event) => {
+                              setDestination(event.target.value);
+                              console.log(event.target.value)
+                            }}
+                            placeholder="Masukkan kota tujuan"
                           />
                         </Stack>
                       </Stack>
                     </Stack>
                   </Grid>
                   <Grid container item xs={2} justifyContent={'center'}>
-                    <SwapVertOutlined
+                    <IconButton
                       sx={{
                         borderRadius: '50%',
                         background: `linear-gradient(270deg, #3A42FF 0%, #7B52AB 100%)`,
                         padding: '0.5rem',
                         color: 'white',
                       }}
-                    ></SwapVertOutlined>
+                      onClick={HandleSwapFromDestination}
+                    >
+                      <SwapVertOutlined></SwapVertOutlined>
+                    </IconButton>
                   </Grid>
                 </Grid>
               </Box>
@@ -265,7 +289,7 @@ const PilihJadwalSearch = () => {
                             Keberangkatan
                           </Typography>
                           <Input
-                            defaultValue="Surabaya, SUB"
+                            defaultValue="Sabtu, 26 Desember 2023"
                             sx={{
                               width: '100%',
                               color: '#1C1C1E',
@@ -280,7 +304,11 @@ const PilihJadwalSearch = () => {
                         direction={'row'}
                         alignItems={'center'}
                         spacing={2}
-                        display={KepulanganVisible ? { display: 'flex' } : { display: 'none' }}
+                        display={
+                          KepulanganVisible
+                            ? { display: 'flex' }
+                            : { display: 'none' }
+                        }
                       >
                         <CalendarMonthOutlined
                           sx={{
@@ -304,7 +332,7 @@ const PilihJadwalSearch = () => {
                             Kepulangan
                           </Typography>
                           <Input
-                            defaultValue="Surabaya, SUB"
+                            defaultValue="Sabtu, 26 Desember 2023"
                             sx={{
                               width: '100%',
                               color: '#1C1C1E',

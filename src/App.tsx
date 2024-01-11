@@ -17,7 +17,7 @@ const router = createBrowserRouter([
     element: <DetailPenumpang />,
   },
   {
-    path: '/test',
+    path: '/pilih-jadwal-search',
     element: <PilihJadwalSearch />,
   },
 ]);
