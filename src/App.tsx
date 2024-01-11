@@ -16,7 +16,6 @@ const router = createBrowserRouter([
     path: '/detail-penumpang',
     element: <DetailPenumpang />,
   },
-  
   {
     path: '/test',
     element: <PilihJadwalSearch />,
