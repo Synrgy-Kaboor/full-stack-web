@@ -2,6 +2,7 @@ import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import RegisterRoute from './pages/Auth/register/registerRoutes';
 import DetailPenumpang from './pages/DetailPenumpang/DetailPenumpang';
 import { LayananTambahan } from './pages/LayananTambahan';
+import { PilihJadwalSearch } from './pages/PilihJadwalSearch';
 
 import { ThemeProvider } from '@mui/material/styles';
 import theme from './config/theme';
@@ -16,12 +17,12 @@ const router = createBrowserRouter([
     element: <DetailPenumpang />,
   },
   {
-    path: '/detail-penumpang',
-    element: <DetailPenumpang />,
-  },
-  {
     path: '/register/*',
     element: <RegisterRoute />,
+  },
+  {
+    path: '/pilih-jadwal-search',
+    element: <PilihJadwalSearch />,
   },
 ]);
 
