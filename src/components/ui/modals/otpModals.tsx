@@ -1,5 +1,5 @@
 import Button from '@mui/material/Button';
-import { useState, useRef, ChangeEvent } from 'react';
+import { useState, useRef, ChangeEvent} from 'react';
 import { styled as muiStyled } from '@mui/material/styles';
 import styled from 'styled-components';
 import Countdown from './timer';
@@ -150,16 +150,32 @@ const Wrapper = styled(ModalsContainer)`
   gap: 8px;
 `;
 
-export default function OtpModals() {
+interface FormData {
+  phoneNumber: string;
+  email: string;
+  fullName: string;
+  password: string;
+}
+
+interface OtpModalsProps {
+  formData : FormData;
+  setOpen : React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+export default function OtpModals({ formData, setOpen}: OtpModalsProps) {
   const [otp, setOtp] = useState(['', '', '', '']);
+  const [time, setTime] = useState(180)
+  
+  const registerPayload = formData;
+
   const inputRefs = [
     useRef<HTMLInputElement>(null),
     useRef<HTMLInputElement>(null),
     useRef<HTMLInputElement>(null),
     useRef<HTMLInputElement>(null),
   ];
+
   const handleTimeout = () => {
-    window.alert('waktu habis. Kirim ulang OTP');
   };
   const handleChange = (e: ChangeEvent<HTMLInputElement>, index: number) => {
     const newOtp = [...otp];
@@ -181,6 +197,17 @@ export default function OtpModals() {
       }
     }
   };
+
+  const handleVerification = () =>{
+    // sendPayload Melalui API
+    console.log(registerPayload);
+    setOpen(false);
+  }
+  const sendOtp = () => {
+    // disini API Render Otp
+    setTime(180);
+  } 
+
   return (
     <>
       <ModalsContainer>
@@ -203,12 +230,12 @@ export default function OtpModals() {
           </OtpContainer>
           <OtpDesc>
             Kode OTP kadaluwarsa pada{' '}
-            <Countdown initialTime={180} onTimeout={handleTimeout} />
+            <Countdown time={time} setTime={setTime} onTimeout={handleTimeout} />
           </OtpDesc>
         </Wrapper>
         <Wrapper>
-          <FirstButton type="submit">Verifikasi</FirstButton>
-          <SecondButton>Kirim Lagi</SecondButton>
+          <FirstButton type='button' onClick={handleVerification}>Verifikasi</FirstButton>
+          <SecondButton type='button'  onClick={sendOtp}>Kirim Lagi</SecondButton>
         </Wrapper>
       </ModalsContainer>
     </>

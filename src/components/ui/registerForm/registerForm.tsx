@@ -169,6 +169,12 @@ interface RegisterFormProps {
 export default function RegisterForm({ email }: RegisterFormProps) {
   const [visibility, setVisibility] = useState(false);
   const [open, setOpen] = useState(false);
+  const [formData, setFormData] = useState({
+    phoneNumber: '',
+    email: '',
+    fullName: '',
+    password: ''
+  });
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -178,8 +184,8 @@ export default function RegisterForm({ email }: RegisterFormProps) {
       fullName: e.currentTarget.fullName.value,
       password: e.currentTarget.password.value,
     };
+    setFormData(formData)
     setOpen(true);
-    console.log(formData);
   };
 
   return (
@@ -192,7 +198,7 @@ export default function RegisterForm({ email }: RegisterFormProps) {
           </FormTitleContainer>
           <InputContainer>
             <Label>Nomor Ponsel</Label>
-            <Input placeholder="+62" required name="phoneNumber" />
+            <Input type="tel" pattern="[0-9,+]{10,}" placeholder="+62" minLength={10} defaultValue='' required name="phoneNumber"/>
           </InputContainer>
           <InputContainer>
             <Label>Email</Label>
@@ -239,7 +245,7 @@ export default function RegisterForm({ email }: RegisterFormProps) {
           </InputContainer>
           <PrimaryButton type="submit" label='Buat Akun'/>
           <GlobalModals open={open} onClose={() => setOpen(false)}>
-            <OtpModals />
+            <OtpModals formData={formData} setOpen={setOpen}/>
           </GlobalModals>
         </Form>
         <PolicyContainer>

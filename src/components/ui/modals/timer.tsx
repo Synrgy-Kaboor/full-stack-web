@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import {  useEffect } from 'react';
 import styled from 'styled-components';
 
 const Timer = styled.p`
@@ -23,12 +23,14 @@ const Timer = styled.p`
 `;
 
 interface TimerProps {
-  initialTime: number;
   onTimeout: () => void;
+  time: number;
+  setTime: React.Dispatch<React.SetStateAction<number>>
+
 }
 
-export default function Countdown({ initialTime, onTimeout }: TimerProps) {
-  const [time, setTime] = useState(initialTime);
+export default function Countdown({ time, onTimeout, setTime}: TimerProps) {
+
   useEffect(() => {
     if (time > 0) {
       const timerId = setInterval(() => {
@@ -38,7 +40,8 @@ export default function Countdown({ initialTime, onTimeout }: TimerProps) {
     } else {
       onTimeout();
     }
-  }, [time, onTimeout]);
+  }, [time, onTimeout, setTime]);
+
 
   const formatTime = (seconds: number) => {
     const minutes = Math.floor(seconds / 60);
