@@ -1,8 +1,9 @@
 import { Card, CardContent, Divider, IconButton, Stack, Typography } from '@mui/material';
 import EditIcon from '@mui/icons-material/Edit';
 import { IOSSwitch } from '../../components/ui/IOSSwitch';
+import { Penumpang } from '../../types/Penumpang';
 
-export default function DaftarPenumpang(props: { penumpang: string[] }) {
+export default function DaftarPenumpang(props: { penumpang: Penumpang[], openPopup: (order: number) => void }) {
     return (
         <Card variant="outlined">
             <CardContent sx={{ p: 2 }}>
@@ -15,8 +16,8 @@ export default function DaftarPenumpang(props: { penumpang: string[] }) {
                 <Divider/>
                 <Stack>
                     {
-                        props.penumpang.map((p) => {
-                            return <PenumpangRow name={p}/>
+                        props.penumpang.map((p, i) => {
+                            return <PenumpangRow penumpang={p} order={i} openPopup={props.openPopup}/>
                         })
                     }
                 </Stack>
@@ -25,13 +26,13 @@ export default function DaftarPenumpang(props: { penumpang: string[] }) {
     );
 }
 
-function PenumpangRow(props: { name: string }) {
+function PenumpangRow(props: { penumpang: Penumpang, order: number, openPopup: (order: number) => void }) {
     return(
         <Stack direction="row" justifyContent="space-between" sx={{ pt: 2 }} alignItems={'center'}>
             <Typography fontWeight={'bold'}>
-                {props.name}
+                {`${props.penumpang.honorific}. ${props.penumpang.name}`}
             </Typography>
-            <IconButton>
+            <IconButton onClick={() => props.openPopup(props.order)}>
                 <EditIcon/>
             </IconButton>
         </Stack>
