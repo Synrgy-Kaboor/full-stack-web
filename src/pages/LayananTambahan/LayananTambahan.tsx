@@ -1,4 +1,3 @@
-import React from 'react';
 import { Box, Grid, Typography, Container, Stack, Button } from '@mui/material';
 import { AddOnsCard, FlightDetailCard, Navbar } from '../../components/ui/';
 

@@ -1,4 +1,3 @@
-import React from 'react';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import RegisterRoute from './pages/Auth/register/registerRoutes';
 import DetailPenumpang from './pages/DetailPenumpang/DetailPenumpang';
