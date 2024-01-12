@@ -10,14 +10,61 @@ import {
 } from '@mui/material';
 import ExtraFacilityCard from '../../components/ui/ExtraFacilityCard';
 import DetailPemesan from './DetailPemesan';
-import Penumpang from './Penumpang';
+import DaftarPenumpang from './DaftarPenumpang';
 import { FlightDetailCard, Navbar } from '../../components/ui';
 import { useNavigate } from 'react-router';
+import FormPemesan from './FormPemesan';
+import FormPenumpang from './FormPenumpang';
+import { Pemesan } from '../../types/Pemesan';
+import { useState } from 'react';
+import { Penumpang } from '../../types/Penumpang';
+import Popup from '../../components/ui/Popup';
 
 export default function DetailPenumpang() {
   const theme = useTheme();
   const isSmallScreen = useMediaQuery(theme.breakpoints.down('md'));
+
+  const pemesanInitialState: Pemesan = {
+    name: 'Andre Hutshon',
+    honorific: 'Mr',
+    phone: '+62 82140520771',
+    email: 'andrehosthon234@gmail.com'
+  };
+
+  const daftarPenumpangInitialState: Penumpang[] = [
+    {
+      name: 'Penumpang 1',
+      honorific: ''
+    },
+    {
+      name: 'Penumpang 2',
+      honorific: ''
+    }
+  ];
+
+  const [pemesan, setPemesan] = useState<Pemesan>(pemesanInitialState);
+  const [daftarPenumpang, setDaftarPenumpang] = useState<Penumpang[]>(daftarPenumpangInitialState);
+  const [openPemesanPopup, setOpenPemesanPopup] = useState(false);
+  const [openPenumpangPopup, setOpenPenumpangPopup] = useState(false);  
+  const [selectedPenumpangOrder, setSelectedPenumpangOrder] = useState(0);
   const navigate = useNavigate();
+
+  const changePemesan = (newPemesan: Pemesan) => {
+    setPemesan(newPemesan);
+    setOpenPemesanPopup(false);
+  }
+
+  const changePenumpang = (newPenumpang: Penumpang, order: number) => {
+    const newDaftarPenumpang = [...daftarPenumpang];
+    newDaftarPenumpang[order] = newPenumpang
+    setDaftarPenumpang(newDaftarPenumpang);
+    setOpenPenumpangPopup(false);
+  }
+
+  const setupOpenPenumpangPopup = (order: number) => {
+    setSelectedPenumpangOrder(order);
+    setOpenPenumpangPopup(true);
+  }
 
   return (
     <>
@@ -32,11 +79,16 @@ export default function DetailPenumpang() {
             <Stack spacing={2}>
               <FlightDetailCard />
               <FlightDetailCard />
+
+              {/* Lanjutkan Pemesanan (Desktop View) */}
               {!isSmallScreen && (
                 <Button
                   variant="contained"
                   onClick={() => navigate('/layanan-tambahan')}
-                  sx={{ backgroundColor: '#7B52AB', width: '100%' }}
+                  sx={{ 
+                    backgroundImage: `linear-gradient(90deg, #7B52AB, #3A42FF)`, 
+                    width: '100%' 
+                  }}
                 >
                   Lanjutkan Pemesanan
                 </Button>
@@ -50,18 +102,32 @@ export default function DetailPenumpang() {
                 Detail Pemesan
               </Typography>
               <DetailPemesan
-                name="Mr. Andre Hutshon"
-                phone="+62 82140520771"
-                email="andrehosthon234@gmail.com"
+                pemesan={pemesan}
+                setOpenPopup={setOpenPemesanPopup}
               />
             </Box>
+            {/* Detail Pemesan Modal */}
+            <Popup
+              title='Detail Pemesan'
+              open={openPemesanPopup}
+              setOpen={setOpenPemesanPopup}
+            >
+              <FormPemesan changePemesan={changePemesan}/>
+            </Popup>
             {/* Penumpang */}
             <Box>
               <Typography variant="h6" mb={2} fontWeight={'bold'}>
                 Penumpang
               </Typography>
-              <Penumpang penumpang={['Orang 1', 'Orang 2']} />
+              <DaftarPenumpang penumpang={daftarPenumpang} openPopup={setupOpenPenumpangPopup}/>
             </Box>
+            <Popup
+              title='Detail Penumpang'
+              open={openPenumpangPopup}
+              setOpen={setOpenPenumpangPopup}
+            >
+              <FormPenumpang changePenumpang={changePenumpang} order={selectedPenumpangOrder}/>
+            </Popup>
             {/* Fasilitas Ekstra */}
             <Box>
               <Typography variant="h6" mb={2} fontWeight={'bold'}>
@@ -86,13 +152,16 @@ export default function DetailPenumpang() {
               </Stack>
             </Box>
           </Grid>
-          {/* Lanjutkan Pemesanan */}
+          {/* Lanjutkan Pemesanan (Mobile View) */}
           <Grid item xs={12} md={6} order={2}>
             {isSmallScreen && (
               <Button
                 variant="contained"
                 onClick={() => navigate('/layanan-tambahan')}
-                sx={{ backgroundColor: '#7B52AB', width: '100%' }}
+                sx={{ 
+                  backgroundImage: `linear-gradient(90deg, #7B52AB, #3A42FF)`, 
+                  width: '100%' 
+                }}
               >
                 Lanjutkan Pemesanan
               </Button>
