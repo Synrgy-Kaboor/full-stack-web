@@ -1,4 +1,4 @@
-import { Card, CardContent, Stack, Typography } from '@mui/material';
+import { Card, CardContent, IconButton, Stack, Typography } from '@mui/material';
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 import LocalPhoneOutlinedIcon from '@mui/icons-material/LocalPhoneOutlined';
 import EmailOutlinedIcon from '@mui/icons-material/EmailOutlined';
@@ -25,7 +25,11 @@ export default function DetailPemesan(props: { name: string, phone: string, emai
                             </Typography>
                         </Stack>
                     </Stack>
-                    <KeyboardArrowRightIcon/>
+                    <IconButton sx={{ 
+                        height: 'fit-content'
+                     }}>
+                        <KeyboardArrowRightIcon/>
+                    </IconButton>
                 </Stack>
             </CardContent>
         </Card>

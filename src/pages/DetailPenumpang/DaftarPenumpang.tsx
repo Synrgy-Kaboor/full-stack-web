@@ -1,15 +1,16 @@
-import { Card, CardContent, Divider, Stack, Switch, Typography } from '@mui/material';
+import { Card, CardContent, Divider, IconButton, Stack, Typography } from '@mui/material';
 import EditIcon from '@mui/icons-material/Edit';
+import { IOSSwitch } from '../../components/ui/IOSSwitch';
 
 export default function DaftarPenumpang(props: { penumpang: string[] }) {
     return (
         <Card variant="outlined">
             <CardContent sx={{ p: 2 }}>
-                <Stack direction="row" justifyContent="space-between">
+                <Stack direction="row" justifyContent="space-between" mb={2}>
                     <Typography>
                         sama dengan pemesan
                     </Typography>
-                    <Switch defaultChecked/>
+                    <IOSSwitch defaultChecked/>
                 </Stack>
                 <Divider/>
                 <Stack>
@@ -26,11 +27,13 @@ export default function DaftarPenumpang(props: { penumpang: string[] }) {
 
 function PenumpangRow(props: { name: string }) {
     return(
-        <Stack direction="row" justifyContent="space-between" sx={{ pt: 2 }}>
+        <Stack direction="row" justifyContent="space-between" sx={{ pt: 2 }} alignItems={'center'}>
             <Typography fontWeight={'bold'}>
                 {props.name}
             </Typography>
-            <EditIcon/>
+            <IconButton>
+                <EditIcon/>
+            </IconButton>
         </Stack>
     );
 }

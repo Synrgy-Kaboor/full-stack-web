@@ -34,11 +34,16 @@ export default function DetailPenumpang() {
             <Stack spacing={2}>
               <FlightDetailCard />
               <FlightDetailCard />
+              
+              {/* Lanjutkan Pemesanan (Desktop View) */}
               {!isSmallScreen && (
                 <Button
                   variant="contained"
                   onClick={() => navigate('/layanan-tambahan')}
-                  sx={{ backgroundColor: '#7B52AB', width: '100%' }}
+                  sx={{ 
+                    backgroundImage: `linear-gradient(90deg, #7B52AB, #3A42FF)`, 
+                    width: '100%' 
+                  }}
                 >
                   Lanjutkan Pemesanan
                 </Button>
@@ -91,13 +96,16 @@ export default function DetailPenumpang() {
               </Stack>
             </Box>
           </Grid>
-          {/* Lanjutkan Pemesanan */}
+          {/* Lanjutkan Pemesanan (Mobile View) */}
           <Grid item xs={12} md={6} order={2}>
             {isSmallScreen && (
               <Button
                 variant="contained"
                 onClick={() => navigate('/layanan-tambahan')}
-                sx={{ backgroundColor: '#7B52AB', width: '100%' }}
+                sx={{ 
+                  backgroundImage: `linear-gradient(90deg, #7B52AB, #3A42FF)`, 
+                  width: '100%' 
+                }}
               >
                 Lanjutkan Pemesanan
               </Button>
