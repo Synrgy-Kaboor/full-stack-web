@@ -1,8 +1,10 @@
 import Button from '@mui/material/Button';
 import { useState, useRef, ChangeEvent} from 'react';
+import { useNavigate } from 'react-router-dom';
 import { styled as muiStyled } from '@mui/material/styles';
 import styled from 'styled-components';
 import Countdown from './timer';
+
 
 const FirstButton = styled(Button)`
   color: var(--shadow, #fff);
@@ -166,6 +168,7 @@ export default function OtpModals({ formData, setOpen}: OtpModalsProps) {
   const [otp, setOtp] = useState(['', '', '', '']);
   const [time, setTime] = useState(180)
   
+  const navigate = useNavigate();
   const registerPayload = formData;
 
   const inputRefs = [
@@ -198,13 +201,51 @@ export default function OtpModals({ formData, setOpen}: OtpModalsProps) {
     }
   };
 
-  const handleVerification = () =>{
-    // sendPayload Melalui API
-    console.log(registerPayload);
-    setOpen(false);
+  let otpReq = ''
+  for(let i=0; i<4; i++){
+    otpReq += otp[i]
   }
+  
+  const handleVerification = async () =>{
+    const otpPayload = {
+      otp: otpReq
+    };
+    const otpVerify = await fetch('https://backend-production-701e.up.railway.app/api/v1/auth/otp/verify', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(otpPayload)
+    });
+
+    if(otpVerify.ok){
+      fetch('https://backend-production-701e.up.railway.app/api/v1/auth/register/user', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(registerPayload)
+      })
+      .then(data => { console.log('succes', data)})
+      .catch(error => {
+        console.error('There was a problem with the fetch operation:', error);
+      })
+      setOpen(false);
+    }
+    else {
+      alert('Kode OTP milikmu sudah kadaluarsa')
+    }
+    navigate('/')
+  }
+
   const sendOtp = () => {
-    // disini API Render Otp
+    fetch('https://backend-production-701e.up.railway.app/api/v1/auth/otp/resend', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({email: registerPayload.email})
+    })
     setTime(180);
   } 
 

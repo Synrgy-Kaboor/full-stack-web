@@ -25,7 +25,10 @@ const FormContainer = styled.div`
     float: none;
     border-radius: 10px 10px 10px 10px;
     margin: 0 auto;
+    justify-content: start;
     align-items: start;
+    height: 140vh;
+    padding: 20px 12px; 
   }
 `;
 
@@ -36,6 +39,9 @@ const Form = styled.form`
   flex-direction: column;
   align-items: flex-start;
   gap: 30px;
+  @media (max-width: 500px) {
+    gap: 20px;
+  }
 `;
 
 const Label = styled.p`
@@ -138,7 +144,7 @@ const FormTitle = styled.p`
   line-height: 40px; /* 125% */
   letter-spacing: -0.75px;
   @media (max-width: 616px) {
-    font-size: 26px;
+    font-size: 24px;
   }
 `;
 
@@ -202,7 +208,7 @@ export default function RegisterForm({ email }: RegisterFormProps) {
           </InputContainer>
           <InputContainer>
             <Label>Email</Label>
-            <Input
+            <Input required
               name="email"
               placeholder="admin@gmail.oom"
               type="email"

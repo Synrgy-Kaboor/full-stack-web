@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import Cover from './../../../assets/Rectangle_319.png';
 import PrimaryButton from '../../../components/ui/registerForm/primaryButton';
-import { Dialog, DialogContent } from '@mui/material';
+import { Dialog, DialogContent, Divider } from '@mui/material';
 import { useState } from 'react';
 
 const Main = styled.main`
@@ -20,6 +20,9 @@ const Layer = styled.div`
   );
   z-index: -1;
   position: absolute;
+  @media (max-width: 500px) {
+    height: 100vh;
+  }
 `;
 
 const Image = styled.img`
@@ -31,6 +34,7 @@ const Image = styled.img`
 
   @media (max-width: 500px) {
     widht: 100%;
+    height: 100vh;
   }
 `;
 
@@ -55,6 +59,7 @@ const FormContainer = styled.div`
     align-items: start;
     justify-content: start;
     padding-top: 100px;
+    height: 100vh;
   }
 `;
 
@@ -65,6 +70,7 @@ const Form = styled.form`
   flex-direction: column;
   align-items: flex-start;
   gap: 30px;
+  
 `;
 
 const Title = styled.p`
@@ -75,6 +81,9 @@ const Title = styled.p`
   font-weight: 700;
   line-height: 40px; /* 125% */
   letter-spacing: -0.75px;
+  @media (max-width: 500px) {
+    font-size: 24px;
+  }
 `;
 
 const Input = styled.input`
@@ -136,18 +145,36 @@ interface RegisterProps {
 export default function Register({ setEmail }: RegisterProps) {
   const [open, setOpen] = useState(false);
   const navigate = useNavigate();
+
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formData = {
       email: e.currentTarget.email.value,
     };
-    alert(`${formData.email} is valid`);
-    setEmail(formData.email);
-    setOpen(true);
-    setTimeout(() => {
+    // email Checking
+    fetch('https://backend-production-701e.up.railway.app/api/v1/auth/check/email', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({email: formData.email})
+    })
+    .then(response => {
+      if(response.ok){
+        setOpen(true);
+      setTimeout(() => {
       setOpen(false);
-    }, 1000);
-    navigate('/register/detail-akun');
+      }, 1000);
+      }
+      else{
+        setEmail(formData.email);
+        navigate('/register/detail-akun');
+      }
+    })
+    .catch(error => {
+      console.error('Fetch error:', error);
+    })
+
   };
   return (
     <Main>
@@ -159,6 +186,7 @@ export default function Register({ setEmail }: RegisterProps) {
           <Input name="email" type="email" required />
           <PrimaryButton type="submit" label="Buat Akun" />
         </Form>
+        <Divider sx={{color: '#9E9E9E', width: '100%', marginTop: '16px', maxWidth: '381px' } }>atau login dengan</Divider>
         <RegisteredModal open={open}>
           <ModalContent>Email ini sudah terdaftar</ModalContent>
         </RegisteredModal>
