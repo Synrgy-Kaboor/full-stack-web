@@ -152,24 +152,17 @@ const Wrapper = styled(ModalsContainer)`
   gap: 8px;
 `;
 
-interface FormData {
-  phoneNumber: string;
-  email: string;
-  fullName: string;
-  password: string;
-}
 
 interface OtpModalsProps {
-  formData : FormData;
   setOpen : React.Dispatch<React.SetStateAction<boolean>>;
+  email: string;
 }
 
-export default function OtpModals({ formData, setOpen}: OtpModalsProps) {
+export default function OtpModals({setOpen, email}: OtpModalsProps) {
   const [otp, setOtp] = useState(['', '', '', '']);
   const [time, setTime] = useState(180)
   
   const navigate = useNavigate();
-  const registerPayload = formData;
 
   const inputRefs = [
     useRef<HTMLInputElement>(null),
@@ -210,42 +203,34 @@ export default function OtpModals({ formData, setOpen}: OtpModalsProps) {
     const otpPayload = {
       otp: otpReq
     };
-    const otpVerify = await fetch('https://kaboor-api-dev.up.railway.app/api/v1/auth/otp/verify', {
+    const otpResponse = await fetch('https://kaboor-api-dev.up.railway.app/api/v1/auth/otp/verify', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(otpPayload)
     });
+    const otpStatus = await otpResponse.json()
 
-    if(otpVerify.ok){
-      fetch('https://kaboor-api-dev.up.railway.app/api/v1/auth/register/user', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(registerPayload)
-      })
-      .then(data => { console.log('succes', data)})
-      .catch(error => {
-        console.error('There was a problem with the fetch operation:', error);
-      })
+    if(otpStatus.code === 200){
       setOpen(false);
+      navigate('/')
     }
     else {
       alert('Kode OTP milikmu sudah kadaluarsa')
     }
-    navigate('/')
   }
 
-  const sendOtp = () => {
-    fetch('https://kaboor-api-dev.up.railway.app/api/v1/auth/otp/resend', {
+  const sendOtp = async () => {
+    const sendtOtpResponse = await fetch('https://kaboor-api-dev.up.railway.app/api/v1/auth/otp/resend', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({email: registerPayload.email})
+      body: JSON.stringify({email: email})
     })
+    const sentOtpStatus = await sendtOtpResponse.json()
+    console.log(sentOtpStatus)
     setTime(180);
   } 
 

@@ -146,34 +146,29 @@ export default function Register({ setEmail }: RegisterProps) {
   const [open, setOpen] = useState(false);
   const navigate = useNavigate();
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>)  => {
     e.preventDefault();
     const formData = {
       email: e.currentTarget.email.value,
     };
     // email Checking
-    fetch('https://kaboor-api-dev.up.railway.app/api/v1/auth/check/email', {
+    const response = await fetch('https://kaboor-api-dev.up.railway.app/api/v1/auth/check/email', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({email: formData.email})
-    })
-    .then(response => {
-      if(response.ok){
-        setOpen(true);
-      setTimeout(() => {
-      setOpen(false);
-      }, 1000);
-      }
-      else{
-        setEmail(formData.email);
-        navigate('/register/detail-akun');
-      }
-    })
-    .catch(error => {
-      console.error('Fetch error:', error);
-    })
+      body: JSON.stringify(formData)
+    });
+    const data = await response.json()
+    console.log(data)
+
+    if(data.code === 200){
+      setEmail(formData.email);
+      navigate('/register/detail-akun')
+    } else {
+      setOpen(true)
+      setTimeout(() => setOpen(false), 3000)
+    }
 
   };
   return (

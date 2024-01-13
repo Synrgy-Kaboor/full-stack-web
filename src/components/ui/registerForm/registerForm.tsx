@@ -175,14 +175,8 @@ interface RegisterFormProps {
 export default function RegisterForm({ email }: RegisterFormProps) {
   const [visibility, setVisibility] = useState(false);
   const [open, setOpen] = useState(false);
-  const [formData, setFormData] = useState({
-    phoneNumber: '',
-    email: '',
-    fullName: '',
-    password: ''
-  });
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formData = {
       phoneNumber: e.currentTarget.phoneNumber.value,
@@ -190,7 +184,24 @@ export default function RegisterForm({ email }: RegisterFormProps) {
       fullName: e.currentTarget.fullName.value,
       password: e.currentTarget.password.value,
     };
-    setFormData(formData)
+    const registerResponse = await fetch('https://kaboor-api-dev.up.railway.app/api/v1/auth/register/user', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData)
+      })
+    const registerStatus = await registerResponse.json()
+    console.log(registerStatus)
+    const sendtOtpResponse = await fetch('https://kaboor-api-dev.up.railway.app/api/v1/auth/otp/resend', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({email: email})
+    })
+    const sendOtpStatus = await sendtOtpResponse.json()
+    console.log(sendOtpStatus)
     setOpen(true);
   };
 
@@ -251,7 +262,7 @@ export default function RegisterForm({ email }: RegisterFormProps) {
           </InputContainer>
           <PrimaryButton type="submit" label='Buat Akun'/>
           <GlobalModals open={open} onClose={() => setOpen(false)}>
-            <OtpModals formData={formData} setOpen={setOpen}/>
+            <OtpModals email={email} setOpen={setOpen}/>
           </GlobalModals>
         </Form>
         <PolicyContainer>
