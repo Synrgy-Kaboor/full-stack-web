@@ -152,7 +152,7 @@ export default function Register({ setEmail }: RegisterProps) {
       email: e.currentTarget.email.value,
     };
     // email Checking
-    fetch('https://backend-production-701e.up.railway.app/api/v1/auth/check/email', {
+    fetch('https://kaboor-api-dev.up.railway.app/api/v1/auth/check/email', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

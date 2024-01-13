@@ -210,7 +210,7 @@ export default function OtpModals({ formData, setOpen}: OtpModalsProps) {
     const otpPayload = {
       otp: otpReq
     };
-    const otpVerify = await fetch('https://backend-production-701e.up.railway.app/api/v1/auth/otp/verify', {
+    const otpVerify = await fetch('https://kaboor-api-dev.up.railway.app/api/v1/auth/otp/verify', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -219,7 +219,7 @@ export default function OtpModals({ formData, setOpen}: OtpModalsProps) {
     });
 
     if(otpVerify.ok){
-      fetch('https://backend-production-701e.up.railway.app/api/v1/auth/register/user', {
+      fetch('https://kaboor-api-dev.up.railway.app/api/v1/auth/register/user', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -239,7 +239,7 @@ export default function OtpModals({ formData, setOpen}: OtpModalsProps) {
   }
 
   const sendOtp = () => {
-    fetch('https://backend-production-701e.up.railway.app/api/v1/auth/otp/resend', {
+    fetch('https://kaboor-api-dev.up.railway.app/api/v1/auth/otp/resend', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
