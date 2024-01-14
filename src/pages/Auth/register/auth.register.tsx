@@ -2,8 +2,11 @@ import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import Cover from './../../../assets/Rectangle_319.png';
 import PrimaryButton from '../../../components/ui/registerForm/primaryButton';
-import { Dialog, DialogContent, Divider } from '@mui/material';
+import { Dialog, DialogContent, Divider, Stack, Typography } from '@mui/material';
 import { useState } from 'react';
+import GlobalModals from '../../../components/ui/modals/modals';
+import OtpModals from '../../../components/ui/modals/otpModals';
+
 
 const Main = styled.main`
   max-width: 1440px;
@@ -143,8 +146,13 @@ interface RegisterProps {
 }
 
 export default function Register({ setEmail }: RegisterProps) {
-  const [open, setOpen] = useState(false);
+  const [myEmail, setMyEmail] = useState('')
+  const [openRegistered, setOpenRegistered] = useState(false);
+  const [openEmailVerify, setOpenEmailVerify] = useState(false)
+  const [openOtpModal, setOpenOtpModal] = useState(false)
   const navigate = useNavigate();
+
+
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>)  => {
     e.preventDefault();
@@ -165,12 +173,33 @@ export default function Register({ setEmail }: RegisterProps) {
     if(data.code === 200){
       setEmail(formData.email);
       navigate('/register/detail-akun')
-    } else {
-      setOpen(true)
-      setTimeout(() => setOpen(false), 3000)
+    } 
+    if(data.message === 'Email was registered, please use another email!') {
+      setOpenRegistered(true)
+      setTimeout(() => setOpenRegistered(false), 3000)
     }
-
+    else{
+      setOpenEmailVerify(true)
+      setMyEmail(formData.email)
+    }
   };
+
+  const handleVerify = async ()=>{
+    setOpenEmailVerify(false);
+    // resendOTP
+    console.log({email:myEmail})
+    const sendtOtpResponse = await fetch('https://kaboor-api-dev.up.railway.app/api/v1/auth/otp/resend', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({email: myEmail})
+      })
+    const sentOtpStatus = await sendtOtpResponse.json()
+    console.log(sentOtpStatus)
+    setOpenOtpModal(true);
+  }
+
   return (
     <Main>
       <Image alt="" src={Cover} />
@@ -180,10 +209,23 @@ export default function Register({ setEmail }: RegisterProps) {
           <Title>Buat Akun</Title>
           <Input name="email" type="email" required />
           <PrimaryButton type="submit" label="Buat Akun" />
+          <GlobalModals open={openOtpModal} onClose={() => setOpenOtpModal(false)}>
+            <OtpModals email={myEmail} setOpen={setOpenOtpModal}/>
+          </GlobalModals>
         </Form>
         <Divider sx={{color: '#9E9E9E', width: '100%', marginTop: '16px', maxWidth: '381px' } }>atau login dengan</Divider>
-        <RegisteredModal open={open}>
+        <RegisteredModal open={openRegistered}>
           <ModalContent>Email ini sudah terdaftar</ModalContent>
+        </RegisteredModal>
+        <RegisteredModal open={openEmailVerify} onClose={() => setOpenEmailVerify(false)}>
+          <ModalContent>
+            <Stack spacing={2} gap={3}>
+              <Typography variant='h5'>
+              Email ini sudah terdaftar, namun belum terverifikasi. verifikasi sekarang
+              </Typography>
+              <PrimaryButton type='button' label='Verifikasi sekarang' handleOnClick={handleVerify}/>
+            </Stack>
+            </ModalContent>
         </RegisteredModal>
       </FormContainer>
     </Main>
