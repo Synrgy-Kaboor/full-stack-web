@@ -1,8 +1,9 @@
 import styled from 'styled-components';
+import { styled as muiStyled } from '@mui/material/styles';
 import { useNavigate } from 'react-router-dom';
 import Cover from './../../../assets/Rectangle_319.png';
 import PrimaryButton from '../../../components/ui/registerForm/primaryButton';
-import { Dialog, DialogContent, Divider, Stack, Typography } from '@mui/material';
+import { Dialog, DialogContent, Divider, Stack, Typography, Button } from '@mui/material';
 import { useState } from 'react';
 import GlobalModals from '../../../components/ui/modals/modals';
 import OtpModals from '../../../components/ui/modals/otpModals';
@@ -141,6 +142,27 @@ const ModalContent = styled(DialogContent)`
   letter-spacing: -0.25px;
 `;
 
+const SecondButton = muiStyled(Button)`
+  font-family: Manrope;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 150%; /* 24px */
+  background: var(
+    --Primary-01,
+    linear-gradient(270deg, #3a42ff 0%, #7b52ab 100%)
+  );
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  border-radius: 8px;
+  border: 1px solid var(--Primary-01, #3a42ff);
+
+  @media (max-width: 616px) {
+    font-size: 8px;
+  }
+`;
+
 interface RegisterProps {
   setEmail: React.Dispatch<React.SetStateAction<string>>;
 }
@@ -176,7 +198,6 @@ export default function Register({ setEmail }: RegisterProps) {
     } 
     if(data.message === 'Email was registered, please use another email!') {
       setOpenRegistered(true)
-      setTimeout(() => setOpenRegistered(false), 3000)
     }
     else{
       setOpenEmailVerify(true)
@@ -214,9 +235,19 @@ export default function Register({ setEmail }: RegisterProps) {
           </GlobalModals>
         </Form>
         <Divider sx={{color: '#9E9E9E', width: '100%', marginTop: '16px', maxWidth: '381px' } }>atau login dengan</Divider>
-        <RegisteredModal open={openRegistered}>
-          <ModalContent>Email ini sudah terdaftar</ModalContent>
-        </RegisteredModal>
+        <GlobalModals open={openRegistered} onClose={()=>{setOpenRegistered(false)}}>
+          <Stack gap={2}>
+            <Typography variant='h5' sx={{color: '#000', fontFamily: 'Open Sans', fontStyle: 'normal', fontSize: '24px', fontWeight: 700, lineHeigh: '40px', letterSpacing:'-0.5px'}}>
+              Email ini sudah terdaftar untuk Log In
+            </Typography>
+            <Typography variant='body2' sx={{color: ' #9E9E9E', textAlign:'center', maxWidth:'426px', 
+            fontFamily: 'Open Sans', fontSize: '16px', fontStyle: 'normal', fontWeight: 400, lineHeigh: '24px', letterSpacing:'0.15px', paddingBottom: '16px'}}>
+              Untuk masuk ke akun, silahkan Log in menggunakan email ini menuju ke halaman Log in
+            </Typography>
+            <SecondButton type='button' onClick={()=>{setOpenRegistered(false)}}>Nanti Saja</SecondButton>
+            <PrimaryButton label='Log In' type='button' handleOnClick={()=>{navigate('/login')}}/>
+          </Stack>
+        </GlobalModals>
         <RegisteredModal open={openEmailVerify} onClose={() => setOpenEmailVerify(false)}>
           <ModalContent>
             <Stack spacing={2} gap={3}>
