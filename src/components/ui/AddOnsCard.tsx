@@ -182,7 +182,7 @@ export default function AddOnsCard(props: { title: string; price: number }) {
           </Typography>
           {addOns === true ? (
             <IconButton onClick={onAddOnsClick}>
-              <CheckCircleIcon sx={{ color: 'success.main' }} />
+              <CheckCircleIcon sx={{ color: 'success.light' }} />
             </IconButton>
           ) : (
             <IconButton onClick={onAddOnsClick}>
