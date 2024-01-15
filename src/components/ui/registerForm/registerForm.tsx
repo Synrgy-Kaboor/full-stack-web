@@ -25,7 +25,10 @@ const FormContainer = styled.div`
     float: none;
     border-radius: 10px 10px 10px 10px;
     margin: 0 auto;
+    justify-content: start;
     align-items: start;
+    height: 140vh;
+    padding: 20px 12px; 
   }
 `;
 
@@ -36,6 +39,9 @@ const Form = styled.form`
   flex-direction: column;
   align-items: flex-start;
   gap: 30px;
+  @media (max-width: 500px) {
+    gap: 20px;
+  }
 `;
 
 const Label = styled.p`
@@ -138,7 +144,7 @@ const FormTitle = styled.p`
   line-height: 40px; /* 125% */
   letter-spacing: -0.75px;
   @media (max-width: 616px) {
-    font-size: 26px;
+    font-size: 24px;
   }
 `;
 
@@ -169,14 +175,8 @@ interface RegisterFormProps {
 export default function RegisterForm({ email }: RegisterFormProps) {
   const [visibility, setVisibility] = useState(false);
   const [open, setOpen] = useState(false);
-  const [formData, setFormData] = useState({
-    phoneNumber: '',
-    email: '',
-    fullName: '',
-    password: ''
-  });
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formData = {
       phoneNumber: e.currentTarget.phoneNumber.value,
@@ -184,7 +184,24 @@ export default function RegisterForm({ email }: RegisterFormProps) {
       fullName: e.currentTarget.fullName.value,
       password: e.currentTarget.password.value,
     };
-    setFormData(formData)
+    const registerResponse = await fetch('https://kaboor-api-dev.up.railway.app/api/v1/auth/register/user', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData)
+      })
+    const registerStatus = await registerResponse.json()
+    console.log(registerStatus)
+    const sendtOtpResponse = await fetch('https://kaboor-api-dev.up.railway.app/api/v1/auth/otp/resend', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({email: email})
+    })
+    const sendOtpStatus = await sendtOtpResponse.json()
+    console.log(sendOtpStatus)
     setOpen(true);
   };
 
@@ -202,7 +219,7 @@ export default function RegisterForm({ email }: RegisterFormProps) {
           </InputContainer>
           <InputContainer>
             <Label>Email</Label>
-            <Input
+            <Input required
               name="email"
               placeholder="admin@gmail.oom"
               type="email"
@@ -245,7 +262,7 @@ export default function RegisterForm({ email }: RegisterFormProps) {
           </InputContainer>
           <PrimaryButton type="submit" label='Buat Akun'/>
           <GlobalModals open={open} onClose={() => setOpen(false)}>
-            <OtpModals formData={formData} setOpen={setOpen}/>
+            <OtpModals email={email} setOpen={setOpen}/>
           </GlobalModals>
         </Form>
         <PolicyContainer>
