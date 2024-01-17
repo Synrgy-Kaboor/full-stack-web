@@ -8,21 +8,85 @@ import {
   IconButton,
   Button,
   Divider,
+  Dialog,
+  // DialogContent,
+  DialogTitle,
 } from "@mui/material";
 
 import GoogleOAuth from "../../../assets/image 21.png";
 import LoginBackgroundImage from "../../../assets/Login Bg.png";
-// import { useState } from "react";
+import { FormEvent, useState } from "react";
+
+import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 
 export default function LoginRoot() {
-  // const [email, setEmail] = useState<string>("");
+  const [email, setEmail] = useState<string>("");
+  const [emailStatus, setEmailStatus] = useState<boolean>(false);
   // console.log(email, setEmail);
 
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    const response = await fetch(
+      "https://kaboor-api-dev.up.railway.app/api/v1/auth/check/email",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(email),
+      }
+    );
+
+    console.log(response.status);
+    if (response.status !== 200) {
+      setEmailStatus(false);
+      alert("Login Berhasil");
+    } else {
+      setEmailStatus(true);
+    }
+
+    // alert(`Status Email: ${emailStatus}`);
+
+    // useEffect(() => {
+    //   response;
+    // }, []);
+  };
+
+  //   try {
+  //     useEffect( async () => {
+  //       fetch('https://kaboor-api-dev.up.railway.app/api/v1/auth/check/email', {
+  //         method: "POST",
+  //         headers: {
+  //           'Content-Type': 'application/json'
+  //         },
+  //         body: JSON.stringify(email)
+  //       })
+  //     })
+  //   }
+  // } catch {
+  //   alert('success')
+  // }
+
   return (
-    <Box sx={{ maxHeight: "100vh" }}>
+    <Box
+      sx={{
+        height: "100%",
+        width: "100%",
+        backgroundImage: `url(${LoginBackgroundImage})`,
+      }}
+    >
       <Grid container sx={{ bgcolor: "kaboor.dark", height: "100vh" }}>
-        <Grid container xs={6} sx={{ maxHeight: "100vh" }}>
-          <img src={LoginBackgroundImage} height="100%" alt="" />
+        <Grid item xs={6}>
+          <Box
+            component="div"
+            border={1}
+            sx={{
+              height: "100%",
+              width: "100%",
+              backgroundImage: `url(${LoginBackgroundImage})`,
+            }}
+          />
         </Grid>
         <Grid
           container
@@ -37,27 +101,39 @@ export default function LoginRoot() {
           }}
         >
           <Box sx={{ width: "100%" }}>
-            <Typography variant="h4" sx={{ fontWeight: "bold" }}>
-              Log In
-            </Typography>
-            <TextField
-              variant="outlined"
-              label="Masukkan Email"
-              sx={{ width: "100%", marginBlock: "1rem" }}
-            ></TextField>
-            <Link underline="none" sx={{ color: "kaboor.main" }}>
-              <Typography textAlign="end">Lupa Password?</Typography>
-            </Link>
-            <Button
-              variant="contained"
-              sx={{
-                backgroundImage: `linear-gradient(90deg, #7B52AB, #3A42FF)`,
-                marginBlock: "1rem",
-                width: "100%",
-              }}
-            >
-              Masuk
-            </Button>
+            <form onSubmit={handleSubmit}>
+              <Typography variant="h4" sx={{ fontWeight: "bold" }}>
+                Log In
+              </Typography>
+              <TextField
+                variant="outlined"
+                label="Masukkan Email"
+                onChange={(e) => setEmail(e.target.value)}
+                sx={{ width: "100%", marginBlock: "1rem" }}
+              ></TextField>
+              <Link underline="none" sx={{ color: "kaboor.main" }}>
+                <Typography textAlign="end">Lupa Password?</Typography>
+              </Link>
+              <Button
+                type="submit"
+                variant="contained"
+                sx={{
+                  backgroundImage: `linear-gradient(90deg, #7B52AB, #3A42FF)`,
+                  marginBlock: "1rem",
+                  width: "100%",
+                }}
+              >
+                Masuk
+              </Button>
+            </form>
+            <Dialog open={emailStatus}>
+              <DialogTitle>
+                <Stack direction="row" alignItems="center" px={4} spacing={3}>
+                  <ArrowBackIosNewIcon onClick={() => setEmailStatus(false)} />
+                  <Typography>Email belum terdaftar</Typography>
+                </Stack>
+              </DialogTitle>
+            </Dialog>
             <Divider sx={{ color: "gray", fontFamily: "Roboto" }}>
               atau login dengan
             </Divider>
