@@ -11,75 +11,71 @@ import {
   Button,
   IconButton,
   SwitchProps,
-  Modal,
-} from "@mui/material";
-import { styled } from "@mui/material/styles";
-import bgPesawat from "../../assets/ikhroma-bg-pesawat.jpg";
-import { useState, useEffect } from "react";
+} from '@mui/material';
+import { styled } from '@mui/material/styles';
+import bgPesawat from '../../assets/ikhroma-bg-pesawat.jpg';
+import { useState } from 'react';
 import {
   FlightTakeoffOutlined,
   FlightLandOutlined,
   SwapVertOutlined,
   CalendarMonthOutlined,
   Person2Outlined,
-  ArrowBackIosOutlined,
-  AddCircleOutlined,
-  RemoveCircleOutlined,
-} from "@mui/icons-material";
+} from '@mui/icons-material';
 
-import { Navbar } from "../../components/ui";
-import { PassangerSearch } from "../../types/ModalPassagerProps";
-import ModalPassanger from "../../components/ui/ModalPassanger";
-import ModalClassSeat from "../../components/ui/ModalClassSeat";
+import { Navbar } from '../../components/ui';
+import { PassangerSearch } from '../../types/ModalPassagerProps';
+import ModalPassanger from '../../components/ui/ModalPassanger';
+import ModalClassSeat from '../../components/ui/ModalClassSeat';
 const IOSSwitch = styled((props: SwitchProps) => (
   <Switch focusVisibleClassName=".Mui-focusVisible" disableRipple {...props} />
 ))(({ theme }) => ({
   width: 42,
   height: 26,
   padding: 0,
-  "& .MuiSwitch-switchBase": {
+  '& .MuiSwitch-switchBase': {
     padding: 0,
     margin: 2,
-    transitionDuration: "300ms",
-    "&.Mui-checked": {
-      transform: "translateX(16px)",
-      color: "#fff",
-      "& + .MuiSwitch-track": {
+    transitionDuration: '300ms',
+    '&.Mui-checked': {
+      transform: 'translateX(16px)',
+      color: '#fff',
+      '& + .MuiSwitch-track': {
         background:
-          theme.palette.mode === "dark"
+          theme.palette.mode === 'dark'
             ? `linear-gradient(270deg, #3A42FF 0%, #7B52AB 100%)`
             : `linear-gradient(270deg, #3A42FF 0%, #7B52AB 100%)`,
         opacity: 1,
         border: 0,
       },
-      "&.Mui-disabled + .MuiSwitch-track": {
+      '&.Mui-disabled + .MuiSwitch-track': {
         opacity: 0.5,
       },
     },
-    "&.Mui-focusVisible .MuiSwitch-thumb": {
-      color: "#33cf4d",
-      border: "6px solid #fff",
+    '&.Mui-focusVisible .MuiSwitch-thumb': {
+      color: '#33cf4d',
+      border: '6px solid #fff',
     },
-    "&.Mui-disabled .MuiSwitch-thumb": {
+    '&.Mui-disabled .MuiSwitch-thumb': {
       color:
-        theme.palette.mode === "light"
+        theme.palette.mode === 'light'
           ? theme.palette.grey[100]
           : theme.palette.grey[600],
     },
-    "&.Mui-disabled + .MuiSwitch-track": {
-      opacity: theme.palette.mode === "light" ? 0.7 : 0.3,
+    '&.Mui-disabled + .MuiSwitch-track': {
+      opacity: theme.palette.mode === 'light' ? 0.7 : 0.3,
     },
   },
-  "& .MuiSwitch-thumb": {
-    boxSizing: "border-box",
+  '& .MuiSwitch-thumb': {
+    boxSizing: 'border-box',
     width: 22,
     height: 22,
   },
-  "& .MuiSwitch-track": {
+  '& .MuiSwitch-track': {
     borderRadius: 26 / 2,
-    backgroundColor: theme.palette.mode === "light" ? "#E9E9EA" : "#39393D",
+    backgroundColor: theme.palette.mode === 'light' ? '#E9E9EA' : '#39393D',
     opacity: 1,
-    transition: theme.transitions.create(["background-color"], {
+    transition: theme.transitions.create(['background-color'], {
       duration: 500,
     }),
   },
@@ -91,7 +87,6 @@ const PilihJadwalSearch = () => {
   const [modalClassSeatVisible, setModalClassSeatVisible] = useState(false);
   const [from, setFrom] = useState<string>();
   const [destination, setDestination] = useState<string>();
-  const [addPassangerVisible, setAddPassangerVisible] = useState(false);
   const [passangerValue, setPassangerValue] = useState<PassangerSearch>({
     adult: {
       value: 1,
@@ -103,7 +98,7 @@ const PilihJadwalSearch = () => {
       value: 0,
     },
   });
-  const [classSeatValue, setClassSeatValue] = useState<string>("Ekonomi");
+  const [classSeatValue, setClassSeatValue] = useState<string>('Ekonomi');
   const handleHomecomingVisible = () => {
     setHomecomingVisible(!homecomingVisible);
   };
@@ -157,20 +152,20 @@ const PilihJadwalSearch = () => {
           background: `
     linear-gradient(270deg, rgba(58, 66, 255, 0.50) 0%, rgba(123, 82, 171, 0.50) 100%),
     url(${bgPesawat})`,
-          paddingBlock: "4rem",
-          height: "100vh",
+          paddingBlock: '4rem',
+          height: '100vh',
         }}
         rowSpacing={2}
-        alignItems={"center"}
+        alignItems={'center'}
       >
         <Grid container item md={6}>
           <Typography
             variant="h3"
-            color={"white"}
-            fontWeight={"800"}
-            fontStyle={"normal"}
+            color={'white'}
+            fontWeight={'800'}
+            fontStyle={'normal'}
             pl={6}
-            fontFamily={"Open Sans"}
+            fontFamily={'Open Sans'}
           >
             Tiket Pesawat Murah & Promo Hari Ini
           </Typography>
@@ -179,69 +174,69 @@ const PilihJadwalSearch = () => {
           container
           item
           md={6}
-          justifyContent={"center"}
-          alignItems={"center"}
-          position={"relative"}
+          justifyContent={'center'}
+          alignItems={'center'}
+          position={'relative'}
         >
           <Card id="main-search-card">
-            <CardContent sx={{ padding: "2rem" }}>
-              <Stack direction={"column"} spacing={2}>
+            <CardContent sx={{ padding: '2rem' }}>
+              <Stack direction={'column'} spacing={2}>
                 <Box
-                  borderRadius={"0.5rem"}
-                  border={"1px solid #C2C2C2"}
-                  sx={{ padding: "1rem 1.5rem" }}
+                  borderRadius={'0.5rem'}
+                  border={'1px solid #C2C2C2'}
+                  sx={{ padding: '1rem 1.5rem' }}
                 >
                   <Grid
                     container
-                    justifyContent={"center"}
-                    alignItems={"center"}
+                    justifyContent={'center'}
+                    alignItems={'center'}
                     spacing={2.5}
                   >
                     <Grid
                       container
                       item
                       xs={10}
-                      justifyContent={"center"}
-                      alignItems={"center"}
+                      justifyContent={'center'}
+                      alignItems={'center'}
                     >
-                      <Stack direction={"column"} spacing={1}>
+                      <Stack direction={'column'} spacing={1}>
                         <Stack
-                          direction={"row"}
-                          alignItems={"center"}
+                          direction={'row'}
+                          alignItems={'center'}
                           spacing={2}
                         >
                           <FlightTakeoffOutlined
                             sx={{
-                              borderRadius: "50%",
+                              borderRadius: '50%',
                               background: `linear-gradient(270deg, #3A42FF 0%, #7B52AB 100%)`,
-                              padding: "0.5rem",
-                              color: "white",
+                              padding: '0.5rem',
+                              color: 'white',
                             }}
                           ></FlightTakeoffOutlined>
-                          <Stack direction={"column"}>
+                          <Stack direction={'column'}>
                             <Typography
                               variant="subtitle1"
                               sx={{
-                                width: "100%",
-                                color: "#9E9E9E",
+                                width: '100%',
+                                color: '#9E9E9E',
                                 fontWeight: 600,
-                                fontStyle: "normal",
-                                lineHeight: "1.5rem",
+                                fontStyle: 'normal',
+                                lineHeight: '1.5rem',
                               }}
                               
-            fontFamily={"Open Sans"}
+            fontFamily={'Open Sans'}
                             >
                               Dari
                             </Typography>
                             <Input
                               value={from}
                               sx={{
-                                width: "100%",
-                                color: "#1C1C1E",
+                                width: '100%',
+                                color: '#1C1C1E',
                                 fontWeight: 600,
-                                fontStyle: "normal",
-                                lineHeight: "1.5rem",
-                                fontFamily: "Open Sans"
+                                fontStyle: 'normal',
+                                lineHeight: '1.5rem',
+                                fontFamily: 'Open Sans'
                               }}
                           
                               placeholder="Masukkan kota asal"
@@ -252,41 +247,41 @@ const PilihJadwalSearch = () => {
                           </Stack>
                         </Stack>
                         <Stack
-                          direction={"row"}
-                          alignItems={"center"}
+                          direction={'row'}
+                          alignItems={'center'}
                           spacing={2}
                         >
                           <FlightLandOutlined
                             sx={{
-                              borderRadius: "50%",
+                              borderRadius: '50%',
                               background: `linear-gradient(270deg, #3A42FF 0%, #7B52AB 100%)`,
-                              padding: "0.5rem",
-                              color: "white",
+                              padding: '0.5rem',
+                              color: 'white',
                             }}
                           ></FlightLandOutlined>
-                          <Stack direction={"column"}>
+                          <Stack direction={'column'}>
                             <Typography
                               variant="subtitle1"
                               sx={{
-                                width: "100%",
-                                color: "#9E9E9E",
+                                width: '100%',
+                                color: '#9E9E9E',
                                 fontWeight: 600,
-                                fontStyle: "normal",
-                                lineHeight: "1.5rem",
+                                fontStyle: 'normal',
+                                lineHeight: '1.5rem',
                               }}
-                              fontFamily={"Open Sans"}
+                              fontFamily={'Open Sans'}
                             >
                               Ke
                             </Typography>
                             <Input
                               value={destination}
                               sx={{
-                                width: "100%",
-                                color: "#1C1C1E",
+                                width: '100%',
+                                color: '#1C1C1E',
                                 fontWeight: 600,
-                                fontStyle: "normal",
-                                lineHeight: "1.5rem",
-                                fontFamily: "Open Sans"
+                                fontStyle: 'normal',
+                                lineHeight: '1.5rem',
+                                fontFamily: 'Open Sans'
                               }}
                               onChange={(event) => {
                                 setDestination(event.target.value);
@@ -297,13 +292,13 @@ const PilihJadwalSearch = () => {
                         </Stack>
                       </Stack>
                     </Grid>
-                    <Grid container item xs={2} justifyContent={"center"}>
+                    <Grid container item xs={2} justifyContent={'center'}>
                       <IconButton
                         sx={{
-                          borderRadius: "50%",
+                          borderRadius: '50%',
                           background: `linear-gradient(270deg, #3A42FF 0%, #7B52AB 100%)`,
-                          padding: "0.5rem",
-                          color: "white",
+                          padding: '0.5rem',
+                          color: 'white',
                         }}
                         onClick={handleSwapFromDestination}
                       >
@@ -313,61 +308,61 @@ const PilihJadwalSearch = () => {
                   </Grid>
                 </Box>
                 <Box
-                  borderRadius={"0.5rem"}
-                  border={"1px solid #C2C2C2"}
-                  sx={{ padding: "1rem 1.5rem" }}
+                  borderRadius={'0.5rem'}
+                  border={'1px solid #C2C2C2'}
+                  sx={{ padding: '1rem 1.5rem' }}
                 >
                   <Grid
                     container
-                    justifyContent={"center"}
-                    alignItems={"center"}
+                    justifyContent={'center'}
+                    alignItems={'center'}
                     spacing={2.5}
                   >
                     <Grid
                       container
                       item
                       xs={12}
-                      justifyContent={"center"}
-                      alignItems={"center"}
+                      justifyContent={'center'}
+                      alignItems={'center'}
                     >
-                      <Stack direction={"column"} spacing={1}>
+                      <Stack direction={'column'} spacing={1}>
                         <Stack
-                          direction={"row"}
-                          alignItems={"center"}
+                          direction={'row'}
+                          alignItems={'center'}
                           spacing={2}
                         >
                           <CalendarMonthOutlined
                             sx={{
-                              borderRadius: "50%",
+                              borderRadius: '50%',
                               background: `linear-gradient(270deg, #3A42FF 0%, #7B52AB 100%)`,
-                              padding: "0.5rem",
-                              color: "white",
+                              padding: '0.5rem',
+                              color: 'white',
                             }}
                           ></CalendarMonthOutlined>
-                          <Stack direction={"column"}>
+                          <Stack direction={'column'}>
                             <Typography
                               variant="subtitle1"
                               sx={{
-                                width: "100%",
-                                color: "#9E9E9E",
+                                width: '100%',
+                                color: '#9E9E9E',
                                 fontWeight: 600,
-                                fontStyle: "normal",
-                                lineHeight: "1.5rem",
-                                letterSpacing:  "-0.1px"
+                                fontStyle: 'normal',
+                                lineHeight: '1.5rem',
+                                letterSpacing:  '-0.1px'
                               }}
-                              fontFamily={"Open Sans"}
+                              fontFamily={'Open Sans'}
                             >
                               Keberangkatan
                             </Typography>
                             <Input
                               defaultValue="Sabtu, 26 Desember 2023"
                               sx={{
-                                width: "100%",
-                                color: "#1C1C1E",
+                                width: '100%',
+                                color: '#1C1C1E',
                                 fontWeight: 600,
-                                fontStyle: "normal",
-                                lineHeight: "1.5rem",
-                                fontFamily: "Open Sans"
+                                fontStyle: 'normal',
+                                lineHeight: '1.5rem',
+                                fontFamily: 'Open Sans'
                               }}
                             />
                           </Stack>
@@ -376,46 +371,46 @@ const PilihJadwalSearch = () => {
                           ></IOSSwitch>
                         </Stack>
                         <Stack
-                          direction={"row"}
-                          alignItems={"center"}
+                          direction={'row'}
+                          alignItems={'center'}
                           spacing={2}
                           display={
                             homecomingVisible
-                              ? { display: "flex" }
-                              : { display: "none" }
+                              ? { display: 'flex' }
+                              : { display: 'none' }
                           }
                         >
                           <CalendarMonthOutlined
                             sx={{
-                              borderRadius: "50%",
+                              borderRadius: '50%',
                               background: `linear-gradient(270deg, #3A42FF 0%, #7B52AB 100%)`,
-                              padding: "0.5rem",
-                              color: "white",
+                              padding: '0.5rem',
+                              color: 'white',
                             }}
                           ></CalendarMonthOutlined>
-                          <Stack direction={"column"}>
+                          <Stack direction={'column'}>
                             <Typography
                               variant="subtitle1"
                               sx={{
-                                width: "100%",
-                                color: "#9E9E9E",
+                                width: '100%',
+                                color: '#9E9E9E',
                                 fontWeight: 600,
-                                fontStyle: "normal",
-                                lineHeight: "1.5rem",
+                                fontStyle: 'normal',
+                                lineHeight: '1.5rem',
                               }}
-                              fontFamily={"Open Sans"}
+                              fontFamily={'Open Sans'}
                             >
                               Kepulangan
                             </Typography>
                             <Input
                               defaultValue="Sabtu, 26 Desember 2023"
                               sx={{
-                                width: "100%",
-                                color: "#1C1C1E",
+                                width: '100%',
+                                color: '#1C1C1E',
                                 fontWeight: 600,
-                                fontStyle: "normal",
-                                lineHeight: "1.5rem",
-                                fontFamily: "Open Sans"
+                                fontStyle: 'normal',
+                                lineHeight: '1.5rem',
+                                fontFamily: 'Open Sans'
                               }}
                             />
                           </Stack>
@@ -425,51 +420,51 @@ const PilihJadwalSearch = () => {
                   </Grid>
                 </Box>
                 <Box>
-                  <Grid container justifyContent={"center"} spacing={1}>
+                  <Grid container justifyContent={'center'} spacing={1}>
                     <Grid item xs={12} md={6}>
                       <Box
-                        borderRadius={"0.5rem"}
-                        border={"1px solid #C2C2C2"}
-                        sx={{ padding: "1rem" }}
+                        borderRadius={'0.5rem'}
+                        border={'1px solid #C2C2C2'}
+                        sx={{ padding: '1rem' }}
                         onClick={handleModalPassangerVisibleOpen}
                       >
                         <Stack
-                          direction={"row"}
+                          direction={'row'}
                           spacing={2}
-                          alignItems={"center"}
+                          alignItems={'center'}
                         >
                           <FlightTakeoffOutlined
                             sx={{
-                              borderRadius: "50%",
+                              borderRadius: '50%',
                               background: `linear-gradient(270deg, #3A42FF 0%, #7B52AB 100%)`,
-                              padding: "0.5rem",
-                              color: "white",
+                              padding: '0.5rem',
+                              color: 'white',
                             }}
                           ></FlightTakeoffOutlined>
                           <Stack>
                             <Typography
                               variant="subtitle1"
                               sx={{
-                                width: "100%",
-                                color: "#9E9E9E",
+                                width: '100%',
+                                color: '#9E9E9E',
                                 fontWeight: 600,
-                                fontStyle: "normal",
-                                lineHeight: "1.5rem",
+                                fontStyle: 'normal',
+                                lineHeight: '1.5rem',
                               }}
-                              fontFamily={"Open Sans"}
+                              fontFamily={'Open Sans'}
                             >
                               Penumpang
                             </Typography>
                             <Typography
                               variant="subtitle1"
                               sx={{
-                                width: "100%",
-                                color: "#1C1C1E",
+                                width: '100%',
+                                color: '#1C1C1E',
                                 fontWeight: 600,
-                                fontStyle: "normal",
-                                lineHeight: "1.5rem",
+                                fontStyle: 'normal',
+                                lineHeight: '1.5rem',
                               }}
-                              fontFamily={"Open Sans"}
+                              fontFamily={'Open Sans'}
                             >
                               {passangerValue.adult.value+passangerValue.child.value+passangerValue.baby.value} Orang
                             </Typography>
@@ -479,48 +474,48 @@ const PilihJadwalSearch = () => {
                     </Grid>
                     <Grid item xs={12} md={6}>
                       <Box
-                        borderRadius={"0.5rem"}
-                        border={"1px solid #C2C2C2"}
-                        sx={{ padding: "1rem" }}
+                        borderRadius={'0.5rem'}
+                        border={'1px solid #C2C2C2'}
+                        sx={{ padding: '1rem' }}
                         onClick={handleModalClassSeatVisibleOpen}
                       >
                         <Stack
-                          direction={"row"}
+                          direction={'row'}
                           spacing={2}
-                          alignItems={"center"}
+                          alignItems={'center'}
                         >
                           <Person2Outlined
                             sx={{
-                              borderRadius: "50%",
+                              borderRadius: '50%',
                               background: `linear-gradient(270deg, #3A42FF 0%, #7B52AB 100%)`,
-                              padding: "0.5rem",
-                              color: "white",
+                              padding: '0.5rem',
+                              color: 'white',
                             }}
                           ></Person2Outlined>
                           <Stack>
                             <Typography
                               variant="subtitle1"
                               sx={{
-                                width: "100%",
-                                color: "#9E9E9E",
+                                width: '100%',
+                                color: '#9E9E9E',
                                 fontWeight: 600,
-                                fontStyle: "normal",
-                                lineHeight: "1.5rem",
+                                fontStyle: 'normal',
+                                lineHeight: '1.5rem',
                               }}
-                              fontFamily={"Open Sans"}
+                              fontFamily={'Open Sans'}
                             >
                               Kelas
                             </Typography>
                             <Typography
                               variant="subtitle1"
                               sx={{
-                                width: "100%",
-                                color: "#1C1C1E",
+                                width: '100%',
+                                color: '#1C1C1E',
                                 fontWeight: 600,
-                                fontStyle: "normal",
-                                lineHeight: "1.5rem",
+                                fontStyle: 'normal',
+                                lineHeight: '1.5rem',
                               }}
-                              fontFamily={"Open Sans"}
+                              fontFamily={'Open Sans'}
                             >
                               {classSeatValue}
                             </Typography>
@@ -535,8 +530,8 @@ const PilihJadwalSearch = () => {
                     variant="contained"
                     sx={{
                       background: `linear-gradient(270deg, #3A42FF 0%, #7B52AB 100%)`,
-                      width: "100%",
-                      fontFamily: "Open Sans",
+                      width: '100%',
+                      fontFamily: 'Open Sans',
                     }}
                   >
                     Cari

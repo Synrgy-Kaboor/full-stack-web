@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/quotes */
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import {
   Grid,
   Stack,
@@ -9,25 +7,24 @@ import {
   IconButton,
   Divider,
   Modal,
-} from "@mui/material";
+} from '@mui/material';
 import {
   ArrowBackIosOutlined,
   AddCircleOutlined,
   RemoveCircleOutlined,
-} from "@mui/icons-material";
+} from '@mui/icons-material';
 import {
   ModalPassagerProps,
-  PassangerSearch,
-} from "../../types/ModalPassagerProps";
-import { useState } from "react";
+} from '../../types/ModalPassagerProps';
+import { useState } from 'react';
 
 const modalStyle = {
-  position: "absolute",
-  top: "50%",
-  left: "50%",
-  transform: "translate(-50%, -50%)",
-  bgcolor: "#FFF",
-  border: "1px solid #C2C2C2",
+  position: 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  bgcolor: '#FFF',
+  border: '1px solid #C2C2C2',
   boxShadow: 24,
   borderRadius: 3,
   px: 9,
@@ -54,65 +51,65 @@ const ModalPassanger = (props: ModalPassagerProps) => {
       aria-describedby="modal-modal-description"
       id="modal-passanger"
     >
-      <Box sx={modalStyle} width={"auto"}>
-        <Stack alignItems={"center"} width={"100%"} spacing={2}>
+      <Box sx={modalStyle} width={'auto'}>
+        <Stack alignItems={'center'} width={'100%'} spacing={2}>
           <Box
-            position={"relative"}
-            width={"100%"}
-            alignItems={"center"}
-            display={"flex"}
+            position={'relative'}
+            width={'100%'}
+            alignItems={'center'}
+            display={'flex'}
           >
-            <IconButton sx={{ position: "absolute" }} onClick={handleOnClose}>
+            <IconButton sx={{ position: 'absolute' }} onClick={handleOnClose}>
               <ArrowBackIosOutlined></ArrowBackIosOutlined>
             </IconButton>
             <Typography
               variant="h4"
               fontWeight={700}
-              textAlign={"center"}
-              width={"100%"}
-              fontFamily={"Open Sans"}
+              textAlign={'center'}
+              width={'100%'}
+              fontFamily={'Open Sans'}
             >
               Penumpang
             </Typography>
           </Box>
-          <Divider sx={{ width: "100%" }} />
-          <Box width={"100%"}>
+          <Divider sx={{ width: '100%' }} />
+          <Box width={'100%'}>
             <Grid
               container
-              justifyContent={"space-between"}
-              alignItems={"center"}
+              justifyContent={'space-between'}
+              alignItems={'center'}
             >
               <Grid item xs={10}>
                 <Stack>
                   <Typography variant="h6" fontWeight={600} 
-              fontFamily={"Open Sans"}>
+              fontFamily={'Open Sans'}>
                     Dewasa
                   </Typography>
                   <Typography
                     variant="subtitle1"
                     fontWeight={400}
-                    color={"#9E9E9E"}
-                    fontFamily={"Open Sans"}
+                    color={'#9E9E9E'}
+                    fontFamily={'Open Sans'}
                   ></Typography>
                 </Stack>
               </Grid>
-              <Grid item xs={2} width={"100%"}>
+              <Grid item xs={2} width={'100%'}>
                 <Stack
-                  direction={"row"}
-                  justifyContent={"space-between"}
-                  alignItems={"center"}
+                  direction={'row'}
+                  justifyContent={'space-between'}
+                  alignItems={'center'}
                 >
                   <IconButton onClick={() => setAdultValue(adultValue + 1)}>
                     <AddCircleOutlined
                       sx={{
-                        color: "#FFF",
-                        bgcolor: "#9E9E9E",
-                        borderRadius: "50%",
+                        color: '#FFF',
+                        bgcolor: '#9E9E9E',
+                        borderRadius: '50%',
                       }}
                     ></AddCircleOutlined>
                   </IconButton>
                   <Typography variant="h6" fontWeight={600} 
-              fontFamily={"Open Sans"}>
+              fontFamily={'Open Sans'}>
                     {adultValue}
                   </Typography>
                   <IconButton
@@ -122,9 +119,9 @@ const ModalPassanger = (props: ModalPassagerProps) => {
                   >
                     <RemoveCircleOutlined
                       sx={{
-                        color: "#FFF",
-                        bgcolor: "#9E9E9E",
-                        borderRadius: "50%",
+                        color: '#FFF',
+                        bgcolor: '#9E9E9E',
+                        borderRadius: '50%',
                       }}
                     ></RemoveCircleOutlined>
                   </IconButton>
@@ -133,48 +130,48 @@ const ModalPassanger = (props: ModalPassagerProps) => {
             </Grid>
           </Box>
 
-          <Divider sx={{ width: "100%" }} />
-          <Box width={"100%"}>
+          <Divider sx={{ width: '100%' }} />
+          <Box width={'100%'}>
             <Grid
               container
-              justifyContent={"space-between"}
-              alignItems={"center"}
+              justifyContent={'space-between'}
+              alignItems={'center'}
             >
               <Grid item xs={10}>
                 <Stack>
                   <Typography variant="h6" fontWeight={600} 
-              fontFamily={"Open Sans"}>
+              fontFamily={'Open Sans'}>
                     Anak
                   </Typography>
                   <Typography
                     variant="subtitle1"
                     fontWeight={400}
-                    color={"#9E9E9E"}
-                    fontFamily={"Open Sans"}
+                    color={'#9E9E9E'}
+                    fontFamily={'Open Sans'}
                   >
                     2-11 tahun saat melakukan perjalanan
                   </Typography>
                 </Stack>
               </Grid>
-              <Grid item xs={2} width={"100%"}>
+              <Grid item xs={2} width={'100%'}>
                 <Stack
-                  direction={"row"}
-                  justifyContent={"space-between"}
-                  alignItems={"center"}
+                  direction={'row'}
+                  justifyContent={'space-between'}
+                  alignItems={'center'}
                 >
                   <IconButton
                     onClick={() => setChildrenValue(childrenValue + 1)}
                   >
                     <AddCircleOutlined
                       sx={{
-                        color: "#FFF",
-                        bgcolor: "#9E9E9E",
-                        borderRadius: "50%",
+                        color: '#FFF',
+                        bgcolor: '#9E9E9E',
+                        borderRadius: '50%',
                       }}
                     ></AddCircleOutlined>
                   </IconButton>
                   <Typography variant="h6" fontWeight={600} 
-              fontFamily={"Open Sans"}>
+              fontFamily={'Open Sans'}>
                     {childrenValue}
                   </Typography>
                   <IconButton
@@ -185,9 +182,9 @@ const ModalPassanger = (props: ModalPassagerProps) => {
                   >
                     <RemoveCircleOutlined
                       sx={{
-                        color: "#FFF",
-                        bgcolor: "#9E9E9E",
-                        borderRadius: "50%",
+                        color: '#FFF',
+                        bgcolor: '#9E9E9E',
+                        borderRadius: '50%',
                       }}
                     ></RemoveCircleOutlined>
                   </IconButton>
@@ -196,46 +193,46 @@ const ModalPassanger = (props: ModalPassagerProps) => {
             </Grid>
           </Box>
 
-          <Divider sx={{ width: "100%" }} />
-          <Box width={"100%"}>
+          <Divider sx={{ width: '100%' }} />
+          <Box width={'100%'}>
             <Grid
               container
-              justifyContent={"space-between"}
-              alignItems={"center"}
+              justifyContent={'space-between'}
+              alignItems={'center'}
             >
               <Grid item xs={10}>
                 <Stack>
                   <Typography variant="h6" fontWeight={600}
-              fontFamily={"Open Sans"}>
+              fontFamily={'Open Sans'}>
                     Bayi
                   </Typography>
                   <Typography
                     variant="subtitle1"
                     fontWeight={400}
-                    color={"#9E9E9E"}
-                    fontFamily={"Open Sans"}
+                    color={'#9E9E9E'}
+                    fontFamily={'Open Sans'}
                   >
                     Dibawah 2 tahun saat melakukan perjalanan
                   </Typography>
                 </Stack>
               </Grid>
-              <Grid item xs={2} width={"100%"}>
+              <Grid item xs={2} width={'100%'}>
                 <Stack
-                  direction={"row"}
-                  justifyContent={"space-between"}
-                  alignItems={"center"}
+                  direction={'row'}
+                  justifyContent={'space-between'}
+                  alignItems={'center'}
                 >
                   <IconButton onClick={() => setBabyValue(babyValue + 1)}>
                     <AddCircleOutlined
                       sx={{
-                        color: "#FFF",
-                        bgcolor: "#9E9E9E",
-                        borderRadius: "50%",
+                        color: '#FFF',
+                        bgcolor: '#9E9E9E',
+                        borderRadius: '50%',
                       }}
                     ></AddCircleOutlined>
                   </IconButton>
                   <Typography variant="h6" fontWeight={600}
-              fontFamily={"Open Sans"}>
+              fontFamily={'Open Sans'}>
                     {babyValue}
                   </Typography>
                   <IconButton
@@ -245,9 +242,9 @@ const ModalPassanger = (props: ModalPassagerProps) => {
                   >
                     <RemoveCircleOutlined
                       sx={{
-                        color: "#FFF",
-                        bgcolor: "#9E9E9E",
-                        borderRadius: "50%",
+                        color: '#FFF',
+                        bgcolor: '#9E9E9E',
+                        borderRadius: '50%',
                       }}
                     ></RemoveCircleOutlined>
                   </IconButton>
@@ -256,10 +253,10 @@ const ModalPassanger = (props: ModalPassagerProps) => {
             </Grid>
           </Box>
 
-          <Divider sx={{ width: "100%" }} />
-          <Box width={"100%"}>
-            <Typography variant="subtitle1" fontWeight={400} color={"#9E9E9E"}
-              fontFamily={"Open Sans"}>
+          <Divider sx={{ width: '100%' }} />
+          <Box width={'100%'}>
+            <Typography variant="subtitle1" fontWeight={400} color={'#9E9E9E'}
+              fontFamily={'Open Sans'}>
               Hasil menampilkan harga rata-rata per penumpang sudah termasuk
               pajak, harga dapat bervariasi tergantung jenis penumpang.
             </Typography>
@@ -268,22 +265,22 @@ const ModalPassanger = (props: ModalPassagerProps) => {
               fontWeight={600}
               sx={{
                 background: `linear-gradient(270deg, #3A42FF 0%, #7B52AB 100%)`,
-                backgroundClip: "text",
-                WebkitTextFillColor: "transparent",
+                backgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
               }}
-              fontFamily={"Open Sans"}
+              fontFamily={'Open Sans'}
             >
               Instruksi pesan tiket untuk anak dan bayi
             </Typography>
           </Box>
-          <Divider sx={{ width: "100%", borderColor: "#FFF" }} />
-          <Box width={"100%"}>
+          <Divider sx={{ width: '100%', borderColor: '#FFF' }} />
+          <Box width={'100%'}>
             <Button
               variant="contained"
               sx={{
                 background: `linear-gradient(270deg, #3A42FF 0%, #7B52AB 100%)`,
-                width: "100%",
-                fontFamily: "Open Sans",
+                width: '100%',
+                fontFamily: 'Open Sans',
               }}
               onClick={() => {
                 const data = {
