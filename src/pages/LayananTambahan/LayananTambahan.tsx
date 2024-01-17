@@ -1,11 +1,11 @@
 import { Box, Grid, Typography, Container, Stack, Button } from '@mui/material';
-
-import { AddOnsCard, FlightDetailCard } from '../../components/ui/';
+import { AddOnsCard, FlightDetailCard, Navbar } from '../../components/ui/';
 
 export default function LayananTambahan() {
   return (
     <Box sx={{ backgroundColor: 'kaboor.light' }}>
-      <Container sx={{ paddingBlock: '2rem' }}>
+      <Navbar />
+      <Container sx={{ paddingBlockEnd: '2rem' }}>
         <Typography variant="h6" sx={{ fontWeight: 'bold' }}>
           Layanan Tambahan
         </Typography>

@@ -28,6 +28,8 @@ import {
   RemoveCircleOutlined,
 } from "@mui/icons-material";
 
+import { Navbar } from '../../components/ui';
+
 const IOSSwitch = styled((props: SwitchProps) => (
   <Switch focusVisibleClassName=".Mui-focusVisible" disableRipple {...props} />
 ))(({ theme }) => ({
@@ -157,10 +159,12 @@ const PilihJadwalSearch = () => {
   };
 
   return (
-    <Grid
-      container
-      sx={{
-        background: `
+    <>
+      <Navbar />
+      <Grid
+        container
+        sx={{
+          background: `
     linear-gradient(270deg, rgba(58, 66, 255, 0.50) 0%, rgba(123, 82, 171, 0.50) 100%),
     url(${bgPesawat})`,
         paddingBlock: "4rem",
