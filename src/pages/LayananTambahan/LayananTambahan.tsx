@@ -5,7 +5,7 @@ export default function LayananTambahan() {
   return (
     <Box sx={{ backgroundColor: 'kaboor.light' }}>
       <Navbar />
-      <Container sx={{ paddingBlock: '2rem' }}>
+      <Container sx={{ paddingBlockEnd: '2rem' }}>
         <Typography variant="h6" sx={{ fontWeight: 'bold' }}>
           Layanan Tambahan
         </Typography>
