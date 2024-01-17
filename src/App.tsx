@@ -1,28 +1,33 @@
-import { RouterProvider, createBrowserRouter } from 'react-router-dom';
-import RegisterRoute from './pages/Auth/register/registerRoutes';
-import DetailPenumpang from './pages/DetailPenumpang/DetailPenumpang';
-import { LayananTambahan } from './pages/LayananTambahan';
-import { PilihJadwalSearch } from './pages/PilihJadwalSearch';
+import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import RegisterRoute from "./pages/Auth/register/registerRoutes";
+import LoginRoot from "./pages/Auth/Login/Login.root";
+import DetailPenumpang from "./pages/DetailPenumpang/DetailPenumpang";
+import { LayananTambahan } from "./pages/LayananTambahan";
+import { PilihJadwalSearch } from "./pages/PilihJadwalSearch";
 
-import { ThemeProvider } from '@mui/material/styles';
-import theme from './config/theme';
+import { ThemeProvider } from "@mui/material/styles";
+import theme from "./config/theme";
 
 const router = createBrowserRouter([
   {
-    path: '/layanan-tambahan',
+    path: "/layanan-tambahan",
     element: <LayananTambahan />,
   },
   {
-    path: '/detail-penumpang',
+    path: "/detail-penumpang",
     element: <DetailPenumpang />,
   },
   {
-    path: '/register/*',
+    path: "/register/*",
     element: <RegisterRoute />,
   },
   {
-    path: '/pilih-jadwal-search',
+    path: "/pilih-jadwal-search",
     element: <PilihJadwalSearch />,
+  },
+  {
+    path: "/login",
+    element: <LoginRoot />,
   },
 ]);
 
