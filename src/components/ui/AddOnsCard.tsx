@@ -18,22 +18,22 @@ import {
   TableBody,
   TableHead,
   TableContainer,
-} from '@mui/material';
+} from "@mui/material";
 
-import CheckCircleIcon from '@mui/icons-material/CheckCircle';
-import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
-import ControlPointOutlinedIcon from '@mui/icons-material/ControlPointOutlined';
-import HealthAndSafetyOutlinedIcon from '@mui/icons-material/HealthAndSafetyOutlined';
-import { useState } from 'react';
+import CheckCircleIcon from "@mui/icons-material/CheckCircle";
+import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
+import ControlPointOutlinedIcon from "@mui/icons-material/ControlPointOutlined";
+import HealthAndSafetyOutlinedIcon from "@mui/icons-material/HealthAndSafetyOutlined";
+import { useState } from "react";
 
 export default function AddOnsCard(props: { title: string; price: number }) {
   const [addOns, setAddOns] = useState<boolean>(false);
   const [openPopUp, setOpenPopUp] = useState<boolean>(false);
 
   function formatPriceToIDR(price: number) {
-    const rupiah = new Intl.NumberFormat('en-ID', {
-      style: 'currency',
-      currency: 'IDR',
+    const rupiah = new Intl.NumberFormat("en-ID", {
+      style: "currency",
+      currency: "IDR",
       maximumSignificantDigits: 3,
     });
 
@@ -58,9 +58,9 @@ export default function AddOnsCard(props: { title: string; price: number }) {
         <Stack direction="row" m={2} alignItems="center">
           <HealthAndSafetyOutlinedIcon
             fontSize="medium"
-            sx={{ color: 'kaboor.main' }}
+            sx={{ color: "kaboor.main" }}
           />
-          <Typography sx={{ fontWeight: 'bold' }} ml={1}>
+          <Typography sx={{ fontWeight: "bold" }} ml={1}>
             {props.title}
           </Typography>
         </Stack>
@@ -86,9 +86,14 @@ export default function AddOnsCard(props: { title: string; price: number }) {
               <Stack px={10} direction="row" justifyContent="center">
                 <ArrowBackIosNewIcon
                   onClick={handleModalClose}
-                  sx={{ position: 'absolute', left: 20, top: 20 }}
+                  sx={{
+                    position: "absolute",
+                    left: 20,
+                    top: 20,
+                    "&:hover": { cursor: "pointer" },
+                  }}
                 />
-                <Typography variant="h5" sx={{ fontWeight: 'bold' }}>
+                <Typography variant="h5" sx={{ fontWeight: "bold" }}>
                   Perlindungan Ekstra
                 </Typography>
               </Stack>
@@ -96,23 +101,23 @@ export default function AddOnsCard(props: { title: string; price: number }) {
             <DialogContent dividers>
               <Stack direction="row" spacing={2} mb={2} alignItems="center">
                 <HealthAndSafetyOutlinedIcon />
-                <Typography variant="h6" sx={{ fontWeight: 'bold' }}>
+                <Typography variant="h6" sx={{ fontWeight: "bold" }}>
                   Asuransi Perjalanan
                 </Typography>
               </Stack>
               <TableContainer component={Paper}>
                 <Table>
                   <TableHead>
-                    <TableRow sx={{ bgcolor: 'kaboor.main' }}>
+                    <TableRow sx={{ bgcolor: "kaboor.main" }}>
                       <TableCell
                         align="center"
-                        sx={{ color: 'white', fontSize: '1.5rem' }}
+                        sx={{ color: "white", fontSize: "1.5rem" }}
                       >
                         Tanggungan
                       </TableCell>
                       <TableCell
                         align="center"
-                        sx={{ color: 'white', fontSize: '1.5rem' }}
+                        sx={{ color: "white", fontSize: "1.5rem" }}
                       >
                         Kompensasi
                       </TableCell>
@@ -120,14 +125,14 @@ export default function AddOnsCard(props: { title: string; price: number }) {
                   </TableHead>
                   <TableBody>
                     <TableRow>
-                      <TableCell sx={{ width: '50%' }}>
+                      <TableCell sx={{ width: "50%" }}>
                         Santunan sebanyak satu kali jika Anda meninggal dunia
                         atau cacat tetap akibat kecelakaan.
                       </TableCell>
                       <TableCell>Hingga Rp 150.000.000</TableCell>
                     </TableRow>
                     <TableRow>
-                      <TableCell sx={{ width: '50%' }}>
+                      <TableCell sx={{ width: "50%" }}>
                         Menanggung biaya perawatan medis selama perjalanan Anda
                         yang dibutuhkan akibat kecelakaan.
                       </TableCell>
@@ -136,7 +141,7 @@ export default function AddOnsCard(props: { title: string; price: number }) {
                       </TableCell>
                     </TableRow>
                     <TableRow>
-                      <TableCell sx={{ width: '50%' }}>
+                      <TableCell sx={{ width: "50%" }}>
                         Menanggung biaya perjalanan dan akomodasi yang hangus
                         jika perjalanan Anda harus dibatalkan setidaknya 30 hari
                         sebelum tanggal keberangkatan Anda, akibat risiko-risiko
@@ -147,7 +152,7 @@ export default function AddOnsCard(props: { title: string; price: number }) {
                       </TableCell>
                     </TableRow>
                     <TableRow>
-                      <TableCell sx={{ width: '50%' }}>
+                      <TableCell sx={{ width: "50%" }}>
                         Menanggung biaya perawatan medis selama perjalanan Anda
                         yang dibutuhkan akibat kecelakaan.
                       </TableCell>
@@ -162,7 +167,7 @@ export default function AddOnsCard(props: { title: string; price: number }) {
           </Dialog>
         </Box>
       </CardContent>
-      <CardActions disableSpacing sx={{ padding: '0' }}>
+      <CardActions disableSpacing sx={{ padding: "0" }}>
         <Stack
           direction="row"
           px={2}
@@ -170,23 +175,23 @@ export default function AddOnsCard(props: { title: string; price: number }) {
           m={0}
           alignItems="center"
           sx={{
-            bgcolor: 'kaboor.main',
-            width: '100%',
-            display: 'flex',
-            flexDirection: 'row',
-            justifyContent: 'space-between',
+            bgcolor: "kaboor.main",
+            width: "100%",
+            display: "flex",
+            flexDirection: "row",
+            justifyContent: "space-between",
           }}
         >
-          <Typography sx={{ fontWeight: 'bold', color: 'white' }}>
+          <Typography sx={{ fontWeight: "bold", color: "white" }}>
             {formatPriceToIDR(props.price)}/pax
           </Typography>
           {addOns === true ? (
             <IconButton onClick={onAddOnsClick}>
-              <CheckCircleIcon sx={{ color: 'success.light' }} />
+              <CheckCircleIcon sx={{ color: "success.light" }} />
             </IconButton>
           ) : (
             <IconButton onClick={onAddOnsClick}>
-              <ControlPointOutlinedIcon sx={{ color: 'white' }} />
+              <ControlPointOutlinedIcon sx={{ color: "white" }} />
             </IconButton>
           )}
         </Stack>
