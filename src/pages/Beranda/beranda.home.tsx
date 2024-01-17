@@ -90,10 +90,9 @@ const Beranda = () => {
           <BerandaDestinasi />
         </div>
         <div style={{marginBottom:'60px'}}>
-          <Typography style={styles.texttitle}>Rekomendasi Mobil Rental Terbaik</Typography>
+          <Typography style={styles.texttitle}>Rekomendasi Maskapai Terbaik</Typography>
           <Typography sx={{ maxWidth: '698px' }} style={styles.textdesc}>
-            Nikmati perjalanan Anda dengan rekomendasi mobil rental terbaik di situ kami. Pilih kendaraan ideal untuk pengalaman mengemudi tak terlupakan!
-          </Typography>
+          Nikmati perjalanan Anda dengan rekomendasi maskapai terbaik kami. Pilih maskapai ideal untuk pengalaman terbang tak terlupakan!          </Typography>
           <BerandaRental />
         </div>
         <footer style={styles.footer}>
