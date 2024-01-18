@@ -7,24 +7,31 @@ import { PilihJadwalSearch } from './pages/PilihJadwalSearch';
 import { ThemeProvider } from '@mui/material/styles';
 import theme from './config/theme';
 import { CssBaseline } from '@mui/material';
+import DefaultLayout from './layouts/DefaultLayout';
 
 const router = createBrowserRouter([
   {
-    path: '/layanan-tambahan',
-    element: <LayananTambahan />,
-  },
-  {
-    path: '/detail-penumpang',
-    element: <DetailPenumpang />,
-  },
-  {
-    path: '/register/*',
-    element: <RegisterRoute />,
-  },
-  {
-    path: '/pilih-jadwal-search',
-    element: <PilihJadwalSearch />,
-  },
+    path: '',
+    element: <DefaultLayout/>,
+    children: [
+      {
+        path: '/layanan-tambahan',
+        element: <LayananTambahan />,
+      },
+      {
+        path: '/detail-penumpang',
+        element: <DetailPenumpang />,
+      },
+      {
+        path: '/register/*',
+        element: <RegisterRoute />,
+      },
+      {
+        path: '/pilih-jadwal-search',
+        element: <PilihJadwalSearch />,
+      },
+    ]
+  }
 ]);
 
 function App() {

@@ -13,8 +13,8 @@ import BusinessCenterOutlinedIcon from '@mui/icons-material/BusinessCenterOutlin
 import HealthAndSafetyOutlinedIcon from '@mui/icons-material/HealthAndSafetyOutlined';
 import RestaurantOutlinedIcon from '@mui/icons-material/RestaurantOutlined';
 
-import FlightLogo from '../../assets/Logo Maskapai.png';
-import PlaneIcon from '../../assets/plane icon.png';
+import FlightLogo from '../../../assets/Logo Maskapai.png';
+import PlaneIcon from '../../../assets/plane icon.png';
 import theme from '../../../config/theme';
 
 // Card detail penerbangan

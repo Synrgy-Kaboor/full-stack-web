@@ -22,7 +22,6 @@ import {
   Person2Outlined,
 } from '@mui/icons-material';
 
-import { Navbar } from '../../components/ui';
 import { PassangerSearch } from '../../types/ModalPassagerProps';
 import ModalPassanger from '../../components/ui/ModalPassanger';
 import ModalClassSeat from '../../components/ui/ModalClassSeat';
@@ -146,7 +145,6 @@ const PilihJadwalSearch = () => {
 
   return (
     <>
-      <Navbar />
       <Grid
         container
         sx={{
