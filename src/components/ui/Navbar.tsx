@@ -32,7 +32,7 @@ export default function Navbar() {
             <Stack direction="row" spacing={1} alignItems="center">
               <NotificationsNoneOutlinedIcon
                 fontSize="large"
-                sx={{ color: 'kaboor.main' }}
+                sx={{ color: 'primary.main' }}
               />
               <Typography color="black">Notifikasi</Typography>
             </Stack>
@@ -40,7 +40,7 @@ export default function Navbar() {
               <img src={PlaneIcon} alt="" />
               <Typography color="black">Pesanan</Typography>
             </Stack>
-            <Avatar sx={{ bgcolor: 'kaboor.main' }}>A</Avatar>
+            <Avatar sx={{ bgcolor: 'primary.main' }}>A</Avatar>
           </Stack>
         </Toolbar>
       </Container>

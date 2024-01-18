@@ -1,6 +1,7 @@
 import { Button, FormControl, FormControlLabel, Radio, RadioGroup, Stack, TextField, Typography } from '@mui/material';
 import { useState } from 'react';
 import { Pemesan } from '../../types/Pemesan';
+import theme from '../../config/theme';
 
 export default function FormPemesan(props: { changePemesan: (newPemesan: Pemesan) => void}) {
     const [pemesan, setPemesan] = useState<Pemesan>({
@@ -50,7 +51,7 @@ export default function FormPemesan(props: { changePemesan: (newPemesan: Pemesan
                 variant="contained"
                 onClick={() => props.changePemesan(pemesan)}
                 sx={{ 
-                    backgroundImage: `linear-gradient(90deg, #7B52AB, #3A42FF)`, 
+                    background: theme.palette.gradients?.horizontal, 
                     width: '100%' 
                 }}
             >

@@ -6,6 +6,7 @@ import { PilihJadwalSearch } from './pages/PilihJadwalSearch';
 
 import { ThemeProvider } from '@mui/material/styles';
 import theme from './config/theme';
+import { CssBaseline } from '@mui/material';
 
 const router = createBrowserRouter([
   {
@@ -29,6 +30,7 @@ const router = createBrowserRouter([
 function App() {
   return (
     <ThemeProvider theme={theme}>
+      <CssBaseline/>
       <RouterProvider router={router} />
     </ThemeProvider>
   );

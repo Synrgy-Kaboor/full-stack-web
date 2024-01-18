@@ -69,7 +69,7 @@ export default function DetailPenumpang() {
   return (
     <>
       <Navbar />
-      <Container sx={{ paddingBlock: '2rem', backgroundColor: 'kaboor.light' }}>
+      <Container sx={{ paddingBlock: '2rem' }}>
         <Typography variant="h5" fontWeight="bold">
           Detail Penumpang
         </Typography>
@@ -86,7 +86,7 @@ export default function DetailPenumpang() {
                   variant="contained"
                   onClick={() => navigate('/layanan-tambahan')}
                   sx={{ 
-                    backgroundImage: `linear-gradient(90deg, #7B52AB, #3A42FF)`, 
+                    background: theme.palette.gradients?.horizontal, 
                     width: '100%' 
                   }}
                 >
@@ -159,7 +159,7 @@ export default function DetailPenumpang() {
                 variant="contained"
                 onClick={() => navigate('/layanan-tambahan')}
                 sx={{ 
-                  backgroundImage: `linear-gradient(90deg, #7B52AB, #3A42FF)`, 
+                  background: theme.palette.gradients?.horizontal, 
                   width: '100%' 
                 }}
               >

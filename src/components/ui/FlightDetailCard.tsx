@@ -15,6 +15,7 @@ import RestaurantOutlinedIcon from '@mui/icons-material/RestaurantOutlined';
 
 import FlightLogo from '../../assets/Logo Maskapai.png';
 import PlaneIcon from '../../assets/plane icon.png';
+import theme from '../../config/theme';
 
 // Card detail penerbangan
 export default function FlightDetailCard() {
@@ -72,16 +73,16 @@ export default function FlightDetailCard() {
         >
           <Stack direction="row" gap={1}>
             <IconButton
-              sx={{
-                backgroundImage: `linear-gradient(90deg, #7B52AB, #3A42FF)`,
-                color: 'white',
-              }}
+              sx={{ 
+                background: theme.palette.gradients?.horizontal,
+                color: 'white'
+               }}
             >
               <BusinessCenterOutlinedIcon />
             </IconButton>
             <IconButton
               sx={{
-                backgroundImage: `linear-gradient(90deg, #7B52AB, #3A42FF)`,
+                background: theme.palette.gradients?.horizontal,
                 color: 'white',
               }}
             >
@@ -89,7 +90,7 @@ export default function FlightDetailCard() {
             </IconButton>
             <IconButton
               sx={{
-                backgroundImage: `linear-gradient(90deg, #7B52AB, #3A42FF)`,
+                background: theme.palette.gradients?.horizontal,
                 color: 'white',
               }}
             >

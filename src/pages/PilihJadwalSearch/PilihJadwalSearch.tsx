@@ -26,6 +26,8 @@ import { Navbar } from '../../components/ui';
 import { PassangerSearch } from '../../types/ModalPassagerProps';
 import ModalPassanger from '../../components/ui/ModalPassanger';
 import ModalClassSeat from '../../components/ui/ModalClassSeat';
+import theme from '../../config/theme';
+
 const IOSSwitch = styled((props: SwitchProps) => (
   <Switch focusVisibleClassName=".Mui-focusVisible" disableRipple {...props} />
 ))(({ theme }) => ({
@@ -207,7 +209,7 @@ const PilihJadwalSearch = () => {
                           <FlightTakeoffOutlined
                             sx={{
                               borderRadius: '50%',
-                              background: `linear-gradient(270deg, #3A42FF 0%, #7B52AB 100%)`,
+                              background: theme.palette.gradients?.diagonal,
                               padding: '0.5rem',
                               color: 'white',
                             }}
@@ -253,7 +255,7 @@ const PilihJadwalSearch = () => {
                           <FlightLandOutlined
                             sx={{
                               borderRadius: '50%',
-                              background: `linear-gradient(270deg, #3A42FF 0%, #7B52AB 100%)`,
+                              background: theme.palette.gradients?.diagonal,
                               padding: '0.5rem',
                               color: 'white',
                             }}
@@ -295,7 +297,7 @@ const PilihJadwalSearch = () => {
                       <IconButton
                         sx={{
                           borderRadius: '50%',
-                          background: `linear-gradient(270deg, #3A42FF 0%, #7B52AB 100%)`,
+                          background: theme.palette.gradients?.diagonal,
                           padding: '0.5rem',
                           color: 'white',
                         }}
@@ -333,7 +335,7 @@ const PilihJadwalSearch = () => {
                           <CalendarMonthOutlined
                             sx={{
                               borderRadius: '50%',
-                              background: `linear-gradient(270deg, #3A42FF 0%, #7B52AB 100%)`,
+                              background: theme.palette.gradients?.diagonal,
                               padding: '0.5rem',
                               color: 'white',
                             }}
@@ -382,7 +384,7 @@ const PilihJadwalSearch = () => {
                           <CalendarMonthOutlined
                             sx={{
                               borderRadius: '50%',
-                              background: `linear-gradient(270deg, #3A42FF 0%, #7B52AB 100%)`,
+                              background: theme.palette.gradients?.diagonal,
                               padding: '0.5rem',
                               color: 'white',
                             }}
@@ -435,7 +437,7 @@ const PilihJadwalSearch = () => {
                           <FlightTakeoffOutlined
                             sx={{
                               borderRadius: '50%',
-                              background: `linear-gradient(270deg, #3A42FF 0%, #7B52AB 100%)`,
+                              background: theme.palette.gradients?.diagonal,
                               padding: '0.5rem',
                               color: 'white',
                             }}
@@ -486,7 +488,7 @@ const PilihJadwalSearch = () => {
                           <Person2Outlined
                             sx={{
                               borderRadius: '50%',
-                              background: `linear-gradient(270deg, #3A42FF 0%, #7B52AB 100%)`,
+                              background: theme.palette.gradients?.diagonal,
                               padding: '0.5rem',
                               color: 'white',
                             }}
@@ -528,7 +530,7 @@ const PilihJadwalSearch = () => {
                   <Button
                     variant="contained"
                     sx={{
-                      background: `linear-gradient(270deg, #3A42FF 0%, #7B52AB 100%)`,
+                      background: theme.palette.gradients?.diagonal,
                       width: '100%',
                       fontFamily: 'Open Sans',
                     }}

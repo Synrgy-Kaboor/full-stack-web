@@ -1,6 +1,7 @@
 import { Button, FormControl, FormControlLabel, Radio, RadioGroup, Stack, TextField, Typography } from '@mui/material';
 import { Penumpang } from '../../types/Penumpang';
 import { useState } from 'react';
+import theme from '../../config/theme';
 
 export default function FormPenumpang(props: { changePenumpang: (newPenumpang: Penumpang, order: number) => void, order: number}) {
     const [penumpang, setPenumpang] = useState<Penumpang>({
@@ -41,7 +42,7 @@ export default function FormPenumpang(props: { changePenumpang: (newPenumpang: P
                 variant="contained"
                 onClick={ () => props.changePenumpang(penumpang, props.order) }
                 sx={{ 
-                    backgroundImage: `linear-gradient(90deg, #7B52AB, #3A42FF)`, 
+                    background: theme.palette.gradients?.horizontal, 
                     width: '100%' 
                 }}
             >
