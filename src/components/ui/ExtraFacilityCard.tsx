@@ -20,7 +20,7 @@ export default function ExtraFacilityCard(props: { title: string, caption: strin
                     m={0}
                     alignItems="center"
                     sx={{
-                      backgroundColor: '#7B52AB',
+                      backgroundColor: 'primary.main',
                       width: '100%',
                       display: 'flex',
                       flexDirection: 'row',
