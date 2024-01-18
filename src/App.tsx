@@ -25,15 +25,15 @@ const router = createBrowserRouter([
         element: <DetailPenumpang />,
       },
       {
-        path: '/register/*',
-        element: <RegisterRoute />,
-      },
-      {
         path: '/pilih-jadwal-search',
         element: <PilihJadwalSearch />,
       },
     ]
-  }
+  },
+  {
+    path: '/register/*',
+    element: <RegisterRoute />,
+  },
 ]);
 
 function App() {
