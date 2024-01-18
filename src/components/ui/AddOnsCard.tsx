@@ -170,7 +170,7 @@ export default function AddOnsCard(props: { title: string; price: number }) {
           m={0}
           alignItems="center"
           sx={{
-            bgcolor: 'kaboor.main',
+            bgcolor: 'primary.main',
             width: '100%',
             display: 'flex',
             flexDirection: 'row',

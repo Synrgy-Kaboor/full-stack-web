@@ -1,10 +1,11 @@
 import { Box, Grid, Typography, Container, Stack, Button } from '@mui/material';
-import { AddOnsCard, FlightDetailCard, Navbar } from '../../components/ui/';
+import { AddOnsCard } from '../../components/ui/';
+import theme from '../../config/theme';
+import FlightDetailCard from '../../components/shared/Pemesanan/FlightDetailCard';
 
 export default function LayananTambahan() {
   return (
-    <Box sx={{ backgroundColor: 'kaboor.light' }}>
-      <Navbar />
+    <>
       <Container sx={{ paddingBlockEnd: '2rem' }}>
         <Typography variant="h6" sx={{ fontWeight: 'bold' }}>
           Layanan Tambahan
@@ -34,7 +35,7 @@ export default function LayananTambahan() {
                   <Typography
                     variant="h5"
                     sx={{
-                      backgroundImage: `linear-gradient(90deg, #7B52AB, #3A42FF)`,
+                      background: theme.palette.gradients?.horizontal,
                       backgroundClip: 'text',
                       color: 'transparent',
                       fontWeight: 'bold',
@@ -47,7 +48,7 @@ export default function LayananTambahan() {
                   <Button
                     variant="contained"
                     sx={{
-                      backgroundImage: `linear-gradient(90deg, #7B52AB, #3A42FF)`,
+                      background: theme.palette.gradients?.horizontal,
                       width: '100%',
                     }}
                   >
@@ -59,6 +60,6 @@ export default function LayananTambahan() {
           </Grid>
         </Grid>
       </Container>
-    </Box>
+    </>
   );
 }
