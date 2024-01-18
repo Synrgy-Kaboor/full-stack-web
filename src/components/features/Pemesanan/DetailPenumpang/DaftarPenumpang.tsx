@@ -1,9 +1,17 @@
 import { Card, CardContent, Divider, IconButton, Stack, Typography } from '@mui/material';
 import EditIcon from '@mui/icons-material/Edit';
 import { IOSSwitch } from '../../../core/IOSSwitch';
-import { Penumpang } from '../../../../types/Penumpang';
+import { useAppDispatch, useAppSelector } from '../../../../redux/hooks';
+import { openPenumpangPopup, resetFirstPenumpang, setFirstPenumpangToPemesan } from '../../../../redux/slices/DetailPenumpang';
+import { useState } from 'react';
 
-export default function DaftarPenumpang(props: { penumpang: Penumpang[], openPopup: (order: number) => void }) {
+
+export default function DaftarPenumpang() {
+    const { daftarPenumpang } = useAppSelector((state) => state.detailPenumpang);
+    const dispatch = useAppDispatch();
+
+    const [switchChecked, setSwitchChecked] = useState(true);
+
     return (
         <Card variant="outlined">
             <CardContent sx={{ p: 2 }}>
@@ -11,13 +19,21 @@ export default function DaftarPenumpang(props: { penumpang: Penumpang[], openPop
                     <Typography>
                         sama dengan pemesan
                     </Typography>
-                    <IOSSwitch defaultChecked/>
+                    <IOSSwitch defaultChecked onChange={() => {
+                        if (switchChecked) {
+                            dispatch(resetFirstPenumpang());
+                            setSwitchChecked(false);
+                        } else {
+                            dispatch(setFirstPenumpangToPemesan());
+                            setSwitchChecked(true);
+                        }
+                    }}/>
                 </Stack>
                 <Divider/>
                 <Stack>
                     {
-                        props.penumpang.map((p, i) => {
-                            return <PenumpangRow penumpang={p} order={i} openPopup={props.openPopup}/>
+                        daftarPenumpang.map((_, i) => {
+                            return <PenumpangRow order={i} key={i}/>
                         })
                     }
                 </Stack>
@@ -26,13 +42,23 @@ export default function DaftarPenumpang(props: { penumpang: Penumpang[], openPop
     );
 }
 
-function PenumpangRow(props: { penumpang: Penumpang, order: number, openPopup: (order: number) => void }) {
+function PenumpangRow(props: { order: number }) {
+    const { daftarPenumpang } = useAppSelector((state) => state.detailPenumpang);
+    const dispatch = useAppDispatch();
+
     return(
         <Stack direction="row" justifyContent="space-between" sx={{ pt: 2 }} alignItems={'center'}>
-            <Typography fontWeight={'bold'}>
-                {`${props.penumpang.honorific}. ${props.penumpang.name}`}
-            </Typography>
-            <IconButton onClick={() => props.openPopup(props.order)}>
+            {daftarPenumpang[props.order].name && 
+                <Typography fontWeight={'bold'}>
+                    {`${daftarPenumpang[props.order].honorific}. ${daftarPenumpang[props.order].name}`}
+                </Typography>
+            }
+            {!daftarPenumpang[props.order].name && 
+                <Typography>
+                    {`Penumpang ${props.order + 1}`}
+                </Typography>
+            }
+            <IconButton onClick={() => dispatch(openPenumpangPopup(props.order))}>
                 <EditIcon/>
             </IconButton>
         </Stack>

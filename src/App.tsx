@@ -8,6 +8,8 @@ import { ThemeProvider } from '@mui/material/styles';
 import theme from './config/theme';
 import { CssBaseline } from '@mui/material';
 import DefaultLayout from './layouts/DefaultLayout';
+import { Provider } from 'react-redux';
+import { store } from './redux/store';
 
 const router = createBrowserRouter([
   {
@@ -36,10 +38,12 @@ const router = createBrowserRouter([
 
 function App() {
   return (
-    <ThemeProvider theme={theme}>
-      <CssBaseline/>
-      <RouterProvider router={router} />
-    </ThemeProvider>
+    <Provider store={store}>
+      <ThemeProvider theme={theme}>
+        <CssBaseline/>
+        <RouterProvider router={router} />
+      </ThemeProvider>
+    </Provider>
   );
 }
 

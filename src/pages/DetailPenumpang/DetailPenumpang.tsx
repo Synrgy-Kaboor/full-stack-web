@@ -15,56 +15,17 @@ import FlightDetailCard from '../../components/shared/Pemesanan/FlightDetailCard
 import { useNavigate } from 'react-router';
 import FormPemesan from '../../components/features/Pemesanan/DetailPenumpang/FormPemesan';
 import FormPenumpang from '../../components/features/Pemesanan/DetailPenumpang/FormPenumpang';
-import { Pemesan } from '../../types/Pemesan';
-import { useState } from 'react';
-import { Penumpang } from '../../types/Penumpang';
 import Popup from '../../components/core/Popup';
+import { useAppDispatch, useAppSelector } from '../../redux/hooks';
+import { closePemesanPopup, closePenumpangPopup } from '../../redux/slices/DetailPenumpang';
 
 export default function DetailPenumpang() {
+  const { pemesanPopupOpened, penumpangPopupOpened } = useAppSelector((state) => state.detailPenumpang);
+  const dispatch = useAppDispatch();
+
   const theme = useTheme();
   const isSmallScreen = useMediaQuery(theme.breakpoints.down('md'));
-
-  const pemesanInitialState: Pemesan = {
-    name: 'Andre Hutshon',
-    honorific: 'Mr',
-    phone: '+62 82140520771',
-    email: 'andrehosthon234@gmail.com'
-  };
-
-  const daftarPenumpangInitialState: Penumpang[] = [
-    {
-      name: 'Penumpang 1',
-      honorific: ''
-    },
-    {
-      name: 'Penumpang 2',
-      honorific: ''
-    }
-  ];
-
-  const [pemesan, setPemesan] = useState<Pemesan>(pemesanInitialState);
-  const [daftarPenumpang, setDaftarPenumpang] = useState<Penumpang[]>(daftarPenumpangInitialState);
-  const [openPemesanPopup, setOpenPemesanPopup] = useState(false);
-  const [openPenumpangPopup, setOpenPenumpangPopup] = useState(false);  
-  const [selectedPenumpangOrder, setSelectedPenumpangOrder] = useState(0);
   const navigate = useNavigate();
-
-  const changePemesan = (newPemesan: Pemesan) => {
-    setPemesan(newPemesan);
-    setOpenPemesanPopup(false);
-  }
-
-  const changePenumpang = (newPenumpang: Penumpang, order: number) => {
-    const newDaftarPenumpang = [...daftarPenumpang];
-    newDaftarPenumpang[order] = newPenumpang
-    setDaftarPenumpang(newDaftarPenumpang);
-    setOpenPenumpangPopup(false);
-  }
-
-  const setupOpenPenumpangPopup = (order: number) => {
-    setSelectedPenumpangOrder(order);
-    setOpenPenumpangPopup(true);
-  }
 
   return (
     <>
@@ -100,32 +61,29 @@ export default function DetailPenumpang() {
               <Typography variant="h6" mb={2} fontWeight={'bold'}>
                 Detail Pemesan
               </Typography>
-              <DetailPemesan
-                pemesan={pemesan}
-                setOpenPopup={setOpenPemesanPopup}
-              />
+              <DetailPemesan/>
             </Box>
             {/* Detail Pemesan Modal */}
             <Popup
               title='Detail Pemesan'
-              open={openPemesanPopup}
-              setOpen={setOpenPemesanPopup}
+              open={pemesanPopupOpened}
+              onClose={() => dispatch(closePemesanPopup())}
             >
-              <FormPemesan changePemesan={changePemesan}/>
+              <FormPemesan/>
             </Popup>
             {/* Penumpang */}
             <Box>
               <Typography variant="h6" mb={2} fontWeight={'bold'}>
                 Penumpang
               </Typography>
-              <DaftarPenumpang penumpang={daftarPenumpang} openPopup={setupOpenPenumpangPopup}/>
+              <DaftarPenumpang/>
             </Box>
             <Popup
               title='Detail Penumpang'
-              open={openPenumpangPopup}
-              setOpen={setOpenPenumpangPopup}
+              open={penumpangPopupOpened}
+              onClose={() => dispatch(closePenumpangPopup())}
             >
-              <FormPenumpang changePenumpang={changePenumpang} order={selectedPenumpangOrder}/>
+              <FormPenumpang/>
             </Popup>
             {/* Fasilitas Ekstra */}
             <Box>
