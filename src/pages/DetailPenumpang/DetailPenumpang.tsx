@@ -9,16 +9,16 @@ import {
   useTheme,
 } from '@mui/material';
 import ExtraFacilityCard from '../../components/ui/ExtraFacilityCard';
-import DetailPemesan from './DetailPemesan';
-import DaftarPenumpang from './DaftarPenumpang';
-import { FlightDetailCard, Navbar } from '../../components/ui';
+import DetailPemesan from '../../components/features/Pemesanan/DetailPenumpang/DetailPemesan';
+import DaftarPenumpang from '../../components/features/Pemesanan/DetailPenumpang/DaftarPenumpang';
+import FlightDetailCard from '../../components/shared/Pemesanan/FlightDetailCard';
 import { useNavigate } from 'react-router';
-import FormPemesan from './FormPemesan';
-import FormPenumpang from './FormPenumpang';
+import FormPemesan from '../../components/features/Pemesanan/DetailPenumpang/FormPemesan';
+import FormPenumpang from '../../components/features/Pemesanan/DetailPenumpang/FormPenumpang';
 import { Pemesan } from '../../types/Pemesan';
 import { useState } from 'react';
 import { Penumpang } from '../../types/Penumpang';
-import Popup from '../../components/ui/Popup';
+import Popup from '../../components/core/Popup';
 
 export default function DetailPenumpang() {
   const theme = useTheme();
@@ -68,7 +68,6 @@ export default function DetailPenumpang() {
 
   return (
     <>
-      <Navbar />
       <Container sx={{ paddingBlock: '2rem' }}>
         <Typography variant="h5" fontWeight="bold">
           Detail Penumpang

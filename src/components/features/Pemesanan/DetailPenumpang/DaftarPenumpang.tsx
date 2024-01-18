@@ -1,7 +1,7 @@
 import { Card, CardContent, Divider, IconButton, Stack, Typography } from '@mui/material';
 import EditIcon from '@mui/icons-material/Edit';
-import { IOSSwitch } from '../../components/ui/IOSSwitch';
-import { Penumpang } from '../../types/Penumpang';
+import { IOSSwitch } from '../../../core/IOSSwitch';
+import { Penumpang } from '../../../../types/Penumpang';
 
 export default function DaftarPenumpang(props: { penumpang: Penumpang[], openPopup: (order: number) => void }) {
     return (

@@ -2,7 +2,7 @@ import { Card, CardContent, IconButton, Stack, Typography } from '@mui/material'
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 import LocalPhoneOutlinedIcon from '@mui/icons-material/LocalPhoneOutlined';
 import EmailOutlinedIcon from '@mui/icons-material/EmailOutlined';
-import { Pemesan } from '../../types/Pemesan';
+import { Pemesan } from '../../../../types/Pemesan';
 import React from 'react';
 
 export default function DetailPemesan(props: { pemesan: Pemesan, setOpenPopup: React.Dispatch<React.SetStateAction<boolean>> }) {

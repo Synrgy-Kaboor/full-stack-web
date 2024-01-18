@@ -1,6 +1,7 @@
 import { Box, Grid, Typography, Container, Stack, Button } from '@mui/material';
-import { AddOnsCard, FlightDetailCard, Navbar } from '../../components/ui/';
+import { AddOnsCard, Navbar } from '../../components/ui/';
 import theme from '../../config/theme';
+import FlightDetailCard from '../../components/shared/Pemesanan/FlightDetailCard';
 
 export default function LayananTambahan() {
   return (
