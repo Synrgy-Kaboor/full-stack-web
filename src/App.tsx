@@ -29,15 +29,15 @@ const router = createBrowserRouter([
         path: '/pilih-jadwal-search',
         element: <PilihJadwalSearch />,
       },
+      {
+        path: '/beranda',
+        element: <Beranda />
+      },
     ]
   },
   {
     path: '/register/*',
     element: <RegisterRoute />,
-  },
-  {
-    path: "/beranda",
-    element: <Beranda />
   },
 ]);
 

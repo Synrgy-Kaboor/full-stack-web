@@ -1,7 +1,7 @@
 import { BerandaButton } from '../../components/features/Beranda/beranda.button';
 import { BerandaHistory } from '../../components/features/Beranda/beranda.card.history';
 import { BerandaDestinasi } from '../../components/features/Beranda/beranda.card.destinasi';
-import Navbar from '../../components/features/Beranda/beranda.navbar';
+// import Navbar from '../../components/features/Beranda/beranda.navbar';
 import { TextField, styled, InputAdornment, Typography, Stack } from '@mui/material';
 import { BerandaRental } from '../../components/features/Beranda/beranda.card.rental';
 
@@ -44,7 +44,7 @@ const SearchInput = styled(TextField)(() => ({
 const Beranda = () => {
   return (
     <>
-    <Navbar/>
+    {/* <Navbar/> */}
       <section style={styles.searchSection}>
      
         <div style={styles.searchContainer}>
