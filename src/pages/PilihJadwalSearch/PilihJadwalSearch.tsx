@@ -102,18 +102,6 @@ const PilihJadwalSearch = () => {
     setHomecomingVisible(!homecomingVisible);
   };
 
-  // const takeData = async () => {
-  //   const response = await fetch('https://kaboor-api-dev.up.railway.app/api/v1/auth/check/email', {
-  //     method: "post",
-  //     body: JSON.stringify({
-  //       "email": "string"
-  //     })
-  //   })
-  //   console.log(response)
-  // }
-  // useEffect(() => {
-  //   takeData()
-  // })
 
   const handleModalPassangerVisibleOpen = () => {
     setModalPassangerVisible(true);
