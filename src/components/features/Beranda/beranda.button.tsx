@@ -1,5 +1,4 @@
-import { IconButton, ThemeProvider, styled, Box, Stack, Typography } from '@mui/material';
-import { createTheme } from '@mui/material/styles';
+import { IconButton, styled, Box, Stack, Typography } from '@mui/material';
 
 const ButtonUngu = styled(IconButton)(() => ({
   background: 'linear-gradient(270deg, #3A42FF 0%, #7B52AB 100%)',
@@ -61,9 +60,9 @@ export const BerandaButton = () => {
         justifyContent="center"
         alignItems="center"
       >
-        <Stack direction="row" spacing={2} justifyContent="center" alignItems="center" marginBottom={"30px"}>
+        <Stack direction="row" spacing={2} justifyContent="center" alignItems="center" marginBottom={'30px'}>
           {buttons.slice(0, 5).map(({ name, text }) => (
-            <Box key={name} textAlign="center" height={"130px"}>
+            <Box key={name} textAlign="center" height={'130px'}>
               <ButtonUngu>
                 {name}
               </ButtonUngu>
@@ -74,7 +73,7 @@ export const BerandaButton = () => {
 
         <Stack direction="row" spacing={2} justifyContent="center" alignItems="center">
           {buttons.slice(5).map(({ name, text }) => (
-            <Box key={name} textAlign="center" height={"150px"}>
+            <Box key={name} textAlign="center" height={'150px'}>
               <ButtonUngu>
                 {name}
               </ButtonUngu>

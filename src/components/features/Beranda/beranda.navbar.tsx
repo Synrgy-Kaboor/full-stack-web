@@ -27,7 +27,7 @@ export default function Navbar() {
           <Typography sx={{ flexGrow: 1 }}></Typography>
           <Stack direction="row" spacing={4} alignItems="center">
             <Stack direction="row" spacing={1} alignItems="center">
-            <Link href="/login" style={{textDecoration:'none'}}> 
+            <Link href="/register" style={{textDecoration:'none'}}> 
               <button
                style={{
                 display: 'flex',

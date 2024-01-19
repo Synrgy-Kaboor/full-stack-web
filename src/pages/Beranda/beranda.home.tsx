@@ -1,10 +1,9 @@
-import React from 'react';
-import { BerandaButton } from '../../components/ui/Beranda/beranda.button';
-import { BerandaHistory } from '../../components/ui/Beranda/beranda.history';
-import { BerandaDestinasi } from '../../components/ui/Beranda/beranda.carddestinasi';
-import Navbar from "../../components/ui/Beranda/beranda.navbar";
+import { BerandaButton } from '../../components/features/Beranda/beranda.button';
+import { BerandaHistory } from '../../components/features/Beranda/beranda.card.history';
+import { BerandaDestinasi } from '../../components/features/Beranda/beranda.card.destinasi';
+import Navbar from '../../components/features/Beranda/beranda.navbar';
 import { TextField, styled, InputAdornment, Typography, Stack } from '@mui/material';
-import { BerandaRental } from '../../components/ui/Beranda/beranda.cardrental';
+import { BerandaRental } from '../../components/features/Beranda/beranda.card.rental';
 
 const SearchInput = styled(TextField)(() => ({
   height: '70px',
@@ -92,7 +91,7 @@ const Beranda = () => {
         <div style={{marginBottom:'60px'}}>
           <Typography style={styles.texttitle}>Rekomendasi Maskapai Terbaik</Typography>
           <Typography sx={{ maxWidth: '698px' }} style={styles.textdesc}>
-          Nikmati perjalanan Anda dengan rekomendasi maskapai terbaik kami. Pilih maskapai ideal untuk pengalaman terbang tak terlupakan!          </Typography>
+Nikmati perjalanan Anda dengan rekomendasi maskapai terbaik kami. Pilih maskapai ideal untuk pengalaman terbang tak terlupakan!          </Typography>
           <BerandaRental />
         </div>
         <footer style={styles.footer}>
@@ -183,7 +182,7 @@ const Beranda = () => {
           </ul>
           <ul style={{listStyleType:'none'}}>
           <li style={styles.footerhead}>
-            Tentang Kaboor
+            Produk
             </li>
             <li style={styles.footertext}>
               Pesawat
@@ -280,40 +279,40 @@ const styles = {
     padding: '48px 24px', 
   },
   texttitle: {
-    color:"#000",
-    fontFamily:"Open Sans",
-    fontSize:"24px",
+    color:'#000',
+    fontFamily:'Open Sans',
+    fontSize:'24px',
     fontWeight:700,
-    lineHeight:"40px",
-    letterSpacing:"-0.15px",
+    lineHeight:'40px',
+    letterSpacing:'-0.15px',
   },
   textdesc: {
-    color:"#9E9E9E",
-    fontFamily:"Open Sans",
-    fontSize:"20px",
+    color:'#9E9E9E',
+    fontFamily:'Open Sans',
+    fontSize:'20px',
     fontWeight:600,
-    lineHeight:"28px",
-    letterSpacing:"-0.75px",
+    lineHeight:'28px',
+    letterSpacing:'-0.75px',
   },
   footer: {
     backgroundColor: '#7B52AB',
     padding: '24px',
   },
   footerhead: {
-    color:"#FFF",
-    fontFamily:"Open Sans",
-    fontSize:"24px",
+    color:'#FFF',
+    fontFamily:'Open Sans',
+    fontSize:'24px',
     fontWeight:700,
-    lineHeight:"40px",
-    letterSpacing:"-0.5px",
+    lineHeight:'40px',
+    letterSpacing:'-0.5px',
   },
   footertext: {
-    color:"#FFF",
-    fontFamily:"Open Sans",
-    fontSize:"16px",
+    color:'#FFF',
+    fontFamily:'Open Sans',
+    fontSize:'16px',
     fontWeight:600,
-    lineHeight:"24px",
-    letterSpacing:"-0.1pxpx",
+    lineHeight:'24px',
+    letterSpacing:'-0.1pxpx',
   },
 };
 
