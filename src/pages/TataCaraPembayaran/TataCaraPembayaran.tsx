@@ -1,5 +1,5 @@
 import { Box, Grid, Typography, Container, Stack, Button } from '@mui/material';
-import { AddOnsCard } from '../../components/ui';
+import  AddOnsCard  from '../../components/features/TataCaraPembayaran/AddOnsCard';
 import theme from '../../config/theme';
 import FlightDetailCard from '../../components/shared/Pemesanan/FlightDetailCard';
 
@@ -7,10 +7,7 @@ export default function TataCaraPembayaran() {
   return (
     <>
       <Container sx={{ paddingBlockEnd: '2rem' }}>
-        <Typography variant="h6" sx={{ fontWeight: 'bold' }}>
-          Layanan Tambahan
-        </Typography>
-        <Grid container mt={0} spacing={2}>
+           <Grid container mt={0} spacing={2}>
           {/* Left Cards */}
           <Grid item md={6} xs={12}>
             <Stack spacing={2}>

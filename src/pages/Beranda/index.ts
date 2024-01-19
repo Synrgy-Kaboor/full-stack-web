@@ -1,1 +1,1 @@
-export {default as Beranda} from "./beranda.home";
+export {default as Beranda} from './beranda.home';
