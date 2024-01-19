@@ -1,69 +1,81 @@
 import {
-  Grid,
   Box,
-  Stack,
-  Typography,
-  TextField,
+  Grid,
   Link,
-  IconButton,
+  Stack,
+  Dialog,
   Button,
   Divider,
-  Dialog,
-  DialogContent,
+  TextField,
+  Typography,
+  IconButton,
   DialogTitle,
-} from "@mui/material";
+  DialogContent,
+  CircularProgress,
+} from '@mui/material';
 
-import GoogleOAuth from "../../../assets/image 21.png";
-import LoginBackgroundImage from "../../../assets/Login Bg.png";
-import { FormEvent, useState } from "react";
-import { useNavigate } from "react-router";
+import GoogleOAuth from '../../../assets/image 21.png';
+import LoginBackgroundImage from '../../../assets/Login Bg.png';
+import { FormEvent, useState } from 'react';
+import { useNavigate } from 'react-router';
 
-import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
+import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 
-export default function LoginRoot() {
-  const [email, setEmail] = useState<string>("");
+interface LoginProps {
+  setEmail: React.Dispatch<React.SetStateAction<string>>;
+}
+
+export default function LoginRoot({ setEmail }: LoginProps) {
+  const [inputEmail, setInputEmail] = useState<string>('');
   const [emailStatus, setEmailStatus] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(false);
   const navigate = useNavigate();
   // console.log(email, setEmail);
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setLoading(true);
 
-    const response = await fetch(
-      "https://kaboor-api-dev.up.railway.app/api/v1/auth/check/email",
+    await fetch(
+      'https://kaboor-api-dev.up.railway.app/api/v1/auth/check/email',
       {
-        method: "POST",
+        method: 'POST',
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
         },
-        body: JSON.stringify(email),
+        body: JSON.stringify(inputEmail),
       }
-    );
-
-    if (response.status !== 200) {
-      setEmailStatus(false);
-      alert("Login Berhasil");
-    } else {
-      setEmailStatus(true);
-    }
+    )
+      .then((response) => {
+        setLoading(false);
+        return response.json();
+      })
+      .then((data) => {
+        if (data.code !== 200) {
+          setEmailStatus(false);
+          setEmail(inputEmail);
+          navigate('/login/credentials');
+        } else {
+          setEmailStatus(true);
+        }
+      });
   };
 
   return (
     <Box
       sx={{
-        height: "100%",
-        width: "100%",
+        height: '100%',
+        width: '100%',
         backgroundImage: `url(${LoginBackgroundImage})`,
       }}
     >
-      <Grid container sx={{ bgcolor: "primary.light", height: "100vh" }}>
+      <Grid container sx={{ bgcolor: 'primary.light', height: '100vh' }}>
         <Grid item xs={6}>
           <Box
             component="div"
-            border={1}
             sx={{
-              height: "100%",
-              width: "100%",
+              height: '100%',
+              width: '100%',
               backgroundImage: `url(${LoginBackgroundImage})`,
             }}
           />
@@ -75,24 +87,24 @@ export default function LoginRoot() {
           xs={6}
           p={10}
           sx={{
-            bgcolor: "white",
+            bgcolor: 'white',
             borderTopLeftRadius: 30,
             borderBottomLeftRadius: 30,
           }}
         >
-          <Box sx={{ width: "100%" }}>
+          <Box sx={{ width: '100%' }}>
             <form onSubmit={handleSubmit}>
-              <Typography variant="h4" sx={{ fontWeight: "bold" }}>
+              <Typography variant="h4" sx={{ fontWeight: 'bold' }}>
                 Log In
               </Typography>
               <TextField
                 variant="outlined"
                 label="Masukkan Email"
-                onChange={(e) => setEmail(e.target.value)}
-                sx={{ width: "100%", marginBlock: "1rem" }}
+                onChange={(e) => setInputEmail(e.target.value)}
+                sx={{ width: '100%', marginBlock: '1rem' }}
                 required
               ></TextField>
-              <Link underline="none" sx={{ color: "kaboor.main" }}>
+              <Link underline="none" sx={{ color: 'kaboor.main' }}>
                 <Typography textAlign="end">Lupa Password?</Typography>
               </Link>
               <Button
@@ -100,11 +112,15 @@ export default function LoginRoot() {
                 variant="contained"
                 sx={{
                   backgroundImage: `linear-gradient(90deg, #7B52AB, #3A42FF)`,
-                  marginBlock: "1rem",
-                  width: "100%",
+                  marginBlock: '1rem',
+                  width: '100%',
                 }}
               >
-                Masuk
+                {loading ? (
+                  <CircularProgress sx={{ color: 'white' }} />
+                ) : (
+                  'Masuk'
+                )}
               </Button>
             </form>
             <Dialog open={emailStatus}>
@@ -112,9 +128,9 @@ export default function LoginRoot() {
                 <Stack direction="row" alignItems="center" spacing={2}>
                   <ArrowBackIosNewIcon
                     onClick={() => setEmailStatus(false)}
-                    sx={{ "&:hover": { cursor: "pointer" } }}
+                    sx={{ '&:hover': { cursor: 'pointer' } }}
                   />
-                  <Typography variant="h6" sx={{ fontWeight: "bold" }}>
+                  <Typography variant="h6" sx={{ fontWeight: 'bold' }}>
                     Kembali
                   </Typography>
                 </Stack>
@@ -123,12 +139,12 @@ export default function LoginRoot() {
                 <Stack spacing={1}>
                   <Typography
                     variant="h5"
-                    sx={{ fontWeight: "bold" }}
+                    sx={{ fontWeight: 'bold' }}
                     textAlign="center"
                   >
                     Email ini belum terdaftar untuk Login
                   </Typography>
-                  <Typography sx={{ color: "gray" }} textAlign="center">
+                  <Typography sx={{ color: 'gray' }} textAlign="center">
                     Untuk log in menggunakan email ini, silahkan lakukan daftar
                     akun terlebih dulu ya
                   </Typography>
@@ -138,7 +154,7 @@ export default function LoginRoot() {
                       onClick={() => setEmailStatus(false)}
                       sx={{
                         border:
-                          "2px solid linear-gradient(90deg, #7B52AB, #3A42FF)",
+                          '2px solid linear-gradient(90deg, #7B52AB, #3A42FF)',
                       }}
                     >
                       Nanti Saja
@@ -148,7 +164,7 @@ export default function LoginRoot() {
                       sx={{
                         backgroundImage: `linear-gradient(90deg, #7B52AB, #3A42FF)`,
                       }}
-                      onClick={() => navigate("/register")}
+                      onClick={() => navigate('/register')}
                     >
                       Daftar Akun
                     </Button>
@@ -156,7 +172,7 @@ export default function LoginRoot() {
                 </Stack>
               </DialogContent>
             </Dialog>
-            <Divider sx={{ color: "gray", fontFamily: "Open Sans" }}>
+            <Divider sx={{ color: 'gray', fontFamily: 'Open Sans' }}>
               atau login dengan
             </Divider>
             <Stack direction="row" justifyContent="center" my={2}>
@@ -166,19 +182,19 @@ export default function LoginRoot() {
             </Stack>
 
             <Typography textAlign="center" my={5}>
-              Dengan Log In kamu menyetujui{" "}
-              <Link underline="none" color="kaboor.main">
+              Dengan Log In kamu menyetujui{' '}
+              <Link underline="none" color="primary.main">
                 Syarat, Ketentuan, dan Kebijakan
-              </Link>{" "}
+              </Link>{' '}
               Privasi Kaboor
             </Typography>
 
             <Typography textAlign="center">
-              Belum punya akun?{" "}
+              Belum punya akun?{' '}
               <Link
-                href="/layanan-tambahan"
+                href="/register"
                 underline="none"
-                sx={{ color: "kaboor.main" }}
+                sx={{ color: 'primary.main' }}
               >
                 Buat akun yuk?
               </Link>

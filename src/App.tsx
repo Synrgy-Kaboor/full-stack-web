@@ -1,43 +1,43 @@
-import { RouterProvider, createBrowserRouter } from "react-router-dom";
-import RegisterRoute from "./pages/Auth/register/registerRoutes";
-import LoginRoot from "./pages/Auth/Login/Login.root";
-import DetailPenumpang from "./pages/DetailPenumpang/DetailPenumpang";
-import { LayananTambahan } from "./pages/LayananTambahan";
-import { PilihJadwalSearch } from "./pages/PilihJadwalSearch";
+import { RouterProvider, createBrowserRouter } from 'react-router-dom';
+import RegisterRoute from './pages/Auth/register/registerRoutes';
+import LoginRoute from './pages/Auth/Login/Login.Routes';
+import DetailPenumpang from './pages/DetailPenumpang/DetailPenumpang';
+import { LayananTambahan } from './pages/LayananTambahan';
+import { PilihJadwalSearch } from './pages/PilihJadwalSearch';
 
-import { ThemeProvider } from "@mui/material/styles";
-import theme from "./config/theme";
-import { CssBaseline } from "@mui/material";
-import DefaultLayout from "./layouts/DefaultLayout";
-import { Provider } from "react-redux";
-import { store } from "./redux/store";
+import { ThemeProvider } from '@mui/material/styles';
+import theme from './config/theme';
+import { CssBaseline } from '@mui/material';
+import DefaultLayout from './layouts/DefaultLayout';
+import { Provider } from 'react-redux';
+import { store } from './redux/store';
 
 const router = createBrowserRouter([
   {
-    path: "",
+    path: '',
     element: <DefaultLayout />,
     children: [
       {
-        path: "/layanan-tambahan",
+        path: '/layanan-tambahan',
         element: <LayananTambahan />,
       },
       {
-        path: "/detail-penumpang",
+        path: '/detail-penumpang',
         element: <DetailPenumpang />,
       },
       {
-        path: "/pilih-jadwal-search",
+        path: '/pilih-jadwal-search',
         element: <PilihJadwalSearch />,
       },
     ],
   },
   {
-    path: "/register/*",
+    path: '/register/*',
     element: <RegisterRoute />,
   },
   {
-    path: "/login",
-    element: <LoginRoot />,
+    path: '/login/*',
+    element: <LoginRoute />,
   },
 ]);
 
