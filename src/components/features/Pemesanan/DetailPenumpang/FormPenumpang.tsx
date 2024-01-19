@@ -1,12 +1,15 @@
 import { Button, FormControl, FormControlLabel, Radio, RadioGroup, Stack, TextField, Typography } from '@mui/material';
-import { Penumpang } from '../../types/Penumpang';
+import { Penumpang } from '../../../../types/Penumpang';
 import { useState } from 'react';
+import theme from '../../../../config/theme';
+import { useAppDispatch, useAppSelector } from '../../../../redux/hooks';
+import { submitPenumpangPopup } from '../../../../redux/slices/DetailPenumpang';
 
-export default function FormPenumpang(props: { changePenumpang: (newPenumpang: Penumpang, order: number) => void, order: number}) {
-    const [penumpang, setPenumpang] = useState<Penumpang>({
-        name: 'Penumpang 1',
-        honorific: ''
-    });
+export default function FormPenumpang() {
+    const { daftarPenumpang, selectedPenumpangOrder } = useAppSelector((state) => state.detailPenumpang);
+    const dispatch = useAppDispatch();
+
+    const [penumpang, setPenumpang] = useState<Penumpang>(daftarPenumpang[selectedPenumpangOrder]);
 
     return (
         <Stack p={2}>
@@ -16,8 +19,8 @@ export default function FormPenumpang(props: { changePenumpang: (newPenumpang: P
 
             <FormControl>
             <Typography fontWeight="bold">Nama Lengkap</Typography>
-            <TextField id="pemesan-name-input" variant="outlined" onChange={(event) => {
-                const newPenumpang = penumpang;
+            <TextField id="pemesan-name-input" variant="outlined" value={penumpang.name} onChange={(event) => {
+                const newPenumpang = {...penumpang};
                 newPenumpang.name = event.target.value;
                 setPenumpang(newPenumpang);
             }}/>
@@ -29,6 +32,12 @@ export default function FormPenumpang(props: { changePenumpang: (newPenumpang: P
                     justifyContent: 'space-between',
                     mb: 1
                 }}
+                value={penumpang.honorific}
+                onChange={(event) => {
+                    const newPenumpang = {...penumpang};
+                    newPenumpang.honorific = event.target.value;
+                    setPenumpang(newPenumpang);
+                }}
             >
                 <FormControlLabel value="Mr" control={<Radio/>} label="Mr"/>
                 <FormControlLabel value="Mrs" control={<Radio/>} label="Mrs"/>
@@ -39,9 +48,9 @@ export default function FormPenumpang(props: { changePenumpang: (newPenumpang: P
                 type="submit"
                 fullWidth
                 variant="contained"
-                onClick={ () => props.changePenumpang(penumpang, props.order) }
+                onClick={ () => dispatch(submitPenumpangPopup(penumpang)) }
                 sx={{ 
-                    backgroundImage: `linear-gradient(90deg, #7B52AB, #3A42FF)`, 
+                    background: theme.palette.gradients?.horizontal, 
                     width: '100%' 
                 }}
             >

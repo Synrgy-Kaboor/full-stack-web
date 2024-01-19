@@ -264,7 +264,7 @@ const ModalPassanger = (props: ModalPassagerProps) => {
               variant="subtitle1"
               fontWeight={600}
               sx={{
-                background: `linear-gradient(270deg, #3A42FF 0%, #7B52AB 100%)`,
+                background: `background: theme.palette.gradients?.diagonal`,
                 backgroundClip: 'text',
                 WebkitTextFillColor: 'transparent',
               }}
@@ -278,7 +278,7 @@ const ModalPassanger = (props: ModalPassagerProps) => {
             <Button
               variant="contained"
               sx={{
-                background: `linear-gradient(270deg, #3A42FF 0%, #7B52AB 100%)`,
+                background: `background: theme.palette.gradients?.diagonal`,
                 width: '100%',
                 fontFamily: 'Open Sans',
               }}
