@@ -46,6 +46,7 @@ export default function LoginCredentials({ email }: IEmailProps) {
       .then((data) => {
         if (data.code === 200) {
           localStorage.setItem('token', data.data.auth.jwt);
+          alert('Login Success!');
           navigate('/');
         } else {
           alert('Login Failed. Please try again');
