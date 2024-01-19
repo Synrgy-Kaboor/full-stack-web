@@ -162,7 +162,7 @@ export const BerandaRental = () => {//data dummy
     },
     {
       imageUrl: 'https://s3-alpha-sig.figma.com/img/4409/b092/1970fcd74b74e1b8edd396bc9c03ba34?Expires=1705881600&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=GdgZpcNIGlIy7F5VgO62LU6aRCk-ETpIP0FXipVRyvYGgILGnUlPfB8r-C-FPu6WLfNbECXn2VNsUfqq-nhRY9QHWKmn8G23BR7anVqN9jsbwjfZexdvcPrJ-SHZyhtogpzj~~M2fUdJSOpETjYSy~yvWbocDCgWpWl4yau-sotiZQkxpdI~BBe77wxuZTpJYeli-293aMFjc7obgci9EwPpemuvrhQKEbIOqin4PGVYLDI7vo15v8AbJVTgETkc5PiMQTrMZkhEjKzuy34d-scg~vu7xmffJm9sc4wF9kBr86B8fWlQ50UCTV3dVQhEcWlCMiv8T3xKXpB6g3qosg__',
-      text: 'Toyota Avanza',
+      text: 'Super Jet Air',
       genre: 'Ekonomi',
       price: '200.000',
       rating: '4',
@@ -170,7 +170,7 @@ export const BerandaRental = () => {//data dummy
     },
     {
       imageUrl: 'https://s3-alpha-sig.figma.com/img/4409/b092/1970fcd74b74e1b8edd396bc9c03ba34?Expires=1705881600&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=GdgZpcNIGlIy7F5VgO62LU6aRCk-ETpIP0FXipVRyvYGgILGnUlPfB8r-C-FPu6WLfNbECXn2VNsUfqq-nhRY9QHWKmn8G23BR7anVqN9jsbwjfZexdvcPrJ-SHZyhtogpzj~~M2fUdJSOpETjYSy~yvWbocDCgWpWl4yau-sotiZQkxpdI~BBe77wxuZTpJYeli-293aMFjc7obgci9EwPpemuvrhQKEbIOqin4PGVYLDI7vo15v8AbJVTgETkc5PiMQTrMZkhEjKzuy34d-scg~vu7xmffJm9sc4wF9kBr86B8fWlQ50UCTV3dVQhEcWlCMiv8T3xKXpB6g3qosg__',
-      text: 'Honda Jeep',
+      text: 'Lion Air',
       genre: 'Ekonomi',
       price: '400.000',
       rating: '4',
@@ -178,7 +178,7 @@ export const BerandaRental = () => {//data dummy
     },
     {
       imageUrl: 'https://s3-alpha-sig.figma.com/img/4409/b092/1970fcd74b74e1b8edd396bc9c03ba34?Expires=1705881600&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=GdgZpcNIGlIy7F5VgO62LU6aRCk-ETpIP0FXipVRyvYGgILGnUlPfB8r-C-FPu6WLfNbECXn2VNsUfqq-nhRY9QHWKmn8G23BR7anVqN9jsbwjfZexdvcPrJ-SHZyhtogpzj~~M2fUdJSOpETjYSy~yvWbocDCgWpWl4yau-sotiZQkxpdI~BBe77wxuZTpJYeli-293aMFjc7obgci9EwPpemuvrhQKEbIOqin4PGVYLDI7vo15v8AbJVTgETkc5PiMQTrMZkhEjKzuy34d-scg~vu7xmffJm9sc4wF9kBr86B8fWlQ50UCTV3dVQhEcWlCMiv8T3xKXpB6g3qosg__',
-      text: 'Yaris',
+      text: 'Garuda Air',
       genre: 'Ekonomi',
       price: '1.000.000',
       rating: '4',
@@ -186,7 +186,7 @@ export const BerandaRental = () => {//data dummy
     },
     {
       imageUrl: 'https://s3-alpha-sig.figma.com/img/4409/b092/1970fcd74b74e1b8edd396bc9c03ba34?Expires=1705881600&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=GdgZpcNIGlIy7F5VgO62LU6aRCk-ETpIP0FXipVRyvYGgILGnUlPfB8r-C-FPu6WLfNbECXn2VNsUfqq-nhRY9QHWKmn8G23BR7anVqN9jsbwjfZexdvcPrJ-SHZyhtogpzj~~M2fUdJSOpETjYSy~yvWbocDCgWpWl4yau-sotiZQkxpdI~BBe77wxuZTpJYeli-293aMFjc7obgci9EwPpemuvrhQKEbIOqin4PGVYLDI7vo15v8AbJVTgETkc5PiMQTrMZkhEjKzuy34d-scg~vu7xmffJm9sc4wF9kBr86B8fWlQ50UCTV3dVQhEcWlCMiv8T3xKXpB6g3qosg__',
-      text: 'Yaris',
+      text: 'Garuda Air',
       genre: 'Ekonomi',
       price: '200.000',
       rating: '4',
@@ -194,7 +194,7 @@ export const BerandaRental = () => {//data dummy
     },
     {
       imageUrl: 'https://s3-alpha-sig.figma.com/img/4409/b092/1970fcd74b74e1b8edd396bc9c03ba34?Expires=1705881600&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=GdgZpcNIGlIy7F5VgO62LU6aRCk-ETpIP0FXipVRyvYGgILGnUlPfB8r-C-FPu6WLfNbECXn2VNsUfqq-nhRY9QHWKmn8G23BR7anVqN9jsbwjfZexdvcPrJ-SHZyhtogpzj~~M2fUdJSOpETjYSy~yvWbocDCgWpWl4yau-sotiZQkxpdI~BBe77wxuZTpJYeli-293aMFjc7obgci9EwPpemuvrhQKEbIOqin4PGVYLDI7vo15v8AbJVTgETkc5PiMQTrMZkhEjKzuy34d-scg~vu7xmffJm9sc4wF9kBr86B8fWlQ50UCTV3dVQhEcWlCMiv8T3xKXpB6g3qosg__',
-      text: 'Yaris',
+      text: 'Garuda Air',
       genre: 'Ekonomi',
       price: '400.000',
       rating: '4',
