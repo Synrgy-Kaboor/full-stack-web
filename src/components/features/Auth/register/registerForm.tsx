@@ -1,11 +1,11 @@
 import { useState } from 'react';
 import styled from 'styled-components';
-import Visible from './../../../assets/eye-line.svg';
-import UnVisible from './../../../assets/eye-off.svg';
-import ChevronRight from './../../../assets/chevron-right.svg';
-import GlobalModals from '../modals/modals';
-import OtpModals from '../modals/otpModals';
-import PrimaryButton from './primaryButton';
+import Visible from './../../../../assets/eye-line.svg';
+import UnVisible from './../../../../assets/eye-off.svg';
+import ChevronRight from './../../../../assets/chevron-right.svg';
+import GlobalModals from '../../../shared/Auth/modals';
+import OtpModals from '../../../shared/Auth/otpModals';
+import PrimaryButton from '../../../core/primaryButton';
 
 const FormContainer = styled.div`
   position: relative;
@@ -37,7 +37,7 @@ const Form = styled.form`
   max-width: 517px;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: stretch;
   gap: 30px;
   @media (max-width: 500px) {
     gap: 20px;

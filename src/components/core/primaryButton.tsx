@@ -9,12 +9,12 @@ interface ButtonProps {
 
 const PrimaryButtonStyle = styled(Button)`
   color: var(--shadow, #fff);
-  width: 100%;
   font-family: Manrope;
   font-size: 16px;
   font-style: normal;
   font-weight: 700;
   line-height: 150%; /* 18px */
+  padding: 12px 20px;
   border-radius: 8px;
   text-transform: none;
   background: var(
