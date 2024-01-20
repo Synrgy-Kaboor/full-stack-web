@@ -11,6 +11,10 @@ import { CssBaseline } from '@mui/material';
 import DefaultLayout from './layouts/DefaultLayout';
 import { Provider } from 'react-redux';
 import { store } from './redux/store';
+import { Beranda } from './pages/Beranda'
+import Profil from './pages/Profil/Profil';
+import ChangeEmail from './components/ui/ChangeEmail';
+import ChangeNumber from './components/ui/ChangeNumber';
 
 const router = createBrowserRouter([
   {
@@ -29,7 +33,21 @@ const router = createBrowserRouter([
         path: '/pilih-jadwal-search',
         element: <PilihJadwalSearch />,
       },
-    ],
+      {
+        path: '/profil',
+        element: <Profil />,
+        children: [
+          {path: 'ganti-email',
+          element : <ChangeEmail/>},
+          {path: 'ganti-nomer',
+          element : <ChangeNumber/>}
+        ]
+      },
+      {
+        path: '/beranda',
+        element: <Beranda />
+      },
+    ]
   },
   {
     path: '/register/*',
