@@ -7,14 +7,17 @@ import {
   TextField,
   Typography,
   OutlinedInput,
+  InputAdornment,
   CircularProgress,
 } from '@mui/material';
+import Visibility from '@mui/icons-material/Visibility';
+import VisibilityOff from '@mui/icons-material/VisibilityOff';
+import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 
-import LoginBackgroundImage from '../../../assets/Login Bg.png';
 import { FormEvent, useState } from 'react';
 import { useNavigate } from 'react-router';
 
-import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
+import LoginBackgroundImage from '../../../assets/Login Bg.png';
 
 interface IEmailProps {
   email: string;
@@ -23,6 +26,7 @@ interface IEmailProps {
 export default function LoginCredentials({ email }: IEmailProps) {
   const [password, setPassword] = useState<string>('');
   const [loading, setLoading] = useState<boolean>(false);
+  const [showPassword, setShowPassword] = useState<boolean>(false);
   const navigate = useNavigate();
 
   const handleLogin = async (e: FormEvent<HTMLFormElement>) => {
@@ -62,14 +66,23 @@ export default function LoginCredentials({ email }: IEmailProps) {
         backgroundImage: `url(${LoginBackgroundImage})`,
       }}
     >
-      <Grid container sx={{ bgcolor: 'primary.light', height: '100vh' }}>
-        <Grid item xs={6}>
+      <Grid container sx={{ height: '100vh' }}>
+        <Grid item xs={6} sx={{ height: '100%' }}>
+          <img
+            src={LoginBackgroundImage}
+            alt=""
+            height="100%"
+            width="55%"
+            style={{ position: 'absolute', left: 0, zIndex: -2 }}
+          />
           <Box
-            component="div"
             sx={{
+              position: 'absolute',
+              zIndex: -1,
               height: '100%',
               width: '100%',
-              backgroundImage: `url(${LoginBackgroundImage})`,
+              background: `
+    linear-gradient(270deg, rgba(58, 66, 255, 0.50) 0%, rgba(123, 82, 171, 0.50) 100%)`,
             }}
           />
         </Grid>
@@ -114,6 +127,22 @@ export default function LoginCredentials({ email }: IEmailProps) {
               <OutlinedInput
                 placeholder="Kata Sandi"
                 sx={{ width: '100%' }}
+                type={showPassword ? 'text' : 'password'}
+                endAdornment={
+                  <InputAdornment position="end">
+                    {showPassword ? (
+                      <VisibilityOff
+                        onClick={() => setShowPassword(false)}
+                        sx={{ '&:hover': { cursor: 'pointer' } }}
+                      />
+                    ) : (
+                      <Visibility
+                        onClick={() => setShowPassword(true)}
+                        sx={{ '&:hover': { cursor: 'pointer' } }}
+                      />
+                    )}
+                  </InputAdornment>
+                }
                 onChange={(e) => setPassword(e.target.value)}
               ></OutlinedInput>
               <Button

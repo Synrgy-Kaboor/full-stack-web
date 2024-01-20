@@ -30,7 +30,6 @@ export default function LoginRoot({ setEmail }: LoginProps) {
   const [emailStatus, setEmailStatus] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
   const navigate = useNavigate();
-  // console.log(email, setEmail);
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -62,21 +61,30 @@ export default function LoginRoot({ setEmail }: LoginProps) {
   };
 
   return (
-    <Box
-      sx={{
-        height: '100%',
-        width: '100%',
-        backgroundImage: `url(${LoginBackgroundImage})`,
-      }}
-    >
-      <Grid container sx={{ bgcolor: 'primary.light', height: '100vh' }}>
-        <Grid item xs={6}>
+    <Box>
+      <Grid container sx={{ height: '100vh' }}>
+        <Grid
+          item
+          xs={6}
+          sx={{
+            height: '100%',
+          }}
+        >
+          <img
+            src={LoginBackgroundImage}
+            alt=""
+            height="100%"
+            width="55%"
+            style={{ position: 'absolute', left: 0, zIndex: -2 }}
+          />
           <Box
-            component="div"
             sx={{
+              position: 'absolute',
+              zIndex: -1,
               height: '100%',
               width: '100%',
-              backgroundImage: `url(${LoginBackgroundImage})`,
+              background: `
+    linear-gradient(270deg, rgba(58, 66, 255, 0.50) 0%, rgba(123, 82, 171, 0.50) 100%)`,
             }}
           />
         </Grid>
@@ -90,6 +98,7 @@ export default function LoginRoot({ setEmail }: LoginProps) {
             bgcolor: 'white',
             borderTopLeftRadius: 30,
             borderBottomLeftRadius: 30,
+            // boxShadow: 3,
           }}
         >
           <Box sx={{ width: '100%' }}>
