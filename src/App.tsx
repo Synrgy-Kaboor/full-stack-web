@@ -1,5 +1,6 @@
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import RegisterRoute from './pages/Auth/register/registerRoutes';
+import LoginRoute from './pages/Auth/Login/Login.Routes';
 import DetailPenumpang from './pages/DetailPenumpang/DetailPenumpang';
 import { LayananTambahan } from './pages/LayananTambahan';
 import { PilihJadwalSearch } from './pages/PilihJadwalSearch';
@@ -18,7 +19,7 @@ import ChangeNumber from './components/ui/ChangeNumber';
 const router = createBrowserRouter([
   {
     path: '',
-    element: <DefaultLayout/>,
+    element: <DefaultLayout />,
     children: [
       {
         path: '/layanan-tambahan',
@@ -52,13 +53,17 @@ const router = createBrowserRouter([
     path: '/register/*',
     element: <RegisterRoute />,
   },
+  {
+    path: '/login/*',
+    element: <LoginRoute />,
+  },
 ]);
 
 function App() {
   return (
     <Provider store={store}>
       <ThemeProvider theme={theme}>
-        <CssBaseline/>
+        <CssBaseline />
         <RouterProvider router={router} />
       </ThemeProvider>
     </Provider>
