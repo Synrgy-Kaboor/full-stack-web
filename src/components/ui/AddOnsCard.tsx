@@ -175,11 +175,11 @@ export default function AddOnsCard(props: { title: string; price: number }) {
           m={0}
           alignItems="center"
           sx={{
-            bgcolor: "kaboor.main",
-            width: "100%",
-            display: "flex",
-            flexDirection: "row",
-            justifyContent: "space-between",
+            bgcolor: 'primary.main',
+            width: '100%',
+            display: 'flex',
+            flexDirection: 'row',
+            justifyContent: 'space-between',
           }}
         >
           <Typography sx={{ fontWeight: "bold", color: "white" }}>

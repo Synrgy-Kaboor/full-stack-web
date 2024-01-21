@@ -3,11 +3,11 @@ import styled from 'styled-components';
 import { styled as muiStyled } from '@mui/material/styles';
 import { useNavigate } from 'react-router-dom';
 import Cover from './../../../assets/Rectangle_319.png';
-import PrimaryButton from '../../../components/ui/registerForm/primaryButton';
+import PrimaryButton from '../../../components/core/primaryButton';
 import { Dialog, DialogContent, Divider, Stack, Typography, Button } from '@mui/material';
 import { useState } from 'react';
-import GlobalModals from '../../../components/ui/modals/modals';
-import OtpModals from '../../../components/ui/modals/otpModals';
+import GlobalModals from '../../../components/shared/Auth/modals';
+import OtpModals from '../../../components/shared/Auth/otpModals';
 
 
 const Main = styled.main`
@@ -73,7 +73,7 @@ const Form = styled.form`
   max-width: 517px;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: stretch;
   gap: 30px;
   
 `;

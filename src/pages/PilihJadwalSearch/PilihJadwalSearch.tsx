@@ -21,7 +21,11 @@ import {
   CalendarMonthOutlined,
   Person2Outlined,
 } from '@mui/icons-material';
-import { Navbar } from '../../components/ui';
+
+import { PassangerSearch } from '../../types/ModalPassagerProps';
+import ModalPassanger from '../../components/ui/ModalPassanger';
+import ModalClassSeat from '../../components/ui/ModalClassSeat';
+import theme from '../../config/theme';
 
 const IOSSwitch = styled((props: SwitchProps) => (
   <Switch focusVisibleClassName=".Mui-focusVisible" disableRipple {...props} />
@@ -76,23 +80,71 @@ const IOSSwitch = styled((props: SwitchProps) => (
     }),
   },
 }));
+
 const PilihJadwalSearch = () => {
-  const [KepulanganVisible, setKepulanganVisible] = useState(false);
+  const [homecomingVisible, setHomecomingVisible] = useState(false);
+  const [modalPassangerVisible, setModalPassangerVisible] = useState(false);
+  const [modalClassSeatVisible, setModalClassSeatVisible] = useState(false);
   const [from, setFrom] = useState<string>();
   const [destination, setDestination] = useState<string>();
-
-  const HandleKepulanganVisible = () => {
-    setKepulanganVisible(!KepulanganVisible);
+  const [passangerValue, setPassangerValue] = useState<PassangerSearch>({
+    adult: {
+      value: 1,
+    },
+    child: {
+      value: 0,
+    },
+    baby: {
+      value: 0,
+    },
+  });
+  const [classSeatValue, setClassSeatValue] = useState<string>('Ekonomi');
+  const handleHomecomingVisible = () => {
+    setHomecomingVisible(!homecomingVisible);
   };
 
-  const HandleSwapFromDestination = () => {
+  // const takeData = async () => {
+  //   const response = await fetch('https://kaboor-api-dev.up.railway.app/api/v1/auth/check/email', {
+  //     method: "post",
+  //     body: JSON.stringify({
+  //       "email": "string"
+  //     })
+  //   })
+  //   console.log(response)
+  // }
+  // useEffect(() => {
+  //   takeData()
+  // })
+
+  const handleModalPassangerVisibleOpen = () => {
+    setModalPassangerVisible(true);
+  };
+  const handleModalPassangerVisibleClose = () => {
+    setModalPassangerVisible(false);
+  };
+
+  const handleModalPassagerSave = (data: PassangerSearch) => {
+    setPassangerValue(data);
+    setModalPassangerVisible(false);
+  }
+  const handleModalClassSeatVisibleOpen = () => {
+    setModalClassSeatVisible(true);
+  };
+
+  const handleModalClassSeatVisibleClose = () => {
+    setModalClassSeatVisible(false);
+  };
+  const handleModalClassSeatSave = (data: string) => {
+    setClassSeatValue(data);
+  }
+
+  const handleSwapFromDestination = () => {
     setFrom(destination);
     setDestination(from);
   };
 
   return (
     <>
-      <Navbar />
       <Grid
         container
         sx={{
@@ -105,13 +157,14 @@ const PilihJadwalSearch = () => {
         rowSpacing={2}
         alignItems={'center'}
       >
-        <Grid container item md={7}>
+        <Grid container item md={6}>
           <Typography
             variant="h3"
             color={'white'}
             fontWeight={'800'}
             fontStyle={'normal'}
             pl={6}
+            fontFamily={'Open Sans'}
           >
             Tiket Pesawat Murah & Promo Hari Ini
           </Typography>
@@ -119,11 +172,12 @@ const PilihJadwalSearch = () => {
         <Grid
           container
           item
-          md={5}
+          md={6}
           justifyContent={'center'}
           alignItems={'center'}
+          position={'relative'}
         >
-          <Card>
+          <Card id="main-search-card">
             <CardContent sx={{ padding: '2rem' }}>
               <Stack direction={'column'} spacing={2}>
                 <Box
@@ -153,7 +207,7 @@ const PilihJadwalSearch = () => {
                           <FlightTakeoffOutlined
                             sx={{
                               borderRadius: '50%',
-                              background: `linear-gradient(270deg, #3A42FF 0%, #7B52AB 100%)`,
+                              background: theme.palette.gradients?.diagonal,
                               padding: '0.5rem',
                               color: 'white',
                             }}
@@ -168,6 +222,8 @@ const PilihJadwalSearch = () => {
                                 fontStyle: 'normal',
                                 lineHeight: '1.5rem',
                               }}
+                              
+            fontFamily={'Open Sans'}
                             >
                               Dari
                             </Typography>
@@ -179,7 +235,9 @@ const PilihJadwalSearch = () => {
                                 fontWeight: 600,
                                 fontStyle: 'normal',
                                 lineHeight: '1.5rem',
+                                fontFamily: 'Open Sans'
                               }}
+                          
                               placeholder="Masukkan kota asal"
                               onChange={(event) => {
                                 setFrom(event.target.value);
@@ -195,7 +253,7 @@ const PilihJadwalSearch = () => {
                           <FlightLandOutlined
                             sx={{
                               borderRadius: '50%',
-                              background: `linear-gradient(270deg, #3A42FF 0%, #7B52AB 100%)`,
+                              background: theme.palette.gradients?.diagonal,
                               padding: '0.5rem',
                               color: 'white',
                             }}
@@ -210,6 +268,7 @@ const PilihJadwalSearch = () => {
                                 fontStyle: 'normal',
                                 lineHeight: '1.5rem',
                               }}
+                              fontFamily={'Open Sans'}
                             >
                               Ke
                             </Typography>
@@ -221,10 +280,10 @@ const PilihJadwalSearch = () => {
                                 fontWeight: 600,
                                 fontStyle: 'normal',
                                 lineHeight: '1.5rem',
+                                fontFamily: 'Open Sans'
                               }}
                               onChange={(event) => {
                                 setDestination(event.target.value);
-                                console.log(event.target.value);
                               }}
                               placeholder="Masukkan kota tujuan"
                             />
@@ -236,11 +295,11 @@ const PilihJadwalSearch = () => {
                       <IconButton
                         sx={{
                           borderRadius: '50%',
-                          background: `linear-gradient(270deg, #3A42FF 0%, #7B52AB 100%)`,
+                          background: theme.palette.gradients?.diagonal,
                           padding: '0.5rem',
                           color: 'white',
                         }}
-                        onClick={HandleSwapFromDestination}
+                        onClick={handleSwapFromDestination}
                       >
                         <SwapVertOutlined></SwapVertOutlined>
                       </IconButton>
@@ -261,7 +320,7 @@ const PilihJadwalSearch = () => {
                     <Grid
                       container
                       item
-                      xs={10}
+                      xs={12}
                       justifyContent={'center'}
                       alignItems={'center'}
                     >
@@ -274,7 +333,7 @@ const PilihJadwalSearch = () => {
                           <CalendarMonthOutlined
                             sx={{
                               borderRadius: '50%',
-                              background: `linear-gradient(270deg, #3A42FF 0%, #7B52AB 100%)`,
+                              background: theme.palette.gradients?.diagonal,
                               padding: '0.5rem',
                               color: 'white',
                             }}
@@ -288,7 +347,9 @@ const PilihJadwalSearch = () => {
                                 fontWeight: 600,
                                 fontStyle: 'normal',
                                 lineHeight: '1.5rem',
+                                letterSpacing:  '-0.1px'
                               }}
+                              fontFamily={'Open Sans'}
                             >
                               Keberangkatan
                             </Typography>
@@ -300,16 +361,20 @@ const PilihJadwalSearch = () => {
                                 fontWeight: 600,
                                 fontStyle: 'normal',
                                 lineHeight: '1.5rem',
+                                fontFamily: 'Open Sans'
                               }}
                             />
                           </Stack>
+                          <IOSSwitch
+                            onChange={handleHomecomingVisible}
+                          ></IOSSwitch>
                         </Stack>
                         <Stack
                           direction={'row'}
                           alignItems={'center'}
                           spacing={2}
                           display={
-                            KepulanganVisible
+                            homecomingVisible
                               ? { display: 'flex' }
                               : { display: 'none' }
                           }
@@ -317,7 +382,7 @@ const PilihJadwalSearch = () => {
                           <CalendarMonthOutlined
                             sx={{
                               borderRadius: '50%',
-                              background: `linear-gradient(270deg, #3A42FF 0%, #7B52AB 100%)`,
+                              background: theme.palette.gradients?.diagonal,
                               padding: '0.5rem',
                               color: 'white',
                             }}
@@ -332,6 +397,7 @@ const PilihJadwalSearch = () => {
                                 fontStyle: 'normal',
                                 lineHeight: '1.5rem',
                               }}
+                              fontFamily={'Open Sans'}
                             >
                               Kepulangan
                             </Typography>
@@ -343,24 +409,23 @@ const PilihJadwalSearch = () => {
                                 fontWeight: 600,
                                 fontStyle: 'normal',
                                 lineHeight: '1.5rem',
+                                fontFamily: 'Open Sans'
                               }}
                             />
                           </Stack>
                         </Stack>
                       </Stack>
                     </Grid>
-                    <Grid container item xs={2} justifyContent={'center'}>
-                      <IOSSwitch onChange={HandleKepulanganVisible}></IOSSwitch>
-                    </Grid>
                   </Grid>
                 </Box>
                 <Box>
                   <Grid container justifyContent={'center'} spacing={1}>
-                    <Grid item xs={6}>
+                    <Grid item xs={12} md={6}>
                       <Box
                         borderRadius={'0.5rem'}
                         border={'1px solid #C2C2C2'}
                         sx={{ padding: '1rem' }}
+                        onClick={handleModalPassangerVisibleOpen}
                       >
                         <Stack
                           direction={'row'}
@@ -370,7 +435,7 @@ const PilihJadwalSearch = () => {
                           <FlightTakeoffOutlined
                             sx={{
                               borderRadius: '50%',
-                              background: `linear-gradient(270deg, #3A42FF 0%, #7B52AB 100%)`,
+                              background: theme.palette.gradients?.diagonal,
                               padding: '0.5rem',
                               color: 'white',
                             }}
@@ -385,6 +450,7 @@ const PilihJadwalSearch = () => {
                                 fontStyle: 'normal',
                                 lineHeight: '1.5rem',
                               }}
+                              fontFamily={'Open Sans'}
                             >
                               Penumpang
                             </Typography>
@@ -397,18 +463,20 @@ const PilihJadwalSearch = () => {
                                 fontStyle: 'normal',
                                 lineHeight: '1.5rem',
                               }}
+                              fontFamily={'Open Sans'}
                             >
-                              1 Orang
+                              {passangerValue.adult.value+passangerValue.child.value+passangerValue.baby.value} Orang
                             </Typography>
                           </Stack>
                         </Stack>
                       </Box>
                     </Grid>
-                    <Grid item xs={6}>
+                    <Grid item xs={12} md={6}>
                       <Box
                         borderRadius={'0.5rem'}
                         border={'1px solid #C2C2C2'}
                         sx={{ padding: '1rem' }}
+                        onClick={handleModalClassSeatVisibleOpen}
                       >
                         <Stack
                           direction={'row'}
@@ -418,7 +486,7 @@ const PilihJadwalSearch = () => {
                           <Person2Outlined
                             sx={{
                               borderRadius: '50%',
-                              background: `linear-gradient(270deg, #3A42FF 0%, #7B52AB 100%)`,
+                              background: theme.palette.gradients?.diagonal,
                               padding: '0.5rem',
                               color: 'white',
                             }}
@@ -433,6 +501,7 @@ const PilihJadwalSearch = () => {
                                 fontStyle: 'normal',
                                 lineHeight: '1.5rem',
                               }}
+                              fontFamily={'Open Sans'}
                             >
                               Kelas
                             </Typography>
@@ -445,8 +514,9 @@ const PilihJadwalSearch = () => {
                                 fontStyle: 'normal',
                                 lineHeight: '1.5rem',
                               }}
+                              fontFamily={'Open Sans'}
                             >
-                              Ekonomi
+                              {classSeatValue}
                             </Typography>
                           </Stack>
                         </Stack>
@@ -458,8 +528,9 @@ const PilihJadwalSearch = () => {
                   <Button
                     variant="contained"
                     sx={{
-                      background: `linear-gradient(270deg, #3A42FF 0%, #7B52AB 100%)`,
+                      background: theme.palette.gradients?.diagonal,
                       width: '100%',
+                      fontFamily: 'Open Sans',
                     }}
                   >
                     Cari
@@ -468,6 +539,13 @@ const PilihJadwalSearch = () => {
               </Stack>
             </CardContent>
           </Card>
+          <ModalPassanger
+            Passanger={passangerValue}
+            open={modalPassangerVisible}
+            onClose={handleModalPassangerVisibleClose}
+            onSave={handleModalPassagerSave}
+          />
+          <ModalClassSeat valueChecked={classSeatValue} open={modalClassSeatVisible} onClose={handleModalClassSeatVisibleClose} onSave={handleModalClassSeatSave} />
         </Grid>
       </Grid>
     </>

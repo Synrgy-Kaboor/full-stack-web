@@ -1,14 +1,15 @@
 import { Button, FormControl, FormControlLabel, Radio, RadioGroup, Stack, TextField, Typography } from '@mui/material';
 import { useState } from 'react';
-import { Pemesan } from '../../types/Pemesan';
+import { Pemesan } from '../../../../types/Pemesan';
+import theme from '../../../../config/theme';
+import { useAppDispatch, useAppSelector } from '../../../../redux/hooks';
+import { submitPemesanPopup } from '../../../../redux/slices/DetailPenumpang';
 
-export default function FormPemesan(props: { changePemesan: (newPemesan: Pemesan) => void}) {
-    const [pemesan, setPemesan] = useState<Pemesan>({
-        name: 'Pemesan 1',
-        honorific: '',
-        phone: '',
-        email: ''
-    });
+export default function FormPemesan() {
+    const currentPemesan = useAppSelector((state) => state.detailPenumpang.pemesan);
+    const dispatch = useAppDispatch();
+
+    const [pemesan, setPemesan] = useState<Pemesan>(currentPemesan);
 
     return (
         <Stack p={2}>
@@ -17,8 +18,8 @@ export default function FormPemesan(props: { changePemesan: (newPemesan: Pemesan
             </Typography>
             <FormControl>
             <Typography fontWeight="bold">Nama Lengkap</Typography>
-            <TextField id="pemesan-name-input" variant="outlined" onChange={(event) => {
-                const newPemesan = pemesan;
+            <TextField id="pemesan-name-input" variant="outlined" value={pemesan.name} onChange={(event) => {
+                const newPemesan = {...pemesan};
                 newPemesan.name = event.target.value;
                 setPemesan(newPemesan);
             }}/>
@@ -30,6 +31,12 @@ export default function FormPemesan(props: { changePemesan: (newPemesan: Pemesan
                     justifyContent: 'space-between',
                     mb: 1
                 }}
+                value={pemesan.honorific}
+                onChange={(event) => {
+                    const newPemesan = {...pemesan};
+                    newPemesan.honorific = event.target.value;
+                    setPemesan(newPemesan);
+                }}
             >
                 <FormControlLabel value="Mr" control={<Radio/>} label="Mr"/>
                 <FormControlLabel value="Mrs" control={<Radio/>} label="Mrs"/>
@@ -37,20 +44,28 @@ export default function FormPemesan(props: { changePemesan: (newPemesan: Pemesan
             </RadioGroup>
 
             <Typography fontWeight="bold">Nomor Telepon</Typography>
-            <TextField id="pemesan-phone-input" variant="outlined"/>
+            <TextField id="pemesan-phone-input" variant="outlined" value={pemesan.phone} onChange={(event) => {
+                    const newPemesan = {...pemesan};
+                    newPemesan.phone = event.target.value;
+                    setPemesan(newPemesan);
+                }}/>
             <Typography variant="caption" mb={1}>*Nomor Telepon Aktif</Typography>
 
             <Typography fontWeight="bold">Alamat Email</Typography>
-            <TextField id="pemesan-email-input" variant="outlined"/>
+            <TextField id="pemesan-email-input" variant="outlined" value={pemesan.email} onChange={(event) => {
+                    const newPemesan = {...pemesan};
+                    newPemesan.email = event.target.value;
+                    setPemesan(newPemesan);
+                }}/>
             <Typography variant="caption" mb={3}>E-Ticket akan dikirimkan ke alamat Email ini</Typography>
 
             <Button
                 type="submit"
                 fullWidth
                 variant="contained"
-                onClick={() => props.changePemesan(pemesan)}
+                onClick={() => dispatch(submitPemesanPopup(pemesan))}
                 sx={{ 
-                    backgroundImage: `linear-gradient(90deg, #7B52AB, #3A42FF)`, 
+                    background: theme.palette.gradients?.horizontal, 
                     width: '100%' 
                 }}
             >

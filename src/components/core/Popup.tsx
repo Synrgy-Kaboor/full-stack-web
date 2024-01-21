@@ -1,6 +1,6 @@
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import { Box, Divider, IconButton, Modal, Typography } from '@mui/material';
-import React, { ReactElement } from 'react';
+import { ReactElement } from 'react';
 
 const style = {
     position: 'absolute',
@@ -16,20 +16,20 @@ const style = {
 export default function Popup(props: { 
     title: string, 
     children: ReactElement, 
-    open: boolean, 
-    setOpen: React.Dispatch<React.SetStateAction<boolean>> 
+    open: boolean,
+    onClose: ((event: object) => void)
 }) {
     return (
         <Modal
             open={props.open}
-            onClose={() => props.setOpen(false)}
+            onClose={props.onClose}
         >
             <Box sx={style}>
                 <Box p={2} sx={{ 
                     position: 'relative'
                  }}>
                     <IconButton 
-                        onClick={() => props.setOpen(false)}
+                        onClick={props.onClose}
                         sx={{ 
                             position: 'absolute',
                             top: '50%',
