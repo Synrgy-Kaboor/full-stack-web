@@ -5,6 +5,7 @@ import DetailPenumpang from './pages/DetailPenumpang/DetailPenumpang';
 import { LayananTambahan } from './pages/LayananTambahan';
 import { PilihJadwalSearch } from './pages/PilihJadwalSearch';
 import { TataCaraPembayaran } from './pages/TataCaraPembayaran';
+import {StatusPembayaran}  from './pages/StatusPembayaran';
 import { ThemeProvider } from '@mui/material/styles';
 import theme from './config/theme';
 import { CssBaseline } from '@mui/material';
@@ -28,6 +29,10 @@ const router = createBrowserRouter([
       {
         path: '/tata-cara-pembayaran',
         element: <TataCaraPembayaran />,
+      },
+      {
+        path: '/status-pembayaran',
+        element: <StatusPembayaran />,
       },
       {
         path: '/detail-penumpang',
