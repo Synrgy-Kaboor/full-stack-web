@@ -4,7 +4,7 @@ const ButtonUngu = styled(IconButton)(() => ({
   background: 'linear-gradient(270deg, #3A42FF 0%, #7B52AB 100%)',
   margin: '15px',
   height: '98px',
-  width: '98px',
+  width: '100%',
 }));
 
 
@@ -59,6 +59,7 @@ export const BerandaButton = () => {
         flexDirection="column"
         justifyContent="center"
         alignItems="center"
+        width={'100%'}
       >
         <Stack direction="row" spacing={2} justifyContent="center" alignItems="center" marginBottom={'30px'}>
           {buttons.slice(0, 5).map(({ name, text }) => (

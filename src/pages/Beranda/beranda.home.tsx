@@ -1,9 +1,9 @@
 import { BerandaButton } from '../../components/features/Beranda/beranda.button';
 import { BerandaHistory } from '../../components/features/Beranda/beranda.card.history';
 import { BerandaDestinasi } from '../../components/features/Beranda/beranda.card.destinasi';
-import Navbar from '../../components/features/Beranda/beranda.navbar';
+// import Navbar from '../../components/features/Beranda/beranda.navbar';
 import { TextField, styled, InputAdornment, Typography, Stack } from '@mui/material';
-import { BerandaRental } from '../../components/features/Beranda/beranda.card.rental';
+import { BerandaRental } from '../../components/features/Beranda/beranda.card.maskapai';
 
 const SearchInput = styled(TextField)(() => ({
   height: '70px',
@@ -44,7 +44,8 @@ const SearchInput = styled(TextField)(() => ({
 const Beranda = () => {
   return (
     <>
-    <Navbar/>
+    {/* <Navbar/> */}
+    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
       <section style={styles.searchSection}>
      
         <div style={styles.searchContainer}>
@@ -76,7 +77,7 @@ const Beranda = () => {
       </section>
 
       <section style={styles.section3}>
-        <Typography style={styles.texttitle}>Terakkhir dilihat</Typography>
+        <Typography style={styles.texttitle}>Terakhir dilihat</Typography>
         <BerandaHistory />
       </section>
 
@@ -94,9 +95,11 @@ const Beranda = () => {
 Nikmati perjalanan Anda dengan rekomendasi maskapai terbaik kami. Pilih maskapai ideal untuk pengalaman terbang tak terlupakan!          </Typography>
           <BerandaRental />
         </div>
-        <footer style={styles.footer}>
+
+      </section>
+      <footer style={styles.footer}>
         <div style={{display:'flex', justifyContent:'space-between', maxWidth:'1305px'}}>
-        <Stack direction="row" useFlexGap flexWrap="wrap" >
+        <Stack direction="row" useFlexGap flexWrap="wrap" marginRight="140px">
         <ul style={{listStyleType:'none'}}>
           <li>
           <img src="https://res.cloudinary.com/dgm5qtyrg/image/upload/v1704977133/mgrcp31s8phuo2c7h7cc.png"/>
@@ -229,7 +232,7 @@ Nikmati perjalanan Anda dengan rekomendasi maskapai terbaik kami. Pilih maskapai
         </Stack>
         </div>
         </footer>
-      </section>
+      </div>
     </>
   );
 };
@@ -244,6 +247,9 @@ const styles = {
     justifyContent: 'center',
     height: '100vh', 
     paddingBottom: '48px',
+    width: '100%', 
+    margin: '0',    
+    padding: '0',    
   },
   searchContainer: {
     display: 'flex',
@@ -265,13 +271,15 @@ const styles = {
   },
   section3: {
     height: '305px',
+    width:'1300px',
     display: 'flex',
     flexDirection: 'column',
-    justifyContent: 'flex-start', 
+    justifyContent: 'center', 
     padding: '48px 24px', 
   },
   section4: {
-    height: '650px',
+    height: 'auto',
+    width :'1300px',
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'flex-start', 
@@ -296,8 +304,13 @@ const styles = {
   },
   footer: {
     backgroundColor: '#7B52AB',
-    padding: '24px',
-  },
+    width: '100%', 
+    height: '517px',
+    margin: '0px',    
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+   },
   footerhead: {
     color:'#FFF',
     fontFamily:'Open Sans',
@@ -312,7 +325,7 @@ const styles = {
     fontSize:'16px',
     fontWeight:600,
     lineHeight:'24px',
-    letterSpacing:'-0.1pxpx',
+    letterSpacing:'-0.1px',
   },
 };
 
