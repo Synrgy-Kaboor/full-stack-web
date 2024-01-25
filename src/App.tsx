@@ -4,7 +4,7 @@ import LoginRoute from './pages/Auth/Login/Login.Routes';
 import DetailPenumpang from './pages/DetailPenumpang/DetailPenumpang';
 import { LayananTambahan } from './pages/LayananTambahan';
 import { PilihJadwalSearch } from './pages/PilihJadwalSearch';
-
+import { TataCaraPembayaran } from './pages/TataCaraPembayaran';
 import { ThemeProvider } from '@mui/material/styles';
 import theme from './config/theme';
 import { CssBaseline } from '@mui/material';
@@ -24,6 +24,10 @@ const router = createBrowserRouter([
       {
         path: '/layanan-tambahan',
         element: <LayananTambahan />,
+      },
+      {
+        path: '/tata-cara-pembayaran',
+        element: <TataCaraPembayaran />,
       },
       {
         path: '/detail-penumpang',
