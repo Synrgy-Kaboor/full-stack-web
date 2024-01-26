@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Card, Typography, Box, IconButton, Collapse } from '@mui/material';
 
-export default function PaymentCard({ label, title, instructions }) {
+export default function PaymentCard({ label, title, instructions }: { label: string, title: string, instructions: string[] }) {
   const [isDropdownOpen, setDropdownOpen] = useState(false);
 
   const toggleDropdown = () => {

@@ -4,6 +4,7 @@ import { BerandaDestinasi } from '../../components/features/Beranda/beranda.card
 // import Navbar from '../../components/features/Beranda/beranda.navbar';
 import { TextField, styled, InputAdornment, Typography, Stack } from '@mui/material';
 import { BerandaRental } from '../../components/features/Beranda/beranda.card.maskapai';
+import React from 'react';
 
 const SearchInput = styled(TextField)(() => ({
   height: '70px',
@@ -237,7 +238,19 @@ Nikmati perjalanan Anda dengan rekomendasi maskapai terbaik kami. Pilih maskapai
   );
 };
 
-const styles = {
+const styles: {
+  searchSection: React.CSSProperties,
+  searchContainer: React.CSSProperties,
+  bigPictureSection: React.CSSProperties,
+  section2: React.CSSProperties,
+  section3: React.CSSProperties,
+  section4: React.CSSProperties,
+  texttitle: React.CSSProperties,
+  textdesc: React.CSSProperties,
+  footer: React.CSSProperties,
+  footerhead: React.CSSProperties,
+  footertext: React.CSSProperties
+} = {
   searchSection: {
     backgroundImage: 'linear-gradient(0deg, rgba(255, 255, 255, 0.60) 0%, rgba(255, 255, 255, 0.60) 100%), url("https://s3-alpha-sig.figma.com/img/b2f0/fd4f/8ec91130e9ef89b84ea82d12323db8be?Expires=1705881600&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=e0uGWHGdPO9hatB~NoUASpIzDHEQoNtlCxX4h9NyYEvYI6QeCbuPLPLCUza5NgMinXYhY2JuedXO2mVtrU0-Uvnxi4OypAgeSYJ0Qr56nHKijGiCeIYQf~GhdS44my5afAZsCrJBD1zuiucdl01QsoXxQ--8abBinGkVeCy1WJn2Bj7I8RQCPvnfIq2qeN1eL31I2mpe3uuncJ5knvY5T~t7xoTvDYTIVvpatcV7vVYIGp2p-WU1sYtscs~xpEOLytINPC4J2FzsfoIr6BQ4CJiy6ybQuZzbuUHoOtOXlsTw-qtHN4X3PVmSF1y9gnY8TCyDvfGLmYE1NOzuy9v1ww__")',
     backgroundSize: 'cover',
