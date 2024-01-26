@@ -170,7 +170,9 @@ export default function ChangeProfile (){
                     <option value="Mrs">WNA</option>
                 </Select>
             </Stack>
-            <PrimaryButton type="button" label="Simpan" handleOnClick={()=>{}}/>
+            <Stack direction={'row'}  justifyContent={'flex-end'} sx={{ width: '100%'}}>
+                <PrimaryButton type="button" label="Simpan" handleOnClick={()=>{}}/>
+            </Stack>
         </Stack>
         </>
         )
