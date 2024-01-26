@@ -10,7 +10,7 @@ export default function Profil () {
         <>
         <Container maxWidth={'xl'} sx={{display: 'flex', gap: '16px'}}>
             <Sidebar/>
-            {location.pathname === '/profil/' && <ChangeProfile />}
+            {location.pathname === '/profil' && <ChangeProfile />}
             <Outlet/>
         </Container>
         </>

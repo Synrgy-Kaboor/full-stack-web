@@ -3,6 +3,7 @@ import { Stack, Typography} from '@mui/material';
 import styled from 'styled-components';
 import icon from '../../assets/Chevron-Down.svg'; 
 
+
 const Select = styled.select`
   max-width: 794px;
   font-family: Open Sans;

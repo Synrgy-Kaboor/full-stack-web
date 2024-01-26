@@ -2,7 +2,7 @@ import { Divider, Stack, Typography, useTheme } from '@mui/material';
 import { sideBarItem1, exitItem } from '.';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-
+import profileImg from '../../../assets/profile-img.svg'; 
 
 
 export default function Sidebar() {
@@ -30,13 +30,14 @@ export default function Sidebar() {
         }}
       >
         <Stack 
+          onClick={() => navigate('/profil')}
           direction={'row'}
           gap={4}
           justifyContent={'space-around'}
           alignItems={'center'}
           padding={'30px 26px 20px 26px'}
         >
-          <img src="" alt="ava" width={'70px'} height={'70px'}/>
+          <img src={profileImg} alt="ava" width={'70px'} height={'70px'}/>
           <Stack>
             <Typography variant="h6">Andre Huston</Typography>
             <Typography variant="body2" color={'#9E9E9E'}>
