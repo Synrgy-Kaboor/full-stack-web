@@ -15,6 +15,8 @@ import { Beranda } from './pages/Beranda'
 import Profil from './pages/Profil/Profil';
 import ChangeEmail from './components/ui/ChangeEmail';
 import ChangeNumber from './components/ui/ChangeNumber';
+import PriceAlertNotification from './pages/InAppNotification/PriceAlertNotification';
+import SavedPriceAlert from './components/ui/SavedPriceAlert';
 
 const router = createBrowserRouter([
   {
@@ -47,6 +49,16 @@ const router = createBrowserRouter([
         path: '/beranda',
         element: <Beranda />
       },
+      {
+        path: '/notification/price-alert',
+        element: <PriceAlertNotification/>,
+        children: [
+          {
+            path: 'saved-price-alert',
+            element: <SavedPriceAlert/>
+          }
+        ]
+      }
     ]
   },
   {
@@ -57,6 +69,10 @@ const router = createBrowserRouter([
     path: '/login/*',
     element: <LoginRoute />,
   },
+  {
+    path: '/notification/price-alert',
+    element: <PriceAlertNotification/>
+  }
 ]);
 
 function App() {
