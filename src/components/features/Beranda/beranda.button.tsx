@@ -62,23 +62,23 @@ export const BerandaButton = () => {
         width={'100%'}
       >
         <Stack direction="row" spacing={2} justifyContent="center" alignItems="center" marginBottom={'30px'}>
-          {buttons.slice(0, 5).map(({ name, text }) => (
-            <Box key={name} textAlign="center" height={'130px'}>
+          {buttons.slice(0, 5).map(({ name, text }, i) => (
+            <Box key={i} textAlign="center" height={'130px'}>
               <ButtonUngu>
                 {name}
               </ButtonUngu>
-              <Typography dangerouslySetInnerHTML={{ __html: text }} style={custombutton}/>
+              <Typography dangerouslySetInnerHTML={{ __html: text }} sx={custombutton}/>
             </Box>
           ))}
         </Stack>
 
         <Stack direction="row" spacing={2} justifyContent="center" alignItems="center">
-          {buttons.slice(5).map(({ name, text }) => (
-            <Box key={name} textAlign="center" height={'150px'}>
+          {buttons.slice(5).map(({ name, text }, i) => (
+            <Box key={i} textAlign="center" height={'150px'}>
               <ButtonUngu>
                 {name}
               </ButtonUngu>
-              <Typography dangerouslySetInnerHTML={{ __html: text }} style={custombutton}/>
+              <Typography dangerouslySetInnerHTML={{ __html: text }} sx={custombutton}/>
             </Box>
           ))}
         </Stack>
