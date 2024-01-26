@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-import { Typography as MuiTypography } from '@mui/material';
+import { Typography as MuiTypography, TypographyProps } from '@mui/material';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import { CardActionArea } from '@mui/material';
 
-const generateStars = (rating) => {
+const generateStars = (rating: number) => {
   const fullStars = Math.floor(rating);
   const halfStar = rating % 1 !== 0;
   const emptyStars = 5 - fullStars - (halfStar ? 1 : 0);
@@ -48,7 +48,7 @@ const generateStars = (rating) => {
   return stars;
 };
 
-const Typography1 = ({ children, rating, review, ...props }) => (
+const Typography1 = ({ children, rating, review, ...props }: { children: string, rating: string, review: string } & TypographyProps) => (
   <div style={{ display: 'grid', gridTemplateColumns: '1fr auto' }}>
     <MuiTypography
       variant="h3"
@@ -78,7 +78,7 @@ const Typography1 = ({ children, rating, review, ...props }) => (
   </div>
 );
 
-const BerandaRentalCard = ({ imageUrl, text, genre, price, rating, review }) => (
+const BerandaRentalCard = ({ imageUrl, text, genre, price, rating, review }: { imageUrl: string, text: string, genre: string, price: string, rating: string, review: string }) => (
   <Card sx={{ maxWidth: 325, width: '100%', height: 435, marginRight: '16px', borderRadius: '8px', boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.1)', position: 'relative' }}>
     <CardActionArea>
       <div style={{ position: 'absolute', top: 10, right: 15, background:  'var(--Primary-01, linear-gradient(270deg, #3A42FF 0%, #7B52AB 100%))', color: 'white', padding: '8px', borderRadius: '32px' }}>

@@ -16,6 +16,7 @@ import { Beranda } from './pages/Beranda'
 import Profil from './pages/Profil/Profil';
 import ChangeEmail from './components/ui/ChangeEmail';
 import ChangeNumber from './components/ui/ChangeNumber';
+import MetodePembayaran from './pages/MetodePembayaran/MetodePembayaran';
 
 const router = createBrowserRouter([
   {
@@ -25,6 +26,10 @@ const router = createBrowserRouter([
       {
         path: '/layanan-tambahan',
         element: <LayananTambahan />,
+      },
+      {
+        path: '/metode-pembayaran',
+        element: <MetodePembayaran/>
       },
       {
         path: '/tata-cara-pembayaran',
