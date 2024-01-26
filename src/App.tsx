@@ -18,7 +18,6 @@ import ChangeEmail from './components/features/Profil/ChangeEmail';
 import ChangeNumber from './components/features/Profil/ChangeNumber';
 import MetodePembayaran from './pages/MetodePembayaran/MetodePembayaran';
 import SavedPriceAlert from './components/ui/SavedPriceAlert';
-import DetailAkun from './components/features/Profil/DetailAkun';
 
 const router = createBrowserRouter([
   {
