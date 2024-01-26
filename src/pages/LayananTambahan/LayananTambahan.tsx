@@ -2,8 +2,11 @@ import { Box, Grid, Typography, Container, Stack, Button } from '@mui/material';
 import { AddOnsCard } from '../../components/ui/';
 import theme from '../../config/theme';
 import FlightDetailCard from '../../components/shared/Pemesanan/FlightDetailCard';
+import { useNavigate } from 'react-router-dom';
 
 export default function LayananTambahan() {
+  const navigate = useNavigate();
+
   return (
     <>
       <Container sx={{ paddingBlockEnd: '2rem' }}>
@@ -47,6 +50,7 @@ export default function LayananTambahan() {
                 <Box sx={{ width: '40%' }}>
                   <Button
                     variant="contained"
+                    onClick={() => navigate('/metode-pembayaran')}
                     sx={{
                       background: theme.palette.gradients?.horizontal,
                       width: '100%',
