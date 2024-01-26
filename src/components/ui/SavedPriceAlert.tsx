@@ -2,24 +2,11 @@ import { Stack, Typography, Box, Button } from '@mui/material';
 import theme from '../../config/theme';
 import { NotificationAdd } from '@mui/icons-material';
 import CardFilterPlaneSchedule from './CardFilterPlaneSchedule';
-import { useEffect, useRef, useState } from 'react';
+import {  useState } from 'react';
 import { InAppNotificationSavedBox } from '../features/InAppNotification/InAppNotificationSavedBox';
 
 const SavedPriceAlert = () => {
-  const widthButton = useRef(null);
-  const widthModalFilter = useRef(null);
-  const [posRef, setPosRef] = useState(0);
   const [modalFilterOpen, setModalFilterOpen] = useState(false);
-  const updatePosRef = () => {
-    const temp =
-      (widthModalFilter.current?.clientWidth || 0) -
-      (widthButton.current?.clientWidth || 0);
-    setPosRef(temp - (temp * 1) / 4);
-    console.log(posRef);
-  };
-  useEffect(() => {
-    updatePosRef();
-  });
   return (
     <>
       <Stack
@@ -28,6 +15,7 @@ const SavedPriceAlert = () => {
         borderRadius={1}
         border={`1px solid ${'#C2C2C2'}`}
         width={'100%'}
+        maxWidth={'880px'}
         sx={{
           background: '#FFF',
         }}
@@ -50,7 +38,6 @@ const SavedPriceAlert = () => {
                 borderRadius: '1.5rem',
                 background: theme.palette.gradients?.diagonal,
               }}
-              ref={widthButton}
               onClick={() => {
                 setModalFilterOpen(!modalFilterOpen);
               }}
@@ -60,7 +47,7 @@ const SavedPriceAlert = () => {
             <Box
               position={'absolute'}
               alignSelf={'center'}
-              left={`${posRef}px`}
+              right={0}
               sx={modalFilterOpen ? { display: 'flex' } : { display: 'none' }}
             >
               <CardFilterPlaneSchedule />
