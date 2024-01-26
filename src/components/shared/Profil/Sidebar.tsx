@@ -36,7 +36,7 @@ export default function Sidebar() {
           alignItems={'center'}
           padding={'30px 26px 20px 26px'}
         >
-          <img src="" alt="ava" width={'70px'} height={'70px'}/>
+          <img src={''} alt="ava" style={{borderRadius: '50%', width: '70px', height: '70px'}}/>
           <Stack>
             <Typography variant="h6">Andre Huston</Typography>
             <Typography variant="body2" color={'#9E9E9E'}>

@@ -11,8 +11,9 @@ import DefaultLayout from './layouts/DefaultLayout';
 import { Provider } from 'react-redux';
 import { store } from './redux/store';
 import Profil from './pages/Profil/Profil';
-import ChangeEmail from './components/ui/ChangeEmail';
-import ChangeNumber from './components/ui/ChangeNumber';
+import ChangeEmail from './components/features/Profil/ChangeEmail';
+import ChangeNumber from './components/features/Profil/ChangeNumber';
+import DetailAkun from './components/features/Profil/DetailAkun';
 
 const router = createBrowserRouter([
   {
@@ -38,7 +39,9 @@ const router = createBrowserRouter([
           {path: 'ganti-email',
           element : <ChangeEmail/>},
           {path: 'ganti-nomer',
-          element : <ChangeNumber/>}
+          element : <ChangeNumber/>},
+          {path: '',
+          element : <DetailAkun/>}
         ]
       },
     ]
