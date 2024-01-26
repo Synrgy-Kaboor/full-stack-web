@@ -1,0 +1,8 @@
+{
+    "code": 200,
+    "message": "message",
+    "data": {
+        "flightId": 1,
+        "classCode": "E"
+    }
+}
