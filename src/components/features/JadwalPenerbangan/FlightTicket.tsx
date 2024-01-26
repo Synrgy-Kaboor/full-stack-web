@@ -9,7 +9,7 @@ import theme from "../../../config/theme";
 
 import { useNavigate } from "react-router";
 
-export default function FlightTicket() {
+export default function FlightTicket(props: { onPage: string }) {
   const navigate = useNavigate();
 
   return (
@@ -18,7 +18,13 @@ export default function FlightTicket() {
       justifyContent="space-between"
       alignItems="center"
       p={2}
-      onClick={() => navigate("/jadwal-kepulangan")}
+      onClick={() => {
+        if (props.onPage === "jadwal-kepulangan") {
+          navigate("/detail-penumpang");
+        } else if (props.onPage === "jadwal-keberangkatan") {
+          navigate("/jadwal-kepulangan");
+        }
+      }}
       sx={{
         bgcolor: "white",
         boxShadow: 1,

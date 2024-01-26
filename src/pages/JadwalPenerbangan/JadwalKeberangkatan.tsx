@@ -3,6 +3,8 @@ import FlightTicket from "../../components/features/JadwalPenerbangan/FlightTick
 import FlightDetails from "../../components/features/JadwalPenerbangan/FlightDetails";
 
 export default function JadwalKeberangkatan() {
+  const onPage = "jadwal-keberangkatan";
+
   return (
     <Box mb={4}>
       <Container>
@@ -12,10 +14,10 @@ export default function JadwalKeberangkatan() {
             Pilih Keberangkatan
           </Typography>
           <Stack direction="column" spacing={2}>
-            <FlightTicket />
-            <FlightTicket />
-            <FlightTicket />
-            <FlightTicket />
+            <FlightTicket onPage={onPage} />
+            <FlightTicket onPage={onPage} />
+            <FlightTicket onPage={onPage} />
+            <FlightTicket onPage={onPage} />
           </Stack>
         </Stack>
       </Container>

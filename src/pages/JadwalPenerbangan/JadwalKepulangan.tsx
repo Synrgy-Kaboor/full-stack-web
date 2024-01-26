@@ -3,6 +3,8 @@ import FlightTicket from "../../components/features/JadwalPenerbangan/FlightTick
 import FlightDetails from "../../components/features/JadwalPenerbangan/FlightDetails";
 
 export default function JadwalKepulangan() {
+  const onPage = "jadwal-kepulangan";
+
   return (
     <Box mb={4}>
       <Container>
@@ -11,7 +13,7 @@ export default function JadwalKepulangan() {
           <Typography variant="h6" sx={{ fontWeight: "bold", py: 2 }}>
             Keberangkatan
           </Typography>
-          <FlightTicket />
+          <FlightTicket onPage={onPage} />
         </Stack>
       </Container>
       <Divider sx={{ paddingBlock: "1rem" }} />
@@ -21,10 +23,10 @@ export default function JadwalKepulangan() {
             Pilih Kepulangan
           </Typography>
           <Stack direction="column" spacing={2}>
-            <FlightTicket />
-            <FlightTicket />
-            <FlightTicket />
-            <FlightTicket />
+            <FlightTicket onPage={onPage} />
+            <FlightTicket onPage={onPage} />
+            <FlightTicket onPage={onPage} />
+            <FlightTicket onPage={onPage} />
           </Stack>
         </Stack>
       </Container>
