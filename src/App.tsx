@@ -56,7 +56,6 @@ const router = createBrowserRouter([
           { path: 'ganti-email', element: <ChangeEmail /> },
           { path: 'ganti-nomer', element: <ChangeNumber /> },
           { path: 'saved-price-alert', element: <SavedPriceAlert /> },
-          { path: '', element: <DetailAkun /> },
         ],
       },
       {
