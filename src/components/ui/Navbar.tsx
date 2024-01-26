@@ -42,7 +42,12 @@ function UserLoggedIn() {
       </Stack>
 
       {/* Avatar */}
-      <Avatar sx={{ bgcolor: "primary.main" }}>A</Avatar>
+      <Avatar
+        sx={{ bgcolor: "primary.main", "&:hover": { cursor: "pointer" } }}
+        onClick={() => navigate("/profil")}
+      >
+        A
+      </Avatar>
     </Stack>
   );
 }
