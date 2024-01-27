@@ -1,9 +1,9 @@
-import { Box, Grid, Typography, Container, Stack, Button } from "@mui/material";
-import { AddOnsCard } from "../../components/ui/";
-import theme from "../../config/theme";
-import { IDetailAsuransi, detailAsuransi } from "./detailAsuransi";
-import FlightDetailCard from "../../components/shared/Pemesanan/FlightDetailCard";
-import { useNavigate } from "react-router-dom";
+import { Box, Grid, Typography, Container, Stack, Button } from '@mui/material';
+import { AddOnsCard } from '../../components/ui/';
+import theme from '../../config/theme';
+import { IDetailAsuransi, detailAsuransi } from './detailAsuransi';
+import FlightDetailCard from '../../components/shared/Pemesanan/FlightDetailCard';
+import { useNavigate } from 'react-router-dom';
 
 export default function LayananTambahan() {
   const addOnsCardContent = detailAsuransi.map(
@@ -25,8 +25,8 @@ export default function LayananTambahan() {
 
   return (
     <>
-      <Container sx={{ paddingBlockEnd: "2rem" }}>
-        <Typography variant="h6" sx={{ fontWeight: "bold" }}>
+      <Container sx={{ paddingBlockEnd: '2rem' }}>
+        <Typography variant="h6" sx={{ fontWeight: 'bold' }}>
           Layanan Tambahan
         </Typography>
         <Grid container mt={0} spacing={2}>
@@ -49,21 +49,21 @@ export default function LayananTambahan() {
                     variant="h5"
                     sx={{
                       background: theme.palette.gradients?.horizontal,
-                      backgroundClip: "text",
-                      color: "transparent",
-                      fontWeight: "bold",
+                      backgroundClip: 'text',
+                      color: 'transparent',
+                      fontWeight: 'bold',
                     }}
                   >
                     Rp 2.350.000
                   </Typography>
                 </Box>
-                <Box sx={{ width: "40%" }}>
+                <Box sx={{ width: '40%' }}>
                   <Button
                     variant="contained"
-                    onClick={() => navigate("/metode-pembayaran")}
+                    onClick={() => navigate('/metode-pembayaran')}
                     sx={{
                       background: theme.palette.gradients?.horizontal,
-                      width: "100%",
+                      width: '100%',
                     }}
                   >
                     Bayar

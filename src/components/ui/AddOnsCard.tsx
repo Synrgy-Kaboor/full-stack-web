@@ -18,19 +18,19 @@ import {
   TableBody,
   TableHead,
   TableContainer,
-} from "@mui/material";
+} from '@mui/material';
 
 // import theme from "../../config/theme";
-import CheckCircleIcon from "@mui/icons-material/CheckCircle";
-import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
-import ControlPointOutlinedIcon from "@mui/icons-material/ControlPointOutlined";
-import HealthAndSafetyOutlinedIcon from "@mui/icons-material/HealthAndSafetyOutlined";
+import CheckCircleIcon from '@mui/icons-material/CheckCircle';
+import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
+import ControlPointOutlinedIcon from '@mui/icons-material/ControlPointOutlined';
+import HealthAndSafetyOutlinedIcon from '@mui/icons-material/HealthAndSafetyOutlined';
 
 import {
   IDetailAsuransi,
   detailAsuransi,
-} from "../../pages/LayananTambahan/detailAsuransi";
-import { useState } from "react";
+} from '../../pages/LayananTambahan/detailAsuransi';
+import { useState } from 'react';
 
 interface IPopUpProps {
   id: number;
@@ -51,13 +51,13 @@ function AssuranceDetailPopUp({ id, setOpenPopUp }: IPopUpProps) {
           <ArrowBackIosNewIcon
             onClick={() => setOpenPopUp(false)}
             sx={{
-              position: "absolute",
+              position: 'absolute',
               left: 20,
               top: 20,
-              "&:hover": { cursor: "pointer" },
+              '&:hover': { cursor: 'pointer' },
             }}
           />
-          <Typography variant="h5" sx={{ fontWeight: "bold" }}>
+          <Typography variant="h5" sx={{ fontWeight: 'bold' }}>
             Perlindungan Ekstra
           </Typography>
         </Stack>
@@ -66,25 +66,25 @@ function AssuranceDetailPopUp({ id, setOpenPopUp }: IPopUpProps) {
         <Stack direction="row" spacing={2} mb={2} alignItems="center">
           <HealthAndSafetyOutlinedIcon
             fontSize="large"
-            sx={{ color: "primary.main" }}
+            sx={{ color: 'primary.main' }}
           />
-          <Typography variant="h6" sx={{ fontWeight: "bold" }}>
+          <Typography variant="h6" sx={{ fontWeight: 'bold' }}>
             {selectedInsurance.title}
           </Typography>
         </Stack>
         <TableContainer component={Paper}>
           <Table>
             <TableHead>
-              <TableRow sx={{ bgcolor: "primary.main" }}>
+              <TableRow sx={{ bgcolor: 'primary.main' }}>
                 <TableCell
                   align="center"
-                  sx={{ color: "white", fontSize: "1.5rem" }}
+                  sx={{ color: 'white', fontSize: '1.5rem' }}
                 >
                   Tanggungan
                 </TableCell>
                 <TableCell
                   align="center"
-                  sx={{ color: "white", fontSize: "1.5rem" }}
+                  sx={{ color: 'white', fontSize: '1.5rem' }}
                 >
                   Kompensasi
                 </TableCell>
@@ -95,7 +95,7 @@ function AssuranceDetailPopUp({ id, setOpenPopUp }: IPopUpProps) {
                 (detail: { tanggungan: string; kompensasi: string }) => {
                   return (
                     <TableRow>
-                      <TableCell sx={{ width: "50%" }}>
+                      <TableCell sx={{ width: '50%' }}>
                         {detail.tanggungan}
                       </TableCell>
                       <TableCell>{detail.kompensasi}</TableCell>
@@ -116,9 +116,9 @@ export default function AddOnsCard(props: IDetailAsuransi) {
   const [openPopUp, setOpenPopUp] = useState<boolean>(false);
 
   function formatPriceToIDR(price: number) {
-    const rupiah = new Intl.NumberFormat("en-ID", {
-      style: "currency",
-      currency: "IDR",
+    const rupiah = new Intl.NumberFormat('en-ID', {
+      style: 'currency',
+      currency: 'IDR',
       maximumSignificantDigits: 3,
     });
 
@@ -131,9 +131,9 @@ export default function AddOnsCard(props: IDetailAsuransi) {
         <Stack direction="row" m={2} alignItems="center">
           <HealthAndSafetyOutlinedIcon
             fontSize="medium"
-            sx={{ color: "primary.main" }}
+            sx={{ color: 'primary.main' }}
           />
-          <Typography sx={{ fontWeight: "bold" }} ml={1}>
+          <Typography sx={{ fontWeight: 'bold' }} ml={1}>
             {props.title}
           </Typography>
         </Stack>
@@ -152,7 +152,7 @@ export default function AddOnsCard(props: IDetailAsuransi) {
               display="inline"
               color="primary.main"
               onClick={() => setOpenPopUp(true)}
-              sx={{ "&:hover": { cursor: "pointer" } }}
+              sx={{ '&:hover': { cursor: 'pointer' } }}
             >
               Baca Selengkapnya
             </Typography>
@@ -163,7 +163,7 @@ export default function AddOnsCard(props: IDetailAsuransi) {
           </Dialog>
         </Box>
       </CardContent>
-      <CardActions disableSpacing sx={{ padding: "0" }}>
+      <CardActions disableSpacing sx={{ padding: '0' }}>
         <Stack
           direction="row"
           px={2}
@@ -171,21 +171,21 @@ export default function AddOnsCard(props: IDetailAsuransi) {
           m={0}
           alignItems="center"
           sx={{
-            bgcolor: "primary.main",
-            width: "100%",
-            display: "flex",
-            flexDirection: "row",
-            justifyContent: "space-between",
+            bgcolor: 'primary.main',
+            width: '100%',
+            display: 'flex',
+            flexDirection: 'row',
+            justifyContent: 'space-between',
           }}
         >
-          <Typography sx={{ fontWeight: "bold", color: "white" }}>
+          <Typography sx={{ fontWeight: 'bold', color: 'white' }}>
             {formatPriceToIDR(props.price)}/pax
           </Typography>
           <IconButton onClick={() => setAddOns(!addOns)}>
             {addOns === true ? (
-              <CheckCircleIcon sx={{ color: "success.light" }} />
+              <CheckCircleIcon sx={{ color: 'success.light' }} />
             ) : (
-              <ControlPointOutlinedIcon sx={{ color: "white" }} />
+              <ControlPointOutlinedIcon sx={{ color: 'white' }} />
             )}
           </IconButton>
         </Stack>
