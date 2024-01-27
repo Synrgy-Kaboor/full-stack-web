@@ -59,6 +59,12 @@ const HelpCenter = () => {
           <Accordion
             expanded={expandedAccordion === 'panel1'}
             onChange={handleChangeAccordion('panel1')}
+            elevation={0}
+            sx={{
+              border: 1,
+              borderRadius: 1,
+              borderColor: 'grey.500',
+            }}
           >
             <AccordionSummary expandIcon={<ExpandMoreOutlined />}>
               <Typography
@@ -86,6 +92,12 @@ const HelpCenter = () => {
           <Accordion
             expanded={expandedAccordion === 'panel2'}
             onChange={handleChangeAccordion('panel2')}
+            elevation={0}
+            sx={{
+              border: 1,
+              borderRadius: 1,
+              borderColor: 'grey.500',
+            }}
           >
             <AccordionSummary expandIcon={<ExpandMoreOutlined />}>
               <Typography
@@ -113,6 +125,12 @@ const HelpCenter = () => {
           <Accordion
             expanded={expandedAccordion === 'panel3'}
             onChange={handleChangeAccordion('panel3')}
+            elevation={0}
+            sx={{
+              border: 1,
+              borderRadius: 1,
+              borderColor: 'grey.500',
+            }}
           >
             <AccordionSummary expandIcon={<ExpandMoreOutlined />}>
               <Typography
@@ -140,6 +158,12 @@ const HelpCenter = () => {
           <Accordion
             expanded={expandedAccordion === 'panel4'}
             onChange={handleChangeAccordion('panel4')}
+            elevation={0}
+            sx={{
+              border: 1,
+              borderRadius: 1,
+              borderColor: 'grey.500',
+            }}
           >
             <AccordionSummary expandIcon={<ExpandMoreOutlined />}>
               <Typography
@@ -167,6 +191,12 @@ const HelpCenter = () => {
           <Accordion
             expanded={expandedAccordion === 'panel5'}
             onChange={handleChangeAccordion('panel5')}
+            elevation={0}
+            sx={{
+              border: 1,
+              borderRadius: 1,
+              borderColor: 'grey.500',
+            }}
           >
             <AccordionSummary expandIcon={<ExpandMoreOutlined />}>
               <Typography
@@ -194,6 +224,12 @@ const HelpCenter = () => {
           <Accordion
             expanded={expandedAccordion === 'panel6'}
             onChange={handleChangeAccordion('panel6')}
+            elevation={0}
+            sx={{
+              border: 1,
+              borderRadius: 1,
+              borderColor: 'grey.500',
+            }}
           >
             <AccordionSummary expandIcon={<ExpandMoreOutlined />}>
               <Typography
