@@ -14,7 +14,7 @@ export const sideBarItem1 = [
   {icon: PlaneIcon, text: 'Pesanan', route: '/'},
   {icon: OctIcon, text: 'Notifikasi', route: '/'}, 
   {icon: BellIcon, text: 'Notifikasi Harga', route: '/saved-price-alert'},
-  {icon: CsIcon, text: 'Pusat Bantuan', route: '/'},
+  {icon: CsIcon, text: 'Pusat Bantuan', route: '/pusat-bantuan'},
 ]
 
 
