@@ -6,6 +6,7 @@ import FlightDetailCard from '../../components/shared/Pemesanan/FlightDetailCard
 import { useNavigate } from 'react-router-dom';
 
 export default function LayananTambahan() {
+  // Testing
   const addOnsCardContent = detailAsuransi.map(
     (insuranceDetail: IDetailAsuransi) => {
       return (
