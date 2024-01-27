@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Typography as MuiTypography } from '@mui/material';
 
-const Typography = ({ children }) => (
+const Typography = ({ children }: { children: string }) => (
     <MuiTypography
       variant="h3"
       sx={{

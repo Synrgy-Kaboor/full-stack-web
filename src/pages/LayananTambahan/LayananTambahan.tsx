@@ -3,6 +3,7 @@ import { AddOnsCard } from "../../components/ui/";
 import theme from "../../config/theme";
 import { IDetailAsuransi, detailAsuransi } from "./detailAsuransi";
 import FlightDetailCard from "../../components/shared/Pemesanan/FlightDetailCard";
+import { useNavigate } from "react-router-dom";
 
 export default function LayananTambahan() {
   const addOnsCardContent = detailAsuransi.map(
@@ -19,6 +20,8 @@ export default function LayananTambahan() {
       );
     }
   );
+
+  const navigate = useNavigate();
 
   return (
     <>
@@ -57,6 +60,7 @@ export default function LayananTambahan() {
                 <Box sx={{ width: "40%" }}>
                   <Button
                     variant="contained"
+                    onClick={() => navigate("/metode-pembayaran")}
                     sx={{
                       background: theme.palette.gradients?.horizontal,
                       width: "100%",
