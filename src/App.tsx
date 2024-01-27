@@ -14,8 +14,8 @@ import { Provider } from 'react-redux';
 import { store } from './redux/store';
 import { Beranda } from './pages/Beranda';
 import Profil from './pages/Profil/Profil';
-import ChangeEmail from './components/ui/ChangeEmail';
-import ChangeNumber from './components/ui/ChangeNumber';
+import ChangeEmail from './components/features/Profil/ChangeEmail';
+import ChangeNumber from './components/features/Profil/ChangeNumber';
 import MetodePembayaran from './pages/MetodePembayaran/MetodePembayaran';
 import SavedPriceAlert from './components/ui/SavedPriceAlert';
 
