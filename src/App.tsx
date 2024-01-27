@@ -18,6 +18,7 @@ import ChangeEmail from './components/ui/ChangeEmail';
 import ChangeNumber from './components/ui/ChangeNumber';
 import MetodePembayaran from './pages/MetodePembayaran/MetodePembayaran';
 import SavedPriceAlert from './components/ui/SavedPriceAlert';
+import HelpCenter from './components/features/Profil/HelpCenter';
 
 const router = createBrowserRouter([
   {
@@ -55,6 +56,7 @@ const router = createBrowserRouter([
           { path: 'ganti-email', element: <ChangeEmail /> },
           { path: 'ganti-nomer', element: <ChangeNumber /> },
           { path: 'saved-price-alert', element: <SavedPriceAlert /> },
+          { path: 'pusat-bantuan', element: <HelpCenter /> },
         ],
       },
       {
