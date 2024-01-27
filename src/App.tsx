@@ -4,6 +4,8 @@ import LoginRoute from './pages/Auth/Login/Login.Routes';
 import DetailPenumpang from './pages/DetailPenumpang/DetailPenumpang';
 import { LayananTambahan } from './pages/LayananTambahan';
 import { PilihJadwalSearch } from './pages/PilihJadwalSearch';
+import JadwalKeberangkatan from './pages/JadwalPenerbangan/JadwalKeberangkatan';
+import JadwalKepulangan from './pages/JadwalPenerbangan/JadwalKepulangan';
 import { TataCaraPembayaran } from './pages/TataCaraPembayaran';
 import { StatusPembayaran } from './pages/StatusPembayaran';
 import { ThemeProvider } from '@mui/material/styles';
@@ -48,6 +50,14 @@ const router = createBrowserRouter([
       {
         path: '/pilih-jadwal-search',
         element: <PilihJadwalSearch />,
+      },
+      {
+        path: '/jadwal-keberangkatan',
+        element: <JadwalKeberangkatan />,
+      },
+      {
+        path: '/jadwal-kepulangan',
+        element: <JadwalKepulangan />,
       },
       {
         path: '/profil',
