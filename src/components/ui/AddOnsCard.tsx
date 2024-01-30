@@ -1,27 +1,129 @@
 import {
   Box,
-  Typography,
+  // Link,
   Card,
-  CardContent,
-  Divider,
   Stack,
-  Link,
-  CardActions,
+  Divider,
+  Dialog,
+  DialogTitle,
+  DialogContent,
   IconButton,
+  Typography,
+  CardActions,
+  CardContent,
+  Paper,
+  Table,
+  TableRow,
+  TableCell,
+  TableBody,
+  TableHead,
+  TableContainer,
 } from '@mui/material';
 
-import HealthAndSafetyOutlinedIcon from '@mui/icons-material/HealthAndSafetyOutlined';
+// import theme from "../../config/theme";
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
+import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import ControlPointOutlinedIcon from '@mui/icons-material/ControlPointOutlined';
+import HealthAndSafetyOutlinedIcon from '@mui/icons-material/HealthAndSafetyOutlined';
 
-export default function AddOnsCard(props: { title: string; price: number }) {
-  const rupiah = new Intl.NumberFormat('en-ID', {
-    style: 'currency',
-    currency: 'IDR',
-    maximumSignificantDigits: 3,
-  });
+import {
+  IDetailAsuransi,
+  detailAsuransi,
+} from '../../pages/LayananTambahan/detailAsuransi';
+import { useState } from 'react';
 
-  const formattedPrice = rupiah.format(props.price);
+interface IPopUpProps {
+  id: number;
+  setOpenPopUp: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+function AssuranceDetailPopUp({ id, setOpenPopUp }: IPopUpProps) {
+  const selectedInsurance = detailAsuransi.filter(
+    (asuransi: IDetailAsuransi) => {
+      return asuransi.id === id;
+    }
+  )[0];
+
+  return (
+    <>
+      <DialogTitle>
+        <Stack px={10} direction="row" justifyContent="center">
+          <ArrowBackIosNewIcon
+            onClick={() => setOpenPopUp(false)}
+            sx={{
+              position: 'absolute',
+              left: 20,
+              top: 20,
+              '&:hover': { cursor: 'pointer' },
+            }}
+          />
+          <Typography variant="h5" sx={{ fontWeight: 'bold' }}>
+            Perlindungan Ekstra
+          </Typography>
+        </Stack>
+      </DialogTitle>
+      <DialogContent dividers>
+        <Stack direction="row" spacing={2} mb={2} alignItems="center">
+          <HealthAndSafetyOutlinedIcon
+            fontSize="large"
+            sx={{ color: 'primary.main' }}
+          />
+          <Typography variant="h6" sx={{ fontWeight: 'bold' }}>
+            {selectedInsurance.title}
+          </Typography>
+        </Stack>
+        <TableContainer component={Paper}>
+          <Table>
+            <TableHead>
+              <TableRow sx={{ bgcolor: 'primary.main' }}>
+                <TableCell
+                  align="center"
+                  sx={{ color: 'white', fontSize: '1.5rem' }}
+                >
+                  Tanggungan
+                </TableCell>
+                <TableCell
+                  align="center"
+                  sx={{ color: 'white', fontSize: '1.5rem' }}
+                >
+                  Kompensasi
+                </TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {selectedInsurance.details.map(
+                (detail: { tanggungan: string; kompensasi: string }) => {
+                  return (
+                    <TableRow>
+                      <TableCell sx={{ width: '50%' }}>
+                        {detail.tanggungan}
+                      </TableCell>
+                      <TableCell>{detail.kompensasi}</TableCell>
+                    </TableRow>
+                  );
+                }
+              )}
+            </TableBody>
+          </Table>
+        </TableContainer>
+      </DialogContent>
+    </>
+  );
+}
+
+export default function AddOnsCard(props: IDetailAsuransi) {
+  const [addOns, setAddOns] = useState<boolean>(false);
+  const [openPopUp, setOpenPopUp] = useState<boolean>(false);
+
+  function formatPriceToIDR(price: number) {
+    const rupiah = new Intl.NumberFormat('en-ID', {
+      style: 'currency',
+      currency: 'IDR',
+      maximumSignificantDigits: 3,
+    });
+
+    return rupiah.format(price);
+  }
 
   return (
     <Card variant="outlined">
@@ -29,7 +131,7 @@ export default function AddOnsCard(props: { title: string; price: number }) {
         <Stack direction="row" m={2} alignItems="center">
           <HealthAndSafetyOutlinedIcon
             fontSize="medium"
-            sx={{ color: 'kaboor.main' }}
+            sx={{ color: 'primary.main' }}
           />
           <Typography sx={{ fontWeight: 'bold' }} ml={1}>
             {props.title}
@@ -37,21 +139,28 @@ export default function AddOnsCard(props: { title: string; price: number }) {
         </Stack>
         <Divider />
         <Box p={2}>
-          <Stack direction="row">
-            <CheckCircleIcon fontSize="small" color="success" />
-            <Typography ml={1}>
-              Kompensasi hingga Rp 500 Juta untuk berbagai resiko tak terduga
+          {props.descriptions.map((description: string) => {
+            return (
+              <Stack direction="row">
+                <CheckCircleIcon fontSize="small" color="success" />
+                <Typography ml={1}>{description}</Typography>
+              </Stack>
+            );
+          })}
+          <Stack mt={2}>
+            <Typography
+              display="inline"
+              color="primary.main"
+              onClick={() => setOpenPopUp(true)}
+              sx={{ '&:hover': { cursor: 'pointer' } }}
+            >
+              Baca Selengkapnya
             </Typography>
           </Stack>
-          <Stack direction="row" mb={2}>
-            <CheckCircleIcon fontSize="small" color="success" />
-            <Typography ml={1}>
-              Kompensasi hingga Rp 500 Juta untuk berbagai resiko tak terduga
-            </Typography>
-          </Stack>
-          <Link href="#" underline="none">
-            Baca Selengkapnya
-          </Link>
+          {/* </Link> */}
+          <Dialog open={openPopUp}>
+            <AssuranceDetailPopUp setOpenPopUp={setOpenPopUp} id={props.id} />
+          </Dialog>
         </Box>
       </CardContent>
       <CardActions disableSpacing sx={{ padding: '0' }}>
@@ -62,7 +171,7 @@ export default function AddOnsCard(props: { title: string; price: number }) {
           m={0}
           alignItems="center"
           sx={{
-            bgcolor: 'kaboor.main',
+            bgcolor: 'primary.main',
             width: '100%',
             display: 'flex',
             flexDirection: 'row',
@@ -70,10 +179,14 @@ export default function AddOnsCard(props: { title: string; price: number }) {
           }}
         >
           <Typography sx={{ fontWeight: 'bold', color: 'white' }}>
-            {formattedPrice}/pax
+            {formatPriceToIDR(props.price)}/pax
           </Typography>
-          <IconButton>
-            <ControlPointOutlinedIcon sx={{ color: 'white' }} />
+          <IconButton onClick={() => setAddOns(!addOns)}>
+            {addOns === true ? (
+              <CheckCircleIcon sx={{ color: 'success.light' }} />
+            ) : (
+              <ControlPointOutlinedIcon sx={{ color: 'white' }} />
+            )}
           </IconButton>
         </Stack>
       </CardActions>

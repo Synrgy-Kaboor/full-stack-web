@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import Cover from './../../../assets/Rectangle_319.png';
-import RegisterForm from '../../../components/ui/registerForm/registerForm';
+import RegisterForm from '../../../components/features/Auth/register/registerForm';
 
 const Main = styled.main`
   max-width: 1440px;
@@ -17,6 +17,9 @@ const Layer = styled.div`
   );
   z-index: -1;
   position: absolute;
+  @media (max-width: 500px) {
+    height: 140vh;
+  }
 `;
 
 const Image = styled.img`
@@ -28,6 +31,7 @@ const Image = styled.img`
 
   @media (max-width: 500px) {
     widht: 100%;
+    height: 140vh;
   }
 `;
 
