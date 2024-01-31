@@ -38,7 +38,7 @@ export default function Sidebar() {
           padding={'30px 26px 20px 26px'}
         >
           <img src={profileImg} alt='ava' width={'70px'} height={'70px'} />
-          <Stack>
+          <Stack sx={{cursor:'pointer'}}>
             <Typography variant='h6'>Andre Huston</Typography>
             <Typography variant='body2' color={'#9E9E9E'}>
               informasi pribadi 16% lengkap

@@ -12,11 +12,11 @@ const Select = styled.select`
   font-size: 18px;
   font-style: normal;
   font-weight: 400;
-  line-height: 26px; /* 144.444% */
+  line-height: 26px; 
   letter-spacing: -0.15px;
   flex-shrink: 1;
   padding: 18px 22px;
-  padding-right: 32px; /* Add padding for the icon */
+  padding-right: 32px;
   box-sizing: border-box;
   border-radius: 8px;
   border: 1px solid var(--Neutral-05, #c2c2c2);
@@ -25,9 +25,9 @@ const Select = styled.select`
   appearance: none;
   outline: none;
   cursor: pointer;
-  background-image: url(${icon}); /* Set the icon as background image */
-  background-repeat: no-repeat; /* Ensure the icon is not repeated */
-  background-position: right 10px center; /* Adjust the position of the icon */
+  background-image: url(${icon}); 
+  background-repeat: no-repeat;
+  background-position: right 10px center; 
 `;
 const Input = styled.input`
   width: 100%;
@@ -36,7 +36,7 @@ const Input = styled.input`
   font-size: 18px;
   font-style: normal;
   font-weight: 400;
-  line-height: 26px; /* 144.444% */
+  line-height: 26px;
   letter-spacing: -0.15px;
   flex-shrink: 1;
   padding: 18px 22px;
@@ -56,13 +56,13 @@ const Input = styled.input`
 `;
 const InputAlamat = styled.textarea`
   width: 100%;
-  height: 120px; /* Set the height to 120px */
+  height: 120px; 
   max-width: 794px;
   font-family: Open Sans;
   font-size: 18px;
   font-style: normal;
   font-weight: 400;
-  line-height: 26px; /* 144.444% */
+  line-height: 26px;
   letter-spacing: -0.15px;
   flex-shrink: 1;
   padding: 18px 22px;
@@ -70,7 +70,7 @@ const InputAlamat = styled.textarea`
   border-radius: 8px;
   border: 1px solid var(--Neutral-05, #c2c2c2);
   background: var(--White, #fff);
-  resize: none; /* Disable resizing */
+  resize: none; 
   ::placeholder {
     color: var(
       --Neutral-06,
