@@ -2,55 +2,55 @@ import { BerandaButton } from '../../components/features/Beranda/beranda.button'
 import { BerandaHistory } from '../../components/features/Beranda/beranda.card.history';
 import { BerandaDestinasi } from '../../components/features/Beranda/beranda.card.destinasi';
 // import Navbar from '../../components/features/Beranda/beranda.navbar';
-import { TextField, styled, InputAdornment, Typography, Stack } from '@mui/material';
+import { Typography, Stack } from '@mui/material';
 import { BerandaRental } from '../../components/features/Beranda/beranda.card.maskapai';
 import React from 'react';
 
-const SearchInput = styled(TextField)(() => ({
-  height: '70px',
-  width: '763px',
-  '& .MuiOutlinedInput-root': {
-    borderRadius: '16px',
-    '&:hover fieldset': {
-      borderColor: 'white',
-      backgroundColor: 'white', 
-    },
-    '&.Mui-focused fieldset': {
-      borderColor: 'white',
-      backgroundColor: 'white',
-    },
-    '&.Mui-disabled fieldset': {
-      borderColor: 'white',
-      backgroundColor: 'white',
-    },
-    '& fieldset': {
-      borderColor: 'white',
-      backgroundColor: 'white',
-    },
-    '& .MuiInputBase-input': {
-      color: 'black',
-      zIndex: 1,
-    },
-    '& .MuiInputBase-input::placeholder': {
-      color: '#9E9E9E',
-      zIndex: 1, 
-    },
-    '& .MuiInputAdornment-root': {
-      zIndex: 1,
-      color: '#9E9E9E',
-    },
-  },
-}));
+// const SearchInput = styled(TextField)(() => ({
+//   height: '70px',
+//   width: '763px',
+//   '& .MuiOutlinedInput-root': {
+//     borderRadius: '16px',
+//     '&:hover fieldset': {
+//       borderColor: 'white',
+//       backgroundColor: 'white', 
+//     },
+//     '&.Mui-focused fieldset': {
+//       borderColor: 'white',
+//       backgroundColor: 'white',
+//     },
+//     '&.Mui-disabled fieldset': {
+//       borderColor: 'white',
+//       backgroundColor: 'white',
+//     },
+//     '& fieldset': {
+//       borderColor: 'white',
+//       backgroundColor: 'white',
+//     },
+//     '& .MuiInputBase-input': {
+//       color: 'black',
+//       zIndex: 1,
+//     },
+//     '& .MuiInputBase-input::placeholder': {
+//       color: '#9E9E9E',
+//       zIndex: 1, 
+//     },
+//     '& .MuiInputAdornment-root': {
+//       zIndex: 1,
+//       color: '#9E9E9E',
+//     },
+//   },
+// }));
 
 const Beranda = () => {
   return (
     <>
-    {/* <Navbar/> */}
+
     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
       <section style={styles.searchSection}>
      
         <div style={styles.searchContainer}>
-          <div style={{ marginBottom: '30px' }}>
+          {/* <div style={{ marginBottom: '30px' }}>
             <SearchInput
               name="search"
               placeholder="Cari"
@@ -62,7 +62,7 @@ const Beranda = () => {
                 </InputAdornment>,
               }}
             />
-          </div>
+          </div> */}
           <BerandaButton />
         </div>
       </section>
@@ -263,6 +263,7 @@ const styles: {
     width: '100%', 
     margin: '0',    
     padding: '0',    
+    marginTop: '-15px',
   },
   searchContainer: {
     display: 'flex',
