@@ -51,6 +51,7 @@ export default function Sidebar({ pathname }: SidebarProp) {
           />
           <Stack
             sx={{
+              cursor: 'pointer',
               '@media screen and (max-width: 600px)': {
                 display: 'none',
               },
