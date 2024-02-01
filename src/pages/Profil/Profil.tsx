@@ -1,6 +1,6 @@
 import { Container } from '@mui/material';
 import Sidebar from '../../components/shared/Profil/Sidebar';
-import  ChangeProfile  from '../../components/ui/ChangeProfile';
+import  ChangeProfile  from '../../components/features/Profil/ChangeProfile';
 import { Outlet, useLocation } from 'react-router-dom';
 
 
