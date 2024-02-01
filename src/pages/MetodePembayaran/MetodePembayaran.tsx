@@ -1,54 +1,80 @@
-import { Box, Grid, Typography, Container, Stack, Button, IconButton, Card, CardContent } from '@mui/material';
-import theme from '../../config/theme';
-import FlightDetailCard from '../../components/shared/Pemesanan/FlightDetailCard';
-import { useAppDispatch, useAppSelector } from '../../redux/hooks';
-import DaftarMetodePembayaran from '../../components/features/MetodePembayaran/DaftarMetodePembayaran';
-import ConfirmationNumberIcon from '@mui/icons-material/ConfirmationNumber';
-import { closeVoucherPopup, openVoucherPopup } from '../../redux/slices/MetodePembayaran';
-import Popup from '../../components/core/Popup';
-import FormVoucher from '../../components/features/MetodePembayaran/FormVoucher';
-import { useNavigate } from 'react-router-dom';
+import {
+  Box,
+  Grid,
+  Typography,
+  Container,
+  Stack,
+  Button,
+  IconButton,
+  Card,
+  CardContent,
+} from "@mui/material";
+import theme from "../../config/theme";
+import FlightDetailCard from "../../components/shared/Pemesanan/FlightDetailCard";
+import { useAppDispatch, useAppSelector } from "../../redux/hooks";
+import DaftarMetodePembayaran from "../../components/features/MetodePembayaran/DaftarMetodePembayaran";
+import ConfirmationNumberIcon from "@mui/icons-material/ConfirmationNumber";
+import {
+  closeVoucherPopup,
+  openVoucherPopup,
+} from "../../redux/slices/MetodePembayaran";
+// import Popup from "../../components/core/Popup";
+import PopupV2 from "../../components/core/PopupV2";
+import FormVoucher from "../../components/features/MetodePembayaran/FormVoucher";
+import { useNavigate } from "react-router-dom";
 
 export default function MetodePembayaran() {
-  const { voucherPopupOpened, selectedVoucher } = useAppSelector((state) => state.metodePembayaran);
+  const { voucherPopupOpened, selectedVoucher } = useAppSelector(
+    (state) => state.metodePembayaran
+  );
   const dispatch = useAppDispatch();
 
   const navigate = useNavigate();
 
   return (
     <>
-      <Container sx={{ paddingBlockEnd: '2rem' }}>
-        <Typography variant="h6" sx={{ fontWeight: 'bold' }}>
+      <Container sx={{ paddingBlockEnd: "2rem" }}>
+        <Typography variant="h6" sx={{ fontWeight: "bold" }}>
           Pilih Metode Pembayaran
         </Typography>
         <Grid container mt={0} spacing={2}>
           <Grid item md={6} xs={12}>
             {/* Payment Methods */}
-            <DaftarMetodePembayaran/>
-            
+            <DaftarMetodePembayaran />
+
             {/* Voucher Button */}
-            <Typography variant='h6' mt={2} mb={1}>Bayar Lebih Hemat!</Typography>
+            <Typography variant="h6" mt={2} mb={1}>
+              Bayar Lebih Hemat!
+            </Typography>
             <Card variant="outlined">
-              <CardContent sx={{ paddingX: 2, paddingY: 1, '&:last-child': {paddingY: 1} }}>
-                <Stack direction="row" alignItems={'center'}>
+              <CardContent
+                sx={{
+                  paddingX: 2,
+                  paddingY: 1,
+                  "&:last-child": { paddingY: 1 },
+                }}
+              >
+                <Stack direction="row" alignItems={"center"}>
                   <Typography flexGrow={1}>
-                    {selectedVoucher ? selectedVoucher.code : 'Pilih/Masukkan Voucher Disini'}
+                    {selectedVoucher
+                      ? selectedVoucher.code
+                      : "Pilih/Masukkan Voucher Disini"}
                   </Typography>
                   <IconButton onClick={() => dispatch(openVoucherPopup())}>
-                    <ConfirmationNumberIcon/>
+                    <ConfirmationNumberIcon />
                   </IconButton>
                 </Stack>
               </CardContent>
             </Card>
 
             {/* Voucher Modal */}
-            <Popup
-              title='Voucher'
+            <PopupV2
+              title="Voucher"
               open={voucherPopupOpened}
               onClose={() => dispatch(closeVoucherPopup())}
             >
-              <FormVoucher/>
-            </Popup>
+              <FormVoucher />
+            </PopupV2>
           </Grid>
 
           {/* Detail Penerbangan */}
@@ -67,21 +93,21 @@ export default function MetodePembayaran() {
                     variant="h5"
                     sx={{
                       background: theme.palette.gradients?.horizontal,
-                      backgroundClip: 'text',
-                      color: 'transparent',
-                      fontWeight: 'bold',
+                      backgroundClip: "text",
+                      color: "transparent",
+                      fontWeight: "bold",
                     }}
                   >
                     Rp 2.350.000
                   </Typography>
                 </Box>
-                <Box sx={{ width: '40%' }}>
+                <Box sx={{ width: "40%" }}>
                   <Button
                     variant="contained"
-                    onClick={() => navigate('/tata-cara-pembayaran')}
+                    onClick={() => navigate("/tata-cara-pembayaran")}
                     sx={{
                       background: theme.palette.gradients?.horizontal,
-                      width: '100%',
+                      width: "100%",
                     }}
                   >
                     Bayar
