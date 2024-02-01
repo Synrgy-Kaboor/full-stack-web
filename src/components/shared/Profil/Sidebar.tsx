@@ -1,18 +1,18 @@
-import { Divider, Stack, Typography, useTheme } from '@mui/material';
+import { Divider, Stack, Typography, useTheme, Avatar } from '@mui/material';
 import { sideBarItem1, exitItem } from '.';
-import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import profileImg from '../../../assets/profile-img.svg';
 
-export default function Sidebar() {
+interface SidebarProp {
+  pathname: string;
+}
+export default function Sidebar({ pathname }: SidebarProp) {
   const navigate = useNavigate();
   const filterIcon =
     'brightness(0) invert(1) sepia(0) saturate(0) hue-rotate(0deg)';
   const theme = useTheme();
-  const [selectedItem, setSelectedItem] = useState<number | null>(null);
-
+  console.log({ path: pathname });
   const handleListItemClick = (index: number) => {
-    setSelectedItem(index);
     navigate(`/profil${sideBarItem1[index].route}`);
   };
   return (
@@ -37,8 +37,25 @@ export default function Sidebar() {
           alignItems={'center'}
           padding={'30px 26px 20px 26px'}
         >
-          <img src={profileImg} alt='ava' width={'70px'} height={'70px'} />
-          <Stack>
+          <Avatar
+            alt='user-avatar'
+            src={profileImg}
+            sx={{
+              width: '70px',
+              height: '70px',
+              '@media screen and (max-width: 600px)': {
+                width: '50px',
+                height: '50px',
+              },
+            }}
+          />
+          <Stack
+            sx={{
+              '@media screen and (max-width: 600px)': {
+                display: 'none',
+              },
+            }}
+          >
             <Typography variant='h6'>Andre Huston</Typography>
             <Typography variant='body2' color={'#9E9E9E'}>
               informasi pribadi 16% lengkap
@@ -58,7 +75,7 @@ export default function Sidebar() {
                 cursor: 'pointer',
                 width: '100%',
                 backgroundColor:
-                  selectedItem === index
+                  pathname === `/profil${sideBarItem1[index].route}`
                     ? theme.palette.primary.main
                     : 'transparent',
               }}
@@ -71,16 +88,27 @@ export default function Sidebar() {
                 alt=''
                 width={'32px'}
                 height={'32px'}
-                style={{ filter: selectedItem === index ? filterIcon : 'none' }}
+                style={{
+                  filter:
+                    pathname === `/profil${sideBarItem1[index].route}`
+                      ? filterIcon
+                      : 'none',
+                }}
               />
               <Typography
                 variant='body2'
                 sx={{
-                  color: selectedItem === index ? '#ffffff' : '#505050',
+                  color:
+                    pathname === `/profil${sideBarItem1[index].route}`
+                      ? '#ffffff'
+                      : '#505050',
                   fontSize: '18px',
                   fontWeight: 400,
                   lineHeight: '26px',
                   letterSpacing: '-0.15px',
+                  '@media screen and (max-width: 600px)': {
+                    display: 'none',
+                  },
                 }}
               >
                 {data.text}
@@ -98,7 +126,7 @@ export default function Sidebar() {
                   cursor: 'pointer',
                   width: '100%',
                   backgroundColor:
-                    selectedItem === index
+                    pathname === `/profil${sideBarItem1[index].route}`
                       ? theme.palette.primary.main
                       : 'transparent',
                 }}
@@ -112,17 +140,26 @@ export default function Sidebar() {
                   width={'32px'}
                   height={'32px'}
                   style={{
-                    filter: selectedItem === index ? filterIcon : 'none',
+                    filter:
+                      pathname === `/profil${sideBarItem1[index].route}`
+                        ? filterIcon
+                        : 'none',
                   }}
                 />
                 <Typography
                   variant='body2'
                   sx={{
-                    color: selectedItem === index ? '#ffffff' : '#505050',
+                    color:
+                      pathname === `/profil${sideBarItem1[index].route}`
+                        ? '#ffffff'
+                        : '#505050',
                     fontSize: '18px',
                     fontWeight: 400,
                     lineHeight: '26px',
                     letterSpacing: '-0.15px',
+                    '@media screen and (max-width: 600px)': {
+                      display: 'none',
+                    },
                   }}
                 >
                   {data.text}
@@ -157,6 +194,9 @@ export default function Sidebar() {
               fontWeight: 400,
               lineHeight: '26px',
               letterSpacing: '-0.15px',
+              '@media screen and (max-width: 600px)': {
+                display: 'none',
+              },
             }}
           >
             {exitItem.text}
