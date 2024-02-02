@@ -6,7 +6,7 @@ import CardMedia from '@mui/material/CardMedia';
 import { CardActionArea } from '@mui/material';
 import stargold from '../../../assets/star-on.png';
 import stargray from '../../../assets/star-off.png';
-import card from "../../../assets/cardberanda.png";
+import card from '../../../assets/cardberanda.png';
 const generateStars = (rating: number) => {
   const fullStars = Math.floor(rating);
   const halfStar = rating % 1 !== 0;
