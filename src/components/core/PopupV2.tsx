@@ -8,9 +8,9 @@ import {
   DialogTitle,
   DialogContent,
   Stack,
-} from "@mui/material";
-import { ReactElement } from "react";
-import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
+} from '@mui/material';
+import { ReactElement } from 'react';
+import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 
 export default function PopupV2(props: {
   title: string;
@@ -25,13 +25,13 @@ export default function PopupV2(props: {
           <ArrowBackIosNewIcon
             onClick={props.onClose}
             sx={{
-              position: "absolute",
+              position: 'absolute',
               left: 20,
               top: 20,
-              "&:hover": { cursor: "pointer" },
+              '&:hover': { cursor: 'pointer' },
             }}
           />
-          <Typography variant="h5" sx={{ fontWeight: "bold" }}>
+          <Typography variant="h5" sx={{ fontWeight: 'bold' }}>
             {props.title}
           </Typography>
         </Stack>

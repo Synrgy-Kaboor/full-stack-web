@@ -9,22 +9,22 @@ import {
   Divider,
   CardActions,
   Box,
-} from "@mui/material";
+} from '@mui/material';
 
-import ConfirmationNumberOutlinedIcon from "@mui/icons-material/ConfirmationNumberOutlined";
-import VerifiedOutlinedIcon from "@mui/icons-material/VerifiedOutlined";
+import ConfirmationNumberOutlinedIcon from '@mui/icons-material/ConfirmationNumberOutlined';
+import VerifiedOutlinedIcon from '@mui/icons-material/VerifiedOutlined';
 
-import { vouchers } from "../../../data/voucher";
-import { Voucher } from "../../../types/Voucher";
+import { vouchers } from '../../../data/voucher';
+import { Voucher } from '../../../types/Voucher';
 
-import { useState, useEffect } from "react";
+import { useState } from 'react';
 
 function PromoCard({ discountPercent, code, desc, timeLimit }: Voucher) {
   return (
     <Card
       sx={{
-        "&:hover": {
-          cursor: "pointer",
+        '&:hover': {
+          cursor: 'pointer',
         },
       }}
     >
@@ -37,7 +37,7 @@ function PromoCard({ discountPercent, code, desc, timeLimit }: Voucher) {
           p={2}
           spacing={1}
         >
-          <VerifiedOutlinedIcon sx={{ color: "white" }} />
+          <VerifiedOutlinedIcon sx={{ color: 'white' }} />
           <Typography color="white" fontWeight="bold">
             Voucher Promo
           </Typography>
@@ -72,7 +72,7 @@ function PromoCard({ discountPercent, code, desc, timeLimit }: Voucher) {
             display="inline"
             color="primary.main"
             my={1}
-            sx={{ "&:hover": { cursor: "pointer" } }}
+            sx={{ '&:hover': { cursor: 'pointer' } }}
           >
             S&K Berlaku
           </Typography>
@@ -92,17 +92,23 @@ function PromoCard({ discountPercent, code, desc, timeLimit }: Voucher) {
 }
 
 export default function FormVoucher() {
-  const [inputVoucher, setInputVoucher] = useState<string>("");
+  const [voucherQuery, setVoucherQuery] = useState<string>('');
   const [listVouchers, setListVouchers] = useState<Voucher[]>(vouchers);
 
-  useEffect(() => {
-    setListVouchers(
-      vouchers.filter((voucher) => {
-        return voucher.code === inputVoucher;
-      })
-    );
-    // console.log(listVouchers);
-  }, [inputVoucher]);
+  const handleVoucherSearch = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    const query = e.target.value;
+    setVoucherQuery(query);
+
+    const promoList = vouchers.filter((voucher) => {
+      return (
+        voucher.code.toLowerCase().indexOf(query.toLocaleLowerCase()) !== -1
+      );
+    });
+
+    setListVouchers(promoList);
+  };
 
   return (
     <>
@@ -114,18 +120,25 @@ export default function FormVoucher() {
           placeholder="Pilih/Masukkan Voucher Disini"
           endAdornment={
             <InputAdornment position="end">
-              <ConfirmationNumberOutlinedIcon sx={{ color: "gray" }} />
+              <ConfirmationNumberOutlinedIcon sx={{ color: 'gray' }} />
             </InputAdornment>
           }
-          onChange={(e) => setInputVoucher(e.target.value)}
+          value={voucherQuery}
+          onChange={(e) => {
+            handleVoucherSearch(e);
+          }}
         />
         <Typography variant="h6" fontWeight="bold" pt={2} gutterBottom>
           Pilih Promo Buat Transaksimu
         </Typography>
+        {/* <Typography>{inputVoucher}</Typography> */}
+        {/* {inputVoucher === "TEMANKABOOR" && (
+          <Typography>Masok pak eko</Typography>
+        )} */}
         <Stack spacing={2}>
           {listVouchers.length > 0 ? (
-            listVouchers.map((voucher) => (
-              <PromoCard key={+new Date()} {...voucher} />
+            listVouchers.map((voucher, index) => (
+              <PromoCard key={index} {...voucher} />
             ))
           ) : (
             <Stack justifyContent="center" alignItems="center" p={2}>
