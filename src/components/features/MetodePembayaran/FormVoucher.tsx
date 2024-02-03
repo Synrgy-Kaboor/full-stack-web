@@ -27,6 +27,7 @@ function PromoCard({ discountPercent, code, desc, timeLimit }: Voucher) {
           cursor: 'pointer',
         },
       }}
+      onClick={() => alert('Promo Clicked')}
     >
       <CardContent sx={{ padding: 0 }}>
         {/* Card Title */}
@@ -67,17 +68,23 @@ function PromoCard({ discountPercent, code, desc, timeLimit }: Voucher) {
           <Typography color="gray" variant="body2">
             Berlaku untuk semua metode pembayaran
           </Typography>
+        </Stack>
+
+        <Box px={2} pb={2}>
           <Typography
             variant="body2"
             display="inline"
             color="primary.main"
             my={1}
             sx={{ '&:hover': { cursor: 'pointer' } }}
+            onClick={(e) => {
+              e.stopPropagation();
+              alert('S&K');
+            }}
           >
             S&K Berlaku
           </Typography>
-        </Stack>
-
+        </Box>
         <Divider />
       </CardContent>
       <CardActions sx={{ padding: 0 }}>
@@ -131,10 +138,6 @@ export default function FormVoucher() {
         <Typography variant="h6" fontWeight="bold" pt={2} gutterBottom>
           Pilih Promo Buat Transaksimu
         </Typography>
-        {/* <Typography>{inputVoucher}</Typography> */}
-        {/* {inputVoucher === "TEMANKABOOR" && (
-          <Typography>Masok pak eko</Typography>
-        )} */}
         <Stack spacing={2}>
           {listVouchers.length > 0 ? (
             listVouchers.map((voucher, index) => (
