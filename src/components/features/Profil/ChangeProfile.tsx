@@ -98,24 +98,26 @@ const SmallImage = styled.img`
 export default function ChangeProfile() {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    const avatar = e.currentTarget.avatar.files[0];
     const title = e.currentTarget.userTitle.value;
-    const name = e.currentTarget.userName.value;
+    const fullName = e.currentTarget.userName.value;
     const gender = e.currentTarget.gender.value;
-    const dateOfBirth = e.currentTarget.dateOfBirth.value;
+    const birthday = e.currentTarget.dateOfBirth.value;
     const country = e.currentTarget.country.value;
     const city = e.currentTarget.city.value;
     const address = e.currentTarget.address.value;
-    const citizen = e.currentTarget.citizen.value;
+    const isWni = e.currentTarget.citizen.value === 'WNI' ? true : false;
 
     const payload = {
       title,
-      name,
+      fullName,
       gender,
-      dateOfBirth,
+      birthday,
       country,
       city,
       address,
-      citizen,
+      isWni,
+      avatar,
     };
     console.log(payload);
   };
@@ -147,30 +149,38 @@ export default function ChangeProfile() {
         >
           Informasi Pribadi
         </Typography>
-
-        <Stack
-          direction={'column'}
-          alignItems={'center'}
-          sx={{ width: '100%', marginBottom: '16px' }}
-          gap={1}
-        >
-          <Typography
-            sx={{
-              color: '#505050',
-              fontFamily: 'Open Sans',
-              fontSize: '20px',
-              fontWeight: 600,
-              letterSpacing: '-0.75px',
-            }}
-          >
-            Foto Profil
-          </Typography>
-          <Stack alignItems={'flex-end'}>
-            <RoundImage src={profile} alt='Round Image' />
-            <SmallImage src={camera} alt='Round Image' />
-          </Stack>
-        </Stack>
         <form onSubmit={handleSubmit} style={{ width: '100%' }}>
+          <Stack
+            direction={'column'}
+            alignItems={'center'}
+            sx={{ width: '100%', marginBottom: '16px' }}
+            gap={1}
+          >
+            <Typography
+              sx={{
+                color: '#505050',
+                fontFamily: 'Open Sans',
+                fontSize: '20px',
+                fontWeight: 600,
+                letterSpacing: '-0.75px',
+              }}
+            >
+              Foto Profil
+            </Typography>
+            <Stack alignItems={'flex-end'}>
+              <RoundImage src={profile} alt='Round Image' />
+              <label htmlFor='avatar'>
+                <SmallImage src={camera} alt='Round Image' />
+              </label>
+              <input
+                type='file'
+                accept='image/png, image/jpeg'
+                name='avatar'
+                id='avatar'
+                style={{ display: 'none' }}
+              />
+            </Stack>
+          </Stack>
           <Stack
             direction={'column'}
             alignItems={'stretch'}
@@ -195,8 +205,6 @@ export default function ChangeProfile() {
               <option value='Mr'>Mr</option>
               <option value='Mrs'>Mrs</option>
               <option value='Ms'>Ms</option>
-              <option value='Dr'>Dr</option>
-              <option value='Prof'>Prof</option>
             </Select>
           </Stack>
           <Stack
@@ -239,9 +247,9 @@ export default function ChangeProfile() {
               <option value='' disabled selected hidden>
                 Pilih Jenis Kelamin
               </option>
-              <option value='Mr'>Pria</option>
-              <option value='Mrs'>Wanita</option>
-              <option value='Ms'>Lainnya</option>
+              <option value='L'>Pria</option>
+              <option value='P'>Wanita</option>
+              <option value='Lainnya'>Lainnya</option>
             </Select>
           </Stack>
           <Stack

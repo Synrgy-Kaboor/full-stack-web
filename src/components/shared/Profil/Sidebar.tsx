@@ -75,10 +75,11 @@ export default function Sidebar({ pathname }: SidebarProp) {
                 padding: '10px 45px',
                 cursor: 'pointer',
                 width: '100%',
-                backgroundColor:
-                  pathname === `/profil${sideBarItem1[index].route}`
-                    ? theme.palette.primary.main
-                    : 'transparent',
+                backgroundColor: pathname.includes(
+                  `/profil${sideBarItem1[index].route}`
+                )
+                  ? theme.palette.primary.main
+                  : 'transparent',
               }}
               onClick={() => {
                 handleListItemClick(index);
@@ -90,19 +91,21 @@ export default function Sidebar({ pathname }: SidebarProp) {
                 width={'32px'}
                 height={'32px'}
                 style={{
-                  filter:
-                    pathname === `/profil${sideBarItem1[index].route}`
-                      ? filterIcon
-                      : 'none',
+                  filter: pathname.includes(
+                    `/profil${sideBarItem1[index].route}`
+                  )
+                    ? filterIcon
+                    : 'none',
                 }}
               />
               <Typography
                 variant='body2'
                 sx={{
-                  color:
-                    pathname === `/profil${sideBarItem1[index].route}`
-                      ? '#ffffff'
-                      : '#505050',
+                  color: pathname.includes(
+                    `/profil${sideBarItem1[index].route}`
+                  )
+                    ? '#ffffff'
+                    : '#505050',
                   fontSize: '18px',
                   fontWeight: 400,
                   lineHeight: '26px',
@@ -126,10 +129,11 @@ export default function Sidebar({ pathname }: SidebarProp) {
                   padding: '10px 45px',
                   cursor: 'pointer',
                   width: '100%',
-                  backgroundColor:
-                    pathname === `/profil${sideBarItem1[index].route}`
-                      ? theme.palette.primary.main
-                      : 'transparent',
+                  backgroundColor: pathname.includes(
+                    `/profil${sideBarItem1[index].route}`
+                  )
+                    ? theme.palette.primary.main
+                    : 'transparent',
                 }}
                 onClick={() => {
                   handleListItemClick(index);
@@ -141,19 +145,21 @@ export default function Sidebar({ pathname }: SidebarProp) {
                   width={'32px'}
                   height={'32px'}
                   style={{
-                    filter:
-                      pathname === `/profil${sideBarItem1[index].route}`
-                        ? filterIcon
-                        : 'none',
+                    filter: pathname.includes(
+                      `/profil${sideBarItem1[index].route}`
+                    )
+                      ? filterIcon
+                      : 'none',
                   }}
                 />
                 <Typography
                   variant='body2'
                   sx={{
-                    color:
-                      pathname === `/profil${sideBarItem1[index].route}`
-                        ? '#ffffff'
-                        : '#505050',
+                    color: pathname.includes(
+                      `/profil${sideBarItem1[index].route}`
+                    )
+                      ? '#ffffff'
+                      : '#505050',
                     fontSize: '18px',
                     fontWeight: 400,
                     lineHeight: '26px',
