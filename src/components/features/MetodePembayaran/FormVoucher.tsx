@@ -1,7 +1,6 @@
 import {
   Stack,
   Typography,
-  // Container,
   OutlinedInput,
   InputAdornment,
   Card,
@@ -14,12 +13,38 @@ import {
 import ConfirmationNumberOutlinedIcon from '@mui/icons-material/ConfirmationNumberOutlined';
 import VerifiedOutlinedIcon from '@mui/icons-material/VerifiedOutlined';
 
-import { vouchers } from '../../../data/voucher';
+import { vouchers } from '../../../data/vouchers';
 import { Voucher } from '../../../types/Voucher';
 
 import { useState } from 'react';
 
-function PromoCard({ discountPercent, code, desc, timeLimit }: Voucher) {
+function PromoCard({ maxDiscount, code, desc, timeLimit }: Voucher) {
+  function formatPriceToIDR(price: number) {
+    const rupiah = new Intl.NumberFormat('en-ID', {
+      style: 'currency',
+      currency: 'IDR',
+      maximumSignificantDigits: 3,
+    });
+
+    return rupiah.format(price);
+  }
+
+  function calculateDuration(timeLimit: Date) {
+    if (timeLimit < new Date()) {
+      return 'Promo sudah berakhir';
+    } else {
+      const diffTime = Math.abs(timeLimit.valueOf() - new Date().valueOf());
+      const diffHours = Math.ceil(diffTime / (1000 * 60 * 60));
+
+      if (diffHours > 24) {
+        const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+        return `Promo berakhir dalam ${diffDays} hari`;
+      } else {
+        return `Promo berakhir dalam ${diffHours} jam`;
+      }
+    }
+  }
+
   return (
     <Card
       sx={{
@@ -53,7 +78,7 @@ function PromoCard({ discountPercent, code, desc, timeLimit }: Voucher) {
             borderRadius={8}
             p={1}
           >
-            Hemat IDR {discountPercent}
+            Hemat {formatPriceToIDR(maxDiscount)}
           </Typography>
         </Box>
         {/* Card Content */}
@@ -90,7 +115,7 @@ function PromoCard({ discountPercent, code, desc, timeLimit }: Voucher) {
       <CardActions sx={{ padding: 0 }}>
         <Stack py={1} px={2}>
           <Typography color="red" variant="body2">
-            Promo Berakhir dalam {timeLimit.toString()} Jam
+            {calculateDuration(timeLimit)}
           </Typography>
         </Stack>
       </CardActions>
