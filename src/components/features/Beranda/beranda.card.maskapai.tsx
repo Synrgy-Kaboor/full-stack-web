@@ -4,7 +4,9 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import { CardActionArea } from '@mui/material';
-
+import stargold from '../../../assets/star-on.png';
+import stargray from '../../../assets/star-off.png';
+import card from '../../../assets/cardberanda.png';
 const generateStars = (rating: number) => {
   const fullStars = Math.floor(rating);
   const halfStar = rating % 1 !== 0;
@@ -16,7 +18,7 @@ const generateStars = (rating: number) => {
     stars.push(
       <img
         key={`star-${i}`}
-        src="https://s3-alpha-sig.figma.com/img/1374/530e/4b9bd61ddb1f4c2b7931ee05e8e62d29?Expires=1705881600&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=JMUl5bNnL4a6fgr50lnIzJGpWox0xyf4drlzpilRgIMrgmXarCRAs13t~6~K7APCESBOyY~OTtQryQA1TNLadn-UmTXXKZmzOqwYqWCAHg32XvkJN1bx57HHXg5Dk-pgBArpWooPTeOgmUX5tGW~UAiRUCmZBiCj7mXumfcw3rHTX3QfA0SCcMq8KNSm34SyWdju31rxrUNLf76H~dKDLcnOGB9mg~n-GCKdrY-3A~2fkw2XpHqmZTFzvhrKrHDO1D5tvovZpcTXUEq9Wv2KpTdvKmFjM0SmwvI9c5UwZ-PuC-fRqsnTE~GX2ChdOFBUwkFiwgWihzIheJYOI2aWtQ__"
+        src={stargold}        
         alt="Gold Star"
         style={{ width: '14px', height: '14px' }}
       />
@@ -27,7 +29,7 @@ const generateStars = (rating: number) => {
     stars.push(
       <img
         key="half-star"
-        src="https://s3-alpha-sig.figma.com/img/17d8/5b98/cd8d6dc4f62bfddc7d58d021bcaba214?Expires=1705881600&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=AFv-wPQUf3LtmmLDaLDUZU272FaMAi1AzxqpsR78zOnLe4PgWg-YixYv3sb5tgC7InSDvP7LErdvxVzv1WZJliiv8YSRlhQBt5z~0jpJT1XCusSyNKiDMh7wDb8cZwnTUw1AdBDvaTb4-vXC23Tw3TWnZyITmm70DiHcFtsFEX4oL-IlSNh2z6B6aZFWbTKs8SU4yPlxjb7s4UnyQaR7ATglmMhZoIcKPJGAaCeRuhY~OdG2Xynbz~s9h0-SOxWVQ2elpVytGeoCR7uQwynEpmOdAZhF3qgGY0ahNjEy8R0Pt~SrSPHcG8yO5NZqM-wlYbWTxCXzvPkjK-3y2DwdRQ__"
+        src={stargray}//belum ada            
         alt="Half Star"
         style={{ width: '14px', height: '14px' }}
       />
@@ -38,7 +40,7 @@ const generateStars = (rating: number) => {
     stars.push(
       <img
         key={`empty-star-${i}`}
-        src="https://s3-alpha-sig.figma.com/img/17d8/5b98/cd8d6dc4f62bfddc7d58d021bcaba214?Expires=1705881600&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=AFv-wPQUf3LtmmLDaLDUZU272FaMAi1AzxqpsR78zOnLe4PgWg-YixYv3sb5tgC7InSDvP7LErdvxVzv1WZJliiv8YSRlhQBt5z~0jpJT1XCusSyNKiDMh7wDb8cZwnTUw1AdBDvaTb4-vXC23Tw3TWnZyITmm70DiHcFtsFEX4oL-IlSNh2z6B6aZFWbTKs8SU4yPlxjb7s4UnyQaR7ATglmMhZoIcKPJGAaCeRuhY~OdG2Xynbz~s9h0-SOxWVQ2elpVytGeoCR7uQwynEpmOdAZhF3qgGY0ahNjEy8R0Pt~SrSPHcG8yO5NZqM-wlYbWTxCXzvPkjK-3y2DwdRQ__"
+        src={stargray}//belum ada             
         alt="Empty Star"
         style={{ width: '14px', height: '14px' }}
       />
@@ -153,7 +155,7 @@ const BerandaRentalCard = ({ imageUrl, text, genre, price, rating, review }: { i
 export const BerandaRental = () => {//data dummy 
   const [historyItems] = React.useState([
     {
-      imageUrl: 'https://s3-alpha-sig.figma.com/img/4409/b092/1970fcd74b74e1b8edd396bc9c03ba34?Expires=1705881600&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=GdgZpcNIGlIy7F5VgO62LU6aRCk-ETpIP0FXipVRyvYGgILGnUlPfB8r-C-FPu6WLfNbECXn2VNsUfqq-nhRY9QHWKmn8G23BR7anVqN9jsbwjfZexdvcPrJ-SHZyhtogpzj~~M2fUdJSOpETjYSy~yvWbocDCgWpWl4yau-sotiZQkxpdI~BBe77wxuZTpJYeli-293aMFjc7obgci9EwPpemuvrhQKEbIOqin4PGVYLDI7vo15v8AbJVTgETkc5PiMQTrMZkhEjKzuy34d-scg~vu7xmffJm9sc4wF9kBr86B8fWlQ50UCTV3dVQhEcWlCMiv8T3xKXpB6g3qosg__',
+      imageUrl: card,
       text: 'Toyota yariz',
       genre: 'Ekonomi',
       price: '1.000.000',
@@ -161,7 +163,7 @@ export const BerandaRental = () => {//data dummy
       review: '23',
     },
     {
-      imageUrl: 'https://s3-alpha-sig.figma.com/img/4409/b092/1970fcd74b74e1b8edd396bc9c03ba34?Expires=1705881600&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=GdgZpcNIGlIy7F5VgO62LU6aRCk-ETpIP0FXipVRyvYGgILGnUlPfB8r-C-FPu6WLfNbECXn2VNsUfqq-nhRY9QHWKmn8G23BR7anVqN9jsbwjfZexdvcPrJ-SHZyhtogpzj~~M2fUdJSOpETjYSy~yvWbocDCgWpWl4yau-sotiZQkxpdI~BBe77wxuZTpJYeli-293aMFjc7obgci9EwPpemuvrhQKEbIOqin4PGVYLDI7vo15v8AbJVTgETkc5PiMQTrMZkhEjKzuy34d-scg~vu7xmffJm9sc4wF9kBr86B8fWlQ50UCTV3dVQhEcWlCMiv8T3xKXpB6g3qosg__',
+      imageUrl: card,      
       text: 'Super Jet Air',
       genre: 'Ekonomi',
       price: '200.000',
@@ -169,7 +171,7 @@ export const BerandaRental = () => {//data dummy
       review: '23',
     },
     {
-      imageUrl: 'https://s3-alpha-sig.figma.com/img/4409/b092/1970fcd74b74e1b8edd396bc9c03ba34?Expires=1705881600&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=GdgZpcNIGlIy7F5VgO62LU6aRCk-ETpIP0FXipVRyvYGgILGnUlPfB8r-C-FPu6WLfNbECXn2VNsUfqq-nhRY9QHWKmn8G23BR7anVqN9jsbwjfZexdvcPrJ-SHZyhtogpzj~~M2fUdJSOpETjYSy~yvWbocDCgWpWl4yau-sotiZQkxpdI~BBe77wxuZTpJYeli-293aMFjc7obgci9EwPpemuvrhQKEbIOqin4PGVYLDI7vo15v8AbJVTgETkc5PiMQTrMZkhEjKzuy34d-scg~vu7xmffJm9sc4wF9kBr86B8fWlQ50UCTV3dVQhEcWlCMiv8T3xKXpB6g3qosg__',
+      imageUrl: card,      
       text: 'Lion Air',
       genre: 'Ekonomi',
       price: '400.000',
@@ -177,7 +179,7 @@ export const BerandaRental = () => {//data dummy
       review: '23',
     },
     {
-      imageUrl: 'https://s3-alpha-sig.figma.com/img/4409/b092/1970fcd74b74e1b8edd396bc9c03ba34?Expires=1705881600&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=GdgZpcNIGlIy7F5VgO62LU6aRCk-ETpIP0FXipVRyvYGgILGnUlPfB8r-C-FPu6WLfNbECXn2VNsUfqq-nhRY9QHWKmn8G23BR7anVqN9jsbwjfZexdvcPrJ-SHZyhtogpzj~~M2fUdJSOpETjYSy~yvWbocDCgWpWl4yau-sotiZQkxpdI~BBe77wxuZTpJYeli-293aMFjc7obgci9EwPpemuvrhQKEbIOqin4PGVYLDI7vo15v8AbJVTgETkc5PiMQTrMZkhEjKzuy34d-scg~vu7xmffJm9sc4wF9kBr86B8fWlQ50UCTV3dVQhEcWlCMiv8T3xKXpB6g3qosg__',
+      imageUrl: card,      
       text: 'Garuda Air',
       genre: 'Ekonomi',
       price: '1.000.000',
@@ -185,7 +187,7 @@ export const BerandaRental = () => {//data dummy
       review: '23',
     },
     {
-      imageUrl: 'https://s3-alpha-sig.figma.com/img/4409/b092/1970fcd74b74e1b8edd396bc9c03ba34?Expires=1705881600&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=GdgZpcNIGlIy7F5VgO62LU6aRCk-ETpIP0FXipVRyvYGgILGnUlPfB8r-C-FPu6WLfNbECXn2VNsUfqq-nhRY9QHWKmn8G23BR7anVqN9jsbwjfZexdvcPrJ-SHZyhtogpzj~~M2fUdJSOpETjYSy~yvWbocDCgWpWl4yau-sotiZQkxpdI~BBe77wxuZTpJYeli-293aMFjc7obgci9EwPpemuvrhQKEbIOqin4PGVYLDI7vo15v8AbJVTgETkc5PiMQTrMZkhEjKzuy34d-scg~vu7xmffJm9sc4wF9kBr86B8fWlQ50UCTV3dVQhEcWlCMiv8T3xKXpB6g3qosg__',
+      imageUrl: card,      
       text: 'Garuda Air',
       genre: 'Ekonomi',
       price: '200.000',
@@ -193,7 +195,7 @@ export const BerandaRental = () => {//data dummy
       review: '23',
     },
     {
-      imageUrl: 'https://s3-alpha-sig.figma.com/img/4409/b092/1970fcd74b74e1b8edd396bc9c03ba34?Expires=1705881600&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=GdgZpcNIGlIy7F5VgO62LU6aRCk-ETpIP0FXipVRyvYGgILGnUlPfB8r-C-FPu6WLfNbECXn2VNsUfqq-nhRY9QHWKmn8G23BR7anVqN9jsbwjfZexdvcPrJ-SHZyhtogpzj~~M2fUdJSOpETjYSy~yvWbocDCgWpWl4yau-sotiZQkxpdI~BBe77wxuZTpJYeli-293aMFjc7obgci9EwPpemuvrhQKEbIOqin4PGVYLDI7vo15v8AbJVTgETkc5PiMQTrMZkhEjKzuy34d-scg~vu7xmffJm9sc4wF9kBr86B8fWlQ50UCTV3dVQhEcWlCMiv8T3xKXpB6g3qosg__',
+      imageUrl: card,      
       text: 'Garuda Air',
       genre: 'Ekonomi',
       price: '400.000',
@@ -201,7 +203,7 @@ export const BerandaRental = () => {//data dummy
       review: '23',
     },
     {
-      imageUrl: 'https://s3-alpha-sig.figma.com/img/4409/b092/1970fcd74b74e1b8edd396bc9c03ba34?Expires=1705881600&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=GdgZpcNIGlIy7F5VgO62LU6aRCk-ETpIP0FXipVRyvYGgILGnUlPfB8r-C-FPu6WLfNbECXn2VNsUfqq-nhRY9QHWKmn8G23BR7anVqN9jsbwjfZexdvcPrJ-SHZyhtogpzj~~M2fUdJSOpETjYSy~yvWbocDCgWpWl4yau-sotiZQkxpdI~BBe77wxuZTpJYeli-293aMFjc7obgci9EwPpemuvrhQKEbIOqin4PGVYLDI7vo15v8AbJVTgETkc5PiMQTrMZkhEjKzuy34d-scg~vu7xmffJm9sc4wF9kBr86B8fWlQ50UCTV3dVQhEcWlCMiv8T3xKXpB6g3qosg__',
+      imageUrl: card,      
       text: 'Yaris',
       genre: 'Ekonomi',
       price: '200.000',
@@ -209,7 +211,7 @@ export const BerandaRental = () => {//data dummy
       review: '23',
     },
     {
-      imageUrl: 'https://s3-alpha-sig.figma.com/img/4409/b092/1970fcd74b74e1b8edd396bc9c03ba34?Expires=1705881600&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=GdgZpcNIGlIy7F5VgO62LU6aRCk-ETpIP0FXipVRyvYGgILGnUlPfB8r-C-FPu6WLfNbECXn2VNsUfqq-nhRY9QHWKmn8G23BR7anVqN9jsbwjfZexdvcPrJ-SHZyhtogpzj~~M2fUdJSOpETjYSy~yvWbocDCgWpWl4yau-sotiZQkxpdI~BBe77wxuZTpJYeli-293aMFjc7obgci9EwPpemuvrhQKEbIOqin4PGVYLDI7vo15v8AbJVTgETkc5PiMQTrMZkhEjKzuy34d-scg~vu7xmffJm9sc4wF9kBr86B8fWlQ50UCTV3dVQhEcWlCMiv8T3xKXpB6g3qosg__',
+      imageUrl: card,      
       text: 'Yaris',
       genre: 'Ekonomi',
       price: '400.000',
@@ -217,7 +219,7 @@ export const BerandaRental = () => {//data dummy
       review: '23',
     },
     {
-      imageUrl: 'https://s3-alpha-sig.figma.com/img/4409/b092/1970fcd74b74e1b8edd396bc9c03ba34?Expires=1705881600&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=GdgZpcNIGlIy7F5VgO62LU6aRCk-ETpIP0FXipVRyvYGgILGnUlPfB8r-C-FPu6WLfNbECXn2VNsUfqq-nhRY9QHWKmn8G23BR7anVqN9jsbwjfZexdvcPrJ-SHZyhtogpzj~~M2fUdJSOpETjYSy~yvWbocDCgWpWl4yau-sotiZQkxpdI~BBe77wxuZTpJYeli-293aMFjc7obgci9EwPpemuvrhQKEbIOqin4PGVYLDI7vo15v8AbJVTgETkc5PiMQTrMZkhEjKzuy34d-scg~vu7xmffJm9sc4wF9kBr86B8fWlQ50UCTV3dVQhEcWlCMiv8T3xKXpB6g3qosg__',
+      imageUrl: card,      
       text: 'Yaris',
       genre: 'Ekonomi',
       price: '1.000.000',
@@ -225,7 +227,7 @@ export const BerandaRental = () => {//data dummy
       review: '23',
     },
     {
-      imageUrl: 'https://s3-alpha-sig.figma.com/img/4409/b092/1970fcd74b74e1b8edd396bc9c03ba34?Expires=1705881600&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=GdgZpcNIGlIy7F5VgO62LU6aRCk-ETpIP0FXipVRyvYGgILGnUlPfB8r-C-FPu6WLfNbECXn2VNsUfqq-nhRY9QHWKmn8G23BR7anVqN9jsbwjfZexdvcPrJ-SHZyhtogpzj~~M2fUdJSOpETjYSy~yvWbocDCgWpWl4yau-sotiZQkxpdI~BBe77wxuZTpJYeli-293aMFjc7obgci9EwPpemuvrhQKEbIOqin4PGVYLDI7vo15v8AbJVTgETkc5PiMQTrMZkhEjKzuy34d-scg~vu7xmffJm9sc4wF9kBr86B8fWlQ50UCTV3dVQhEcWlCMiv8T3xKXpB6g3qosg__',
+      imageUrl: card,      
       text: 'Yaris',
       genre: 'Ekonomi',
       price: '200.000',
@@ -233,7 +235,7 @@ export const BerandaRental = () => {//data dummy
       review: '23',
     },
     {
-      imageUrl: 'https://s3-alpha-sig.figma.com/img/4409/b092/1970fcd74b74e1b8edd396bc9c03ba34?Expires=1705881600&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=GdgZpcNIGlIy7F5VgO62LU6aRCk-ETpIP0FXipVRyvYGgILGnUlPfB8r-C-FPu6WLfNbECXn2VNsUfqq-nhRY9QHWKmn8G23BR7anVqN9jsbwjfZexdvcPrJ-SHZyhtogpzj~~M2fUdJSOpETjYSy~yvWbocDCgWpWl4yau-sotiZQkxpdI~BBe77wxuZTpJYeli-293aMFjc7obgci9EwPpemuvrhQKEbIOqin4PGVYLDI7vo15v8AbJVTgETkc5PiMQTrMZkhEjKzuy34d-scg~vu7xmffJm9sc4wF9kBr86B8fWlQ50UCTV3dVQhEcWlCMiv8T3xKXpB6g3qosg__',
+      imageUrl: card,      
       text: 'Yaris',
       genre: 'Ekonomi',
       price: '400.000',
