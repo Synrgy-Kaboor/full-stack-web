@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Typography as MuiTypography, TypographyProps } from '@mui/material';
+import { Typography as MuiTypography, Stack, TypographyProps, Button } from '@mui/material';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
@@ -51,7 +51,7 @@ const generateStars = (rating: number) => {
 };
 
 const Typography1 = ({ children, rating, review, ...props }: { children: string, rating: string, review: string } & TypographyProps) => (
-  <div style={{ display: 'grid', gridTemplateColumns: '1fr auto' }}>
+  <Stack style={{ display: 'grid', gridTemplateColumns: '1fr auto' }}>
     <MuiTypography
       variant="h3"
       sx={{
@@ -69,27 +69,38 @@ const Typography1 = ({ children, rating, review, ...props }: { children: string,
     >
       {children}
     </MuiTypography>
-    <div>
-      <div style={{ marginLeft: '8px', fontSize: '14px', color: '#9E9E9E' }}>
+    <Stack>
+      <Stack style={{ marginLeft: '8px', fontSize: '14px', color: '#9E9E9E' }}>
         {rating}/5 ({review} Review)
-      </div>
-      <div style={{ marginLeft: '8px', fontSize: '14px', color: '#9E9E9E', display: 'flex', justifyContent: 'end' }}>
+      </Stack>
+      <Stack direction={'row'} style={{ marginLeft: '8px', fontSize: '14px', color: '#9E9E9E', display: 'flex', justifyContent: 'end' }}>
         {generateStars(parseFloat(rating))}
-      </div>
-    </div>
-  </div>
+      </Stack>
+    </Stack>
+  </Stack>
 );
 
 const BerandaRentalCard = ({ imageUrl, text, genre, price, rating, review }: { imageUrl: string, text: string, genre: string, price: string, rating: string, review: string }) => (
   <Card sx={{ maxWidth: 325, width: '100%', height: 435, marginRight: '16px', borderRadius: '8px', boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.1)', position: 'relative' }}>
     <CardActionArea>
-      <div style={{ position: 'absolute', top: 10, right: 15, background:  'var(--Primary-01, linear-gradient(270deg, #3A42FF 0%, #7B52AB 100%))', color: 'white', padding: '8px', borderRadius: '32px' }}>
+      <Stack sx={{
+        position: 'absolute', 
+        top: 10, 
+        right: 15, 
+        background:  'var(--Primary-01, linear-gradient(270deg, #3A42FF 0%, #7B52AB 100%))', 
+        color: 'white', 
+        padding: '8px', 
+        borderRadius: '32px'
+      }}>
         Promo Terbaik
-      </div>
+      </Stack>
+     
       <CardMedia component="img" height="182" image={imageUrl} alt="Image" />
       <CardContent>
-        <div style={{ height: '225px',  display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
-          <div>
+        <Stack sx={{
+        height: '225px',  display: 'flex', flexDirection: 'column', justifyContent: 'space-between'  
+        }}>
+          <Stack>
             <Typography1
               gutterBottom
               overflow="hidden"
@@ -116,8 +127,8 @@ const BerandaRentalCard = ({ imageUrl, text, genre, price, rating, review }: { i
             >
               {genre}
             </MuiTypography>
-          </div>
-          <div>
+          </Stack>
+          <Stack>
             <MuiTypography
               variant="body2"
               color="var(--Neutral-06, var(--android-bottom-navigation-bottom-navigation-selected-color, #9E9E9E));"
@@ -145,8 +156,8 @@ const BerandaRentalCard = ({ imageUrl, text, genre, price, rating, review }: { i
             >
               Rp. {price}
             </MuiTypography>
-          </div>
-        </div>
+          </Stack>
+          </Stack>
       </CardContent>
     </CardActionArea>
   </Card>
@@ -255,8 +266,8 @@ export const BerandaRental = () => {//data dummy
   const latestItems = historyItems.slice(0, visibleItems);
 
   return (
-    <div>
-      <div style={{ display: 'grid', gridTemplateColumns: `repeat(auto-fill, minmax(calc(25% - 16px), 1fr))`, gap: '16px', margin: '16px 0' }}>
+    <Stack>
+            <Stack sx={{display: 'grid', gridTemplateColumns: `repeat(auto-fill, minmax(calc(25% - 16px), 1fr))`, gap: '16px', margin: '16px 0'}}>
         {latestItems.map((item, index) => (
           <BerandaRentalCard
             key={index}
@@ -268,10 +279,10 @@ export const BerandaRental = () => {//data dummy
             review={item.review}
           />
         ))}
-      </div>
+      </Stack>
       {visibleItems < historyItems.length && (
         <div style={{ display: 'flex', justifyContent: 'center', margin: '0 auto', marginTop:'40px'}}>
-          <button
+          <Button size='medium'
             style={{
               display: 'flex',
               padding: '12px 20px',
@@ -286,9 +297,9 @@ export const BerandaRental = () => {//data dummy
             onClick={loadMoreItems}
           >
             Lihat Semua
-          </button>
+          </Button>
         </div>
       )}
-    </div>
+    </Stack>
   );
 };
