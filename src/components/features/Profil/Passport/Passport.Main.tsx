@@ -13,7 +13,8 @@ export default function Passport() {
       p={4}
       bgcolor={'white'}
       borderRadius={2}
-      sx={{ width: '70%', border: '1px solid #C2C2C2' }}
+      maxWidth={'880px'}
+      sx={{ width: '100%', border: '1px solid #C2C2C2' }}
     >
       <Typography variant="h6" fontWeight={'bold'}>
         Daftar Paspor
