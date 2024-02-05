@@ -11,11 +11,18 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DesktopDatePicker } from '@mui/x-date-pickers/DesktopDatePicker';
 
-import theme from '../../../config/theme';
+import theme from '../../../../config/theme';
+import { useNavigate } from 'react-router-dom';
+import { FormEvent } from 'react';
 
-// import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
+export default function CreatePassport() {
+  const navigate = useNavigate();
 
-export default function Passport() {
+  function handleSubmit(e: FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    navigate(-1);
+  }
+
   return (
     <Stack
       p={4}
@@ -32,7 +39,7 @@ export default function Passport() {
         Isi semua kolom dengan data paspor yang berlaku ya
       </Typography>
 
-      <form>
+      <form onSubmit={handleSubmit}>
         <Typography mt={2} gutterBottom>
           Nama Lengkap
         </Typography>
@@ -68,6 +75,7 @@ export default function Passport() {
         <Stack alignItems={'end'} sx={{ width: '100%' }} my={2}>
           <Button
             variant="contained"
+            type="submit"
             sx={{
               width: '20%',
               background: theme.palette.gradients?.horizontal,
