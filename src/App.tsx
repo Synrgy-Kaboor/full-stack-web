@@ -21,6 +21,7 @@ import ChangeNumber from './components/features/Profil/ChangeNumber';
 import MetodePembayaran from './pages/MetodePembayaran/MetodePembayaran';
 import SavedPriceAlert from './components/ui/SavedPriceAlert';
 import HelpCenter from './components/features/Profil/HelpCenter';
+import PassportRoutes from './components/features/Profil/Passport/Passport.Routes';
 import Notification from './components/features/Profil/Notification';
 import NotifDetail from './components/features/Profil/NotifDetail';
 
@@ -69,6 +70,7 @@ const router = createBrowserRouter([
           { path: 'ganti-nomer', element: <ChangeNumber /> },
           { path: 'saved-price-alert', element: <SavedPriceAlert /> },
           { path: 'pusat-bantuan', element: <HelpCenter /> },
+          { path: 'passport/*', element: <PassportRoutes /> },
           { path: 'notifikasi', element: <Notification /> },
           { path: 'notifikasi/:notifId', element: <NotifDetail /> },
         ],
