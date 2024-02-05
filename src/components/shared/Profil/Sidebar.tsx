@@ -38,7 +38,7 @@ export default function Sidebar({ pathname }: SidebarProp) {
           padding={'30px 26px 20px 26px'}
         >
           <Avatar
-            alt="user-avatar"
+            alt='user-avatar'
             src={profileImg}
             sx={{
               width: '70px',
@@ -57,8 +57,8 @@ export default function Sidebar({ pathname }: SidebarProp) {
               },
             }}
           >
-            <Typography variant="h6">Andre Huston</Typography>
-            <Typography variant="body2" color={'#9E9E9E'}>
+            <Typography variant='h6'>Andre Huston</Typography>
+            <Typography variant='body2' color={'#9E9E9E'}>
               informasi pribadi 16% lengkap
             </Typography>
           </Stack>
@@ -87,7 +87,7 @@ export default function Sidebar({ pathname }: SidebarProp) {
             >
               <img
                 src={data.icon}
-                alt=""
+                alt=''
                 width={'32px'}
                 height={'32px'}
                 style={{
@@ -99,7 +99,7 @@ export default function Sidebar({ pathname }: SidebarProp) {
                 }}
               />
               <Typography
-                variant="body2"
+                variant='body2'
                 sx={{
                   color: pathname.includes(
                     `/profil${sideBarItem1[index].route}`
@@ -141,7 +141,7 @@ export default function Sidebar({ pathname }: SidebarProp) {
               >
                 <img
                   src={data.icon}
-                  alt=""
+                  alt=''
                   width={'32px'}
                   height={'32px'}
                   style={{
@@ -153,7 +153,7 @@ export default function Sidebar({ pathname }: SidebarProp) {
                   }}
                 />
                 <Typography
-                  variant="body2"
+                  variant='body2'
                   sx={{
                     color: pathname.includes(
                       `/profil${sideBarItem1[index].route}`
@@ -192,9 +192,9 @@ export default function Sidebar({ pathname }: SidebarProp) {
             console.log('keluar');
           }}
         >
-          <img src={exitItem.icon} alt="" width={'32px'} height={'32px'} />
+          <img src={exitItem.icon} alt='' width={'32px'} height={'32px'} />
           <Typography
-            variant="body2"
+            variant='body2'
             sx={{
               color: '#505050',
               fontSize: '18px',
