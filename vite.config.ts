@@ -1,8 +1,6 @@
-import { defineConfig } from 'vitest/config'
-import react from '@vitejs/plugin-react-swc'
-import eslintPlugin from 'vite-plugin-eslint';
-
-
+import { defineConfig } from "vitest/config";
+import react from "@vitejs/plugin-react-swc";
+import eslintPlugin from "vite-plugin-eslint";
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -10,21 +8,21 @@ export default defineConfig({
     react(),
     eslintPlugin({
       cache: false,
-      include: ['./src/**/*.tsx']
-    })
+      include: ["./src/**/*.tsx"],
+    }),
   ],
   resolve: {
     alias: {
-      '@mui/styled-engine': '@mui/styled-engine-sc',
-    }},
+      "@mui/styled-engine": "@mui/styled-engine-sc",
+    },
+  },
   test: {
     globals: true,
-    environment: 'jsdom'
+    environment: "jsdom",
   },
   server: {
     watch: {
-      usePolling: true
-    }
-  }
-})
-
+      usePolling: true,
+    },
+  },
+});
