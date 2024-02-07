@@ -1,6 +1,6 @@
 import { PassangerSearch } from './ModalPassagerProps';
 
-export interface CardFilterPlaneSchedule  {
+export interface CardFilterPlaneScheduleType  {
     deparature: string,
     arrival: string,
     deparatureDate: Date | null,
@@ -12,6 +12,6 @@ export interface CardFilterPlaneSchedule  {
 export interface CardFilterPlaneScheduleProps {
     sliderOn : boolean;
     textSubmit : string;
-    onSubmit : (value: Partial<CardFilterPlaneSchedule>) => void;
+    onSubmit : (value: Partial<CardFilterPlaneScheduleType>) => void;
 }
 
