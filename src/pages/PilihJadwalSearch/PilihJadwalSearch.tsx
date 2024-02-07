@@ -1,10 +1,16 @@
-import { Grid, Typography, useTheme, useMediaQuery } from '@mui/material';
-import bgPesawat from '../../assets/ikhroma-bg-pesawat.jpg';
-import CardFilterPlaneSchedule from '../../components/ui/CardFilterPlaneSchedule';
+import { Grid, Typography, useTheme, useMediaQuery } from "@mui/material";
+import bgPesawat from "../../assets/ikhroma-bg-pesawat.jpg";
+import CardFilterPlaneSchedule from "../../components/ui/CardFilterPlaneSchedule";
+import { type CardFilterPlaneSchedule as filterType } from "../../types/CardFilterPlaneScheduleProps";
+import { useState } from "react";
 
 const PilihJadwalSearch = () => {
   const newTheme = useTheme();
-  const sizeScreen = useMediaQuery(newTheme.breakpoints.up('md'));
+  const sizeScreen = useMediaQuery(newTheme.breakpoints.up("md"));
+  const [filterValue, SetFilterValue] = useState<filterType>({});
+  const handleSubmit = (value: filterType) => {
+    console.log(value);
+  };
 
   return (
     <>
@@ -14,19 +20,19 @@ const PilihJadwalSearch = () => {
           background: `
     linear-gradient(270deg, rgba(58, 66, 255, 0.50) 0%, rgba(123, 82, 171, 0.50) 100%),
     url(${bgPesawat})`,
-          paddingBlock: '4rem',
-          height: '100vh',
+          paddingBlock: "4rem",
+          height: "100vh",
         }}
         rowSpacing={2}
-        alignItems={'center'}
+        alignItems={"center"}
       >
         <Grid container item md={6}>
           <Typography
             variant="h3"
-            color={'white'}
-            fontWeight={'800'}
-            fontStyle={'normal'}
-            fontFamily={'Open Sans'}
+            color={"white"}
+            fontWeight={"800"}
+            fontStyle={"normal"}
+            fontFamily={"Open Sans"}
             pl={sizeScreen ? 6 : 2}
           >
             Tiket Pesawat Murah & Promo Hari Ini
@@ -36,11 +42,15 @@ const PilihJadwalSearch = () => {
           container
           item
           md={6}
-          justifyContent={'center'}
-          alignItems={'center'}
-          position={'relative'}
+          justifyContent={"center"}
+          alignItems={"center"}
+          position={"relative"}
         >
-          <CardFilterPlaneSchedule />
+          <CardFilterPlaneSchedule
+            sliderOn={false}
+            textSubmit="Cari"
+            onSubmit={handleSubmit(filterValue)}
+          />
         </Grid>
       </Grid>
     </>
