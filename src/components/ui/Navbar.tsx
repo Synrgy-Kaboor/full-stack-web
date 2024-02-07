@@ -9,7 +9,7 @@ import {
   Button,
 } from '@mui/material';
 
-import KaboorIcon from '../../assets/kaboor.svg';
+import KaboorIcon from '../../assets/logo_kaboor.png';
 import PlaneIcon from '../../assets/plane icon.png';
 import NotificationsNoneOutlinedIcon from '@mui/icons-material/NotificationsNoneOutlined';
 
@@ -42,7 +42,12 @@ function UserLoggedIn() {
       </Stack>
 
       {/* Avatar */}
-      <Avatar sx={{ bgcolor: 'primary.main' }}>A</Avatar>
+      <Avatar
+        sx={{ bgcolor: 'primary.main', '&:hover': { cursor: 'pointer' } }}
+        onClick={() => navigate('/profil')}
+      >
+        A
+      </Avatar>
     </Stack>
   );
 }
@@ -94,7 +99,7 @@ export default function Navbar() {
             sx={{ width: '100%' }}
           >
             {/* Logo */}
-            <Link href="/">
+            <Link href="/Beranda">
               <img src={KaboorIcon} alt="" />
             </Link>
 

@@ -1,9 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit';
 import detailPenumpangReducer from './slices/DetailPenumpang';
+import metodePembayaranReducer from './slices/MetodePembayaran';
 
 export const store = configureStore({
     reducer: {
-        detailPenumpang: detailPenumpangReducer
+        detailPenumpang: detailPenumpangReducer,
+        metodePembayaran: metodePembayaranReducer
     }
 });
 

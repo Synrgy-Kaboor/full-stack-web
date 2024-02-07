@@ -8,7 +8,7 @@ import {
   useMediaQuery,
   useTheme,
 } from '@mui/material';
-import ExtraFacilityCard from '../../components/ui/ExtraFacilityCard';
+import ExtraFacilityCard from './../../components/ui/ExtraFacilityCard';
 import DetailPemesan from '../../components/features/Pemesanan/DetailPenumpang/DetailPemesan';
 import DaftarPenumpang from '../../components/features/Pemesanan/DetailPenumpang/DaftarPenumpang';
 import FlightDetailCard from '../../components/shared/Pemesanan/FlightDetailCard';

@@ -1,16 +1,18 @@
 import { Container } from '@mui/material';
 import Sidebar from '../../components/shared/Profil/Sidebar';
-import { Outlet } from 'react-router-dom';
+import ChangeProfile from '../../components/features/Profil/ChangeProfile';
+import { Outlet, useLocation } from 'react-router-dom';
 
-
-export default function Profil () {
-
-    return (
-        <>
-        <Container maxWidth={'xl'} sx={{display: 'flex', gap: '16px'}}>
-            <Sidebar/>
-            <Outlet/>
-        </Container>
-        </>
-    )
+export default function Profil() {
+  const location = useLocation();
+  console.log(location.pathname);
+  return (
+    <>
+      <Container maxWidth={'lg'} sx={{ display: 'flex', gap: '16px' }}>
+        <Sidebar pathname={location.pathname} />
+        {location.pathname === '/profil' && <ChangeProfile />}
+        <Outlet />
+      </Container>
+    </>
+  );
 }
