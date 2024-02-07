@@ -2,75 +2,73 @@ import { BerandaButton } from '../../components/features/Beranda/beranda.button'
 import { BerandaHistory } from '../../components/features/Beranda/beranda.card.history';
 import { BerandaDestinasi } from '../../components/features/Beranda/beranda.card.destinasi';
 // import Navbar from '../../components/features/Beranda/beranda.navbar';
-import { TextField, styled, InputAdornment, Typography, Stack } from '@mui/material';
+import { Typography, Stack } from '@mui/material';
 import { BerandaRental } from '../../components/features/Beranda/beranda.card.maskapai';
 import React from 'react';
-
-const SearchInput = styled(TextField)(() => ({
-  height: '70px',
-  width: '763px',
-  '& .MuiOutlinedInput-root': {
-    borderRadius: '16px',
-    '&:hover fieldset': {
-      borderColor: 'white',
-      backgroundColor: 'white', 
-    },
-    '&.Mui-focused fieldset': {
-      borderColor: 'white',
-      backgroundColor: 'white',
-    },
-    '&.Mui-disabled fieldset': {
-      borderColor: 'white',
-      backgroundColor: 'white',
-    },
-    '& fieldset': {
-      borderColor: 'white',
-      backgroundColor: 'white',
-    },
-    '& .MuiInputBase-input': {
-      color: 'black',
-      zIndex: 1,
-    },
-    '& .MuiInputBase-input::placeholder': {
-      color: '#9E9E9E',
-      zIndex: 1, 
-    },
-    '& .MuiInputAdornment-root': {
-      zIndex: 1,
-      color: '#9E9E9E',
-    },
-  },
-}));
+import bg from '../../assets/bgberanda.png';
+import promo from '../../assets/promoberanda.png';
+import logo from '../../assets/logofooter.png';
+import bri from '../../assets/brifooter.png';
+import bni from '../../assets/bnifooter.png';
+import bca from '../../assets/bcafooter.png';
+import mandiri from '../../assets/mandirifooter.png';
+import bsi from '../../assets/bsifooter.png';
+import jatim from '../../assets/bankjatimfooter.png';
+import btpn from '../../assets/btpnfooter.png';
+import danamon from '../../assets/danamonfooter.png';
+import btn from '../../assets/btnfooter.png';
+import playstore from '../../assets/playstore.png';
+// const SearchInput = styled(TextField)(() => ({
+//   height: '70px',
+//   width: '763px',
+//   '& .MuiOutlinedInput-root': {
+//     borderRadius: '16px',
+//     '&:hover fieldset': {
+//       borderColor: 'white',
+//       backgroundColor: 'white', 
+//     },
+//     '&.Mui-focused fieldset': {
+//       borderColor: 'white',
+//       backgroundColor: 'white',
+//     },
+//     '&.Mui-disabled fieldset': {
+//       borderColor: 'white',
+//       backgroundColor: 'white',
+//     },
+//     '& fieldset': {
+//       borderColor: 'white',
+//       backgroundColor: 'white',
+//     },
+//     '& .MuiInputBase-input': {
+//       color: 'black',
+//       zIndex: 1,
+//     },
+//     '& .MuiInputBase-input::placeholder': {
+//       color: '#9E9E9E',
+//       zIndex: 1, 
+//     },
+//     '& .MuiInputAdornment-root': {
+//       zIndex: 1,
+//       color: '#9E9E9E',
+//     },
+//   },
+// }));
 
 const Beranda = () => {
   return (
     <>
-    {/* <Navbar/> */}
-    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+
+    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
       <section style={styles.searchSection}>
-     
         <div style={styles.searchContainer}>
-          <div style={{ marginBottom: '30px' }}>
-            <SearchInput
-              name="search"
-              placeholder="Cari"
-              InputProps={{
-                startAdornment: <InputAdornment position="start">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="38" height="38" viewBox="0 0 38 38" fill="none">
-                    <path fillRule="evenodd" clipRule="evenodd" d="M5.75 15.8333C5.75 10.2645 10.2645 5.75 15.8333 5.75C21.4022 5.75 25.9167 10.2645 25.9167 15.8333C25.9167 21.4022 21.4022 25.9167 15.8333 25.9167C10.2645 25.9167 5.75 21.4022 5.75 15.8333ZM15.8333 3.75C9.15989 3.75 3.75 9.15989 3.75 15.8333C3.75 22.5068 9.15989 27.9167 15.8333 27.9167C18.8101 27.9167 21.5354 26.8403 23.6413 25.0555L32.5429 33.9571C32.9334 34.3476 33.5666 34.3476 33.9571 33.9571C34.3476 33.5666 34.3476 32.9334 33.9571 32.5429L25.0555 23.6413C26.8403 21.5354 27.9167 18.8101 27.9167 15.8333C27.9167 9.15989 22.5068 3.75 15.8333 3.75Z" fill="#9E9E9E" />
-                  </svg>
-                </InputAdornment>,
-              }}
-            />
-          </div>
-          <BerandaButton />
+            <BerandaButton />
         </div>
       </section>
 
       <section style={styles.section2}>
         <div color='red' style={{ borderRadius: '12px', overflow: 'hidden', display: 'flex' }}>
           <img
-            src="https://s3-alpha-sig.figma.com/img/cfab/9bcd/cc273561bf39bd50bf3549b161322589?Expires=1705881600&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=psbjOLY8IZJLc-otScYg3u7YMJjpqqzXXNod0Mwa5CR-rHMT-~HqQFr4SLmzxqw-qD1l~OtauomYMSc~YFoo6fETzsRY33W3KmuL98-LqVKGMN4QdPBgk~bjtsixmy1T3Bo1iqZnuy7A7QrNizWwhhFUM7cRkNM6V0y2U6EHvvUBQyWNnefSp5xpf7Em-3vSOq9hbF8S7hZKfoN3Lzy1sxSejkBjk1RPDp2f6kJi11GfSxNWloNkiQOHbYx1eC67~z-XnHllIirwLRsbLcAJ1j7dnUTfR22cg9bAsMXmxhfmIeEbZD8s7kZ92Qvkh3LbnzHnORRK2oCRjG-VJJ~10A__"
+            src={promo}
             alt="Placeholder"
             style={{ width: '100%', height: '100%', objectFit: 'cover' }}
           />
@@ -103,7 +101,7 @@ Nikmati perjalanan Anda dengan rekomendasi maskapai terbaik kami. Pilih maskapai
         <Stack direction="row" useFlexGap flexWrap="wrap" marginRight="140px">
         <ul style={{listStyleType:'none'}}>
           <li>
-          <img src="https://res.cloudinary.com/dgm5qtyrg/image/upload/v1704977133/mgrcp31s8phuo2c7h7cc.png"/>
+          <img src={logo}/>
           </li>
           <li style={styles.footerhead}>
          Payment Partners
@@ -111,31 +109,31 @@ Nikmati perjalanan Anda dengan rekomendasi maskapai terbaik kami. Pilih maskapai
           <li>
           <ul style={{ listStyleType: 'none', display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '16px 37px', paddingLeft: '0px' }}>
             <li>
-              <img src="https://res.cloudinary.com/dgm5qtyrg/image/upload/v1704977587/a4esbquplwkpabwtvbtf.png" />
+              <img src={bri} />
             </li>
             <li>
-              <img src="https://res.cloudinary.com/dgm5qtyrg/image/upload/v1704977587/onooyp2tjwvhzriqzr8i.png"/>
+            <img src={bni} />            
             </li>
             <li>
-              <img src="https://res.cloudinary.com/dgm5qtyrg/image/upload/v1704977587/lwxx0kglylbhs4zfpx6b.png" />
+            <img src={bca} />
             </li>
             <li>
-              <img src="https://res.cloudinary.com/dgm5qtyrg/image/upload/v1704977587/ruwif0d3x8dcpkuwsea7.png" />
+            <img src={mandiri} />
             </li>
             <li>
-              <img src="https://res.cloudinary.com/dgm5qtyrg/image/upload/v1704977587/dmitfaj9fk62y4qhyicj.png"/>
+            <img src={bsi} />
             </li>
             <li>
-              <img src="https://res.cloudinary.com/dgm5qtyrg/image/upload/v1704977587/ka1p1773nsrkszyszxqc.png"/>
+            <img src={jatim} />
             </li>
             <li>
-              <img src="https://res.cloudinary.com/dgm5qtyrg/image/upload/v1704977587/yhxuamiaoxj2naqwhcmw.png"/>
+            <img src={btpn} />
             </li>
             <li>
-              <img src="https://res.cloudinary.com/dgm5qtyrg/image/upload/v1704977587/q9fkghwspl7fkiudimmr.png"/>
+            <img src={danamon} />
             </li>
             <li>
-              <img src="https://res.cloudinary.com/dgm5qtyrg/image/upload/v1704977587/plcqalad5ifztpmzzfej.png"/>
+            <img src={btn} />
             </li>
           </ul>
           </li>
@@ -216,7 +214,7 @@ Nikmati perjalanan Anda dengan rekomendasi maskapai terbaik kami. Pilih maskapai
               Asuransi Perjalanan
             </li>
           </ul>
-          <ul style={{listStyleType:'none'}}>
+          <ul style={{listStyleType:'none', marginLeft:'60px'}}>
            <ul style={{marginLeft:'0px', listStyleType:'none', marginBottom:'57px'}}>
            <li style={styles.footerhead}>
               Dukungan
@@ -227,7 +225,7 @@ Nikmati perjalanan Anda dengan rekomendasi maskapai terbaik kami. Pilih maskapai
            </ul>
            <ul style={{marginLeft:'0px', listStyleType:'none'}}>
            <li style={styles.footerhead}>Download Kaboor Apps</li>
-            <li><div style={{maxWidth:'245px'}}><img src="https://res.cloudinary.com/dgm5qtyrg/image/upload/v1704978369/ykccytqhnxhgni9vfkdd.png" alt="playstore" /></div></li>
+            <li><div style={{maxWidth:'245px'}}><img src={playstore} alt="playstore" /></div></li>
            </ul>
           </ul>
         </Stack>
@@ -249,10 +247,11 @@ const styles: {
   textdesc: React.CSSProperties,
   footer: React.CSSProperties,
   footerhead: React.CSSProperties,
-  footertext: React.CSSProperties
+  footertext: React.CSSProperties,
+ 
 } = {
   searchSection: {
-    backgroundImage: 'linear-gradient(0deg, rgba(255, 255, 255, 0.60) 0%, rgba(255, 255, 255, 0.60) 100%), url("https://s3-alpha-sig.figma.com/img/b2f0/fd4f/8ec91130e9ef89b84ea82d12323db8be?Expires=1705881600&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=e0uGWHGdPO9hatB~NoUASpIzDHEQoNtlCxX4h9NyYEvYI6QeCbuPLPLCUza5NgMinXYhY2JuedXO2mVtrU0-Uvnxi4OypAgeSYJ0Qr56nHKijGiCeIYQf~GhdS44my5afAZsCrJBD1zuiucdl01QsoXxQ--8abBinGkVeCy1WJn2Bj7I8RQCPvnfIq2qeN1eL31I2mpe3uuncJ5knvY5T~t7xoTvDYTIVvpatcV7vVYIGp2p-WU1sYtscs~xpEOLytINPC4J2FzsfoIr6BQ4CJiy6ybQuZzbuUHoOtOXlsTw-qtHN4X3PVmSF1y9gnY8TCyDvfGLmYE1NOzuy9v1ww__")',
+    background: `url(${bg}) center center / cover no-repeat`,
     backgroundSize: 'cover',
     backgroundPosition: 'center',
     display: 'flex',
@@ -263,6 +262,7 @@ const styles: {
     width: '100%', 
     margin: '0',    
     padding: '0',    
+    marginTop: '-15px',
   },
   searchContainer: {
     display: 'flex',
