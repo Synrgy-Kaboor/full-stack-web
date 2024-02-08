@@ -2,6 +2,7 @@ import { Divider, Stack, Typography, useTheme, Avatar } from "@mui/material";
 import { sideBarItem1, exitItem } from ".";
 import { useNavigate } from "react-router-dom";
 import profileImg from "../../../assets/profile-img.svg";
+import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 
 interface SidebarProp {
   pathname: string;
@@ -33,7 +34,7 @@ export default function Sidebar({ pathname }: SidebarProp) {
           gap={4}
           justifyContent={"space-around"}
           alignItems={"center"}
-          padding={"30px 26px 20px 26px"}
+          padding={"26px 26px 26px 26px"}
         >
           <Avatar
             alt="user-avatar"
@@ -60,6 +61,13 @@ export default function Sidebar({ pathname }: SidebarProp) {
               informasi pribadi 16% lengkap
             </Typography>
           </Stack>
+          <ArrowForwardIosIcon
+            onClick={(e) => {
+              e.stopPropagation();
+              alert("Hei");
+            }}
+            sx={{ display: { sm: "none", xs: "flex" } }}
+          />
         </Stack>
         <Divider
           sx={{
