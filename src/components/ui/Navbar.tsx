@@ -114,7 +114,7 @@ function UserLoggedIn(props: INavbarMenu) {
   );
 }
 
-function UserNotLoggedIn() {
+function UserNotLoggedIn(props: INavbarMenu) {
   const navigate = useNavigate();
 
   return (
@@ -142,6 +142,25 @@ function UserNotLoggedIn() {
       >
         Login
       </Button>
+      <Menu
+        anchorEl={props.anchorElNav}
+        anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
+        keepMounted
+        transformOrigin={{
+          vertical: "top",
+          horizontal: "left",
+        }}
+        open={Boolean(props.anchorElNav)}
+        onClose={props.handleCloseNavMenu}
+        sx={{ dislay: { xs: "block", sm: "none" } }}
+      >
+        <MenuItem onClick={() => navigate("/register")}>
+          <Typography>Register</Typography>
+        </MenuItem>
+        <MenuItem onClick={() => navigate("/login")}>
+          <Typography>Login</Typography>
+        </MenuItem>
+      </Menu>
     </Stack>
   );
 }
@@ -193,7 +212,11 @@ export default function Navbar(props: NavbarProps) {
               </Link>
 
               {/* Content */}
-              {token ? <UserLoggedIn {...navbarProps} /> : <UserNotLoggedIn />}
+              {token ? (
+                <UserLoggedIn {...navbarProps} />
+              ) : (
+                <UserNotLoggedIn {...navbarProps} />
+              )}
             </Stack>
           </Toolbar>
         </Container>

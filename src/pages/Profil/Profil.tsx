@@ -1,5 +1,5 @@
-import { Container, Grid, Stack, Typography } from "@mui/material";
-// import Sidebar from '../../components/shared/Profil/Sidebar';
+import { Container, Grid } from "@mui/material";
+import Sidebar from "../../components/shared/Profil/Sidebar";
 // import ChangeProfile from '../../components/features/Profil/ChangeProfile';
 import { Outlet, useLocation } from "react-router-dom";
 
@@ -9,11 +9,9 @@ export default function Profil() {
   return (
     <>
       <Container maxWidth="lg" sx={{ my: 2 }}>
-        <Grid container justifyContent="center">
+        <Grid container justifyContent="center" spacing={2}>
           <Grid item xs={12} sm={3}>
-            <Stack borderRadius={1} p={2} sx={{ border: "1px solid #C2C2C2" }}>
-              <Typography>Sidebar</Typography>
-            </Stack>
+            <Sidebar pathname={location.pathname} />
           </Grid>
           <Grid item xs={12} sm={9}>
             <Outlet />
