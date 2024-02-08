@@ -1,6 +1,6 @@
-export type Pemesan = {
+export type Orderer = {
     name: string;
-    honorific: string;
+    title: string;
     phone: string;
     email: string;
 }

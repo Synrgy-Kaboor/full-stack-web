@@ -1,5 +1,5 @@
 import { Box, Grid, Typography, Container, Stack, Button } from '@mui/material';
-import { AddOnsCard } from '../../components/ui/';
+import { AddOnsCard } from '../../components/ui';
 import theme from '../../config/theme';
 import { IDetailAsuransi, detailAsuransi } from './detailAsuransi';
 import FlightDetailCard from '../../components/shared/Pemesanan/FlightDetailCard';

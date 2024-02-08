@@ -1,8 +1,7 @@
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import RegisterRoute from './pages/Auth/register/registerRoutes';
 import LoginRoute from './pages/Auth/Login/Login.Routes';
-import DetailPenumpang from './pages/DetailPenumpang/DetailPenumpang';
-import { LayananTambahan } from './pages/LayananTambahan';
+import DetailPenumpang from './pages/Booking/DetailPenumpang';
 import { PilihJadwalSearch } from './pages/PilihJadwalSearch';
 import JadwalKeberangkatan from './pages/JadwalPenerbangan/JadwalKeberangkatan';
 import JadwalKepulangan from './pages/JadwalPenerbangan/JadwalKepulangan';
@@ -18,7 +17,7 @@ import { Beranda } from './pages/Beranda';
 import Profil from './pages/Profil/Profil';
 import ChangeEmail from './components/features/Profil/ChangeEmail';
 import ChangeNumber from './components/features/Profil/ChangeNumber';
-import MetodePembayaran from './pages/MetodePembayaran/MetodePembayaran';
+import MetodePembayaran from './pages/Booking/MetodePembayaran';
 import SavedPriceAlert from './components/ui/SavedPriceAlert';
 import HelpCenter from './components/features/Profil/HelpCenter';
 import PassportRoutes from './components/features/Profil/Passport/Passport.Routes';
@@ -26,6 +25,7 @@ import Notification from './components/features/Profil/Notification';
 import NotifDetail from './components/features/Profil/NotifDetail';
 import ChangeProfile from './components/features/Profil/ChangeProfile';
 import Pesanan from './components/features/Profil/Pesanan';
+import Booking from './pages/Booking/Booking';
 
 const router = createBrowserRouter([
   {
@@ -33,8 +33,8 @@ const router = createBrowserRouter([
     element: <DefaultLayout />,
     children: [
       {
-        path: '/layanan-tambahan',
-        element: <LayananTambahan />,
+        path: '/booking',
+        element: <Booking />,
       },
       {
         path: '/metode-pembayaran',

@@ -8,24 +8,22 @@ import {
   useMediaQuery,
   useTheme,
 } from '@mui/material';
-import ExtraFacilityCard from './../../components/ui/ExtraFacilityCard';
+import ExtraFacilityCard from '../../components/ui/ExtraFacilityCard';
 import DetailPemesan from '../../components/features/Pemesanan/DetailPenumpang/DetailPemesan';
 import DaftarPenumpang from '../../components/features/Pemesanan/DetailPenumpang/DaftarPenumpang';
 import FlightDetailCard from '../../components/shared/Pemesanan/FlightDetailCard';
-import { useNavigate } from 'react-router';
 import FormPemesan from '../../components/features/Pemesanan/DetailPenumpang/FormPemesan';
 import FormPenumpang from '../../components/features/Pemesanan/DetailPenumpang/FormPenumpang';
 import Popup from '../../components/core/Popup';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
-import { closePemesanPopup, closePenumpangPopup } from '../../redux/slices/DetailPenumpang';
+import { changePage, closePemesanPopup, closePenumpangPopup } from '../../redux/slices/Booking';
 
 export default function DetailPenumpang() {
-  const { pemesanPopupOpened, penumpangPopupOpened } = useAppSelector((state) => state.detailPenumpang);
+  const { penumpangPopupOpened, pemesanPopupOpened } = useAppSelector((state) => state.booking.detailPenumpang);
   const dispatch = useAppDispatch();
 
   const theme = useTheme();
   const isSmallScreen = useMediaQuery(theme.breakpoints.down('md'));
-  const navigate = useNavigate();
 
   return (
     <>
@@ -44,7 +42,7 @@ export default function DetailPenumpang() {
               {!isSmallScreen && (
                 <Button
                   variant="contained"
-                  onClick={() => navigate('/layanan-tambahan')}
+                  onClick={() => dispatch(changePage(2))}
                   sx={{ 
                     background: theme.palette.gradients?.horizontal, 
                     width: '100%' 
@@ -96,16 +94,6 @@ export default function DetailPenumpang() {
                   caption="Yakin bagasi 20kg cukup untuk semua barang bawaan kamu sekarang"
                   actionText="Tambah bagasi tambahan"
                 />
-                <ExtraFacilityCard
-                  title="Nomor Kursi"
-                  caption="Yuk pilih kursi yang dekat teman atau keluargamu, biar gak keliatan jomblo loh. Apa mau kamu duduk sendiri di kursi tengah?"
-                  actionText="Pilih kursimu sekarang"
-                />
-                <ExtraFacilityCard
-                  title="Makanan"
-                  caption="Terbang 4 jam bisa bikin laper lho. Nikmati hidangan yang cocok dalam petualangnmu dengan kuliner diatas pesawat."
-                  actionText="Beli makananmu sekarang"
-                />
               </Stack>
             </Box>
           </Grid>
@@ -114,7 +102,7 @@ export default function DetailPenumpang() {
             {isSmallScreen && (
               <Button
                 variant="contained"
-                onClick={() => navigate('/layanan-tambahan')}
+                onClick={() => dispatch(changePage(2))}
                 sx={{ 
                   background: theme.palette.gradients?.horizontal, 
                   width: '100%' 

@@ -29,7 +29,7 @@ import HealthAndSafetyOutlinedIcon from '@mui/icons-material/HealthAndSafetyOutl
 import {
   IDetailAsuransi,
   detailAsuransi,
-} from '../../pages/LayananTambahan/detailAsuransi';
+} from '../../pages/Booking/detailAsuransi';
 import { useState } from 'react';
 
 interface IPopUpProps {
