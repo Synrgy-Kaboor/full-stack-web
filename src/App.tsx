@@ -24,6 +24,7 @@ import HelpCenter from './components/features/Profil/HelpCenter';
 import PassportRoutes from './components/features/Profil/Passport/Passport.Routes';
 import Notification from './components/features/Profil/Notification';
 import NotifDetail from './components/features/Profil/NotifDetail';
+import ChangeProfile from './components/features/Profil/ChangeProfile';
 import Pesanan from './components/features/Profil/Pesanan';
 
 const router = createBrowserRouter([
@@ -67,6 +68,7 @@ const router = createBrowserRouter([
         path: '/profil',
         element: <Profil />,
         children: [
+          { index: true, element: <ChangeProfile /> },
           { path: 'ganti-email', element: <ChangeEmail /> },
           { path: 'ganti-nomer', element: <ChangeNumber /> },
           { path: 'saved-price-alert', element: <SavedPriceAlert /> },
@@ -90,6 +92,11 @@ const router = createBrowserRouter([
   {
     path: '/login/*',
     element: <LoginRoute />,
+  },
+  {
+    path: '/profile-test',
+    element: <Profil />,
+    children: [{ index: true, element: <ChangeProfile /> }],
   },
 ]);
 
