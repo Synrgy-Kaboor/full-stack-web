@@ -24,7 +24,7 @@ import React, { useState } from 'react';
 
 export interface NavbarProps {
   window?: () => Window;
-  children: React.ReactElement;
+  children?: React.ReactElement;
 }
 
 interface INavbarMenu {
@@ -41,7 +41,7 @@ function HideOnScroll(props: NavbarProps) {
 
   return (
     <Slide appear={false} direction="down" in={!trigger}>
-      {children}
+      {children!}
     </Slide>
   );
 }
