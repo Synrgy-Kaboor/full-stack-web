@@ -1,10 +1,10 @@
 import { Stack, Typography, Box, Button } from '@mui/material';
-import CardFilterPlaneSchedule from '../../ui/CardFilterPlaneSchedule';
+//import CardFilterPlaneSchedule from '../../ui/CardFilterPlaneSchedule';
 import { useState } from 'react';
 import { PesananCardsList } from '../Profil/PesananCard';
 import PesananData from './PesananData';
 
-const SavedPriceAlert = () => {
+const Pesanan = () => {
   const [modalFilterOpen] = useState(false);
   const [filterStatus, setFilterStatus] = useState('all'); // 'all', 'Aktif', or 'Riwayat'
 
@@ -44,7 +44,7 @@ const SavedPriceAlert = () => {
               right={0}
               sx={modalFilterOpen ? { display: 'flex' } : { display: 'none' }}
             >
-              <CardFilterPlaneSchedule />
+              {/* <CardFilterPlaneSchedule /> */}
             </Box>
           </Box>
         </Stack>
@@ -90,4 +90,4 @@ const SavedPriceAlert = () => {
   );
 };
 
-export default SavedPriceAlert;
+export default Pesanan;
