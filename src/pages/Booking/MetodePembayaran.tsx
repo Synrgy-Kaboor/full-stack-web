@@ -14,19 +14,16 @@ import FlightDetailCard from '../../components/shared/Pemesanan/FlightDetailCard
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import DaftarMetodePembayaran from '../../components/features/MetodePembayaran/DaftarMetodePembayaran';
 import ConfirmationNumberIcon from '@mui/icons-material/ConfirmationNumber';
-import {
-  closeVoucherPopup,
-  openVoucherPopup,
-} from '../../redux/slices/MetodePembayaran';
-// import Popup from "../../components/core/Popup";
-import PopupV2 from '../../components/core/PopupV2';
+import Popup from '../../components/core/Popup';
 import FormVoucher from '../../components/features/MetodePembayaran/FormVoucher';
 import { useNavigate } from 'react-router-dom';
+import { closeVoucherPopup, openVoucherPopup } from '../../redux/slices/Booking';
+import { numToRp } from '../../utils/formatter';
 
 export default function MetodePembayaran() {
-  const { voucherPopupOpened, selectedVoucher } = useAppSelector(
-    (state) => state.metodePembayaran
-  );
+  const voucherPopupOpened = useAppSelector((state) => state.booking.metodePembayaran.voucherPopupOpened);
+  const selectedVoucher = useAppSelector((state) => state.booking.booking.voucher);
+  const totalPrice = useAppSelector((state) => state.booking.totalPrice);
   const dispatch = useAppDispatch();
 
   const navigate = useNavigate();
@@ -73,13 +70,13 @@ export default function MetodePembayaran() {
             </Card>
 
             {/* Voucher Modal */}
-            <PopupV2
+            <Popup
               title="Voucher"
               open={voucherPopupOpened}
               onClose={() => dispatch(closeVoucherPopup())}
             >
               <FormVoucher />
-            </PopupV2>
+            </Popup>
           </Grid>
 
           {/* Detail Penerbangan */}
@@ -103,7 +100,7 @@ export default function MetodePembayaran() {
                       fontWeight: 'bold',
                     }}
                   >
-                    Rp 2.350.000
+                    {numToRp(totalPrice)}
                   </Typography>
                 </Box>
                 <Box sx={{ width: '40%' }}>

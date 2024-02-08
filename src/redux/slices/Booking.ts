@@ -191,8 +191,9 @@ export const bookingSlice = createSlice({
       state.metodePembayaran.vouchers = action.payload;
     },
     submitVoucherPopup: (state, action: PayloadAction<Voucher>) => {
-       state.booking.voucher = action.payload;
-       state.totalPrice = calculateTotalPrice(state);
+      state.metodePembayaran.voucherPopupOpened = false;
+      state.booking.voucher = action.payload;
+      state.totalPrice = calculateTotalPrice(state);
     }
   }
 });
