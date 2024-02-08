@@ -10,10 +10,10 @@ export default function Profil() {
     <>
       <Container maxWidth="lg" sx={{ my: 2 }}>
         <Grid container justifyContent="center" spacing={2}>
-          <Grid item xs={12} sm={3}>
+          <Grid item xs={12} sm={4}>
             <Sidebar pathname={location.pathname} />
           </Grid>
-          <Grid item xs={12} sm={9}>
+          <Grid item xs={12} sm={8}>
             <Outlet />
           </Grid>
         </Grid>

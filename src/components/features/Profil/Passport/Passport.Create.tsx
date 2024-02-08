@@ -1,10 +1,4 @@
-import {
-  Stack,
-  Typography,
-  OutlinedInput,
-  Button,
-  //   InputAdornment,
-} from "@mui/material";
+import { Stack, Typography, OutlinedInput, Button } from "@mui/material";
 
 import { DemoItem } from "@mui/x-date-pickers/internals/demo";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
