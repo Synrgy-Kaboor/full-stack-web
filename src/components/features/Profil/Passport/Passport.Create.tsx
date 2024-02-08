@@ -1,13 +1,13 @@
-import { Stack, Typography, OutlinedInput, Button } from "@mui/material";
+import { Stack, Typography, OutlinedInput, Button } from '@mui/material';
 
-import { DemoItem } from "@mui/x-date-pickers/internals/demo";
-import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
-import { DesktopDatePicker } from "@mui/x-date-pickers/DesktopDatePicker";
+import { DemoItem } from '@mui/x-date-pickers/internals/demo';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { DesktopDatePicker } from '@mui/x-date-pickers/DesktopDatePicker';
 
-import theme from "../../../../config/theme";
-import { useNavigate } from "react-router-dom";
-import { FormEvent } from "react";
+import theme from '../../../../config/theme';
+import { useNavigate } from 'react-router-dom';
+import { FormEvent } from 'react';
 
 export default function CreatePassport() {
   const navigate = useNavigate();
@@ -20,16 +20,16 @@ export default function CreatePassport() {
   return (
     <Stack
       p={4}
-      bgcolor={"white"}
+      bgcolor={'white'}
       borderRadius={2}
-      sx={{ border: "1px solid #C2C2C2" }}
+      sx={{ border: '1px solid #C2C2C2' }}
     >
-      <Typography variant="h6" fontWeight={"bold"}>
+      <Typography variant="h6" fontWeight={'bold'}>
         Paspor
       </Typography>
 
       <Typography mt={2}>Detail Paspor</Typography>
-      <Typography color={"gray"} variant="subtitle2">
+      <Typography color={'gray'} variant="subtitle2">
         Isi semua kolom dengan data paspor yang berlaku ya
       </Typography>
 
@@ -57,7 +57,7 @@ export default function CreatePassport() {
         </Typography>
         <LocalizationProvider dateAdapter={AdapterDayjs}>
           <DemoItem>
-            <DesktopDatePicker sx={{ width: "100%" }} />
+            <DesktopDatePicker sx={{ width: '100%' }} />
           </DemoItem>
         </LocalizationProvider>
 
@@ -66,12 +66,12 @@ export default function CreatePassport() {
         </Typography>
         <OutlinedInput size="medium" placeholder="Masukkan Negara" fullWidth />
 
-        <Stack alignItems={"end"} sx={{ width: "100%" }} my={2}>
+        <Stack alignItems={'end'} sx={{ width: '100%' }} my={2}>
           <Button
             variant="contained"
             type="submit"
             sx={{
-              width: "20%",
+              width: '20%',
               background: theme.palette.gradients?.horizontal,
             }}
           >

@@ -1,7 +1,7 @@
-import { Container, Grid } from "@mui/material";
-import Sidebar from "../../components/shared/Profil/Sidebar";
+import { Container, Grid } from '@mui/material';
+import Sidebar from '../../components/shared/Profil/Sidebar';
 // import ChangeProfile from '../../components/features/Profil/ChangeProfile';
-import { Outlet, useLocation } from "react-router-dom";
+import { Outlet, useLocation } from 'react-router-dom';
 
 export default function Profil() {
   const location = useLocation();
