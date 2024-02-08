@@ -25,6 +25,7 @@ import PassportRoutes from './components/features/Profil/Passport/Passport.Route
 import Notification from './components/features/Profil/Notification';
 import NotifDetail from './components/features/Profil/NotifDetail';
 import ChangeProfile from './components/features/Profil/ChangeProfile';
+import Pesanan from './components/features/Profil/Pesanan';
 
 const router = createBrowserRouter([
   {
@@ -75,6 +76,7 @@ const router = createBrowserRouter([
           { path: 'passport/*', element: <PassportRoutes /> },
           { path: 'notifikasi', element: <Notification /> },
           { path: 'notifikasi/:notifId', element: <NotifDetail /> },
+          { path: 'pesanan', element: <Pesanan /> },
         ],
       },
       {
