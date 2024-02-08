@@ -26,24 +26,16 @@ import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import ControlPointOutlinedIcon from '@mui/icons-material/ControlPointOutlined';
 import HealthAndSafetyOutlinedIcon from '@mui/icons-material/HealthAndSafetyOutlined';
 
-import {
-  IDetailAsuransi,
-  detailAsuransi,
-} from '../../pages/Booking/detailAsuransi';
 import { useState } from 'react';
+import { numToRp } from '../../utils/formatter';
+import { IDetailAsuransi } from '../../types/DetailAsuransi';
 
 interface IPopUpProps {
-  id: number;
+  selectedInsurance: IDetailAsuransi;
   setOpenPopUp: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-function AssuranceDetailPopUp({ id, setOpenPopUp }: IPopUpProps) {
-  const selectedInsurance = detailAsuransi.filter(
-    (asuransi: IDetailAsuransi) => {
-      return asuransi.id === id;
-    }
-  )[0];
-
+function AssuranceDetailPopUp({ selectedInsurance, setOpenPopUp }: IPopUpProps, ) {
   return (
     <>
       <DialogTitle>
@@ -92,9 +84,9 @@ function AssuranceDetailPopUp({ id, setOpenPopUp }: IPopUpProps) {
             </TableHead>
             <TableBody>
               {selectedInsurance.details.map(
-                (detail: { tanggungan: string; kompensasi: string }) => {
+                (detail: { tanggungan: string; kompensasi: string }, i: number) => {
                   return (
-                    <TableRow>
+                    <TableRow key={i}>
                       <TableCell sx={{ width: '50%' }}>
                         {detail.tanggungan}
                       </TableCell>
@@ -115,16 +107,6 @@ export default function AddOnsCard(props: IDetailAsuransi) {
   const [addOns, setAddOns] = useState<boolean>(false);
   const [openPopUp, setOpenPopUp] = useState<boolean>(false);
 
-  function formatPriceToIDR(price: number) {
-    const rupiah = new Intl.NumberFormat('en-ID', {
-      style: 'currency',
-      currency: 'IDR',
-      maximumSignificantDigits: 3,
-    });
-
-    return rupiah.format(price);
-  }
-
   return (
     <Card variant="outlined">
       <CardContent sx={{ padding: 0 }}>
@@ -139,9 +121,9 @@ export default function AddOnsCard(props: IDetailAsuransi) {
         </Stack>
         <Divider />
         <Box p={2}>
-          {props.descriptions.map((description: string) => {
+          {props.descriptions.map((description: string, i: number) => {
             return (
-              <Stack direction="row">
+              <Stack direction="row" key={i}>
                 <CheckCircleIcon fontSize="small" color="success" />
                 <Typography ml={1}>{description}</Typography>
               </Stack>
@@ -159,7 +141,7 @@ export default function AddOnsCard(props: IDetailAsuransi) {
           </Stack>
           {/* </Link> */}
           <Dialog open={openPopUp}>
-            <AssuranceDetailPopUp setOpenPopUp={setOpenPopUp} id={props.id} />
+            <AssuranceDetailPopUp setOpenPopUp={setOpenPopUp} selectedInsurance={props} />
           </Dialog>
         </Box>
       </CardContent>
@@ -179,9 +161,13 @@ export default function AddOnsCard(props: IDetailAsuransi) {
           }}
         >
           <Typography sx={{ fontWeight: 'bold', color: 'white' }}>
-            {formatPriceToIDR(props.price)}/pax
+            {numToRp(props.price)}/pax
           </Typography>
-          <IconButton onClick={() => setAddOns(!addOns)}>
+          <IconButton onClick={() => {
+            const changedAddOns = !addOns;
+            setAddOns(changedAddOns);
+            props.changeState(changedAddOns);
+          }}>
             {addOns === true ? (
               <CheckCircleIcon sx={{ color: 'success.light' }} />
             ) : (
