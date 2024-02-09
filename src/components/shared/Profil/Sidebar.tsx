@@ -1,6 +1,15 @@
-import { Divider, Stack, Typography, useTheme, Avatar } from "@mui/material";
+import {
+  Divider,
+  Stack,
+  Typography,
+  useTheme,
+  Avatar,
+  Menu,
+  MenuItem,
+} from "@mui/material";
 import { sideBarItem1, exitItem } from ".";
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 import profileImg from "../../../assets/profile-img.svg";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 
@@ -8,14 +17,27 @@ interface SidebarProp {
   pathname: string;
 }
 export default function Sidebar({ pathname }: SidebarProp) {
-  const navigate = useNavigate();
   const filterIcon =
     "brightness(0) invert(1) sepia(0) saturate(0) hue-rotate(0deg)";
   const theme = useTheme();
   console.log({ path: pathname });
+
+  const navigate = useNavigate();
+  const [anchorElNav, setAnchorElNav] = useState<
+    null | HTMLElement | SVGSVGElement
+  >(null);
+
   const handleListItemClick = (index: number) => {
     navigate(`/profil${sideBarItem1[index].route}`);
   };
+
+  function handleLogout() {
+    if (confirm("Are you sure you want to log out?")) {
+      localStorage.removeItem("token");
+      navigate("/beranda");
+    }
+  }
+
   return (
     <>
       <Stack
@@ -48,14 +70,7 @@ export default function Sidebar({ pathname }: SidebarProp) {
               },
             }}
           />
-          <Stack
-            sx={{
-              cursor: "pointer",
-              // "@media screen and (max-width: 600px)": {
-              //   display: "none",
-              // },
-            }}
-          >
+          <Stack sx={{ cursor: "pointer" }}>
             <Typography variant="h6">Andre Huston</Typography>
             <Typography variant="body2" color={"#9E9E9E"}>
               informasi pribadi 16% lengkap
@@ -64,10 +79,35 @@ export default function Sidebar({ pathname }: SidebarProp) {
           <ArrowForwardIosIcon
             onClick={(e) => {
               e.stopPropagation();
-              alert("Hei");
+              setAnchorElNav(e.currentTarget);
             }}
             sx={{ display: { sm: "none", xs: "flex" } }}
           />
+          <Menu
+            anchorEl={anchorElNav}
+            anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
+            keepMounted
+            transformOrigin={{
+              vertical: "top",
+              horizontal: "left",
+            }}
+            open={Boolean(anchorElNav)}
+            onClose={() => setAnchorElNav(null)}
+            sx={{ dislay: { xs: "block", sm: "none" } }}
+          >
+            {sideBarItem1.map((data, index) => (
+              <MenuItem
+                key={index}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setAnchorElNav(null);
+                  handleListItemClick(index);
+                }}
+              >
+                <Typography>{data.text}</Typography>
+              </MenuItem>
+            ))}
+          </Menu>
         </Stack>
         <Divider
           sx={{
@@ -148,7 +188,7 @@ export default function Sidebar({ pathname }: SidebarProp) {
                   )
                     ? theme.palette.primary.main
                     : "transparent",
-                  display: { xs: "none" },
+                  display: { xs: "none", sm: "flex" },
                 }}
                 onClick={() => {
                   handleListItemClick(index);
@@ -216,9 +256,7 @@ export default function Sidebar({ pathname }: SidebarProp) {
             width: "100%",
             display: { xs: "none", sm: "flex" },
           }}
-          onClick={() => {
-            console.log("keluar");
-          }}
+          onClick={handleLogout}
         >
           <img src={exitItem.icon} alt="" width={"32px"} height={"32px"} />
           <Typography
