@@ -1,10 +1,8 @@
 import Button from '@mui/material/Button';
-import { useState, useRef, ChangeEvent} from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useState, useRef, ChangeEvent } from 'react';
 import { styled as muiStyled } from '@mui/material/styles';
 import styled from 'styled-components';
-import Countdown from './../../shared/Auth/timer'
-
+import Countdown from './../../shared/Auth/timer';
 
 const FirstButton = styled(Button)`
   color: var(--shadow, #fff);
@@ -152,18 +150,26 @@ const Wrapper = styled(ModalsContainer)`
   gap: 8px;
 `;
 
-
 interface OtpModalsProps {
-  setOpen : React.Dispatch<React.SetStateAction<boolean>>;
-  email: string;
+  setOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  payload: string;
+  isForEmail?: boolean;
 }
 
-export default function OtpProfile({setOpen, email}: OtpModalsProps) {
+export default function OtpProfile({
+  setOpen,
+  payload,
+  isForEmail,
+}: OtpModalsProps) {
   const [otp, setOtp] = useState(['', '', '', '']);
-  const [time, setTime] = useState(180)
-  
-  const navigate = useNavigate();
-
+  const [time, setTime] = useState(180);
+  const jwtToken = localStorage.getItem('token');
+  const sendOtpUrl = isForEmail
+    ? 'https://fsw-backend.fly.dev/api/v1/user/email'
+    : 'https://fsw-backend.fly.dev/api/v1/user/phone';
+  const verifyOtpUrl = isForEmail
+    ? 'https://fsw-backend.fly.dev/api/v1/user/email/otp/verify'
+    : 'https://fsw-backend.fly.dev/api/v1/user/phone/otp/verify';
   const inputRefs = [
     useRef<HTMLInputElement>(null),
     useRef<HTMLInputElement>(null),
@@ -171,8 +177,7 @@ export default function OtpProfile({setOpen, email}: OtpModalsProps) {
     useRef<HTMLInputElement>(null),
   ];
 
-  const handleTimeout = () => {
-  };
+  const handleTimeout = () => {};
   const handleChange = (e: ChangeEvent<HTMLInputElement>, index: number) => {
     const newOtp = [...otp];
     const inputChar = e.target.value;
@@ -194,45 +199,48 @@ export default function OtpProfile({setOpen, email}: OtpModalsProps) {
     }
   };
 
-  let otpReq = ''
-  for(let i=0; i<4; i++){
-    otpReq += otp[i]
+  let otpReq = '';
+  for (let i = 0; i < 4; i++) {
+    otpReq += otp[i];
   }
-  
-  const handleVerification = async () =>{
+
+  const handleVerification = async () => {
     const otpPayload = {
-      otp: otpReq
+      otp: otpReq,
     };
-    const otpResponse = await fetch('https://kaboor-api-dev.up.railway.app/api/v1/auth/otp/verify', {
+    const otpResponse = await fetch(verifyOtpUrl, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
+        Authorization: `Bearer ${jwtToken}`,
       },
-      body: JSON.stringify(otpPayload)
+      body: JSON.stringify(otpPayload),
     });
-    const otpStatus = await otpResponse.json()
+    const otpStatus = await otpResponse.json();
+    console.log(otpStatus);
+    console.log(verifyOtpUrl);
 
-    if(otpStatus.code === 200){
+    if (otpStatus.code === 200) {
       setOpen(false);
-      navigate('/')
+    } else {
+      alert('Kode OTP milikmu sudah kadaluarsa');
     }
-    else {
-      alert('Kode OTP milikmu sudah kadaluarsa')
-    }
-  }
+  };
 
   const sendOtp = async () => {
-    const sendtOtpResponse = await fetch('https://kaboor-api-dev.up.railway.app/api/v1/auth/otp/resend', {
-      method: 'POST',
+    const sendtOtpResponse = await await fetch(sendOtpUrl, {
+      method: 'PATCH',
       headers: {
         'Content-Type': 'application/json',
+        Authorization: `Bearer ${jwtToken}`,
       },
-      body: JSON.stringify({email: email})
-    })
-    const sentOtpStatus = await sendtOtpResponse.json()
-    console.log(sentOtpStatus)
+      body: JSON.stringify({ payload }),
+    });
+    const sentOtpStatus = await sendtOtpResponse.json();
+    console.log(sentOtpStatus);
+    console.log(sendOtpUrl);
     setTime(180);
-  } 
+  };
 
   return (
     <>
@@ -247,7 +255,7 @@ export default function OtpProfile({setOpen, email}: OtpModalsProps) {
               <OtpInput
                 key={index}
                 value={value}
-                type="text"
+                type='text'
                 onChange={(e) => handleChange(e, index)}
                 maxLength={1}
                 ref={inputRefs[index]}
@@ -256,12 +264,20 @@ export default function OtpProfile({setOpen, email}: OtpModalsProps) {
           </OtpContainer>
           <OtpDesc>
             Kode OTP kadaluwarsa pada{' '}
-            <Countdown time={time} setTime={setTime} onTimeout={handleTimeout} />
+            <Countdown
+              time={time}
+              setTime={setTime}
+              onTimeout={handleTimeout}
+            />
           </OtpDesc>
         </Wrapper>
         <Wrapper>
-          <FirstButton type='button' onClick={handleVerification}>Verifikasi</FirstButton>
-          <SecondButton type='button'  onClick={sendOtp}>Kirim Lagi</SecondButton>
+          <FirstButton type='button' onClick={handleVerification}>
+            Verifikasi
+          </FirstButton>
+          <SecondButton type='button' onClick={sendOtp}>
+            Kirim Lagi
+          </SecondButton>
         </Wrapper>
       </ModalsContainer>
     </>

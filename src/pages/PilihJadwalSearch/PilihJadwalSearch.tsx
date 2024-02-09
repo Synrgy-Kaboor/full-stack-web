@@ -22,7 +22,7 @@ const PilihJadwalSearch = () => {
       >
         <Grid container item md={6}>
           <Typography
-            variant="h3"
+            variant='h3'
             color={'white'}
             fontWeight={'800'}
             fontStyle={'normal'}

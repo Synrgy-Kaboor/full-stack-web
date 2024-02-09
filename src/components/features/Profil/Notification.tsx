@@ -77,7 +77,7 @@ const Notification = () => {
                   fontWeight: 600,
                   letterSpacing: '-0.75px',
                 }}
-              >{`${item.message}`}</Typography>
+              >{`${item.detail}`}</Typography>
             </Stack>
           </Stack>
         ))}

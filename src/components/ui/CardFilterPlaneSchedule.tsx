@@ -27,7 +27,7 @@ import ModalClassSeat from '../../components/ui/ModalClassSeat';
 import theme from '../../config/theme';
 
 const IOSSwitch = styled((props: SwitchProps) => (
-  <Switch focusVisibleClassName=".Mui-focusVisible" disableRipple {...props} />
+  <Switch focusVisibleClassName='.Mui-focusVisible' disableRipple {...props} />
 ))(({ theme }) => ({
   width: 42,
   height: 26,
@@ -131,7 +131,10 @@ const CardFilterPlaneSchedule = () => {
 
   return (
     <>
-      <Card id="main-search-card" sx={{ background: '#FFF', zIndex:2, width: 'max-content' }}>
+      <Card
+        id='main-search-card'
+        sx={{ background: '#FFF', zIndex: 2, width: 'max-content' }}
+      >
         <CardContent sx={{ padding: '2rem' }}>
           <Stack direction={'column'} spacing={2}>
             <Box
@@ -164,7 +167,7 @@ const CardFilterPlaneSchedule = () => {
                       ></FlightTakeoffOutlined>
                       <Stack direction={'column'}>
                         <Typography
-                          variant="subtitle1"
+                          variant='subtitle1'
                           sx={{
                             width: '100%',
                             color: '#9E9E9E',
@@ -186,7 +189,7 @@ const CardFilterPlaneSchedule = () => {
                             lineHeight: '1.5rem',
                             fontFamily: 'Open Sans',
                           }}
-                          placeholder="Masukkan kota asal"
+                          placeholder='Masukkan kota asal'
                           onChange={(event) => {
                             setFrom(event.target.value);
                           }}
@@ -204,7 +207,7 @@ const CardFilterPlaneSchedule = () => {
                       ></FlightLandOutlined>
                       <Stack direction={'column'}>
                         <Typography
-                          variant="subtitle1"
+                          variant='subtitle1'
                           sx={{
                             width: '100%',
                             color: '#9E9E9E',
@@ -229,7 +232,7 @@ const CardFilterPlaneSchedule = () => {
                           onChange={(event) => {
                             setDestination(event.target.value);
                           }}
-                          placeholder="Masukkan kota tujuan"
+                          placeholder='Masukkan kota tujuan'
                         />
                       </Stack>
                     </Stack>
@@ -280,7 +283,7 @@ const CardFilterPlaneSchedule = () => {
                       ></CalendarMonthOutlined>
                       <Stack direction={'column'}>
                         <Typography
-                          variant="subtitle1"
+                          variant='subtitle1'
                           sx={{
                             width: '100%',
                             color: '#9E9E9E',
@@ -294,7 +297,7 @@ const CardFilterPlaneSchedule = () => {
                           Keberangkatan
                         </Typography>
                         <Input
-                          defaultValue="Sabtu, 26 Desember 2023"
+                          defaultValue='Sabtu, 26 Desember 2023'
                           sx={{
                             width: '100%',
                             color: '#1C1C1E',
@@ -327,7 +330,7 @@ const CardFilterPlaneSchedule = () => {
                       ></CalendarMonthOutlined>
                       <Stack direction={'column'}>
                         <Typography
-                          variant="subtitle1"
+                          variant='subtitle1'
                           sx={{
                             width: '100%',
                             color: '#9E9E9E',
@@ -340,7 +343,7 @@ const CardFilterPlaneSchedule = () => {
                           Kepulangan
                         </Typography>
                         <Input
-                          defaultValue="Sabtu, 26 Desember 2023"
+                          defaultValue='Sabtu, 26 Desember 2023'
                           sx={{
                             width: '100%',
                             color: '#1C1C1E',
@@ -376,7 +379,7 @@ const CardFilterPlaneSchedule = () => {
                       ></FlightTakeoffOutlined>
                       <Stack>
                         <Typography
-                          variant="subtitle1"
+                          variant='subtitle1'
                           sx={{
                             width: '100%',
                             color: '#9E9E9E',
@@ -389,7 +392,7 @@ const CardFilterPlaneSchedule = () => {
                           Penumpang
                         </Typography>
                         <Typography
-                          variant="subtitle1"
+                          variant='subtitle1'
                           sx={{
                             width: '100%',
                             color: '#1C1C1E',
@@ -426,7 +429,7 @@ const CardFilterPlaneSchedule = () => {
                       ></Person2Outlined>
                       <Stack>
                         <Typography
-                          variant="subtitle1"
+                          variant='subtitle1'
                           sx={{
                             width: '100%',
                             color: '#9E9E9E',
@@ -439,7 +442,7 @@ const CardFilterPlaneSchedule = () => {
                           Kelas
                         </Typography>
                         <Typography
-                          variant="subtitle1"
+                          variant='subtitle1'
                           sx={{
                             width: '100%',
                             color: '#1C1C1E',
@@ -459,7 +462,7 @@ const CardFilterPlaneSchedule = () => {
             </Box>
             <Box>
               <Button
-                variant="contained"
+                variant='contained'
                 sx={{
                   background: theme.palette.gradients?.diagonal,
                   width: '100%',

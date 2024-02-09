@@ -2,14 +2,25 @@
 
 const dateNow = new Date()
 export const notificationData = [
-  {createdAt: dateNow,
-  id: 'number1',
-  message: 'this is firs Notif',
-  title: 'this is title'},
-  {createdAt: dateNow,
-    id: 'number2',
-    message: 'this is second Notif',
-    title: 'this is 2 title'}
+  {
+    'id': 1,
+    'type': 'price',
+    'title': 'Harga Baru Tersedia',
+    'detail': 'Harga baru telah ditetapkan untuk produk Y.',
+    'createdAt': dateNow,
+    'flag': false,
+    'priceNotificationId': null
+}, 
+{
+  'id': 2,
+  'type': 'approval',
+  'title': 'Permintaan Persetujuan Proyek Z',
+  'detail': 'Mohon tinjau dan berikan persetujuan untuk proyek Z.',
+  'createdAt': dateNow,
+  'flag': true,
+  'priceNotificationId': 1
+}
+
 ]
 
 export  const formatDate = (date: { toLocaleString: (arg0: string, arg1: { day: string; month: string; }) => unknown; }) => {
