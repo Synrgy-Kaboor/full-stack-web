@@ -11,7 +11,8 @@ import { sideBarItem1, exitItem } from '.';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import profileImg from '../../../assets/profile-img.svg';
-import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
+// import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 
 interface SidebarProp {
   pathname: string;
@@ -73,10 +74,10 @@ export default function Sidebar({ pathname }: SidebarProp) {
           <Stack sx={{ cursor: 'pointer' }}>
             <Typography variant="h6">Andre Huston</Typography>
             <Typography variant="body2" color={'#9E9E9E'}>
-              informasi pribadi 16% lengkap
+              Informasi pribadi 16% lengkap
             </Typography>
           </Stack>
-          <ArrowForwardIosIcon
+          <KeyboardArrowDownIcon
             onClick={(e) => {
               e.stopPropagation();
               setAnchorElNav(e.currentTarget);
@@ -107,6 +108,14 @@ export default function Sidebar({ pathname }: SidebarProp) {
                 <Typography>{data.text}</Typography>
               </MenuItem>
             ))}
+            <MenuItem
+              onClick={(e) => {
+                e.stopPropagation();
+                handleLogout();
+              }}
+            >
+              <Typography>Keluar</Typography>
+            </MenuItem>
           </Menu>
         </Stack>
         <Divider
