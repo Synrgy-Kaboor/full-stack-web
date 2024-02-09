@@ -1,8 +1,8 @@
 import {
+  Autocomplete,
   Grid,
   Stack,
   Typography,
-  Input,
   Box,
   Switch,
   Card,
@@ -10,22 +10,27 @@ import {
   Button,
   IconButton,
   SwitchProps,
+  Slider,
+  TextField,
 } from '@mui/material';
 import { styled } from '@mui/material/styles';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import {
   FlightTakeoffOutlined,
   FlightLandOutlined,
   SwapVertOutlined,
   CalendarMonthOutlined,
   Person2Outlined,
+  AirlineSeatReclineNormalOutlined,
 } from '@mui/icons-material';
 
 import { PassangerSearch } from '../../types/ModalPassagerProps';
 import ModalPassanger from '../../components/ui/ModalPassanger';
 import ModalClassSeat from '../../components/ui/ModalClassSeat';
 import theme from '../../config/theme';
-
+import { CardFilterPlaneScheduleProps } from '../../types/CardFilterPlaneScheduleProps';
+import { AdapterDateFns as adapterDate } from '@mui/x-date-pickers/AdapterDateFns';
+import { LocalizationProvider, MobileDatePicker } from '@mui/x-date-pickers';
 const IOSSwitch = styled((props: SwitchProps) => (
   <Switch focusVisibleClassName='.Mui-focusVisible' disableRipple {...props} />
 ))(({ theme }) => ({
@@ -80,7 +85,7 @@ const IOSSwitch = styled((props: SwitchProps) => (
   },
 }));
 
-const CardFilterPlaneSchedule = () => {
+const CardFilterPlaneSchedule = (props: CardFilterPlaneScheduleProps) => {
   const [homecomingVisible, setHomecomingVisible] = useState(false);
   const [modalPassangerVisible, setModalPassangerVisible] = useState(false);
   const [modalClassSeatVisible, setModalClassSeatVisible] = useState(false);
@@ -98,6 +103,10 @@ const CardFilterPlaneSchedule = () => {
     },
   });
   const [classSeatValue, setClassSeatValue] = useState<string>('Ekonomi');
+  const [sliderValue, setSliderValue] = useState<number[]>([0, 10000000]);
+  const [deparatureDateValue, setDeparatureDateValue] = useState<Date | null>();
+  const [arrivalDateValue, setArrivalDateValue] = useState<Date | null>();
+  const [listAirPort, setListAirPort] = useState<string[]>([]);
   const handleHomecomingVisible = () => {
     setHomecomingVisible(!homecomingVisible);
   };
@@ -128,6 +137,37 @@ const CardFilterPlaneSchedule = () => {
     setFrom(destination);
     setDestination(from);
   };
+  const handleSliderChange = (event: Event, newValue: number | number[]) => {
+    const view = false;
+    view ? console.log(event) : '';
+    setSliderValue(newValue as number[]);
+  };
+
+  const handleSubmit = () => {
+    const value = {
+      deparature: from,
+      arrival: destination,
+      deparatureDate: deparatureDateValue,
+      arrivalDate: homecomingVisible ? arrivalDateValue : null,
+      passanger: passangerValue,
+      class: classSeatValue,
+      priceRange: props.sliderOn ? sliderValue : null,
+    };
+    props.onSubmit(value);
+  };
+
+  const getListAirPort = async () => {
+    const response = await fetch('https://fsw-backend.fly.dev/api/v1/airport');
+    const data = await response.json();
+    const listOfAirport = data.data.map(
+      (item: { id: number; code: string; name: string; timezone: string }) =>
+        item.name + ', ' + item.code
+    );
+    setListAirPort(listOfAirport);
+  };
+  useEffect(() => {
+    getListAirPort();
+  }, []);
 
   return (
     <>
@@ -142,222 +182,221 @@ const CardFilterPlaneSchedule = () => {
               border={'1px solid #C2C2C2'}
               sx={{ padding: '1rem 1.5rem' }}
             >
-              <Grid
-                container
-                justifyContent={'center'}
+              <Stack
+                direction={'row'}
+                spacing={2}
+                justifyContent={'space-between'}
                 alignItems={'center'}
-                spacing={2.5}
               >
-                <Grid
-                  container
-                  item
-                  xs={10}
-                  justifyContent={'center'}
-                  alignItems={'center'}
-                >
-                  <Stack direction={'column'} spacing={1}>
-                    <Stack direction={'row'} alignItems={'center'} spacing={2}>
-                      <FlightTakeoffOutlined
+                <Stack direction={'column'} spacing={1} flexGrow={1}>
+                  <Stack direction={'row'} alignItems={'center'} spacing={2}>
+                    <FlightTakeoffOutlined
+                      sx={{
+                        borderRadius: '50%',
+                        background: theme.palette.gradients?.diagonal,
+                        padding: '0.5rem',
+                        color: 'white',
+                        height: '3rem',
+                        width: '3rem',
+                      }}
+                    ></FlightTakeoffOutlined>
+                    <Stack direction={'column'} flexGrow={1}>
+                      <Typography
+                        variant='subtitle1'
                         sx={{
-                          borderRadius: '50%',
-                          background: theme.palette.gradients?.diagonal,
-                          padding: '0.5rem',
-                          color: 'white',
+                          width: '100%',
+                          color: '#9E9E9E',
+                          fontWeight: 600,
+                          fontStyle: 'normal',
+                          lineHeight: '1.5rem',
                         }}
-                      ></FlightTakeoffOutlined>
-                      <Stack direction={'column'}>
-                        <Typography
-                          variant='subtitle1'
-                          sx={{
-                            width: '100%',
-                            color: '#9E9E9E',
-                            fontWeight: 600,
-                            fontStyle: 'normal',
-                            lineHeight: '1.5rem',
-                          }}
-                          fontFamily={'Open Sans'}
-                        >
-                          Dari
-                        </Typography>
-                        <Input
-                          value={from}
-                          sx={{
-                            width: '100%',
-                            color: '#1C1C1E',
-                            fontWeight: 600,
-                            fontStyle: 'normal',
-                            lineHeight: '1.5rem',
-                            fontFamily: 'Open Sans',
-                          }}
-                          placeholder='Masukkan kota asal'
-                          onChange={(event) => {
-                            setFrom(event.target.value);
-                          }}
-                        />
-                      </Stack>
-                    </Stack>
-                    <Stack direction={'row'} alignItems={'center'} spacing={2}>
-                      <FlightLandOutlined
-                        sx={{
-                          borderRadius: '50%',
-                          background: theme.palette.gradients?.diagonal,
-                          padding: '0.5rem',
-                          color: 'white',
+                        fontFamily={'Open Sans'}
+                      >
+                        Dari
+                      </Typography>
+                      <Autocomplete
+                        options={listAirPort}
+                        popupIcon={null}
+                        disableClearable
+                        value={from}
+                        renderTags={() => null}
+                        onChange={(event, value) => {
+                          event.preventDefault();
+                          setFrom(value);
                         }}
-                      ></FlightLandOutlined>
-                      <Stack direction={'column'}>
-                        <Typography
-                          variant='subtitle1'
-                          sx={{
-                            width: '100%',
-                            color: '#9E9E9E',
-                            fontWeight: 600,
-                            fontStyle: 'normal',
-                            lineHeight: '1.5rem',
-                          }}
-                          fontFamily={'Open Sans'}
-                        >
-                          Ke
-                        </Typography>
-                        <Input
-                          value={destination}
-                          sx={{
-                            width: '100%',
-                            color: '#1C1C1E',
-                            fontWeight: 600,
-                            fontStyle: 'normal',
-                            lineHeight: '1.5rem',
-                            fontFamily: 'Open Sans',
-                          }}
-                          onChange={(event) => {
-                            setDestination(event.target.value);
-                          }}
-                          placeholder='Masukkan kota tujuan'
-                        />
-                      </Stack>
+                        renderInput={(params) => (
+                          <TextField
+                            variant='standard'
+                            placeholder='Masukkan Kota Asal'
+                            {...params}
+                            required
+                            sx={{
+                              width: '100% !important',
+                              color: '#1C1C1E !important',
+                              fontWeight: '600 !important',
+                              fontStyle: 'normal !important',
+                              lineHeight: '1.5rem !important',
+                              fontFamily: 'Open Sans !important',
+                              fontSize: '2rem',
+                            }}
+                          />
+                        )}
+                      ></Autocomplete>
                     </Stack>
                   </Stack>
-                </Grid>
-                <Grid container item xs={2} justifyContent={'center'}>
-                  <IconButton
-                    sx={{
-                      borderRadius: '50%',
-                      background: theme.palette.gradients?.diagonal,
-                      padding: '0.5rem',
-                      color: 'white',
-                    }}
-                    onClick={handleSwapFromDestination}
-                  >
-                    <SwapVertOutlined></SwapVertOutlined>
-                  </IconButton>
-                </Grid>
-              </Grid>
+                  <Stack direction={'row'} alignItems={'center'} spacing={2}>
+                    <FlightLandOutlined
+                      sx={{
+                        borderRadius: '50%',
+                        background: theme.palette.gradients?.diagonal,
+                        padding: '0.5rem',
+                        color: 'white',
+                        height: '3rem',
+                        width: '3rem',
+                      }}
+                    ></FlightLandOutlined>
+                    <Stack direction={'column'} flexGrow={1}>
+                      <Typography
+                        variant='subtitle1'
+                        sx={{
+                          width: '100%',
+                          color: '#9E9E9E',
+                          fontWeight: 600,
+                          fontStyle: 'normal',
+                          lineHeight: '1.5rem',
+                        }}
+                        fontFamily={'Open Sans'}
+                      >
+                        Ke
+                      </Typography>
+                      <Box flexGrow={1}>
+                        <Autocomplete
+                          options={listAirPort}
+                          popupIcon={null}
+                          disableClearable
+                          value={from}
+                          renderTags={() => null}
+                          onChange={(event, value) => {
+                            event.preventDefault();
+                            setDestination(value);
+                          }}
+                          sx={{ width: '100%' }}
+                          renderInput={(params) => (
+                            <TextField
+                              variant='standard'
+                              placeholder='Masukkan Kota Kepergian'
+                              {...params}
+                              required
+                              sx={{
+                                width: '100% !important',
+                                color: '#1C1C1E !important',
+                                fontWeight: '600 !important',
+                                fontStyle: 'normal !important',
+                                lineHeight: '1.5rem !important',
+                                fontFamily: 'Open Sans !important',
+                                fontSize: '2rem',
+                                flexGrow: 1,
+                              }}
+                            />
+                          )}
+                        ></Autocomplete>
+                      </Box>
+                    </Stack>
+                  </Stack>
+                </Stack>
+                <IconButton
+                  sx={{
+                    borderRadius: '50%',
+                    background: theme.palette.gradients?.diagonal,
+                    padding: '0.5rem',
+                    height: '3rem',
+                    width: '3rem',
+                    color: 'white',
+                  }}
+                  onClick={handleSwapFromDestination}
+                >
+                  <SwapVertOutlined></SwapVertOutlined>
+                </IconButton>
+              </Stack>
             </Box>
             <Box
               borderRadius={'0.5rem'}
               border={'1px solid #C2C2C2'}
               sx={{ padding: '1rem 1.5rem' }}
             >
-              <Grid
-                container
-                justifyContent={'center'}
-                alignItems={'center'}
-                spacing={2.5}
-              >
-                <Grid
-                  container
-                  item
-                  xs={12}
-                  justifyContent={'center'}
+              <Stack direction={'column'} spacing={1} width={'100%'}>
+                <Stack
+                  direction={'row'}
                   alignItems={'center'}
+                  spacing={2}
+                  justifyContent={'space-between'}
                 >
-                  <Stack direction={'column'} spacing={1}>
-                    <Stack direction={'row'} alignItems={'center'} spacing={2}>
-                      <CalendarMonthOutlined
-                        sx={{
-                          borderRadius: '50%',
-                          background: theme.palette.gradients?.diagonal,
-                          padding: '0.5rem',
-                          color: 'white',
-                        }}
-                      ></CalendarMonthOutlined>
-                      <Stack direction={'column'}>
-                        <Typography
-                          variant='subtitle1'
-                          sx={{
-                            width: '100%',
-                            color: '#9E9E9E',
-                            fontWeight: 600,
-                            fontStyle: 'normal',
-                            lineHeight: '1.5rem',
-                            letterSpacing: '-0.1px',
+                  <CalendarMonthOutlined
+                    sx={{
+                      borderRadius: '50%',
+                      background: theme.palette.gradients?.diagonal,
+                      padding: '0.5rem',
+                      color: 'white',
+                      height: '3rem',
+                      width: '3rem',
+                    }}
+                  ></CalendarMonthOutlined>
+                  <Stack direction={'column'} flexGrow={1}>
+                    <Box>
+                      <LocalizationProvider dateAdapter={adapterDate}>
+                        <MobileDatePicker
+                          value={deparatureDateValue}
+                          onChange={(value) => {
+                            setDeparatureDateValue(value);
                           }}
-                          fontFamily={'Open Sans'}
-                        >
-                          Keberangkatan
-                        </Typography>
-                        <Input
-                          defaultValue='Sabtu, 26 Desember 2023'
-                          sx={{
-                            width: '100%',
-                            color: '#1C1C1E',
-                            fontWeight: 600,
-                            fontStyle: 'normal',
-                            lineHeight: '1.5rem',
-                            fontFamily: 'Open Sans',
-                          }}
+                          disablePast
+                          label='Keberangkatan'
+                          format='dd MMMM yyyy'
+                          sx={{ border: '0px' }}
                         />
-                      </Stack>
-                      <IOSSwitch onChange={handleHomecomingVisible}></IOSSwitch>
-                    </Stack>
-                    <Stack
-                      direction={'row'}
-                      alignItems={'center'}
-                      spacing={2}
-                      display={
-                        homecomingVisible
-                          ? { display: 'flex' }
-                          : { display: 'none' }
-                      }
-                    >
-                      <CalendarMonthOutlined
-                        sx={{
-                          borderRadius: '50%',
-                          background: theme.palette.gradients?.diagonal,
-                          padding: '0.5rem',
-                          color: 'white',
-                        }}
-                      ></CalendarMonthOutlined>
-                      <Stack direction={'column'}>
-                        <Typography
-                          variant='subtitle1'
-                          sx={{
-                            width: '100%',
-                            color: '#9E9E9E',
-                            fontWeight: 600,
-                            fontStyle: 'normal',
-                            lineHeight: '1.5rem',
-                          }}
-                          fontFamily={'Open Sans'}
-                        >
-                          Kepulangan
-                        </Typography>
-                        <Input
-                          defaultValue='Sabtu, 26 Desember 2023'
-                          sx={{
-                            width: '100%',
-                            color: '#1C1C1E',
-                            fontWeight: 600,
-                            fontStyle: 'normal',
-                            lineHeight: '1.5rem',
-                            fontFamily: 'Open Sans',
-                          }}
-                        />
-                      </Stack>
-                    </Stack>
+                      </LocalizationProvider>
+                    </Box>
                   </Stack>
-                </Grid>
-              </Grid>
+                  <IOSSwitch onChange={handleHomecomingVisible}></IOSSwitch>
+                </Stack>
+                <Stack
+                  direction={'row'}
+                  alignItems={'center'}
+                  spacing={2}
+                  display={
+                    homecomingVisible
+                      ? { display: 'flex' }
+                      : { display: 'none' }
+                  }
+                >
+                  <CalendarMonthOutlined
+                    sx={{
+                      borderRadius: '50%',
+                      background: theme.palette.gradients?.diagonal,
+                      padding: '0.5rem',
+                      color: 'white',
+                      height: '3rem',
+                      width: '3rem',
+                    }}
+                  ></CalendarMonthOutlined>
+                  <Stack direction={'column'} flexGrow={1}>
+                    <Box>
+                      <LocalizationProvider dateAdapter={adapterDate}>
+                        <MobileDatePicker
+                          value={arrivalDateValue}
+                          onChange={(value) => {
+                            setArrivalDateValue(value);
+                          }}
+                          disablePast
+                          label='Kepulangan'
+                          format='dd MMMM yyyy'
+                          sx={{ borderTop: '0px' }}
+                        />
+                      </LocalizationProvider>
+                    </Box>
+                  </Stack>
+                </Stack>
+              </Stack>
             </Box>
             <Box>
               <Grid container justifyContent={'center'} spacing={1}>
@@ -369,14 +408,16 @@ const CardFilterPlaneSchedule = () => {
                     onClick={handleModalPassangerVisibleOpen}
                   >
                     <Stack direction={'row'} spacing={2} alignItems={'center'}>
-                      <FlightTakeoffOutlined
+                      <AirlineSeatReclineNormalOutlined
                         sx={{
                           borderRadius: '50%',
                           background: theme.palette.gradients?.diagonal,
                           padding: '0.5rem',
                           color: 'white',
+                          height: '3rem',
+                          width: '3rem',
                         }}
-                      ></FlightTakeoffOutlined>
+                      ></AirlineSeatReclineNormalOutlined>
                       <Stack>
                         <Typography
                           variant='subtitle1'
@@ -425,6 +466,8 @@ const CardFilterPlaneSchedule = () => {
                           background: theme.palette.gradients?.diagonal,
                           padding: '0.5rem',
                           color: 'white',
+                          height: '3rem',
+                          width: '3rem',
                         }}
                       ></Person2Outlined>
                       <Stack>
@@ -460,6 +503,21 @@ const CardFilterPlaneSchedule = () => {
                 </Grid>
               </Grid>
             </Box>
+            <Box
+              borderRadius={'0.5rem'}
+              border={'1px solid #C2C2C2'}
+              sx={{ padding: '1rem 1.5rem' }}
+              display={props.sliderOn ? 'flex' : 'none'}
+            >
+              <Slider
+                getAriaLabel={() => 'price range'}
+                value={sliderValue}
+                onChange={handleSliderChange}
+                valueLabelDisplay='auto'
+                getAriaValueText={(value: number) => `Rp.${value}`}
+                max={10000000}
+              ></Slider>
+            </Box>
             <Box>
               <Button
                 variant='contained'
@@ -468,8 +526,9 @@ const CardFilterPlaneSchedule = () => {
                   width: '100%',
                   fontFamily: 'Open Sans',
                 }}
+                onClick={handleSubmit}
               >
-                Cari
+                {props.textSubmit}
               </Button>
             </Box>
           </Stack>

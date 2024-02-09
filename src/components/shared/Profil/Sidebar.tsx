@@ -1,7 +1,17 @@
-import { Divider, Stack, Typography, useTheme, Avatar } from '@mui/material';
+import {
+  Divider,
+  Stack,
+  Typography,
+  useTheme,
+  Avatar,
+  Menu,
+  MenuItem,
+} from '@mui/material';
 import { sideBarItem1, exitItem } from '.';
 import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
 import { useAppSelector } from './../../../redux/hooks';
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 
 interface SidebarProp {
   pathname: string;
@@ -13,9 +23,21 @@ export default function Sidebar({ pathname }: SidebarProp) {
     'brightness(0) invert(1) sepia(0) saturate(0) hue-rotate(0deg)';
   const theme = useTheme();
   console.log({ path: pathname });
+  const [anchorElNav, setAnchorElNav] = useState<
+    null | HTMLElement | SVGSVGElement
+  >(null);
+
   const handleListItemClick = (index: number) => {
     navigate(`/profil${sideBarItem1[index].route}`);
   };
+
+  function handleLogout() {
+    if (confirm('Are you sure you want to log out?')) {
+      localStorage.removeItem('token');
+      navigate('/beranda');
+    }
+  }
+
   return (
     <>
       <Stack
@@ -23,8 +45,6 @@ export default function Sidebar({ pathname }: SidebarProp) {
           border: '1px solid #C2C2C2',
           borderRadius: '8px',
           background: '#FFF',
-          maxWidth: '437px',
-          maxHeight: '732px',
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'start',
@@ -36,7 +56,7 @@ export default function Sidebar({ pathname }: SidebarProp) {
           gap={4}
           justifyContent={'space-around'}
           alignItems={'center'}
-          padding={'30px 26px 20px 26px'}
+          padding={'26px 26px 26px 26px'}
         >
           <Avatar
             alt='user-avatar'
@@ -50,21 +70,53 @@ export default function Sidebar({ pathname }: SidebarProp) {
               },
             }}
           />
-          <Stack
-            sx={{
-              cursor: 'pointer',
-              '@media screen and (max-width: 768px)': {
-                display: 'none',
-              },
-            }}
-          >
+          <Stack sx={{ cursor: 'pointer' }}>
             <Typography variant='h6'>Andre Huston</Typography>
             <Typography variant='body2' color={'#9E9E9E'}>
               informasi pribadi 16% lengkap
             </Typography>
           </Stack>
+          <ArrowForwardIosIcon
+            onClick={(e) => {
+              e.stopPropagation();
+              setAnchorElNav(e.currentTarget);
+            }}
+            sx={{ display: { sm: 'none', xs: 'flex' } }}
+          />
+          <Menu
+            anchorEl={anchorElNav}
+            anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
+            keepMounted
+            transformOrigin={{
+              vertical: 'top',
+              horizontal: 'left',
+            }}
+            open={Boolean(anchorElNav)}
+            onClose={() => setAnchorElNav(null)}
+            sx={{ dislay: { xs: 'block', sm: 'none' } }}
+          >
+            {sideBarItem1.map((data, index) => (
+              <MenuItem
+                key={index}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setAnchorElNav(null);
+                  handleListItemClick(index);
+                }}
+              >
+                <Typography>{data.text}</Typography>
+              </MenuItem>
+            ))}
+          </Menu>
         </Stack>
-        <Divider sx={{ width: '100%', color: '#C2C2C2', margin: '10px 0' }} />
+        <Divider
+          sx={{
+            width: '100%',
+            color: '#C2C2C2',
+            margin: '10px 0',
+            display: { xs: 'none', sm: 'flex' },
+          }}
+        />
         {sideBarItem1.map((data, index) =>
           index !== 2 ? (
             <Stack
@@ -81,6 +133,7 @@ export default function Sidebar({ pathname }: SidebarProp) {
                 )
                   ? theme.palette.primary.main
                   : 'transparent',
+                display: { xs: 'none', sm: 'flex' },
               }}
               onClick={() => {
                 handleListItemClick(index);
@@ -135,6 +188,7 @@ export default function Sidebar({ pathname }: SidebarProp) {
                   )
                     ? theme.palette.primary.main
                     : 'transparent',
+                  display: { xs: 'none', sm: 'flex' },
                 }}
                 onClick={() => {
                   handleListItemClick(index);
@@ -174,12 +228,24 @@ export default function Sidebar({ pathname }: SidebarProp) {
                 </Typography>
               </Stack>
               <Divider
-                sx={{ width: '100%', color: '#C2C2C2', margin: '10px 0' }}
+                sx={{
+                  width: '100%',
+                  color: '#C2C2C2',
+                  margin: '10px 0',
+                  display: { xs: 'none', sm: 'flex' },
+                }}
               />
             </>
           )
         )}
-        <Divider sx={{ width: '100%', color: '#C2C2C2', margin: '10px 0' }} />
+        <Divider
+          sx={{
+            width: '100%',
+            color: '#C2C2C2',
+            margin: '10px 0',
+            display: { xs: 'none', sm: 'flex' },
+          }}
+        />
         <Stack
           gap={2}
           direction={'row'}
@@ -188,10 +254,9 @@ export default function Sidebar({ pathname }: SidebarProp) {
             padding: '10px 45px',
             cursor: 'pointer',
             width: '100%',
+            display: { xs: 'none', sm: 'flex' },
           }}
-          onClick={() => {
-            console.log('keluar');
-          }}
+          onClick={handleLogout}
         >
           <img src={exitItem.icon} alt='' width={'32px'} height={'32px'} />
           <Typography
