@@ -11,7 +11,6 @@ import {
 
 import BusinessCenterOutlinedIcon from '@mui/icons-material/BusinessCenterOutlined';
 import HealthAndSafetyOutlinedIcon from '@mui/icons-material/HealthAndSafetyOutlined';
-import RestaurantOutlinedIcon from '@mui/icons-material/RestaurantOutlined';
 
 import PlaneIcon from '../../../assets/plane icon.png';
 import theme from '../../../config/theme';
@@ -43,7 +42,7 @@ function OutboundFlightDetailCard() {
             alignItems="center"
           >
             <Box>
-              <img src={flight.plane.airline.imageUrl} alt="Garuda Indonesia" />
+              <img src={flight.plane.airline.imageUrl} alt="Garuda Indonesia" height={'70px'}/>
             </Box>
             <Box sx={{ textAlign: 'end' }}>
               <Typography variant="body1" sx={{ fontWeight: 'bold' }}>
@@ -102,14 +101,6 @@ function OutboundFlightDetailCard() {
                 }}
               >
                 <HealthAndSafetyOutlinedIcon />
-              </IconButton>
-              <IconButton
-                sx={{
-                  background: theme.palette.gradients?.horizontal,
-                  color: 'white',
-                }}
-              >
-                <RestaurantOutlinedIcon />
               </IconButton>
             </Stack>
             <Stack>
@@ -208,14 +199,6 @@ function ReturnFlightDetailCard() {
                 }}
               >
                 <HealthAndSafetyOutlinedIcon />
-              </IconButton>
-              <IconButton
-                sx={{
-                  background: theme.palette.gradients?.horizontal,
-                  color: 'white',
-                }}
-              >
-                <RestaurantOutlinedIcon />
               </IconButton>
             </Stack>
             <Stack>

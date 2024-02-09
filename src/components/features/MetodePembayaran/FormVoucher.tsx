@@ -13,7 +13,6 @@ import {
 import ConfirmationNumberOutlinedIcon from '@mui/icons-material/ConfirmationNumberOutlined';
 import VerifiedOutlinedIcon from '@mui/icons-material/VerifiedOutlined';
 
-import { vouchers } from '../../../data/vouchers';
 import { Voucher } from '../../../types/Voucher';
 
 import { useState } from 'react';
@@ -120,7 +119,7 @@ function PromoCard(props: Voucher) {
 
 export default function FormVoucher() {
   const [voucherQuery, setVoucherQuery] = useState<string>('');
-  const [listVouchers, setListVouchers] = useState<Voucher[]>(vouchers);
+  const [listVouchers, setListVouchers] = useState<Voucher[]>([]);
 
   const handleVoucherSearch = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>

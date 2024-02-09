@@ -11,7 +11,10 @@ const pemesanInitialState: Orderer = {
     email: ''
 };
 
-const daftarPenumpangInitialState: Passenger[] = [];
+const initialPassenger: Passenger = {
+  name: '',
+  title: ''
+};
 
 function calculateTotalPrice(state: BookingSliceState): number {
   // Hitung harga tiket pesawat
@@ -88,7 +91,7 @@ export const bookingSlice = createSlice({
     returnFlight: null,
     booking: {
       orderer: pemesanInitialState,
-      passengers: daftarPenumpangInitialState,
+      passengers: [],
       addBaggage: false,
       addTravelInsurance: false,
       addBaggageInsurance: false,
@@ -127,7 +130,18 @@ export const bookingSlice = createSlice({
       state.totalChildren = action.payload.totalChildren;
       state.totalBabies = action.payload.totalBabies;
 
+      state.booking.passengers = [];
+      for (let i = 0; i < state.totalAdults + state.totalChildren + state.totalBabies; i++) {
+        state.booking.passengers.push(initialPassenger);
+      }
+
       state.totalPrice = calculateTotalPrice(state);
+    },
+    setInitialOrderer: (state, action: PayloadAction<Orderer>) => {
+      state.booking.orderer = action.payload;
+
+      state.booking.passengers[0].name = state.booking.orderer.name;
+      state.booking.passengers[0].title = state.booking.orderer.title;
     },
     // Ganti Halaman,
     changePage: (state, action: PayloadAction<number>) => {
@@ -207,6 +221,7 @@ export const {
   setOutboundFlight,
   setReturnFlight,
   setNumberOfPassengers,
+  setInitialOrderer,
   changePage,
   openPemesanPopup, 
   closePemesanPopup, 
