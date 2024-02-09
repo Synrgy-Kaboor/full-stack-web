@@ -65,18 +65,22 @@ export default function LoginRoot({ setEmail }: LoginProps) {
       <Grid container sx={{ height: '100vh' }}>
         <Grid
           item
-          xs={6}
+          xs={12}
+          md={6}
           sx={{
-            height: '100%',
+            // minHeight: "30%",
+            maxHeight: '100%',
           }}
         >
-          <img
-            src={LoginBackgroundImage}
-            alt=""
-            height="100%"
-            width="52%"
-            style={{ position: 'absolute', left: 0, zIndex: -2 }}
-          />
+          <Stack sx={{ display: { xs: 'none', md: 'flex' } }}>
+            <img
+              src={LoginBackgroundImage}
+              alt=""
+              height="100%"
+              width="52%"
+              style={{ position: 'absolute', left: 0, zIndex: -2 }}
+            />
+          </Stack>
           <Box
             sx={{
               position: 'absolute',
@@ -92,12 +96,18 @@ export default function LoginRoot({ setEmail }: LoginProps) {
           container
           justifyContent="center"
           alignItems="center"
-          xs={6}
+          xs={12}
+          md={6}
           p={10}
           sx={{
             bgcolor: 'white',
             borderTopLeftRadius: 30,
             borderBottomLeftRadius: 30,
+            '@media screen and (max-width: 899px)': {
+              borderTopRightRadius: 30,
+              borderBottomLeftRadius: 0,
+              padding: '2rem',
+            },
             // boxShadow: 3,
           }}
         >
