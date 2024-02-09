@@ -23,7 +23,7 @@ const PilihJadwalSearch = () => {
           paddingBlock: '4rem',
           backgroundRepeat: 'no-repeat',
           backgroundSize: 'cover',
-          height: '100%',
+          height: '100vh',
         }}
         rowSpacing={2}
         alignItems={'center'}
