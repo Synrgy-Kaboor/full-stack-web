@@ -36,7 +36,10 @@ function calculateTotalPrice(state: BookingSliceState): number {
     + (state.booking.addTravelInsurance ? 1 : 0)
     + (state.booking.addBaggageInsurance ? 1 : 0)
     + (state.booking.addDelayProtection ? 1 : 0);
-  const totalAdditionsPrice = numOfPassengers * numOfAdditions * 65000;
+  let totalAdditionsPrice = numOfPassengers * numOfAdditions * 65000;
+  if (state.returnFlight) {
+    totalAdditionsPrice *= 2;
+  }
 
   let price = outboundFlightPrice + returnFlightPrice + totalAdditionsPrice;
 
@@ -74,7 +77,8 @@ interface BookingSliceState {
   currentPage: number,
   totalAdults: number,
   totalChildren: number,
-  totalBabies: number
+  totalBabies: number,
+  classCode: string
 }
 
 export const bookingSlice = createSlice({
@@ -105,7 +109,8 @@ export const bookingSlice = createSlice({
     totalAdults: 0,
     totalChildren: 0,
     totalBabies: 0,
-    currentPage: 1
+    currentPage: 1,
+    classCode: ''
   } as BookingSliceState,
   reducers: {
     // Set Initial Data

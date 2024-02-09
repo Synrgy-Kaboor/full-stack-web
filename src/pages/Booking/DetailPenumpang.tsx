@@ -35,8 +35,8 @@ export default function DetailPenumpang() {
           {/* Detail Penerbangan */}
           <Grid item xs={12} md={6} order={{ xs: 0, md: 1 }}>
             <Stack spacing={2}>
-              <FlightDetailCard />
-              <FlightDetailCard />
+              <FlightDetailCard type='outbound'/>
+              <FlightDetailCard type='return'/>
 
               {/* Lanjutkan Pemesanan (Desktop View) */}
               {!isSmallScreen && (

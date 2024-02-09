@@ -103,8 +103,8 @@ export default function TataCaraPembayaran() {
           <Grid item md={6} xs={12}>
             <Stack spacing={2}>
               <Fileinput />
-              <FlightDetailCard />
-              <FlightDetailCard />
+              <FlightDetailCard type='outbound'/>
+              <FlightDetailCard type='return'/>
              
             </Stack>
           </Grid>

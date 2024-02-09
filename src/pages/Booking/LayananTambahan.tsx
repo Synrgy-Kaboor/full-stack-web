@@ -123,8 +123,8 @@ export default function LayananTambahan() {
           </Grid>
           <Grid item md={6} xs={12}>
             <Stack spacing={2}>
-              <FlightDetailCard />
-              <FlightDetailCard />
+              <FlightDetailCard type='outbound'/>
+              <FlightDetailCard type='return'/>
               <Stack
                 direction="row"
                 justifyContent="space-between"
