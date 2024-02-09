@@ -4,13 +4,7 @@ import { Voucher } from '../../types/Voucher';
 function calculateFinalPrice(totalPrice: number, voucher: Voucher | null): number {
   if (!voucher) return totalPrice;
   
-  const discountValue = Math.min(
-    Math.floor(
-      voucher.discountPercent * totalPrice / 100
-    ),
-    voucher.maxDiscount
-  );
-  return Math.max(0, totalPrice - discountValue);
+  return Math.max(0, totalPrice - voucher.maxDiscount);
 }
 
 export const metodePembayaranSlice = createSlice({

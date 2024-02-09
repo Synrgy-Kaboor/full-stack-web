@@ -1,16 +1,32 @@
-import { Box, Grid, Typography, Container, Stack, Button, IconButton, Card, CardContent } from '@mui/material';
+import {
+  Box,
+  Grid,
+  Typography,
+  Container,
+  Stack,
+  Button,
+  IconButton,
+  Card,
+  CardContent,
+} from '@mui/material';
 import theme from '../../config/theme';
 import FlightDetailCard from '../../components/shared/Pemesanan/FlightDetailCard';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import DaftarMetodePembayaran from '../../components/features/MetodePembayaran/DaftarMetodePembayaran';
 import ConfirmationNumberIcon from '@mui/icons-material/ConfirmationNumber';
-import { closeVoucherPopup, openVoucherPopup } from '../../redux/slices/MetodePembayaran';
-import Popup from '../../components/core/Popup';
+import {
+  closeVoucherPopup,
+  openVoucherPopup,
+} from '../../redux/slices/MetodePembayaran';
+// import Popup from "../../components/core/Popup";
+import PopupV2 from '../../components/core/PopupV2';
 import FormVoucher from '../../components/features/MetodePembayaran/FormVoucher';
 import { useNavigate } from 'react-router-dom';
 
 export default function MetodePembayaran() {
-  const { voucherPopupOpened, selectedVoucher } = useAppSelector((state) => state.metodePembayaran);
+  const { voucherPopupOpened, selectedVoucher } = useAppSelector(
+    (state) => state.metodePembayaran
+  );
   const dispatch = useAppDispatch();
 
   const navigate = useNavigate();
@@ -24,31 +40,46 @@ export default function MetodePembayaran() {
         <Grid container mt={0} spacing={2}>
           <Grid item md={6} xs={12}>
             {/* Payment Methods */}
-            <DaftarMetodePembayaran/>
-            
+            <DaftarMetodePembayaran />
+
             {/* Voucher Button */}
-            <Typography variant='h6' mt={2} mb={1}>Bayar Lebih Hemat!</Typography>
+            <Typography variant="h6" mt={2} mb={1}>
+              Bayar Lebih Hemat!
+            </Typography>
             <Card variant="outlined">
-              <CardContent sx={{ paddingX: 2, paddingY: 1, '&:last-child': {paddingY: 1} }}>
-                <Stack direction="row" alignItems={'center'}>
+              <CardContent
+                sx={{
+                  paddingX: 2,
+                  paddingY: 1,
+                  '&:last-child': { paddingY: 1 },
+                }}
+              >
+                <Stack
+                  direction="row"
+                  alignItems={'center'}
+                  onClick={() => dispatch(openVoucherPopup())}
+                  sx={{ '&:hover': { cursor: 'pointer' } }}
+                >
                   <Typography flexGrow={1}>
-                    {selectedVoucher ? selectedVoucher.code : 'Pilih/Masukkan Voucher Disini'}
+                    {selectedVoucher
+                      ? selectedVoucher.code
+                      : 'Pilih/Masukkan Voucher Disini'}
                   </Typography>
                   <IconButton onClick={() => dispatch(openVoucherPopup())}>
-                    <ConfirmationNumberIcon/>
+                    <ConfirmationNumberIcon />
                   </IconButton>
                 </Stack>
               </CardContent>
             </Card>
 
             {/* Voucher Modal */}
-            <Popup
-              title='Voucher'
+            <PopupV2
+              title="Voucher"
               open={voucherPopupOpened}
               onClose={() => dispatch(closeVoucherPopup())}
             >
-              <FormVoucher/>
-            </Popup>
+              <FormVoucher />
+            </PopupV2>
           </Grid>
 
           {/* Detail Penerbangan */}
