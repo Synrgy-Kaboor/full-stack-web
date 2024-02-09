@@ -106,7 +106,6 @@ export default function ChangeProfile() {
   useEffect(() => {
     dispatch(fetchUser());
   }, [dispatch, isUpdate]);
-
   const userInfo = useAppSelector((state) => state.userInfo.user);
   const loading = useAppSelector((state) => state.userInfo.loading);
 
@@ -129,34 +128,20 @@ export default function ChangeProfile() {
     const formData = new FormData();
     formData.append('image', avatar);
     console.log('yang mau gue liat', formData.getAll('image'));
-    for (const value of formData.values()) {
-      console.log(value);
-    }
-
-    try {
-      const response = await fetch(
-        'https://fsw-backend.fly.dev/api/v1/user/image',
-        {
-          method: 'POST',
-          body: formData,
-          headers: {
-            Authorization: `Bearer ${jwtToken}`,
-          },
-        }
-      );
-
-      if (!response.ok) {
-        throw new Error('Failed to upload image');
+    const response = await fetch(
+      'https://fsw-backend.fly.dev/api/v1/user/image',
+      {
+        method: 'POST',
+        body: formData,
+        headers: {
+          Authorization: `Bearer ${jwtToken}`,
+        },
       }
+    );
 
-      const data = await response.json();
-      console.log('Image uploaded successfully:', data);
-    } catch (error) {
-      console.error('Error uploading image:', error);
-      console.log(formData);
-    }
+    const data = await response.json();
+    console.log('Image uploaded successfully:', data.imageName);
 
-    console.log(avatar);
     const payload = {
       title,
       fullName,
@@ -167,8 +152,9 @@ export default function ChangeProfile() {
       city,
       address,
       isWni,
-      imageName: avatar.name,
+      imageName: data.imageName,
     };
+
     const updateProfile = await fetch(
       'https://fsw-backend.fly.dev/api/v1/user',
       {
@@ -184,11 +170,8 @@ export default function ChangeProfile() {
     setIsUpdate((isUpdate) => !isUpdate);
     console.log('hasilPatch', updateRespond);
     console.log('stateLoading', loading);
-    console.log('stateInfo', userInfo);
-    console.log({ birthday });
-    console.log('tanggal', formattedBirthday);
+    console.log('userInfoGue', userInfo);
   };
-  console.log('stateInfo', userInfo);
 
   if (!loading) {
     return (

@@ -13,7 +13,18 @@ import {
   Slider,
   TextField,
 } from '@mui/material';
+import {
+  setClassCode,
+  setReturnDate,
+  setDestinationAirportCode,
+  setDepartureDate,
+  setNumOfAdults,
+  setNumOfBabies,
+  setNumOfChildren,
+  setOriginAirportCode,
+} from './../../redux/slices/FlightSchedule';
 import { styled } from '@mui/material/styles';
+import { getFlightClass, formatDate } from './index';
 import { useEffect, useState } from 'react';
 import {
   FlightTakeoffOutlined,
@@ -31,6 +42,7 @@ import theme from '../../config/theme';
 import { CardFilterPlaneScheduleProps } from '../../types/CardFilterPlaneScheduleProps';
 import { AdapterDateFns as adapterDate } from '@mui/x-date-pickers/AdapterDateFns';
 import { LocalizationProvider, MobileDatePicker } from '@mui/x-date-pickers';
+import { useAppDispatch } from '../../redux/hooks';
 const IOSSwitch = styled((props: SwitchProps) => (
   <Switch focusVisibleClassName='.Mui-focusVisible' disableRipple {...props} />
 ))(({ theme }) => ({
@@ -86,11 +98,12 @@ const IOSSwitch = styled((props: SwitchProps) => (
 }));
 
 const CardFilterPlaneSchedule = (props: CardFilterPlaneScheduleProps) => {
+  const dispatch = useAppDispatch();
   const [homecomingVisible, setHomecomingVisible] = useState(false);
   const [modalPassangerVisible, setModalPassangerVisible] = useState(false);
   const [modalClassSeatVisible, setModalClassSeatVisible] = useState(false);
-  const [from, setFrom] = useState<string>();
-  const [destination, setDestination] = useState<string>();
+  const [from, setFrom] = useState<string>('');
+  const [destination, setDestination] = useState<string>('');
   const [passangerValue, setPassangerValue] = useState<PassangerSearch>({
     adult: {
       value: 1,
@@ -120,8 +133,12 @@ const CardFilterPlaneSchedule = (props: CardFilterPlaneScheduleProps) => {
 
   const handleModalPassagerSave = (data: PassangerSearch) => {
     setPassangerValue(data);
+    dispatch(setNumOfAdults(passangerValue.adult.value));
+    dispatch(setNumOfChildren(passangerValue.child.value));
+    dispatch(setNumOfBabies(passangerValue.baby.value));
     setModalPassangerVisible(false);
   };
+
   const handleModalClassSeatVisibleOpen = () => {
     setModalClassSeatVisible(true);
   };
@@ -145,14 +162,20 @@ const CardFilterPlaneSchedule = (props: CardFilterPlaneScheduleProps) => {
 
   const handleSubmit = () => {
     const value = {
-      deparature: from,
-      arrival: destination,
+      deparature: from.slice(-3),
+      arrival: destination.slice(-3),
       deparatureDate: deparatureDateValue,
       arrivalDate: homecomingVisible ? arrivalDateValue : null,
       passanger: passangerValue,
       class: classSeatValue,
       priceRange: props.sliderOn ? sliderValue : null,
     };
+
+    dispatch(setOriginAirportCode(value.deparature));
+    dispatch(setDestinationAirportCode(value.arrival));
+    dispatch(setClassCode(getFlightClass(value.class)));
+    dispatch(setReturnDate(formatDate(value.arrivalDate)));
+    dispatch(setDepartureDate(formatDate(value.deparatureDate)));
     props.onSubmit(value);
   };
 
@@ -391,6 +414,7 @@ const CardFilterPlaneSchedule = (props: CardFilterPlaneScheduleProps) => {
                           label='Kepulangan'
                           format='dd MMMM yyyy'
                           sx={{ borderTop: '0px' }}
+                          defaultValue={new Date()}
                         />
                       </LocalizationProvider>
                     </Box>

@@ -18,7 +18,7 @@ interface SidebarProp {
 }
 export default function Sidebar({ pathname }: SidebarProp) {
   const navigate = useNavigate();
-  const ava = useAppSelector((state) => state.userInfo.user.imageUrl);
+  const userInfo = useAppSelector((state) => state.userInfo.user);
   const filterIcon =
     'brightness(0) invert(1) sepia(0) saturate(0) hue-rotate(0deg)';
   const theme = useTheme();
@@ -60,7 +60,7 @@ export default function Sidebar({ pathname }: SidebarProp) {
         >
           <Avatar
             alt='user-avatar'
-            src={ava}
+            src={userInfo.imageUrl}
             sx={{
               width: '70px',
               height: '70px',
@@ -71,7 +71,7 @@ export default function Sidebar({ pathname }: SidebarProp) {
             }}
           />
           <Stack sx={{ cursor: 'pointer' }}>
-            <Typography variant='h6'>Andre Huston</Typography>
+            <Typography variant='h6'>{userInfo.fullName}</Typography>
             <Typography variant='body2' color={'#9E9E9E'}>
               informasi pribadi 16% lengkap
             </Typography>
