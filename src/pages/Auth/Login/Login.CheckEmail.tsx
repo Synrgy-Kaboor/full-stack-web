@@ -12,21 +12,21 @@ import {
   DialogTitle,
   DialogContent,
   CircularProgress,
-} from "@mui/material";
+} from '@mui/material';
 
-import GoogleOAuth from "../../../assets/image 21.png";
-import LoginBackgroundImage from "../../../assets/Login Bg.png";
-import { FormEvent, useState } from "react";
-import { useNavigate } from "react-router";
+import GoogleOAuth from '../../../assets/image 21.png';
+import LoginBackgroundImage from '../../../assets/Login Bg.png';
+import { FormEvent, useState } from 'react';
+import { useNavigate } from 'react-router';
 
-import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
+import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 
 interface LoginProps {
   setEmail: React.Dispatch<React.SetStateAction<string>>;
 }
 
 export default function LoginRoot({ setEmail }: LoginProps) {
-  const [inputEmail, setInputEmail] = useState<string>("");
+  const [inputEmail, setInputEmail] = useState<string>('');
   const [emailStatus, setEmailStatus] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
   const navigate = useNavigate();
@@ -36,11 +36,11 @@ export default function LoginRoot({ setEmail }: LoginProps) {
     setLoading(true);
 
     await fetch(
-      "https://kaboor-api-dev.up.railway.app/api/v1/auth/check/email",
+      'https://kaboor-api-dev.up.railway.app/api/v1/auth/check/email',
       {
-        method: "POST",
+        method: 'POST',
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
         },
         body: JSON.stringify(inputEmail),
       }
@@ -53,7 +53,7 @@ export default function LoginRoot({ setEmail }: LoginProps) {
         if (data.code !== 200) {
           setEmailStatus(false);
           setEmail(inputEmail);
-          navigate("/login/credentials");
+          navigate('/login/credentials');
         } else {
           setEmailStatus(true);
         }
@@ -62,31 +62,31 @@ export default function LoginRoot({ setEmail }: LoginProps) {
 
   return (
     <Box>
-      <Grid container sx={{ height: "100vh" }}>
+      <Grid container sx={{ height: '100vh' }}>
         <Grid
           item
           xs={12}
           md={6}
           sx={{
             // minHeight: "30%",
-            maxHeight: "100%",
+            maxHeight: '100%',
           }}
         >
-          <Stack sx={{ display: { xs: "none", md: "flex" } }}>
+          <Stack sx={{ display: { xs: 'none', md: 'flex' } }}>
             <img
               src={LoginBackgroundImage}
               alt=""
               height="100%"
               width="52%"
-              style={{ position: "absolute", left: 0, zIndex: -2 }}
+              style={{ position: 'absolute', left: 0, zIndex: -2 }}
             />
           </Stack>
           <Box
             sx={{
-              position: "absolute",
+              position: 'absolute',
               zIndex: -1,
-              height: "100%",
-              width: "100%",
+              height: '100%',
+              width: '100%',
               background: `
     linear-gradient(270deg, rgba(58, 66, 255, 0.50) 0%, rgba(123, 82, 171, 0.50) 100%)`,
             }}
@@ -100,30 +100,30 @@ export default function LoginRoot({ setEmail }: LoginProps) {
           md={6}
           p={10}
           sx={{
-            bgcolor: "white",
+            bgcolor: 'white',
             borderTopLeftRadius: 30,
             borderBottomLeftRadius: 30,
-            "@media screen and (max-width: 899px)": {
+            '@media screen and (max-width: 899px)': {
               borderTopRightRadius: 30,
               borderBottomLeftRadius: 0,
-              padding: "2rem",
+              padding: '2rem',
             },
             // boxShadow: 3,
           }}
         >
-          <Box sx={{ width: "100%" }}>
+          <Box sx={{ width: '100%' }}>
             <form onSubmit={handleSubmit}>
-              <Typography variant="h4" sx={{ fontWeight: "bold" }}>
+              <Typography variant="h4" sx={{ fontWeight: 'bold' }}>
                 Log In
               </Typography>
               <TextField
                 variant="outlined"
                 label="Masukkan Email"
                 onChange={(e) => setInputEmail(e.target.value)}
-                sx={{ width: "100%", marginBlock: "1rem" }}
+                sx={{ width: '100%', marginBlock: '1rem' }}
                 required
               ></TextField>
-              <Link underline="none" sx={{ color: "kaboor.main" }}>
+              <Link underline="none" sx={{ color: 'kaboor.main' }}>
                 <Typography textAlign="end">Lupa Password?</Typography>
               </Link>
               <Button
@@ -131,14 +131,14 @@ export default function LoginRoot({ setEmail }: LoginProps) {
                 variant="contained"
                 sx={{
                   backgroundImage: `linear-gradient(90deg, #7B52AB, #3A42FF)`,
-                  marginBlock: "1rem",
-                  width: "100%",
+                  marginBlock: '1rem',
+                  width: '100%',
                 }}
               >
                 {loading ? (
-                  <CircularProgress sx={{ color: "white" }} />
+                  <CircularProgress sx={{ color: 'white' }} />
                 ) : (
-                  "Masuk"
+                  'Masuk'
                 )}
               </Button>
             </form>
@@ -147,9 +147,9 @@ export default function LoginRoot({ setEmail }: LoginProps) {
                 <Stack direction="row" alignItems="center" spacing={2}>
                   <ArrowBackIosNewIcon
                     onClick={() => setEmailStatus(false)}
-                    sx={{ "&:hover": { cursor: "pointer" } }}
+                    sx={{ '&:hover': { cursor: 'pointer' } }}
                   />
-                  <Typography variant="h6" sx={{ fontWeight: "bold" }}>
+                  <Typography variant="h6" sx={{ fontWeight: 'bold' }}>
                     Kembali
                   </Typography>
                 </Stack>
@@ -158,12 +158,12 @@ export default function LoginRoot({ setEmail }: LoginProps) {
                 <Stack spacing={1}>
                   <Typography
                     variant="h5"
-                    sx={{ fontWeight: "bold" }}
+                    sx={{ fontWeight: 'bold' }}
                     textAlign="center"
                   >
                     Email ini belum terdaftar untuk Login
                   </Typography>
-                  <Typography sx={{ color: "gray" }} textAlign="center">
+                  <Typography sx={{ color: 'gray' }} textAlign="center">
                     Untuk log in menggunakan email ini, silahkan lakukan daftar
                     akun terlebih dulu ya
                   </Typography>
@@ -173,7 +173,7 @@ export default function LoginRoot({ setEmail }: LoginProps) {
                       onClick={() => setEmailStatus(false)}
                       sx={{
                         border:
-                          "2px solid linear-gradient(90deg, #7B52AB, #3A42FF)",
+                          '2px solid linear-gradient(90deg, #7B52AB, #3A42FF)',
                       }}
                     >
                       Nanti Saja
@@ -183,7 +183,7 @@ export default function LoginRoot({ setEmail }: LoginProps) {
                       sx={{
                         backgroundImage: `linear-gradient(90deg, #7B52AB, #3A42FF)`,
                       }}
-                      onClick={() => navigate("/register")}
+                      onClick={() => navigate('/register')}
                     >
                       Daftar Akun
                     </Button>
@@ -191,7 +191,7 @@ export default function LoginRoot({ setEmail }: LoginProps) {
                 </Stack>
               </DialogContent>
             </Dialog>
-            <Divider sx={{ color: "gray", fontFamily: "Open Sans" }}>
+            <Divider sx={{ color: 'gray', fontFamily: 'Open Sans' }}>
               atau login dengan
             </Divider>
             <Stack direction="row" justifyContent="center" my={2}>
@@ -201,19 +201,19 @@ export default function LoginRoot({ setEmail }: LoginProps) {
             </Stack>
 
             <Typography textAlign="center" my={5}>
-              Dengan Log In kamu menyetujui{" "}
+              Dengan Log In kamu menyetujui{' '}
               <Link underline="none" color="primary.main">
                 Syarat, Ketentuan, dan Kebijakan
-              </Link>{" "}
+              </Link>{' '}
               Privasi Kaboor
             </Typography>
 
             <Typography textAlign="center">
-              Belum punya akun?{" "}
+              Belum punya akun?{' '}
               <Link
                 href="/register"
                 underline="none"
-                sx={{ color: "primary.main" }}
+                sx={{ color: 'primary.main' }}
               >
                 Buat akun yuk?
               </Link>
