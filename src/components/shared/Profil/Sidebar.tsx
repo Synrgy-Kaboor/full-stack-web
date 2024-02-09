@@ -6,19 +6,20 @@ import {
   Avatar,
   Menu,
   MenuItem,
-} from "@mui/material";
-import { sideBarItem1, exitItem } from ".";
-import { useNavigate } from "react-router-dom";
-import { useState } from "react";
-import profileImg from "../../../assets/profile-img.svg";
-import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
+} from '@mui/material';
+import { sideBarItem1, exitItem } from '.';
+import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
+import profileImg from '../../../assets/profile-img.svg';
+// import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 
 interface SidebarProp {
   pathname: string;
 }
 export default function Sidebar({ pathname }: SidebarProp) {
   const filterIcon =
-    "brightness(0) invert(1) sepia(0) saturate(0) hue-rotate(0deg)";
+    'brightness(0) invert(1) sepia(0) saturate(0) hue-rotate(0deg)';
   const theme = useTheme();
   console.log({ path: pathname });
 
@@ -32,9 +33,9 @@ export default function Sidebar({ pathname }: SidebarProp) {
   };
 
   function handleLogout() {
-    if (confirm("Are you sure you want to log out?")) {
-      localStorage.removeItem("token");
-      navigate("/beranda");
+    if (confirm('Are you sure you want to log out?')) {
+      localStorage.removeItem('token');
+      navigate('/beranda');
     }
   }
 
@@ -42,58 +43,58 @@ export default function Sidebar({ pathname }: SidebarProp) {
     <>
       <Stack
         sx={{
-          border: "1px solid #C2C2C2",
-          borderRadius: "8px",
-          background: "#FFF",
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "start",
+          border: '1px solid #C2C2C2',
+          borderRadius: '8px',
+          background: '#FFF',
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'start',
         }}
       >
         <Stack
-          onClick={() => navigate("/profil")}
-          direction={"row"}
+          onClick={() => navigate('/profil')}
+          direction={'row'}
           gap={4}
-          justifyContent={"space-around"}
-          alignItems={"center"}
-          padding={"26px 26px 26px 26px"}
+          justifyContent={'space-around'}
+          alignItems={'center'}
+          padding={'26px 26px 26px 26px'}
         >
           <Avatar
             alt="user-avatar"
             src={profileImg}
             sx={{
-              width: "70px",
-              height: "70px",
-              "@media screen and (max-width: 600px)": {
-                width: "50px",
-                height: "50px",
+              width: '70px',
+              height: '70px',
+              '@media screen and (max-width: 600px)': {
+                width: '50px',
+                height: '50px',
               },
             }}
           />
-          <Stack sx={{ cursor: "pointer" }}>
+          <Stack sx={{ cursor: 'pointer' }}>
             <Typography variant="h6">Andre Huston</Typography>
-            <Typography variant="body2" color={"#9E9E9E"}>
-              informasi pribadi 16% lengkap
+            <Typography variant="body2" color={'#9E9E9E'}>
+              Informasi pribadi 16% lengkap
             </Typography>
           </Stack>
-          <ArrowForwardIosIcon
+          <KeyboardArrowDownIcon
             onClick={(e) => {
               e.stopPropagation();
               setAnchorElNav(e.currentTarget);
             }}
-            sx={{ display: { sm: "none", xs: "flex" } }}
+            sx={{ display: { sm: 'none', xs: 'flex' } }}
           />
           <Menu
             anchorEl={anchorElNav}
-            anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
+            anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
             keepMounted
             transformOrigin={{
-              vertical: "top",
-              horizontal: "left",
+              vertical: 'top',
+              horizontal: 'left',
             }}
             open={Boolean(anchorElNav)}
             onClose={() => setAnchorElNav(null)}
-            sx={{ dislay: { xs: "block", sm: "none" } }}
+            sx={{ dislay: { xs: 'block', sm: 'none' } }}
           >
             {sideBarItem1.map((data, index) => (
               <MenuItem
@@ -107,14 +108,22 @@ export default function Sidebar({ pathname }: SidebarProp) {
                 <Typography>{data.text}</Typography>
               </MenuItem>
             ))}
+            <MenuItem
+              onClick={(e) => {
+                e.stopPropagation();
+                handleLogout();
+              }}
+            >
+              <Typography>Keluar</Typography>
+            </MenuItem>
           </Menu>
         </Stack>
         <Divider
           sx={{
-            width: "100%",
-            color: "#C2C2C2",
-            margin: "10px 0",
-            display: { xs: "none", sm: "flex" },
+            width: '100%',
+            color: '#C2C2C2',
+            margin: '10px 0',
+            display: { xs: 'none', sm: 'flex' },
           }}
         />
         {sideBarItem1.map((data, index) =>
@@ -122,18 +131,18 @@ export default function Sidebar({ pathname }: SidebarProp) {
             <Stack
               key={index}
               gap={2}
-              direction={"row"}
+              direction={'row'}
               sx={{
-                alignItems: "center",
-                padding: "10px 45px",
-                cursor: "pointer",
-                width: "100%",
+                alignItems: 'center',
+                padding: '10px 45px',
+                cursor: 'pointer',
+                width: '100%',
                 backgroundColor: pathname.includes(
                   `/profil${sideBarItem1[index].route}`
                 )
                   ? theme.palette.primary.main
-                  : "transparent",
-                display: { xs: "none", sm: "flex" },
+                  : 'transparent',
+                display: { xs: 'none', sm: 'flex' },
               }}
               onClick={() => {
                 handleListItemClick(index);
@@ -142,14 +151,14 @@ export default function Sidebar({ pathname }: SidebarProp) {
               <img
                 src={data.icon}
                 alt=""
-                width={"32px"}
-                height={"32px"}
+                width={'32px'}
+                height={'32px'}
                 style={{
                   filter: pathname.includes(
                     `/profil${sideBarItem1[index].route}`
                   )
                     ? filterIcon
-                    : "none",
+                    : 'none',
                 }}
               />
               <Typography
@@ -158,14 +167,14 @@ export default function Sidebar({ pathname }: SidebarProp) {
                   color: pathname.includes(
                     `/profil${sideBarItem1[index].route}`
                   )
-                    ? "#ffffff"
-                    : "#505050",
-                  fontSize: "18px",
+                    ? '#ffffff'
+                    : '#505050',
+                  fontSize: '18px',
                   fontWeight: 400,
-                  lineHeight: "26px",
-                  letterSpacing: "-0.15px",
-                  "@media screen and (max-width: 600px)": {
-                    display: "none",
+                  lineHeight: '26px',
+                  letterSpacing: '-0.15px',
+                  '@media screen and (max-width: 600px)': {
+                    display: 'none',
                   },
                 }}
               >
@@ -177,18 +186,18 @@ export default function Sidebar({ pathname }: SidebarProp) {
               <Stack
                 key={index}
                 gap={2}
-                direction={"row"}
+                direction={'row'}
                 sx={{
-                  alignItems: "center",
-                  padding: "10px 45px",
-                  cursor: "pointer",
-                  width: "100%",
+                  alignItems: 'center',
+                  padding: '10px 45px',
+                  cursor: 'pointer',
+                  width: '100%',
                   backgroundColor: pathname.includes(
                     `/profil${sideBarItem1[index].route}`
                   )
                     ? theme.palette.primary.main
-                    : "transparent",
-                  display: { xs: "none", sm: "flex" },
+                    : 'transparent',
+                  display: { xs: 'none', sm: 'flex' },
                 }}
                 onClick={() => {
                   handleListItemClick(index);
@@ -197,14 +206,14 @@ export default function Sidebar({ pathname }: SidebarProp) {
                 <img
                   src={data.icon}
                   alt=""
-                  width={"32px"}
-                  height={"32px"}
+                  width={'32px'}
+                  height={'32px'}
                   style={{
                     filter: pathname.includes(
                       `/profil${sideBarItem1[index].route}`
                     )
                       ? filterIcon
-                      : "none",
+                      : 'none',
                   }}
                 />
                 <Typography
@@ -213,14 +222,14 @@ export default function Sidebar({ pathname }: SidebarProp) {
                     color: pathname.includes(
                       `/profil${sideBarItem1[index].route}`
                     )
-                      ? "#ffffff"
-                      : "#505050",
-                    fontSize: "18px",
+                      ? '#ffffff'
+                      : '#505050',
+                    fontSize: '18px',
                     fontWeight: 400,
-                    lineHeight: "26px",
-                    letterSpacing: "-0.15px",
-                    "@media screen and (max-width: 600px)": {
-                      display: "none",
+                    lineHeight: '26px',
+                    letterSpacing: '-0.15px',
+                    '@media screen and (max-width: 600px)': {
+                      display: 'none',
                     },
                   }}
                 >
@@ -229,10 +238,10 @@ export default function Sidebar({ pathname }: SidebarProp) {
               </Stack>
               <Divider
                 sx={{
-                  width: "100%",
-                  color: "#C2C2C2",
-                  margin: "10px 0",
-                  display: { xs: "none", sm: "flex" },
+                  width: '100%',
+                  color: '#C2C2C2',
+                  margin: '10px 0',
+                  display: { xs: 'none', sm: 'flex' },
                 }}
               />
             </>
@@ -240,35 +249,35 @@ export default function Sidebar({ pathname }: SidebarProp) {
         )}
         <Divider
           sx={{
-            width: "100%",
-            color: "#C2C2C2",
-            margin: "10px 0",
-            display: { xs: "none", sm: "flex" },
+            width: '100%',
+            color: '#C2C2C2',
+            margin: '10px 0',
+            display: { xs: 'none', sm: 'flex' },
           }}
         />
         <Stack
           gap={2}
-          direction={"row"}
+          direction={'row'}
           sx={{
-            alignItems: "center",
-            padding: "10px 45px",
-            cursor: "pointer",
-            width: "100%",
-            display: { xs: "none", sm: "flex" },
+            alignItems: 'center',
+            padding: '10px 45px',
+            cursor: 'pointer',
+            width: '100%',
+            display: { xs: 'none', sm: 'flex' },
           }}
           onClick={handleLogout}
         >
-          <img src={exitItem.icon} alt="" width={"32px"} height={"32px"} />
+          <img src={exitItem.icon} alt="" width={'32px'} height={'32px'} />
           <Typography
             variant="body2"
             sx={{
-              color: "#505050",
-              fontSize: "18px",
+              color: '#505050',
+              fontSize: '18px',
               fontWeight: 400,
-              lineHeight: "26px",
-              letterSpacing: "-0.15px",
-              "@media screen and (max-width: 600px)": {
-                display: "none",
+              lineHeight: '26px',
+              letterSpacing: '-0.15px',
+              '@media screen and (max-width: 600px)': {
+                display: 'none',
               },
             }}
           >
