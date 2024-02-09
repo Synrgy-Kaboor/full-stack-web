@@ -8,26 +8,31 @@ import {
   Divider,
   Button,
   Radio,
+  useMediaQuery,
+  useTheme,
 } from '@mui/material';
 import { ArrowBackIosOutlined } from '@mui/icons-material';
 import { ModalClassSeatProps } from '../../types/ModalClassSeatProps';
 import { useState } from 'react';
 
-const modalStyle = {
-  position: 'absolute',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
-  bgcolor: '#FFF',
-  border: '1px solid #C2C2C2',
-  boxShadow: 24,
-  borderRadius: 3,
-  px: 9,
-  py: 3,
-};
-
 const ModalClassSeat = (props: ModalClassSeatProps) => {
+  const theme = useTheme();
+  const isSmallScreen = useMediaQuery(theme.breakpoints.down('md'));
   const [valueChecked, setValueChecked] = useState<string>(props.valueChecked);
+  console.log(isSmallScreen);
+  const modalStyle = {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    bgcolor: '#FFF',
+    border: '1px solid #C2C2C2',
+    boxShadow: 24,
+    borderRadius: 3,
+    px: isSmallScreen ? 5 : 9,
+    py: 3,
+  };
+
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setValueChecked((event.target as HTMLInputElement).value);
   };
@@ -47,7 +52,7 @@ const ModalClassSeat = (props: ModalClassSeatProps) => {
       aria-describedby="modal-modal-description"
       id="modal-passanger"
     >
-      <Box sx={modalStyle} width={'auto'}>
+      <Box sx={modalStyle} width={isSmallScreen ? '100%' : 'auto'}>
         <Stack alignItems={'center'} width={'100%'} spacing={1}>
           <Box
             position={'relative'}
@@ -94,7 +99,7 @@ const ModalClassSeat = (props: ModalClassSeatProps) => {
                   </Typography>
                 </Stack>
               </Grid>
-              <Grid item xs={1} width={'100%'}  justifyContent={'flex-end'}>
+              <Grid item xs={1} width={'100%'} justifyContent={'flex-end'}>
                 <Radio
                   checked={valueChecked === 'Ekonomi'}
                   onChange={handleChange}
