@@ -28,7 +28,7 @@ export default function DaftarPenumpang() {
     <Card variant="outlined">
       <CardContent sx={{ p: 2 }}>
         <Stack direction="row" justifyContent="space-between" mb={2}>
-          <Typography>sama dengan pemesan</Typography>
+          <Typography>Sama dengan pemesan</Typography>
           <IOSSwitch
             defaultChecked
             onChange={() => {

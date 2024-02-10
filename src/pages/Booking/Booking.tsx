@@ -33,8 +33,8 @@ export default function Booking() {
       dispatch(setInitialOrderer({
         name: response.data.fullName,
         title: response.data.title,
-        phone: '',
-        email: ''
+        phone: response.data.phoneNumber,
+        email: response.data.email
       }));
     });
 
@@ -55,8 +55,8 @@ export default function Booking() {
           adultPrice: response.data.adultPrice,
           childPrice: response.data.childPrice,
           babyPrice: response.data.babyPrice,
-          departureDateTime: new Date(response.data.departureDatetime),
-          arrivalDateTime: new Date(response.data.arrivalDatetime)
+          departureDateTime: response.data.departureDatetime,
+          arrivalDateTime: response.data.arrivalDatetime
         }));
       });
     }
@@ -73,8 +73,8 @@ export default function Booking() {
           adultPrice: response.data.adultPrice,
           childPrice: response.data.childPrice,
           babyPrice: response.data.babyPrice,
-          departureDateTime: new Date(response.data.departureDatetime),
-          arrivalDateTime: new Date(response.data.arrivalDatetime)
+          departureDateTime: response.data.departureDatetime,
+          arrivalDateTime: response.data.arrivalDatetime
         }));
       });
     }

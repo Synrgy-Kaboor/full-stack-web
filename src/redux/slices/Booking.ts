@@ -138,7 +138,10 @@ export const bookingSlice = createSlice({
       state.totalPrice = calculateTotalPrice(state);
     },
     setInitialOrderer: (state, action: PayloadAction<Orderer>) => {
-      state.booking.orderer = action.payload;
+      state.booking.orderer.name = action.payload.name ?? '';
+      state.booking.orderer.title = action.payload.title ?? '';
+      state.booking.orderer.email = action.payload.email ?? '';
+      state.booking.orderer.phone = action.payload.phone ?? '';
 
       state.booking.passengers[0].name = state.booking.orderer.name;
       state.booking.passengers[0].title = state.booking.orderer.title;

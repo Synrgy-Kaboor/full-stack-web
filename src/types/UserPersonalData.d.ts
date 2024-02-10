@@ -9,5 +9,7 @@ export type UserPersonalData = {
   address: string,
   isWni: boolean,
   imageName: string,
-  imageUrl: string
+  imageUrl: string,
+  email: string,
+  phoneNumber: string
 }

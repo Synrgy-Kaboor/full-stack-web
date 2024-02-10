@@ -2,8 +2,8 @@ import { Airport } from './Airport';
 
 export type Flight = {
   id: number;
-  departureDateTime: Date;
-  arrivalDateTime: Date;
+  departureDateTime: string;
+  arrivalDateTime: string;
   plane: Plane
   originAirport: Airport;
   destinationAirport: Airport;

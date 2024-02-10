@@ -42,7 +42,7 @@ function OutboundFlightDetailCard() {
             alignItems="center"
           >
             <Box>
-              <img src={flight.plane.airline.imageUrl} alt="Garuda Indonesia" height={'70px'}/>
+              <img src={flight.plane.airline.imageUrl} alt={flight.plane.airline.name} height={'70px'}/>
             </Box>
             <Box sx={{ textAlign: 'end' }}>
               <Typography variant="body1" sx={{ fontWeight: 'bold' }}>
@@ -55,7 +55,7 @@ function OutboundFlightDetailCard() {
             <Box>
               <Typography variant="body2">Surabaya</Typography>
               <Typography variant="body1" sx={{ fontWeight: 'bold' }}>
-                {timeWithTimezone(flight.departureDateTime, flight.originAirport.timezone)}
+                {timeWithTimezone(new Date(flight.departureDateTime), flight.originAirport.timezone)}
               </Typography>
             </Box>
             <Box sx={{ width: '40%', textAlign: 'center' }} mx={2}>
@@ -63,16 +63,16 @@ function OutboundFlightDetailCard() {
                 <img src={PlaneIcon} alt="" />
               </Divider>
               <Typography variant="subtitle2" sx={{ color: 'gray' }}>
-                Durasi {durationString(flight.departureDateTime, flight?.arrivalDateTime)}
+                Durasi {durationString(new Date(flight.departureDateTime), new Date(flight?.arrivalDateTime))}
               </Typography>
               <Typography variant="subtitle2" sx={{ color: 'gray' }}>
-                {dateToVerboseString(flight.departureDateTime, flight.originAirport.timezone)}
+                {dateToVerboseString(new Date(flight.departureDateTime), flight.originAirport.timezone)}
               </Typography>
             </Box>
             <Box sx={{ textAlign: 'end' }}>
               <Typography variant="body2">Jakarta</Typography>
               <Typography variant="body1" sx={{ fontWeight: 'bold' }}>
-                {flight ? timeWithTimezone(flight.arrivalDateTime, flight.originAirport.timezone): ''}
+                {flight ? timeWithTimezone(new Date(flight.arrivalDateTime), flight.originAirport.timezone): ''}
               </Typography>
             </Box>
           </Stack>
@@ -140,7 +140,7 @@ function ReturnFlightDetailCard() {
             alignItems="center"
           >
             <Box>
-              <img src={flight.plane.airline.imageUrl} alt="Garuda Indonesia" />
+            <img src={flight.plane.airline.imageUrl} alt={flight.plane.airline.name} height={'70px'}/>
             </Box>
             <Box sx={{ textAlign: 'end' }}>
               <Typography variant="body1" sx={{ fontWeight: 'bold' }}>
@@ -153,7 +153,7 @@ function ReturnFlightDetailCard() {
             <Box>
               <Typography variant="body2">Surabaya</Typography>
               <Typography variant="body1" sx={{ fontWeight: 'bold' }}>
-                {timeWithTimezone(flight.departureDateTime, flight.originAirport.timezone)}
+                {timeWithTimezone(new Date(flight.departureDateTime), flight.originAirport.timezone)}
               </Typography>
             </Box>
             <Box sx={{ width: '40%', textAlign: 'center' }} mx={2}>
@@ -161,16 +161,16 @@ function ReturnFlightDetailCard() {
                 <img src={PlaneIcon} alt="" />
               </Divider>
               <Typography variant="subtitle2" sx={{ color: 'gray' }}>
-                Durasi {durationString(flight.departureDateTime, flight?.arrivalDateTime)}
+                Durasi {durationString(new Date(flight.departureDateTime), new Date(flight?.arrivalDateTime))}
               </Typography>
               <Typography variant="subtitle2" sx={{ color: 'gray' }}>
-                {dateToVerboseString(flight.departureDateTime, flight.originAirport.timezone)}
+                {dateToVerboseString(new Date(flight.departureDateTime), flight.originAirport.timezone)}
               </Typography>
             </Box>
             <Box sx={{ textAlign: 'end' }}>
               <Typography variant="body2">Jakarta</Typography>
               <Typography variant="body1" sx={{ fontWeight: 'bold' }}>
-                {flight ? timeWithTimezone(flight.arrivalDateTime, flight.originAirport.timezone): ''}
+                {flight ? timeWithTimezone(new Date(flight.arrivalDateTime), flight.originAirport.timezone): ''}
               </Typography>
             </Box>
           </Stack>

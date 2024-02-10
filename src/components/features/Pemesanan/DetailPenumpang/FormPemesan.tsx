@@ -53,13 +53,13 @@ export default function FormPemesan() {
           value={orderer.title}
           onChange={(event) => {
             const newOrderer = { ...orderer };
-            newOrderer.name = event.target.value;
+            newOrderer.title = event.target.value;
             setOrderer(newOrderer);
           }}
         >
           <FormControlLabel value="Mr" control={<Radio />} label="Mr" />
+          <FormControlLabel value="Ms" control={<Radio />} label="Ms" />
           <FormControlLabel value="Mrs" control={<Radio />} label="Mrs" />
-          <FormControlLabel value="Miss" control={<Radio />} label="Miss" />
         </RadioGroup>
 
         <Typography fontWeight="bold">Nomor Telepon</Typography>

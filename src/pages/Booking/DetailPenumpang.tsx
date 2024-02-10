@@ -16,7 +16,7 @@ import FormPemesan from '../../components/features/Pemesanan/DetailPenumpang/For
 import FormPenumpang from '../../components/features/Pemesanan/DetailPenumpang/FormPenumpang';
 import Popup from '../../components/core/Popup';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
-import { changePage, closePemesanPopup, closePenumpangPopup } from '../../redux/slices/Booking';
+import { changePage, closePemesanPopup, closePenumpangPopup, setAddBaggage } from '../../redux/slices/Booking';
 
 export default function DetailPenumpang() {
   const { penumpangPopupOpened, pemesanPopupOpened } = useAppSelector((state) => state.booking.detailPenumpang);
@@ -27,7 +27,7 @@ export default function DetailPenumpang() {
 
   return (
     <>
-      <Container sx={{ paddingBlock: '2rem' }}>
+      <Container sx={{ paddingBlockEnd: '2rem' }}>
         <Typography variant="h5" fontWeight="bold">
           Detail Penumpang
         </Typography>
@@ -92,7 +92,8 @@ export default function DetailPenumpang() {
                 <ExtraFacilityCard
                   title="Bagasi"
                   caption="Yakin bagasi 20kg cukup untuk semua barang bawaan kamu sekarang"
-                  actionText="Tambah bagasi tambahan"
+                  price={65000}
+                  changeState={(payload) => { dispatch(setAddBaggage(payload)) }}
                 />
               </Stack>
             </Box>
