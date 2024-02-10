@@ -14,22 +14,33 @@ import FlightDetailCard from '../../components/shared/Pemesanan/FlightDetailCard
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import DaftarMetodePembayaran from '../../components/features/MetodePembayaran/DaftarMetodePembayaran';
 import ConfirmationNumberIcon from '@mui/icons-material/ConfirmationNumber';
-import {
-  closeVoucherPopup,
-  openVoucherPopup,
-} from '../../redux/slices/MetodePembayaran';
-// import Popup from "../../components/core/Popup";
-import PopupV2 from '../../components/core/PopupV2';
+import Popup from '../../components/core/Popup';
 import FormVoucher from '../../components/features/MetodePembayaran/FormVoucher';
 import { useNavigate } from 'react-router-dom';
+import { closeVoucherPopup, openVoucherPopup, setAvailableVouchers } from '../../redux/slices/Booking';
+import { numToRp } from '../../utils/formatter';
+import { useEffect } from 'react';
+import { httpFetch } from '../../utils/http';
+import { BeResponse } from '../../types/BeResponse';
+import { Voucher } from '../../types/Voucher';
+import { CreateBookingBody } from '../../types/CreateBookingBody';
 
 export default function MetodePembayaran() {
-  const { voucherPopupOpened, selectedVoucher } = useAppSelector(
-    (state) => state.metodePembayaran
-  );
+  const voucherPopupOpened = useAppSelector((state) => state.booking.metodePembayaran.voucherPopupOpened);
+  const totalPrice = useAppSelector((state) => state.booking.totalPrice);
+  const booking = useAppSelector((state) => state.booking.booking);
+  const outboundFlight = useAppSelector((state) => state.booking.outboundFlight);
+  const returnFlight = useAppSelector((state) => state.booking.returnFlight);
+  const { totalAdults, totalChildren, totalBabies, classCode } = useAppSelector((state) => state.booking);
   const dispatch = useAppDispatch();
-
   const navigate = useNavigate();
+
+  useEffect(() => {
+    // Load vouchers
+    httpFetch<BeResponse<Voucher[]>>('api/v1/voucher', true, {}, 'fsw').then(response => {
+      dispatch(setAvailableVouchers(response.data))
+    }); 
+  }, [dispatch]);
 
   return (
     <>
@@ -61,8 +72,8 @@ export default function MetodePembayaran() {
                   sx={{ '&:hover': { cursor: 'pointer' } }}
                 >
                   <Typography flexGrow={1}>
-                    {selectedVoucher
-                      ? selectedVoucher.code
+                    {booking.voucher
+                      ? booking.voucher.code
                       : 'Pilih/Masukkan Voucher Disini'}
                   </Typography>
                   <IconButton onClick={() => dispatch(openVoucherPopup())}>
@@ -73,20 +84,20 @@ export default function MetodePembayaran() {
             </Card>
 
             {/* Voucher Modal */}
-            <PopupV2
+            <Popup
               title="Voucher"
               open={voucherPopupOpened}
               onClose={() => dispatch(closeVoucherPopup())}
             >
               <FormVoucher />
-            </PopupV2>
+            </Popup>
           </Grid>
 
           {/* Detail Penerbangan */}
           <Grid item md={6} xs={12}>
             <Stack spacing={2}>
-              <FlightDetailCard />
-              <FlightDetailCard />
+              <FlightDetailCard type='outbound'/>
+              <FlightDetailCard type='return'/>
               <Stack
                 direction="row"
                 justifyContent="space-between"
@@ -103,13 +114,37 @@ export default function MetodePembayaran() {
                       fontWeight: 'bold',
                     }}
                   >
-                    Rp 2.350.000
+                    {numToRp(totalPrice)}
                   </Typography>
                 </Box>
                 <Box sx={{ width: '40%' }}>
                   <Button
                     variant="contained"
-                    onClick={() => navigate('/tata-cara-pembayaran')}
+                    onClick={() => {
+                      const body = {
+                        outboundFlightId: outboundFlight ? outboundFlight.id : null,
+                        returnFlightId: returnFlight ? returnFlight.id : null,
+                        classCode,
+                        totalAdult: totalAdults,
+                        totalChild: totalChildren,
+                        totalBaby: totalBabies,
+                        orderer: booking.orderer,
+                        passengers: booking.passengers,
+                        addBaggage: booking.addBaggage,
+                        addTravelInsurance: booking.addTravelInsurance,
+                        addBaggageInsurance: booking.addBaggageInsurance,
+                        addDelayProtection: booking.addDelayProtection,
+                        paymentMethod: booking.paymentMethod,
+                        voucherId: booking.voucher ? booking.voucher.id : null
+                      };
+                      console.log(body)
+                      httpFetch<BeResponse<CreateBookingBody>>('api/v1/booking', true, {}, 'fsw', {
+                        method: 'POST',
+                        body: JSON.stringify(body)
+                      }).then((response) => {
+                        navigate(`/booking/${response.data.bookingId}/pembayaran`);
+                      });
+                    }}
                     sx={{
                       background: theme.palette.gradients?.horizontal,
                       width: '100%',
