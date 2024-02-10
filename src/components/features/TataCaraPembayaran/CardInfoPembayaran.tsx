@@ -1,13 +1,13 @@
 import { useState, useEffect } from 'react';
 import { Card, Typography, Box, IconButton, Stack } from '@mui/material';
 
-export default function AddOnsCard(props: { title: string; price: number; fontweight: string; label: string; item: string }) {
-  const [timeRemaining, setTimeRemaining] = useState(24 * 60 * 60); // 24 hours in seconds
+export default function CardInfoPembayaran(props: { title: string; fontweight: string; label: string; item: string; expiredTime?: number }) {
+  const [timeRemaining, setTimeRemaining] = useState<number>(props.expiredTime || 0); // 24 hours in seconds
 
   useEffect(() => {
     if (props.item === 'time') {
       const interval = setInterval(() => {
-        setTimeRemaining((prevTime) => Math.max(0, prevTime - 1));
+        setTimeRemaining((prevTime: number) => Math.max(0, prevTime - 1));
       }, 1000);
 
       return () => clearInterval(interval);
