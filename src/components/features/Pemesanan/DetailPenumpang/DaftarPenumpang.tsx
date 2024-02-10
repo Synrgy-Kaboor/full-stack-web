@@ -66,12 +66,12 @@ function PenumpangRow(props: { order: number }) {
       sx={{ pt: 2 }}
       alignItems={'center'}
     >
-      {passengers[props.order].name && (
+      {passengers[props.order].fullName && (
         <Typography fontWeight={'bold'}>
-          {`${passengers[props.order].title}. ${passengers[props.order].name}`}
+          {`${passengers[props.order].title}. ${passengers[props.order].fullName}`}
         </Typography>
       )}
-      {!passengers[props.order].name && (
+      {!passengers[props.order].fullName && (
         <Typography>{`Penumpang ${props.order + 1}`}</Typography>
       )}
       <IconButton onClick={() => dispatch(openPenumpangPopup(props.order))}>

@@ -1,5 +1,5 @@
 export type Orderer = {
-    name: string;
+    fullName: string;
     title: string;
     phone: string;
     email: string;

@@ -17,7 +17,6 @@ import { Beranda } from './pages/Beranda';
 import Profil from './pages/Profil/Profil';
 import ChangeEmail from './components/features/Profil/ChangeEmail';
 import ChangeNumber from './components/features/Profil/ChangeNumber';
-import MetodePembayaran from './pages/Booking/MetodePembayaran';
 import SavedPriceAlert from './components/ui/SavedPriceAlert';
 import HelpCenter from './components/features/Profil/HelpCenter';
 import PassportRoutes from './components/features/Profil/Passport/Passport.Routes';
@@ -37,11 +36,7 @@ const router = createBrowserRouter([
         element: <Booking />,
       },
       {
-        path: '/metode-pembayaran',
-        element: <MetodePembayaran />,
-      },
-      {
-        path: '/tata-cara-pembayaran',
+        path: '/booking/:id/pembayaran',
         element: <TataCaraPembayaran />,
       },
       {

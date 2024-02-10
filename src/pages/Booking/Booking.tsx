@@ -5,7 +5,7 @@ import LayananTambahan from './LayananTambahan';
 import MetodePembayaran from './MetodePembayaran';
 import { httpFetch } from '../../utils/http';
 import { useNavigate, useSearchParams } from 'react-router-dom';
-import { setInitialOrderer, setNumberOfPassengers, setOutboundFlight, setReturnFlight } from '../../redux/slices/Booking';
+import { setClassCode, setInitialOrderer, setNumberOfPassengers, setOutboundFlight, setReturnFlight } from '../../redux/slices/Booking';
 import { BeResponse } from '../../types/BeResponse';
 import { UserPersonalData } from '../../types/UserPersonalData';
 import { FlightResponseBody } from '../../types/FlightResponseBody';
@@ -17,6 +17,9 @@ export default function Booking() {
   const navigate = useNavigate(); 
 
   useEffect(() => {
+    // Set class code
+    dispatch(setClassCode(searchParams.get('classCode') || ''));
+
     // Set inital number of passengers
     const totalAdults = Number(searchParams.get('totalAdults')) || 0;
     const totalChildren = Number(searchParams.get('totalChildren')) || 0;
@@ -31,7 +34,7 @@ export default function Booking() {
     // Get user data
     httpFetch<BeResponse<UserPersonalData>>('api/v1/user', true, {}, 'fsw').then(response => {
       dispatch(setInitialOrderer({
-        name: response.data.fullName,
+        fullName: response.data.fullName,
         title: response.data.title,
         phone: response.data.phoneNumber,
         email: response.data.email

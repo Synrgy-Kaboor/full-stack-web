@@ -34,10 +34,10 @@ export default function FormPenumpang() {
         <TextField
           id="pemesan-name-input"
           variant="outlined"
-          value={penumpang.name}
+          value={penumpang.fullName}
           onChange={(event) => {
             const newPenumpang = { ...penumpang };
-            newPenumpang.name = event.target.value;
+            newPenumpang.fullName = event.target.value;
             setPenumpang(newPenumpang);
           }}
         />
@@ -60,8 +60,8 @@ export default function FormPenumpang() {
           }}
         >
           <FormControlLabel value="Mr" control={<Radio />} label="Mr" />
+          <FormControlLabel value="Ms" control={<Radio />} label="Ms" />
           <FormControlLabel value="Mrs" control={<Radio />} label="Mrs" />
-          <FormControlLabel value="Miss" control={<Radio />} label="Miss" />
         </RadioGroup>
 
         <Button

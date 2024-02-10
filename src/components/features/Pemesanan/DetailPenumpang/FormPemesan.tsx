@@ -32,10 +32,10 @@ export default function FormPemesan() {
         <TextField
           id="pemesan-name-input"
           variant="outlined"
-          value={orderer.name}
+          value={orderer.fullName}
           onChange={(event) => {
             const newOrderer = { ...orderer };
-            newOrderer.name = event.target.value;
+            newOrderer.fullName = event.target.value;
             setOrderer(newOrderer);
           }}
         />
@@ -69,7 +69,7 @@ export default function FormPemesan() {
           value={orderer.phone}
           onChange={(event) => {
             const newOrderer = { ...orderer };
-            newOrderer.name = event.target.value;
+            newOrderer.phone = event.target.value;
             setOrderer(newOrderer);
           }}
         />
@@ -84,7 +84,7 @@ export default function FormPemesan() {
           value={orderer.email}
           onChange={(event) => {
             const newOrderer = { ...orderer };
-            newOrderer.name = event.target.value;
+            newOrderer.email = event.target.value;
             setOrderer(newOrderer);
           }}
         />

@@ -23,11 +23,15 @@ import { useEffect } from 'react';
 import { httpFetch } from '../../utils/http';
 import { BeResponse } from '../../types/BeResponse';
 import { Voucher } from '../../types/Voucher';
+import { CreateBookingBody } from '../../types/CreateBookingBody';
 
 export default function MetodePembayaran() {
   const voucherPopupOpened = useAppSelector((state) => state.booking.metodePembayaran.voucherPopupOpened);
-  const selectedVoucher = useAppSelector((state) => state.booking.booking.voucher);
   const totalPrice = useAppSelector((state) => state.booking.totalPrice);
+  const booking = useAppSelector((state) => state.booking.booking);
+  const outboundFlight = useAppSelector((state) => state.booking.outboundFlight);
+  const returnFlight = useAppSelector((state) => state.booking.returnFlight);
+  const { totalAdults, totalChildren, totalBabies, classCode } = useAppSelector((state) => state.booking);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
@@ -36,7 +40,7 @@ export default function MetodePembayaran() {
     httpFetch<BeResponse<Voucher[]>>('api/v1/voucher', true, {}, 'fsw').then(response => {
       dispatch(setAvailableVouchers(response.data))
     }); 
-  });
+  }, [dispatch]);
 
   return (
     <>
@@ -68,8 +72,8 @@ export default function MetodePembayaran() {
                   sx={{ '&:hover': { cursor: 'pointer' } }}
                 >
                   <Typography flexGrow={1}>
-                    {selectedVoucher
-                      ? selectedVoucher.code
+                    {booking.voucher
+                      ? booking.voucher.code
                       : 'Pilih/Masukkan Voucher Disini'}
                   </Typography>
                   <IconButton onClick={() => dispatch(openVoucherPopup())}>
@@ -116,7 +120,31 @@ export default function MetodePembayaran() {
                 <Box sx={{ width: '40%' }}>
                   <Button
                     variant="contained"
-                    onClick={() => navigate('/tata-cara-pembayaran')}
+                    onClick={() => {
+                      const body = {
+                        outboundFlightId: outboundFlight ? outboundFlight.id : null,
+                        returnFlightId: returnFlight ? returnFlight.id : null,
+                        classCode,
+                        totalAdult: totalAdults,
+                        totalChild: totalChildren,
+                        totalBaby: totalBabies,
+                        orderer: booking.orderer,
+                        passengers: booking.passengers,
+                        addBaggage: booking.addBaggage,
+                        addTravelInsurance: booking.addTravelInsurance,
+                        addBaggageInsurance: booking.addBaggageInsurance,
+                        addDelayProtection: booking.addDelayProtection,
+                        paymentMethod: booking.paymentMethod,
+                        voucherId: booking.voucher ? booking.voucher.id : null
+                      };
+                      console.log(body)
+                      httpFetch<BeResponse<CreateBookingBody>>('api/v1/booking', true, {}, 'fsw', {
+                        method: 'POST',
+                        body: JSON.stringify(body)
+                      }).then((response) => {
+                        navigate(`/booking/${response.data.bookingId}/pembayaran`);
+                      });
+                    }}
                     sx={{
                       background: theme.palette.gradients?.horizontal,
                       width: '100%',

@@ -21,7 +21,7 @@ export default function DetailPemesan() {
         <Stack direction="row" justifyContent="space-between">
           <Stack>
             <Typography fontWeight="bold">
-              {`${orderer.title}. ${orderer.name}`}
+              {`${orderer.title}. ${orderer.fullName}`}
             </Typography>
             <Stack direction="row" spacing={2}>
               <LocalPhoneOutlinedIcon />

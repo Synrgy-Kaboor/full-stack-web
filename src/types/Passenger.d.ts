@@ -1,4 +1,4 @@
 export type Passenger = {
-    name: string;
+    fullName: string;
     title: string;
 }

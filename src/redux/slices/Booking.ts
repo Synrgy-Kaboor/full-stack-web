@@ -5,14 +5,14 @@ import { Voucher } from '../../types/Voucher';
 import { Flight } from '../../types/Flight';
 
 const pemesanInitialState: Orderer = {
-    name: '',
+    fullName: '',
     title: '',
     phone: '',
     email: ''
 };
 
 const initialPassenger: Passenger = {
-  name: '',
+  fullName: '',
   title: ''
 };
 
@@ -138,13 +138,16 @@ export const bookingSlice = createSlice({
       state.totalPrice = calculateTotalPrice(state);
     },
     setInitialOrderer: (state, action: PayloadAction<Orderer>) => {
-      state.booking.orderer.name = action.payload.name ?? '';
+      state.booking.orderer.fullName = action.payload.fullName ?? '';
       state.booking.orderer.title = action.payload.title ?? '';
       state.booking.orderer.email = action.payload.email ?? '';
       state.booking.orderer.phone = action.payload.phone ?? '';
 
-      state.booking.passengers[0].name = state.booking.orderer.name;
+      state.booking.passengers[0].fullName = state.booking.orderer.fullName;
       state.booking.passengers[0].title = state.booking.orderer.title;
+    },
+    setClassCode: (state, action: PayloadAction<string>) => {
+      state.classCode = action.payload ?? 'E';
     },
     // Ganti Halaman,
     changePage: (state, action: PayloadAction<number>) => {
@@ -173,11 +176,11 @@ export const bookingSlice = createSlice({
       state.booking.passengers[state.detailPenumpang.selectedPenumpangOrder] = action.payload;
     },
     setFirstPenumpangToPemesan: (state) => {
-      state.booking.passengers[0].name = state.booking.orderer.name;
+      state.booking.passengers[0].fullName = state.booking.orderer.fullName;
       state.booking.passengers[0].title = state.booking.orderer.title;
     },
     resetFirstPenumpang: (state) => {
-      state.booking.passengers[0].name = '';
+      state.booking.passengers[0].fullName = '';
       state.booking.passengers[0].title = '';
     },
     setAddBaggage: (state, action: PayloadAction<boolean>) => {
@@ -226,6 +229,7 @@ export const {
   setNumberOfPassengers,
   setInitialOrderer,
   changePage,
+  setClassCode,
   openPemesanPopup, 
   closePemesanPopup, 
   submitPemesanPopup, 
