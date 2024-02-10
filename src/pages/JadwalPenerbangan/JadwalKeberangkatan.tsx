@@ -48,7 +48,15 @@ export default function JadwalKeberangkatan() {
       }
     };
     fetchData();
-  }, []);
+  }, [
+    adults,
+    babies,
+    childs,
+    classCode,
+    departureDate,
+    destinationAirport,
+    originAirport,
+  ]);
 
   console.log(isLoading);
   const classDetail: Record<string, string> = {

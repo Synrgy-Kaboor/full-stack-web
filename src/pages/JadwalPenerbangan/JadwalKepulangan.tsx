@@ -49,7 +49,15 @@ export default function JadwalKepulangan() {
       }
     };
     fetchData();
-  }, []);
+  }, [
+    adults,
+    babies,
+    childs,
+    classCode,
+    departureDate,
+    destinationAirport,
+    originAirport,
+  ]);
 
   const classDetail: Record<string, string> = {
     E: 'EKONOMI',
