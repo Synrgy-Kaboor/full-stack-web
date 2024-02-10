@@ -256,11 +256,14 @@ export default function Sidebar({ pathname }: SidebarProp) {
           }}
         />
         <Stack
-          gap={2}
+          // gap={2}
           direction={'row'}
+          px={5}
+          pb={2}
+          pt={1}
           sx={{
             alignItems: 'center',
-            padding: '10px 45px',
+            // padding: '10px 45px',
             cursor: 'pointer',
             width: '100%',
             display: { xs: 'none', sm: 'flex' },

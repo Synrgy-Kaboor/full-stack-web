@@ -93,11 +93,6 @@ const router = createBrowserRouter([
     path: '/login/*',
     element: <LoginRoute />,
   },
-  {
-    path: '/profile-test',
-    element: <Profil />,
-    children: [{ index: true, element: <ChangeProfile /> }],
-  },
 ]);
 
 function App() {

@@ -11,7 +11,6 @@ import {
 
 import BusinessCenterOutlinedIcon from '@mui/icons-material/BusinessCenterOutlined';
 import HealthAndSafetyOutlinedIcon from '@mui/icons-material/HealthAndSafetyOutlined';
-import RestaurantOutlinedIcon from '@mui/icons-material/RestaurantOutlined';
 
 import FlightLogo from '../../../assets/Logo Maskapai.png';
 import PlaneIcon from '../../../assets/plane icon.png';
@@ -73,10 +72,10 @@ export default function FlightDetailCard() {
         >
           <Stack direction="row" gap={1}>
             <IconButton
-              sx={{ 
+              sx={{
                 background: theme.palette.gradients?.horizontal,
-                color: 'white'
-               }}
+                color: 'white',
+              }}
             >
               <BusinessCenterOutlinedIcon />
             </IconButton>
@@ -87,14 +86,6 @@ export default function FlightDetailCard() {
               }}
             >
               <HealthAndSafetyOutlinedIcon />
-            </IconButton>
-            <IconButton
-              sx={{
-                background: theme.palette.gradients?.horizontal,
-                color: 'white',
-              }}
-            >
-              <RestaurantOutlinedIcon />
             </IconButton>
           </Stack>
           <Stack>

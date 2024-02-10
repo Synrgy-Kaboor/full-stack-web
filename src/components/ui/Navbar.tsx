@@ -56,7 +56,11 @@ function UserLoggedIn(props: INavbarMenu) {
         direction="row"
         spacing={1}
         alignItems="center"
-        sx={{ display: { xs: 'none', sm: 'flex' } }}
+        sx={{
+          display: { xs: 'none', sm: 'flex' },
+          '&:hover': { cursor: 'pointer' },
+        }}
+        onClick={() => navigate('/profil/notifikasi')}
       >
         <NotificationsNoneOutlinedIcon
           fontSize="large"
@@ -78,10 +82,20 @@ function UserLoggedIn(props: INavbarMenu) {
         onClose={props.handleCloseNavMenu}
         sx={{ dislay: { xs: 'block', sm: 'none' } }}
       >
-        <MenuItem onClick={props.handleCloseNavMenu}>
+        <MenuItem
+          onClick={() => {
+            props.handleCloseNavMenu;
+            navigate('profil/notifikasi');
+          }}
+        >
           <Typography>Notifikasi</Typography>
         </MenuItem>
-        <MenuItem onClick={() => navigate('pilih-jadwal-search')}>
+        <MenuItem
+          onClick={() => {
+            props.handleCloseNavMenu;
+            navigate('profil/pesanan');
+          }}
+        >
           <Typography>Pesanan</Typography>
         </MenuItem>
       </Menu>
@@ -90,7 +104,7 @@ function UserLoggedIn(props: INavbarMenu) {
         direction="row"
         spacing={1}
         alignItems="center"
-        onClick={() => navigate('pilih-jadwal-search')}
+        onClick={() => navigate('profil/pesanan')}
         sx={{
           '&:hover': { cursor: 'pointer' },
           display: { xs: 'none', sm: 'flex' },
