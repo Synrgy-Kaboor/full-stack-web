@@ -17,7 +17,7 @@ import { Voucher } from '../../../types/Voucher';
 
 import { useState } from 'react';
 import { numToRp } from '../../../utils/formatter';
-import { useAppDispatch } from '../../../redux/hooks';
+import { useAppDispatch, useAppSelector } from '../../../redux/hooks';
 import { submitVoucherPopup } from '../../../redux/slices/Booking';
 
 function PromoCard(props: Voucher) {
@@ -59,7 +59,7 @@ function PromoCard(props: Voucher) {
         >
           <VerifiedOutlinedIcon sx={{ color: 'white' }} />
           <Typography color="white" fontWeight="bold">
-            Voucher Promo
+            {props.title}
           </Typography>
         </Stack>
 
@@ -72,12 +72,12 @@ function PromoCard(props: Voucher) {
             borderRadius={8}
             p={1}
           >
-            Hemat {numToRp(props.maxDiscount)}
+            Hemat Sampai {numToRp(props.maximumDiscount)}
           </Typography>
         </Box>
         {/* Card Content */}
         <Stack py={1} px={2}>
-          <Typography fontWeight="bold">{props.desc}</Typography>
+          <Typography fontWeight="bold">{props.description}</Typography>
           <Stack direction="row" spacing={1}>
             <Typography color="gray" variant="body2">
               Kode :
@@ -96,10 +96,6 @@ function PromoCard(props: Voucher) {
             color="primary.main"
             my={1}
             sx={{ '&:hover': { cursor: 'pointer' } }}
-            onClick={(e) => {
-              e.stopPropagation();
-              alert('S&K');
-            }}
           >
             S&K Berlaku
           </Typography>
@@ -109,7 +105,7 @@ function PromoCard(props: Voucher) {
       <CardActions sx={{ padding: 0 }}>
         <Stack py={1} px={2}>
           <Typography color="red" variant="body2">
-            {calculateDuration(props.timeLimit)}
+            {calculateDuration(new Date(props.expiredTime))}
           </Typography>
         </Stack>
       </CardActions>
@@ -118,8 +114,10 @@ function PromoCard(props: Voucher) {
 }
 
 export default function FormVoucher() {
+  const vouchers = useAppSelector((state) => state.booking.metodePembayaran.vouchers);
+
   const [voucherQuery, setVoucherQuery] = useState<string>('');
-  const [listVouchers, setListVouchers] = useState<Voucher[]>([]);
+  const [listVouchers, setListVouchers] = useState<Voucher[]>(vouchers);
 
   const handleVoucherSearch = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>

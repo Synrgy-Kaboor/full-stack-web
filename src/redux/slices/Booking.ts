@@ -48,7 +48,7 @@ function calculateTotalPrice(state: BookingSliceState): number {
 
   // Hitung harga setelah potongan voucher
   if (state.booking.voucher) {
-    price = Math.max(0, price - state.booking.voucher.maxDiscount);
+    price = Math.max(0, price - state.booking.voucher.maximumDiscount);
   }
 
   return price;

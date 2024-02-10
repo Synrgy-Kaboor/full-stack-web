@@ -17,16 +17,26 @@ import ConfirmationNumberIcon from '@mui/icons-material/ConfirmationNumber';
 import Popup from '../../components/core/Popup';
 import FormVoucher from '../../components/features/MetodePembayaran/FormVoucher';
 import { useNavigate } from 'react-router-dom';
-import { closeVoucherPopup, openVoucherPopup } from '../../redux/slices/Booking';
+import { closeVoucherPopup, openVoucherPopup, setAvailableVouchers } from '../../redux/slices/Booking';
 import { numToRp } from '../../utils/formatter';
+import { useEffect } from 'react';
+import { httpFetch } from '../../utils/http';
+import { BeResponse } from '../../types/BeResponse';
+import { Voucher } from '../../types/Voucher';
 
 export default function MetodePembayaran() {
   const voucherPopupOpened = useAppSelector((state) => state.booking.metodePembayaran.voucherPopupOpened);
   const selectedVoucher = useAppSelector((state) => state.booking.booking.voucher);
   const totalPrice = useAppSelector((state) => state.booking.totalPrice);
   const dispatch = useAppDispatch();
-
   const navigate = useNavigate();
+
+  useEffect(() => {
+    // Load vouchers
+    httpFetch<BeResponse<Voucher[]>>('api/v1/voucher', true, {}, 'fsw').then(response => {
+      dispatch(setAvailableVouchers(response.data))
+    }); 
+  });
 
   return (
     <>
