@@ -17,8 +17,8 @@ import {
   FlightLandOutlined,
   SwapVertOutlined,
   CalendarMonthOutlined,
-  Person2Outlined,
   AirlineSeatReclineNormalOutlined,
+  EventSeatOutlined,
 } from '@mui/icons-material';
 
 import { PassangerSearch } from '../../types/ModalPassagerProps';
@@ -30,13 +30,12 @@ import { AdapterDateFns as adapterDate } from '@mui/x-date-pickers/AdapterDateFn
 import { LocalizationProvider, MobileDatePicker } from '@mui/x-date-pickers';
 import { IOSSwitch } from '../core/IOSSwitch';
 
-
 const CardFilterPlaneSchedule = (props: CardFilterPlaneScheduleProps) => {
   const [homecomingVisible, setHomecomingVisible] = useState(false);
   const [modalPassangerVisible, setModalPassangerVisible] = useState(false);
   const [modalClassSeatVisible, setModalClassSeatVisible] = useState(false);
-  const [from, setFrom] = useState<string>();
-  const [destination, setDestination] = useState<string>();
+  const [from, setFrom] = useState<string>('');
+  const [destination, setDestination] = useState<string>('');
   const [passangerValue, setPassangerValue] = useState<PassangerSearch>({
     adult: {
       value: 1,
@@ -162,18 +161,18 @@ const CardFilterPlaneSchedule = (props: CardFilterPlaneScheduleProps) => {
                       </Typography>
                       <Autocomplete
                         options={listAirPort}
+                        value={from ? from : undefined}
+                        inputValue={from}
+                        onInputChange={(_event, newInputValue) => {
+                          setFrom(newInputValue);
+                        }}
                         popupIcon={null}
                         disableClearable
-                        value={from}
                         renderTags={() => null}
-                        onChange={(event, value) => {
-                          event.preventDefault();
-                          setFrom(value);
-                        }}
                         renderInput={(params) => (
                           <TextField
                             variant="standard"
-                            placeholder="Masukkan Kota Asal"
+                            placeholder="Masukkan Bandara Asal"
                             {...params}
                             required
                             sx={{
@@ -219,18 +218,18 @@ const CardFilterPlaneSchedule = (props: CardFilterPlaneScheduleProps) => {
                         <Autocomplete
                           options={listAirPort}
                           popupIcon={null}
-                          disableClearable
-                          value={from}
-                          renderTags={() => null}
-                          onChange={(event, value) => {
-                            event.preventDefault();
-                            setDestination(value);
+                          value={destination ? destination : undefined}
+                          inputValue={destination}
+                          onInputChange={(_event, newInputValue) => {
+                            setDestination(newInputValue);
                           }}
-                          sx= {{width: '100%'}}
+                          disableClearable
+                          renderTags={() => null}
+                          sx={{ width: '100%' }}
                           renderInput={(params) => (
                             <TextField
                               variant="standard"
-                              placeholder="Masukkan Kota Kepergian"
+                              placeholder="Masukkan Bandara Kepergian"
                               {...params}
                               required
                               sx={{
@@ -406,7 +405,7 @@ const CardFilterPlaneSchedule = (props: CardFilterPlaneScheduleProps) => {
                     onClick={handleModalClassSeatVisibleOpen}
                   >
                     <Stack direction={'row'} spacing={2} alignItems={'center'}>
-                      <Person2Outlined
+                      <EventSeatOutlined
                         sx={{
                           borderRadius: '50%',
                           background: theme.palette.gradients?.diagonal,
@@ -415,7 +414,7 @@ const CardFilterPlaneSchedule = (props: CardFilterPlaneScheduleProps) => {
                           height: '3rem',
                           width: '3rem',
                         }}
-                      ></Person2Outlined>
+                      ></EventSeatOutlined>
                       <Stack>
                         <Typography
                           variant="subtitle1"

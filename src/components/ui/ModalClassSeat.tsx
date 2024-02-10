@@ -19,7 +19,6 @@ const ModalClassSeat = (props: ModalClassSeatProps) => {
   const theme = useTheme();
   const isSmallScreen = useMediaQuery(theme.breakpoints.down('md'));
   const [valueChecked, setValueChecked] = useState<string>(props.valueChecked);
-  console.log(isSmallScreen);
   const modalStyle = {
     position: 'absolute',
     top: '50%',
