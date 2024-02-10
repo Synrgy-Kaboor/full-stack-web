@@ -12,6 +12,7 @@ import { numToRp } from '../../utils/formatter';
 
 export default function TataCaraPembayaran() {
   const [paymentAttributes, setPaymentAttributes] = useState<PaymentAttributes | null>(null);
+  const [startInterval, setStartInterval] = useState<boolean>(false);
   const [file, setFile] = useState<File | null>(null);
   const [fileName, setFileName] = useState<string>('')
   const { id } = useParams();
@@ -19,16 +20,24 @@ export default function TataCaraPembayaran() {
   const navigate = useNavigate();
 
   useEffect(() => {
+    
     httpFetch<BeResponse<PaymentResponseBody>>(`api/v1/booking/${id}/payment`, true, {}, 'fsw').then(response => {
       setPaymentAttributes({
         methodName: response.data.methodName,
         accountNumber: response.data.accountNumber,
         totalPrice: response.data.totalPrice,
         paymentCompleted: response.data.paymentCompleted,
-        expiredTime: Math.max(0, (new Date().getTime() - new Date(response.data.expiredTime).getTime()) / 1000)
+        expiredTime: Math.max(0, Math.round((new Date(response.data.expiredTime).getTime() - new Date().getTime()) / 1000))
       });
+      setStartInterval(true);
+
+      if (response.data.paymentCompleted) {
+        navigate('/profil/pesanan');
+      }
+    }).catch(() => {
+      navigate('/profil/pesanan')
     });
-  }, [id]);
+  }, [id, navigate]);
 
   function uploadImageHandler(event: React.ChangeEvent<HTMLInputElement>) {
     const selectedFiles = event.target.files as FileList;
@@ -56,13 +65,30 @@ export default function TataCaraPembayaran() {
     setFileName('');
   }
 
+  function submitProofOfPayment() {
+    httpFetch(
+      `api/v1/booking/${id}/payment/proof`,
+      true,
+      {},
+      'fsw',
+      {
+        method: 'PATCH',
+        body: JSON.stringify({
+          fileName
+        })
+      }
+    ).then(() => {
+      navigate('/profil/pesanan');
+    });
+  }
+
   return (
     <>
       <Container sx={{ paddingBlockEnd: '2rem' }}>
         <Grid container mt={0} spacing={2}>
           <Grid item md={6} xs={12}>
             <Stack spacing={2}>
-              <InfoCard title={'Selesaikan dalam'} fontweight='normal' label='' item='time' expiredTime={paymentAttributes?.expiredTime || 0}/>
+              <InfoCard title={'Selesaikan dalam'} fontweight='normal' label='' item='time' expiredTime={paymentAttributes?.expiredTime} startInterval={startInterval}/>
               <InfoCard title={paymentAttributes?.accountNumber || ''} fontweight='bold' label='Lakukan Transfer Ke' item='copy'/>
               <InfoCard title={numToRp(paymentAttributes?.totalPrice || 0)} fontweight='bold' label='Total Pembayaran' item='copy'/>
               <InstructionCard label= 'Cara Membayar' title={'Transfer Melalui ATM'} 
@@ -121,9 +147,7 @@ export default function TataCaraPembayaran() {
                   alignItems: 'center',
                   textTransform:'initial',
                 }}
-                onClick={() => {
-                  navigate('/')
-                }}
+                onClick={() => navigate('/profil/pesanan')}
               >
                 Lihat Daftar Pesanan
               </Button>}
@@ -142,9 +166,7 @@ export default function TataCaraPembayaran() {
                   alignItems: 'center',
                   textTransform:'initial',
                 }}
-                onClick={() => { 
-                  navigate('/')
-                }}
+                onClick={() => submitProofOfPayment()}
               >
                 Selesai
               </Button>}
