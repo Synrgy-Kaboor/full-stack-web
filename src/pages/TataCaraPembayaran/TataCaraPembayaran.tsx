@@ -4,7 +4,7 @@ import  InstructionCard  from '../../components/features/TataCaraPembayaran/Card
 import  Fileinput  from '../../components/features/TataCaraPembayaran/FileDragnDrop';
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { httpFetch } from '../../utils/http';
+import { httpFetch, httpFetchMultipart } from '../../utils/http';
 import { BeResponse } from '../../types/BeResponse';
 import { PaymentAttributes } from '../../types/PaymentAttributes';
 import { PaymentResponseBody } from '../../types/PaymentResponseBody';
@@ -32,8 +32,22 @@ export default function TataCaraPembayaran() {
 
   function uploadImageHandler(event: React.ChangeEvent<HTMLInputElement>) {
     const selectedFiles = event.target.files as FileList;
-    setFile(selectedFiles?.[0]);
-    setFileName(selectedFiles?.[0].name);
+    const formData = new FormData();
+    formData.append('file', selectedFiles?.[0]);
+
+    httpFetchMultipart<BeResponse<{ fileName: string, fileUrl: string }>>(
+      'api/v1/booking/payment/file',
+      true,
+      {},
+      'fsw',
+      {
+        method: 'POST',
+        body: formData
+      }
+    ).then(response => {
+      setFile(selectedFiles?.[0]);
+      setFileName(response.data.fileName);
+    })
   }
 
   function resetFileHandler() {
@@ -84,7 +98,7 @@ export default function TataCaraPembayaran() {
             </Stack>
           </Grid>
           <Grid item md={6} xs={12}>
-            <Fileinput fileName={fileName} uploadImage={uploadImageHandler} resetFile={resetFileHandler}/>
+            <Fileinput fileName={file?.name || ''} uploadImage={uploadImageHandler} resetFile={resetFileHandler}/>
           </Grid>
           <Grid item md={6} xs={12}>
             <Stack
