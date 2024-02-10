@@ -12,6 +12,9 @@ import {
 import { ArrowBackIosOutlined } from '@mui/icons-material';
 import { ModalClassSeatProps } from '../../types/ModalClassSeatProps';
 import { useState } from 'react';
+import { useAppDispatch } from '../../redux/hooks';
+import { getFlightClass } from '.';
+import { setClassCode } from '../../redux/slices/FlightSchedule';
 
 const modalStyle = {
   position: 'absolute',
@@ -27,9 +30,13 @@ const modalStyle = {
 };
 
 const ModalClassSeat = (props: ModalClassSeatProps) => {
+  const dispatch = useAppDispatch();
   const [valueChecked, setValueChecked] = useState<string>(props.valueChecked);
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setValueChecked((event.target as HTMLInputElement).value);
+    dispatch(
+      setClassCode(getFlightClass((event.target as HTMLInputElement).value))
+    );
   };
   const handleClose = () => {
     setValueChecked(props.valueChecked);

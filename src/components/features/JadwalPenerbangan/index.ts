@@ -1,4 +1,4 @@
-export function getHourDifference(dateTime1:string, dateTime2: string) {
+export function getHourDiff(dateTime1:string, dateTime2: string) {
   const date1 = new Date(dateTime1);
   const date2 = new Date(dateTime2);
 
@@ -16,12 +16,8 @@ export function UTCtoLocalTime(utcDateString: string, timeZone: string): string 
   const options: Intl.DateTimeFormatOptions = {
     timeZone: timeZone,
     hour12: false,
-    year: 'numeric',
-    month: '2-digit',
-    day: '2-digit',
     hour: '2-digit',
-    minute: '2-digit',
-    second: '2-digit'
+    minute: '2-digit'
   };
 
   return localDateObject.toLocaleString('id-ID', options);

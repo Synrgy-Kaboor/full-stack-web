@@ -1,4 +1,5 @@
 import { PassangerSearch } from './ModalPassagerProps';
+import { FlightType } from '../pages/JadwalPenerbangan';
 
 export interface CardFilterPlaneScheduleType  {
     deparature: string,
@@ -15,3 +16,17 @@ export interface CardFilterPlaneScheduleProps {
     onSubmit : (value: Partial<CardFilterPlaneScheduleType>) => void;
 }
 
+export interface FlightScheduleState {
+    originAirportCode: string;
+    destinationAirportCode: string;
+    numOfAdults: number;
+    numOfChildren: number;
+    numOfBabies: number;
+    classCode: string;
+    departureDate: string;
+    returnDate: string;
+    lowestPrice: number;
+    highestPrice: number;
+    departureFlight: FlightType | null;
+    returnFlight: FlightType | null;
+  }

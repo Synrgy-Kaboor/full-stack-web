@@ -14,7 +14,6 @@ import {
   TextField,
 } from '@mui/material';
 import {
-  setClassCode,
   setReturnDate,
   setDestinationAirportCode,
   setDepartureDate,
@@ -24,7 +23,7 @@ import {
   setOriginAirportCode,
 } from './../../redux/slices/FlightSchedule';
 import { styled } from '@mui/material/styles';
-import { getFlightClass, formatDate } from './index';
+import { formatDate } from './index';
 import { useEffect, useState } from 'react';
 import {
   FlightTakeoffOutlined,
@@ -170,12 +169,6 @@ const CardFilterPlaneSchedule = (props: CardFilterPlaneScheduleProps) => {
       class: classSeatValue,
       priceRange: props.sliderOn ? sliderValue : null,
     };
-
-    dispatch(setOriginAirportCode(value.deparature));
-    dispatch(setDestinationAirportCode(value.arrival));
-    dispatch(setClassCode(getFlightClass(value.class)));
-    dispatch(setReturnDate(formatDate(value.arrivalDate)));
-    dispatch(setDepartureDate(formatDate(value.deparatureDate)));
     props.onSubmit(value);
   };
 
@@ -245,6 +238,7 @@ const CardFilterPlaneSchedule = (props: CardFilterPlaneScheduleProps) => {
                         renderTags={() => null}
                         onChange={(event, value) => {
                           event.preventDefault();
+                          dispatch(setOriginAirportCode(value.slice(-3)));
                           setFrom(value);
                         }}
                         renderInput={(params) => (
@@ -301,6 +295,9 @@ const CardFilterPlaneSchedule = (props: CardFilterPlaneScheduleProps) => {
                           renderTags={() => null}
                           onChange={(event, value) => {
                             event.preventDefault();
+                            dispatch(
+                              setDestinationAirportCode(value.slice(-3))
+                            );
                             setDestination(value);
                           }}
                           sx={{ width: '100%' }}
@@ -370,6 +367,7 @@ const CardFilterPlaneSchedule = (props: CardFilterPlaneScheduleProps) => {
                         <MobileDatePicker
                           value={deparatureDateValue}
                           onChange={(value) => {
+                            dispatch(setDepartureDate(formatDate(value)));
                             setDeparatureDateValue(value);
                           }}
                           disablePast
@@ -409,6 +407,7 @@ const CardFilterPlaneSchedule = (props: CardFilterPlaneScheduleProps) => {
                           value={arrivalDateValue}
                           onChange={(value) => {
                             setArrivalDateValue(value);
+                            dispatch(setReturnDate(formatDate(value)));
                           }}
                           disablePast
                           label='Kepulangan'

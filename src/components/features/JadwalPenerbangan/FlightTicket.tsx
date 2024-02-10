@@ -1,11 +1,9 @@
 import { IconButton, Stack, Typography, Box, Divider } from '@mui/material';
 import BusinessCenterOutlinedIcon from '@mui/icons-material/BusinessCenterOutlined';
 import HealthAndSafetyOutlinedIcon from '@mui/icons-material/HealthAndSafetyOutlined';
-
+import { UTCtoLocalTime, getHourDiff } from '.';
 import PlaneIcon from '../../../assets/plane icon.png';
 import theme from '../../../config/theme';
-
-import { useNavigate } from 'react-router';
 
 interface FlightList {
   airLine: string;
@@ -13,25 +11,19 @@ interface FlightList {
   departureDatetime: string;
   arrivedDatetime: string;
   price: string;
-  onPage: string;
+  onClick?: () => void;
   airlineLogo: string;
+  from: string;
+  to: string;
 }
 export default function FlightTicket(props: FlightList) {
-  const navigate = useNavigate();
-
   return (
     <Stack
       direction='row'
       justifyContent='space-between'
       alignItems='center'
       p={2}
-      onClick={() => {
-        if (props.onPage === 'jadwal-kepulangan') {
-          navigate('/detail-penumpang');
-        } else if (props.onPage === 'jadwal-keberangkatan') {
-          navigate('/jadwal-kepulangan');
-        }
-      }}
+      onClick={props.onClick}
       sx={{
         bgcolor: 'white',
         boxShadow: 1,
@@ -59,9 +51,9 @@ export default function FlightTicket(props: FlightList) {
       {/* Rute */}
       <Stack direction='row' justifyContent='center' sx={{ width: '40%' }}>
         <Box>
-          <Typography variant='body2'>Surabaya</Typography>
+          <Typography variant='body2'>{props.from}</Typography>
           <Typography variant='body1' sx={{ fontWeight: 'bold' }}>
-            {props.departureDatetime}
+            {UTCtoLocalTime(props.departureDatetime, 'Asia/Jakarta')} WIB
           </Typography>
         </Box>
         <Box sx={{ width: '50%', textAlign: 'center' }} mx={2}>
@@ -69,13 +61,14 @@ export default function FlightTicket(props: FlightList) {
             <img src={PlaneIcon} alt='' />
           </Divider>
           <Typography variant='subtitle2' sx={{ color: 'gray' }}>
-            Durasi 4 Jam
+            Durasi {getHourDiff(props.departureDatetime, props.arrivedDatetime)}{' '}
+            Jam
           </Typography>
         </Box>
         <Box sx={{ textAlign: 'end' }}>
-          <Typography variant='body2'>Jakarta</Typography>
+          <Typography variant='body2'>{props.to}</Typography>
           <Typography variant='body1' sx={{ fontWeight: 'bold' }}>
-            {props.arrivedDatetime}
+            {UTCtoLocalTime(props.arrivedDatetime, 'Asia/Jakarta')} WIB
           </Typography>
         </Box>
       </Stack>
