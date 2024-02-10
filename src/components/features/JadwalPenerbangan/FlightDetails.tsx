@@ -2,46 +2,54 @@ import { Stack, Typography, Divider } from '@mui/material';
 
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 
-export default function FlightDetails() {
+interface FilterValue {
+  from: string | null;
+  to: string | null;
+  date: string | null;
+  passenger: number | null;
+  flightClass: string | null;
+}
+
+export default function FlightDetails(props: FilterValue) {
   return (
     <Stack
-      direction="row"
-      alignItems="center"
-      justifyContent="space-between"
+      direction='row'
+      alignItems='center'
+      justifyContent='space-between'
       p={2}
       sx={{ bgcolor: 'white', boxShadow: 1, borderRadius: 1 }}
     >
       {/* Pesawat */}
       <Stack
-        direction="row"
+        direction='row'
         spacing={1}
-        justifyContent="center"
+        justifyContent='center'
         sx={{ width: '100%' }}
       >
-        <Typography>SUB</Typography>
+        <Typography>{props.from}</Typography>
         <ArrowForwardIcon sx={{ color: 'gray' }} />
-        <Typography>JKT</Typography>
+        <Typography>{props.to}</Typography>
       </Stack>
 
-      <Divider orientation="vertical" flexItem />
+      <Divider orientation='vertical' flexItem />
 
       {/* Tanggal */}
-      <Stack direction="row" justifyContent="center" sx={{ width: '100%' }}>
-        <Typography>Senin, 24 Desember 2024</Typography>
+      <Stack direction='row' justifyContent='center' sx={{ width: '100%' }}>
+        <Typography>{props.date}</Typography>
       </Stack>
 
-      <Divider orientation="vertical" flexItem />
+      <Divider orientation='vertical' flexItem />
 
       {/* Jumlah Penumpang */}
-      <Stack direction="row" justifyContent="center" sx={{ width: '100%' }}>
-        <Typography>1 Orang</Typography>
+      <Stack direction='row' justifyContent='center' sx={{ width: '100%' }}>
+        <Typography>{`${props.passenger} Orang`}</Typography>
       </Stack>
 
-      <Divider orientation="vertical" flexItem />
+      <Divider orientation='vertical' flexItem />
 
       {/* Kelas Pesawat */}
-      <Stack direction="row" justifyContent="center" sx={{ width: '100%' }}>
-        <Typography>Ekonomi</Typography>
+      <Stack direction='row' justifyContent='center' sx={{ width: '100%' }}>
+        <Typography>{props.flightClass}</Typography>
       </Stack>
     </Stack>
   );

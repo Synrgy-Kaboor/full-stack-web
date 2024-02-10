@@ -3,20 +3,27 @@ import BusinessCenterOutlinedIcon from '@mui/icons-material/BusinessCenterOutlin
 import HealthAndSafetyOutlinedIcon from '@mui/icons-material/HealthAndSafetyOutlined';
 
 import PlaneIcon from '../../../assets/plane icon.png';
-import FlightLogo from '../../../assets/Logo Maskapai.png';
-
 import theme from '../../../config/theme';
 
 import { useNavigate } from 'react-router';
 
-export default function FlightTicket(props: { onPage: string }) {
+interface FlightList {
+  airLine: string;
+  flightClass: string;
+  departureDatetime: string;
+  arrivedDatetime: string;
+  price: string;
+  onPage: string;
+  airlineLogo: string;
+}
+export default function FlightTicket(props: FlightList) {
   const navigate = useNavigate();
 
   return (
     <Stack
-      direction="row"
-      justifyContent="space-between"
-      alignItems="center"
+      direction='row'
+      justifyContent='space-between'
+      alignItems='center'
       p={2}
       onClick={() => {
         if (props.onPage === 'jadwal-kepulangan') {
@@ -37,44 +44,44 @@ export default function FlightTicket(props: { onPage: string }) {
       }}
     >
       {/* Maskapai */}
-      <Stack direction="row" alignItems="center" spacing={2}>
-        <img src={FlightLogo} />
-        <Stack direction="column">
-          <Typography variant="body1" sx={{ fontWeight: 'bold' }}>
-            Garuda Indonesia
+      <Stack direction='row' alignItems='center' spacing={2}>
+        <img src={props.airlineLogo} height={'50px'} width={'50px'} />
+        <Stack direction='column'>
+          <Typography variant='body1' sx={{ fontWeight: 'bold' }}>
+            {props.airLine}
           </Typography>
-          <Typography variant="body2" sx={{ color: 'gray' }}>
-            Ekonomi
+          <Typography variant='body2' sx={{ color: 'gray' }}>
+            {props.flightClass}
           </Typography>
         </Stack>
       </Stack>
 
       {/* Rute */}
-      <Stack direction="row" justifyContent="center" sx={{ width: '40%' }}>
+      <Stack direction='row' justifyContent='center' sx={{ width: '40%' }}>
         <Box>
-          <Typography variant="body2">Surabaya</Typography>
-          <Typography variant="body1" sx={{ fontWeight: 'bold' }}>
-            05.00 WIB
+          <Typography variant='body2'>Surabaya</Typography>
+          <Typography variant='body1' sx={{ fontWeight: 'bold' }}>
+            {props.departureDatetime}
           </Typography>
         </Box>
         <Box sx={{ width: '50%', textAlign: 'center' }} mx={2}>
           <Divider sx={{ borderStyle: 'dashed' }}>
-            <img src={PlaneIcon} alt="" />
+            <img src={PlaneIcon} alt='' />
           </Divider>
-          <Typography variant="subtitle2" sx={{ color: 'gray' }}>
+          <Typography variant='subtitle2' sx={{ color: 'gray' }}>
             Durasi 4 Jam
           </Typography>
         </Box>
         <Box sx={{ textAlign: 'end' }}>
-          <Typography variant="body2">Jakarta</Typography>
-          <Typography variant="body1" sx={{ fontWeight: 'bold' }}>
-            09.00 WIB
+          <Typography variant='body2'>Jakarta</Typography>
+          <Typography variant='body1' sx={{ fontWeight: 'bold' }}>
+            {props.arrivedDatetime}
           </Typography>
         </Box>
       </Stack>
 
       {/* Add Ons */}
-      <Stack direction="row" justifyContent="center" gap={1}>
+      <Stack direction='row' justifyContent='center' gap={1}>
         <IconButton
           sx={{
             background: theme.palette.gradients?.horizontal,
@@ -94,9 +101,9 @@ export default function FlightTicket(props: { onPage: string }) {
       </Stack>
 
       {/* Ticket Price */}
-      <Stack direction="row">
+      <Stack direction='row'>
         <Typography
-          variant="h5"
+          variant='h5'
           sx={{
             background: theme.palette.gradients?.horizontal,
             backgroundClip: 'text',
@@ -104,7 +111,7 @@ export default function FlightTicket(props: { onPage: string }) {
             fontWeight: 'bold',
           }}
         >
-          Rp 1.230.000
+          {props.price}
         </Typography>
       </Stack>
     </Stack>

@@ -6,10 +6,10 @@ export const searchJadwalSlice = createSlice({
     initialState: {
         originAirportCode : '',
         destinationAirportCode: '',
-        numOfAdults: 0,
+        numOfAdults: 1,
         numOfChildren: 0,
         numOfBabies: 0,
-        classCode: '',
+        classCode: 'E',
         departureDate: '',
         returnDate: '',
         lowestPrice: 0,
