@@ -1,6 +1,6 @@
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
-import RegisterRoute from './pages/Auth/register/registerRoutes';
-import LoginRoute from './pages/Auth/Login/Login.Routes';
+// import RegisterRoute from "./pages/Auth/register/registerRoutes";
+import LoginRoutes from './pages/Auth/Login/Login.Routes';
 import DetailPenumpang from './pages/Booking/DetailPenumpang';
 import { PilihJadwalSearch } from './pages/PilihJadwalSearch';
 import JadwalKeberangkatan from './pages/JadwalPenerbangan/JadwalKeberangkatan';
@@ -25,6 +25,9 @@ import NotifDetail from './components/features/Profil/NotifDetail';
 import ChangeProfile from './components/features/Profil/ChangeProfile';
 import Pesanan from './components/features/Profil/Pesanan';
 import Booking from './pages/Booking/Booking';
+import AuthLayout from './layouts/AuthLayout';
+import RegisterRoutes from './pages/Auth/RegisterV2/Register.Routes';
+import ForgetPasswordRoutes from './pages/Auth/ForgetPassword/ForgetPassword.Routes';
 
 const router = createBrowserRouter([
   {
@@ -81,18 +84,36 @@ const router = createBrowserRouter([
     ],
   },
   {
-    path: '/register/*',
-    element: <RegisterRoute />,
+    path: '/auth',
+    element: <AuthLayout />,
+    children: [
+      {
+        path: 'login/*',
+        element: <LoginRoutes />,
+      },
+      {
+        path: 'register/*',
+        element: <RegisterRoutes />,
+      },
+      {
+        path: 'forget-password/*',
+        element: <ForgetPasswordRoutes />,
+      },
+    ],
   },
-  {
-    path: '/login/*',
-    element: <LoginRoute />,
-  },
-  {
-    path: '/profile-test',
-    element: <Profil />,
-    children: [{ index: true, element: <ChangeProfile /> }],
-  },
+  // {
+  //   path: "/register/*",
+  //   element: <RegisterRoute />,
+  // },
+  // {
+  //   path: "/login/*",
+  //   element: <LoginRoutes />,
+  // },
+  // {
+  //   path: "/profile-test",
+  //   element: <Profil />,
+  //   children: [{ index: true, element: <ChangeProfile /> }],
+  // },
 ]);
 
 function App() {

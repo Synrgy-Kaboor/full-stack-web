@@ -1,37 +1,41 @@
 import {
   Box,
-  Link,
   Stack,
   Dialog,
   Button,
-  TextField,
   Typography,
   DialogTitle,
+  OutlinedInput,
   DialogContent,
   CircularProgress,
+  FormHelperText,
 } from '@mui/material';
-
-import { FormEvent, useState } from 'react';
-import { useNavigate } from 'react-router';
 
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 
-interface LoginProps {
+import { useNavigate } from 'react-router-dom';
+import { useState, FormEvent } from 'react';
+
+import GlobalModals from '../../../shared/Auth/modals';
+import OtpModals from '../../../shared/Auth/otpModals';
+
+interface SetEmailProps {
   setEmail: React.Dispatch<React.SetStateAction<string>>;
 }
 
-export default function LoginRoot({ setEmail }: LoginProps) {
-  const [inputEmail, setInputEmail] = useState<string>('');
-  const [emailStatus, setEmailStatus] = useState<boolean>(false);
-  const [loading, setLoading] = useState<boolean>(false);
+export default function ForgetPasswordMain({ setEmail }: SetEmailProps) {
   const navigate = useNavigate();
+  const [inputEmail, setInputEmail] = useState<string>('');
+  const [loading, setLoading] = useState<boolean>(false);
+  const [emailStatus, setEmailStatus] = useState<boolean>(false);
+  const [open, setOpen] = useState<boolean>(false);
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setLoading(true);
 
     await fetch(
-      'https://kaboor-api-dev.up.railway.app/api/v1/auth/check/email',
+      'https://kaboor-api-dev.up.railway.app/api/v1/auth/password/forget',
       {
         method: 'POST',
         headers: {
@@ -44,11 +48,24 @@ export default function LoginRoot({ setEmail }: LoginProps) {
         setLoading(false);
         return response.json();
       })
-      .then((data) => {
+      .then(async (data) => {
+        console.log(data);
         if (data.code !== 200) {
           setEmailStatus(false);
           setEmail(inputEmail);
-          navigate('credentials');
+          await fetch(
+            'https://kaboor-api-dev.up.railway.app/api/v1/auth/otp/verify',
+            {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify({ email: inputEmail }),
+            }
+          ).then(() => {
+            setOpen(true);
+          });
+          // navigate("credentials");
         } else {
           setEmailStatus(true);
         }
@@ -57,24 +74,34 @@ export default function LoginRoot({ setEmail }: LoginProps) {
 
   return (
     <Box sx={{ width: '100%' }}>
-      <form onSubmit={handleSubmit}>
-        <Typography variant="h4" sx={{ fontWeight: 'bold' }}>
-          Log In
+      <Stack direction="row" alignItems="center" spacing={3} mb={4}>
+        <ArrowBackIosNewIcon
+          onClick={() => navigate(-1)}
+          sx={{
+            '&:hover': { cursor: 'pointer' },
+          }}
+        />
+        <Typography variant="h5" sx={{ fontWeight: 'bold' }}>
+          Masukkan Email
         </Typography>
-        <TextField
-          variant="outlined"
-          label="Masukkan Email"
+      </Stack>
+      <form onSubmit={handleSubmit}>
+        <FormHelperText>
+          Jangan khawatir. Tuliskan email untuk membuat kata sandi baru.
+        </FormHelperText>
+        <Typography variant="h6" sx={{ fontWeight: 'bold' }}>
+          Email
+        </Typography>
+        <OutlinedInput
+          placeholder="Masukkan Email"
           onChange={(e) => setInputEmail(e.target.value)}
-          sx={{ width: '100%', marginBlock: '1rem' }}
+          sx={{
+            width: '100%',
+            marginBlockEnd: '.5rem',
+            marginBlockStart: '.3rem',
+          }}
           required
-        ></TextField>
-        <Link
-          href="/auth/forget-password"
-          underline="none"
-          sx={{ color: 'kaboor.main' }}
-        >
-          <Typography textAlign="end">Lupa Password?</Typography>
-        </Link>
+        ></OutlinedInput>
         <Button
           type="submit"
           variant="contained"
@@ -84,7 +111,7 @@ export default function LoginRoot({ setEmail }: LoginProps) {
             width: '100%',
           }}
         >
-          {loading ? <CircularProgress sx={{ color: 'white' }} /> : 'Masuk'}
+          {loading ? <CircularProgress sx={{ color: 'white' }} /> : 'Kirim'}
         </Button>
       </form>
       <Dialog open={emailStatus}>
@@ -106,11 +133,11 @@ export default function LoginRoot({ setEmail }: LoginProps) {
               sx={{ fontWeight: 'bold' }}
               textAlign="center"
             >
-              Email ini belum terdaftar untuk Login
+              Email ini belum terdaftar
             </Typography>
             <Typography sx={{ color: 'gray' }} textAlign="center">
-              Untuk log in menggunakan email ini, silahkan lakukan daftar akun
-              terlebih dulu ya
+              Untuk menggunakan email ini, silahkan lakukan daftar akun terlebih
+              dulu ya
             </Typography>
             <Stack spacing={2} pt={2}>
               <Button
@@ -136,24 +163,9 @@ export default function LoginRoot({ setEmail }: LoginProps) {
         </DialogContent>
       </Dialog>
 
-      <Typography textAlign="center" my={5}>
-        Dengan Log In kamu menyetujui{' '}
-        <Link underline="none" color="primary.main">
-          Syarat, Ketentuan, dan Kebijakan
-        </Link>{' '}
-        Privasi Kaboor
-      </Typography>
-
-      <Typography textAlign="center">
-        Belum punya akun?{' '}
-        <Link
-          href="/auth/register"
-          underline="none"
-          sx={{ color: 'primary.main' }}
-        >
-          Buat akun yuk?
-        </Link>
-      </Typography>
+      <GlobalModals open={open} onClose={() => setOpen(false)}>
+        <OtpModals email={inputEmail} setOpen={setOpen} path={'credentials'} />
+      </GlobalModals>
     </Box>
   );
 }

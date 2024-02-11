@@ -126,14 +126,14 @@ function UserNotLoggedIn(props: INavbarMenu) {
     >
       <Button
         variant="outlined"
-        onClick={() => navigate('/register')}
+        onClick={() => navigate('auth/register')}
         sx={{ paddingInline: '2rem' }}
       >
         Register
       </Button>
       <Button
         variant="contained"
-        onClick={() => navigate('/login')}
+        onClick={() => navigate('auth/login')}
         sx={{
           paddingInline: '2rem',
           backgroundImage: `linear-gradient(90deg, #7B52AB, #3A42FF)`,
@@ -154,10 +154,10 @@ function UserNotLoggedIn(props: INavbarMenu) {
         onClose={props.handleCloseNavMenu}
         sx={{ dislay: { xs: 'block', sm: 'none' } }}
       >
-        <MenuItem onClick={() => navigate('/register')}>
+        <MenuItem onClick={() => navigate('auth/register')}>
           <Typography>Register</Typography>
         </MenuItem>
-        <MenuItem onClick={() => navigate('/login')}>
+        <MenuItem onClick={() => navigate('auth/login')}>
           <Typography>Login</Typography>
         </MenuItem>
       </Menu>
