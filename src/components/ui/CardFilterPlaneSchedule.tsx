@@ -182,8 +182,8 @@ const CardFilterPlaneSchedule = (props: CardFilterPlaneScheduleProps) => {
                       </Typography>
                       <Autocomplete
                         options={listAirPort}
-                        inputValue={from}
-                        onInputChange={(_event, newInputValue) => {
+                        value={from}
+                        onChange={(_event, newInputValue) => {
                           dispatch(setOriginAirportCode(newInputValue.slice(-3)));
                           setFrom(newInputValue);
                         }}
@@ -239,8 +239,8 @@ const CardFilterPlaneSchedule = (props: CardFilterPlaneScheduleProps) => {
                         <Autocomplete
                           options={listAirPort}
                           popupIcon={null}
-                          inputValue={destination}
-                          onInputChange={(_event, newInputValue) => {
+                          value={destination}
+                          onChange={(_event, newInputValue) => {
                             dispatch(
                               setDestinationAirportCode(newInputValue.slice(-3))
                             );
