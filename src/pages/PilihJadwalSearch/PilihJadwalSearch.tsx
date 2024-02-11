@@ -37,6 +37,8 @@ const PilihJadwalSearch = () => {
     linear-gradient(270deg, rgba(58, 66, 255, 0.50) 0%, rgba(123, 82, 171, 0.50) 100%),
     url(${bgPesawat})`,
           paddingBlock: '4rem',
+          backgroundRepeat: 'no-repeat',
+          backgroundSize: 'cover',
           height: '100vh',
         }}
         rowSpacing={2}

@@ -13,21 +13,15 @@ import {
 import ConfirmationNumberOutlinedIcon from '@mui/icons-material/ConfirmationNumberOutlined';
 import VerifiedOutlinedIcon from '@mui/icons-material/VerifiedOutlined';
 
-import { vouchers } from '../../../data/vouchers';
 import { Voucher } from '../../../types/Voucher';
 
 import { useState } from 'react';
+import { numToRp } from '../../../utils/formatter';
+import { useAppDispatch, useAppSelector } from '../../../redux/hooks';
+import { submitVoucherPopup } from '../../../redux/slices/Booking';
 
-function PromoCard({ maxDiscount, code, desc, timeLimit }: Voucher) {
-  function formatPriceToIDR(price: number) {
-    const rupiah = new Intl.NumberFormat('en-ID', {
-      style: 'currency',
-      currency: 'IDR',
-      maximumSignificantDigits: 3,
-    });
-
-    return rupiah.format(price);
-  }
+function PromoCard(props: Voucher) {
+  const dispatch = useAppDispatch();
 
   function calculateDuration(timeLimit: Date) {
     if (timeLimit < new Date()) {
@@ -52,7 +46,7 @@ function PromoCard({ maxDiscount, code, desc, timeLimit }: Voucher) {
           cursor: 'pointer',
         },
       }}
-      onClick={() => alert('Promo Clicked')}
+      onClick={() => {dispatch(submitVoucherPopup(props))}}
     >
       <CardContent sx={{ padding: 0 }}>
         {/* Card Title */}
@@ -65,7 +59,7 @@ function PromoCard({ maxDiscount, code, desc, timeLimit }: Voucher) {
         >
           <VerifiedOutlinedIcon sx={{ color: 'white' }} />
           <Typography color="white" fontWeight="bold">
-            Voucher Promo
+            {props.title}
           </Typography>
         </Stack>
 
@@ -78,17 +72,17 @@ function PromoCard({ maxDiscount, code, desc, timeLimit }: Voucher) {
             borderRadius={8}
             p={1}
           >
-            Hemat {formatPriceToIDR(maxDiscount)}
+            Hemat Sampai {numToRp(props.maximumDiscount)}
           </Typography>
         </Box>
         {/* Card Content */}
         <Stack py={1} px={2}>
-          <Typography fontWeight="bold">{desc}</Typography>
+          <Typography fontWeight="bold">{props.description}</Typography>
           <Stack direction="row" spacing={1}>
             <Typography color="gray" variant="body2">
               Kode :
             </Typography>
-            <Typography variant="body2">{code}</Typography>
+            <Typography variant="body2">{props.code}</Typography>
           </Stack>
           <Typography color="gray" variant="body2">
             Berlaku untuk semua metode pembayaran
@@ -102,10 +96,6 @@ function PromoCard({ maxDiscount, code, desc, timeLimit }: Voucher) {
             color="primary.main"
             my={1}
             sx={{ '&:hover': { cursor: 'pointer' } }}
-            onClick={(e) => {
-              e.stopPropagation();
-              alert('S&K');
-            }}
           >
             S&K Berlaku
           </Typography>
@@ -115,7 +105,7 @@ function PromoCard({ maxDiscount, code, desc, timeLimit }: Voucher) {
       <CardActions sx={{ padding: 0 }}>
         <Stack py={1} px={2}>
           <Typography color="red" variant="body2">
-            {calculateDuration(timeLimit)}
+            {calculateDuration(new Date(props.expiredTime))}
           </Typography>
         </Stack>
       </CardActions>
@@ -124,6 +114,8 @@ function PromoCard({ maxDiscount, code, desc, timeLimit }: Voucher) {
 }
 
 export default function FormVoucher() {
+  const vouchers = useAppSelector((state) => state.booking.metodePembayaran.vouchers);
+
   const [voucherQuery, setVoucherQuery] = useState<string>('');
   const [listVouchers, setListVouchers] = useState<Voucher[]>(vouchers);
 
@@ -133,7 +125,7 @@ export default function FormVoucher() {
     const query = e.target.value;
     setVoucherQuery(query);
 
-    const promoList = vouchers.filter((voucher) => {
+    const promoList = listVouchers.filter((voucher) => {
       return (
         voucher.code.toLowerCase().indexOf(query.toLocaleLowerCase()) !== -1
       );

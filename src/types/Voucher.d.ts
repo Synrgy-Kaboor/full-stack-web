@@ -1,6 +1,8 @@
 export type Voucher = {
-  maxDiscount: number;
+  id: number;
+  maximumDiscount: number;
   code: string;
-  desc: string;
-  timeLimit: Date;
+  title: string;
+  description: string;
+  expiredTime: string;
 }
