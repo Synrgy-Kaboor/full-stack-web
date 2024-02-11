@@ -51,7 +51,7 @@ export default function LoginCredentials({ email }: IEmailProps) {
         if (data.code === 200) {
           localStorage.setItem('token', data.data.auth.jwt);
           alert('Login Success!');
-          navigate('/');
+          navigate('/beranda');
         } else {
           alert('Login Failed. Please try again');
         }
@@ -67,14 +67,24 @@ export default function LoginCredentials({ email }: IEmailProps) {
       }}
     >
       <Grid container sx={{ height: '100vh' }}>
-        <Grid item xs={6} sx={{ height: '100%' }}>
-          <img
-            src={LoginBackgroundImage}
-            alt=""
-            height="100%"
-            width="55%"
-            style={{ position: 'absolute', left: 0, zIndex: -2 }}
-          />
+        <Grid
+          item
+          xs={12}
+          md={6}
+          sx={{
+            // minHeight: "10%",
+            maxHeight: '100%',
+          }}
+        >
+          <Stack sx={{ display: { xs: 'none', md: 'flex' } }}>
+            <img
+              src={LoginBackgroundImage}
+              alt=""
+              height="100%"
+              width="55%"
+              style={{ position: 'absolute', left: 0, zIndex: -2 }}
+            />
+          </Stack>
           <Box
             sx={{
               position: 'absolute',
@@ -90,12 +100,18 @@ export default function LoginCredentials({ email }: IEmailProps) {
           container
           justifyContent="center"
           alignItems="center"
-          xs={6}
+          xs={12}
+          md={6}
           p={10}
           sx={{
             bgcolor: 'white',
             borderTopLeftRadius: 30,
             borderBottomLeftRadius: 30,
+            '@media screen and (max-width: 899px)': {
+              borderTopRightRadius: 30,
+              borderBottomLeftRadius: 0,
+              padding: '2rem',
+            },
           }}
         >
           <Box sx={{ width: '100%' }}>

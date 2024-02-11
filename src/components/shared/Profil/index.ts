@@ -9,8 +9,8 @@ import ExitIcon from './../../../assets/iconamoon_exit-light.svg';
 
 export const sideBarItem1 = [
   { icon: MailIcon, text: 'Email Saya', route: '/ganti-email' },
-  { icon: PhoneIcon, text: 'NO. Telp', route: '/ganti-nomer' },
-  { icon: PasporIcon, text: 'Paspor', route: '/paspor' },
+  { icon: PhoneIcon, text: 'No. Telp', route: '/ganti-nomer' },
+  { icon: PasporIcon, text: 'Paspor', route: '/passport' },
   { icon: PlaneIcon, text: 'Pesanan', route: '/pesanan' },
   { icon: OctIcon, text: 'Notifikasi', route: '/notifikasi' },
   { icon: BellIcon, text: 'Notifikasi Harga', route: '/saved-price-alert' },

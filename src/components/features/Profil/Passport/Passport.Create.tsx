@@ -1,10 +1,4 @@
-import {
-  Stack,
-  Typography,
-  OutlinedInput,
-  Button,
-  //   InputAdornment,
-} from '@mui/material';
+import { Stack, Typography, OutlinedInput, Button } from '@mui/material';
 
 import { DemoItem } from '@mui/x-date-pickers/internals/demo';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
@@ -28,7 +22,7 @@ export default function CreatePassport() {
       p={4}
       bgcolor={'white'}
       borderRadius={2}
-      sx={{ width: '70%', border: '1px solid #C2C2C2' }}
+      sx={{ border: '1px solid #C2C2C2' }}
     >
       <Typography variant="h6" fontWeight={'bold'}>
         Paspor

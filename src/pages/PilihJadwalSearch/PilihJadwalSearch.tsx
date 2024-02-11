@@ -1,10 +1,16 @@
 import { Grid, Typography, useTheme, useMediaQuery } from '@mui/material';
 import bgPesawat from '../../assets/ikhroma-bg-pesawat.jpg';
 import CardFilterPlaneSchedule from '../../components/ui/CardFilterPlaneSchedule';
+import { type CardFilterPlaneScheduleType as filterType } from '../../types/CardFilterPlaneScheduleProps';
+
 
 const PilihJadwalSearch = () => {
   const newTheme = useTheme();
   const sizeScreen = useMediaQuery(newTheme.breakpoints.up('md'));
+ 
+  const handleSubmit = (value: Partial<filterType>):void => {
+    console.log(value);
+  };
 
   return (
     <>
@@ -15,6 +21,8 @@ const PilihJadwalSearch = () => {
     linear-gradient(270deg, rgba(58, 66, 255, 0.50) 0%, rgba(123, 82, 171, 0.50) 100%),
     url(${bgPesawat})`,
           paddingBlock: '4rem',
+          backgroundRepeat: 'no-repeat',
+          backgroundSize: 'cover',
           height: '100vh',
         }}
         rowSpacing={2}
@@ -40,7 +48,11 @@ const PilihJadwalSearch = () => {
           alignItems={'center'}
           position={'relative'}
         >
-          <CardFilterPlaneSchedule />
+          <CardFilterPlaneSchedule
+            sliderOn={false}
+            textSubmit="Cari"
+            onSubmit={handleSubmit}
+          />
         </Grid>
       </Grid>
     </>
