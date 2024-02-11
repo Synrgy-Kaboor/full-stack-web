@@ -81,11 +81,12 @@ const HelpCenter = () => {
                 color={'#1C1C1E'}
                 fontWeight={400}
               >
-                1. Pilih metode pembayaran sesuai yang kita inginkan <br />
-                2. Baca tutorial yang sudah dijelaskan di dalam halaman
-                pembayaran <br />
-                3. Transfer sesuai nominal yang sudah tertera dan waktu yang
-                sudah ditentukan
+                Biasanya, pembayaran akan segera diproses setelah Anda
+                menyelesaikan transaksi pembelian tiket pesawat. Proses ini
+                dapat memakan waktu beberapa saat tergantung pada metode
+                pembayaran yang Anda gunakan. Jika pembayaran Anda telah
+                berhasil diproses, Anda akan menerima konfirmasi melalui email
+                atau melalui aplikasi pemesanan kami.
               </Typography>
             </AccordionDetails>
           </Accordion>
@@ -114,11 +115,22 @@ const HelpCenter = () => {
                 color={'#1C1C1E'}
                 fontWeight={400}
               >
-                1. Pilih metode pembayaran sesuai yang kita inginkan <br />
-                2. Baca tutorial yang sudah dijelaskan di dalam halaman
-                pembayaran <br />
-                3. Transfer sesuai nominal yang sudah tertera dan waktu yang
-                sudah ditentukan
+                Membayar pesanan tiket pesawat Anda dengan cepat dan mudah
+                adalah prioritas kami. Berikut langkah-langkah singkat untuk
+                melakukan pembayaran: <br /> <br />
+                1. Setelah Anda memilih penerbangan yang diinginkan dan mengisi
+                detail penumpang, Anda akan diarahkan ke halaman pembayaran.
+                <br />
+                2. Pilih metode pembayaran yang Anda preferensikan dari opsi
+                yang tersedia, seperti kartu kredit/debit, transfer bank, atau
+                dompet digital. <br />
+                3. Masukkan detail pembayaran sesuai dengan instruksi yang
+                diberikan. <br />
+                4. Periksa kembali detail pesanan Anda dan pastikan semuanya
+                benar sebelum menyelesaikan pembayaran. <br />
+                5. Setelah pembayaran berhasil diproses, Anda akan menerima
+                konfirmasi pembayaran melalui email atau langsung di aplikasi
+                pemesanan kami.
               </Typography>
             </AccordionDetails>
           </Accordion>
@@ -147,11 +159,28 @@ const HelpCenter = () => {
                 color={'#1C1C1E'}
                 fontWeight={400}
               >
-                1. Pilih metode pembayaran sesuai yang kita inginkan <br />
-                2. Baca tutorial yang sudah dijelaskan di dalam halaman
-                pembayaran <br />
-                3. Transfer sesuai nominal yang sudah tertera dan waktu yang
-                sudah ditentukan
+                Jika Anda ingin mengubah nomor handphone yang terdaftar di akun
+                Anda, ikuti langkah-langkah berikut:
+                <br /> <br />
+                1. Buka aplikasi kami dan masuk ke akun Anda.
+                <br />
+                2. Di menu utama, cari opsi "Pengaturan" atau "Profil Saya".
+                <br />
+                3. Pilih opsi yang berkaitan dengan informasi akun atau profil
+                Anda.
+                <br />
+                4. Temukan bagian yang berisi informasi nomor handphone Anda
+                saat ini.
+                <br />
+                5. Klik atau ketuk opsi "Ubah" atau "Edit" di sebelah nomor
+                handphone Anda.
+                <br />
+                6. Masukkan nomor handphone baru Anda.
+                <br />
+                7. Verifikasi nomor handphone baru Anda dengan kode yang
+                dikirimkan melalui SMS atau email, sesuai prosedur yang berlaku.
+                <br />
+                8. Setelah verifikasi berhasil, simpan perubahan Anda.
               </Typography>
             </AccordionDetails>
           </Accordion>
@@ -180,11 +209,31 @@ const HelpCenter = () => {
                 color={'#1C1C1E'}
                 fontWeight={400}
               >
-                1. Pilih metode pembayaran sesuai yang kita inginkan <br />
-                2. Baca tutorial yang sudah dijelaskan di dalam halaman
-                pembayaran <br />
-                3. Transfer sesuai nominal yang sudah tertera dan waktu yang
-                sudah ditentukan
+                Jika Anda perlu mengganti alamat email yang terdaftar di akun
+                Anda, ikuti langkah-langkah berikut: <br />
+                <br />
+                1. Buka aplikasi kami dan masuk ke akun Anda.
+                <br />
+                2. Di menu utama, cari opsi "Pengaturan" atau "Profil Saya".
+                <br />
+                3. Pilih opsi yang berkaitan dengan informasi akun atau profil
+                Anda.
+                <br />
+                4. Cari bagian yang berisi informasi alamat email Anda saat ini.
+                <br />
+                5. Klik atau ketuk opsi "Ubah" atau "Edit" di sebelah alamat
+                email Anda.
+                <br />
+                6. Masukkan alamat email baru Anda.
+                <br />
+                7. Pastikan untuk memasukkan alamat email dengan cermat dan
+                pastikan tidak ada kesalahan pengetikan.
+                <br />
+                8. Simpan perubahan Anda.
+                <br />
+                9. Anda mungkin akan diminta untuk melakukan verifikasi alamat
+                email baru Anda. Periksa kotak masuk email Anda dan ikuti
+                instruksi yang diberikan untuk menyelesaikan proses verifikasi.
               </Typography>
             </AccordionDetails>
           </Accordion>
@@ -213,11 +262,35 @@ const HelpCenter = () => {
                 color={'#1C1C1E'}
                 fontWeight={400}
               >
-                1. Pilih metode pembayaran sesuai yang kita inginkan <br />
-                2. Baca tutorial yang sudah dijelaskan di dalam halaman
-                pembayaran <br />
-                3. Transfer sesuai nominal yang sudah tertera dan waktu yang
-                sudah ditentukan
+                Jika Anda mengalami masalah dengan transaksi Anda, berikut
+                adalah langkah-langkah yang dapat Anda ikuti untuk mencari
+                solusi:
+                <br />
+                <br />
+                1. Periksa Koneksi Internet: Pastikan koneksi internet Anda
+                stabil dan tidak ada gangguan saat melakukan transaksi. Koneksi
+                yang tidak stabil dapat menyebabkan gangguan dalam proses
+                pembayaran.
+                <br />
+                2. Cek Saldo atau Limit Kartu: Pastikan saldo atau limit kartu
+                pembayaran Anda mencukupi untuk melakukan transaksi.
+                Kadang-kadang transaksi tidak berhasil karena saldo tidak
+                mencukupi atau telah melebihi limit.
+                <br />
+                3. Coba Transaksi Kembali: Jika transaksi masih belum berhasil,
+                coba ulangi proses pembayaran setelah beberapa saat.
+                Kadang-kadang masalah teknis sementara dapat terjadi.
+                <br />
+                4. Hubungi Layanan Pelanggan Kami: Jika setelah langkah-langkah di
+                atas transaksi masih tidak berhasil, jangan ragu untuk
+                menghubungi tim dukungan pelanggan kami melalui [masukkan kontak
+                layanan pelanggan]. Tim kami akan dengan senang hati membantu
+                Anda menyelesaikan masalah ini.
+                <br />
+                <br />
+                Jangan lupa untuk menyertakan detail transaksi yang terkait,
+                seperti nomor pemesanan atau detail pembayaran, saat menghubungi
+                layanan pelanggan kami untuk mempercepat proses bantuan.
               </Typography>
             </AccordionDetails>
           </Accordion>
@@ -246,11 +319,28 @@ const HelpCenter = () => {
                 color={'#1C1C1E'}
                 fontWeight={400}
               >
-                1. Pilih metode pembayaran sesuai yang kita inginkan <br />
-                2. Baca tutorial yang sudah dijelaskan di dalam halaman
-                pembayaran <br />
-                3. Transfer sesuai nominal yang sudah tertera dan waktu yang
-                sudah ditentukan
+                Jika Anda mengalami masalah saat mencoba mendaftar akun, berikut
+                adalah beberapa langkah yang dapat Anda coba untuk menyelesaikan
+                masalah: <br />
+                <br />
+                1. Periksa Koneksi Internet: Pastikan Anda memiliki koneksi
+                internet yang stabil saat melakukan proses pendaftaran. Koneksi
+                yang tidak stabil bisa menjadi penyebab pendaftaran gagal.
+                <br />
+                2. Coba Lagi: Kadang-kadang pendaftaran gagal karena masalah
+                teknis sementara. Cobalah untuk mendaftar kembali setelah
+                beberapa saat.
+                <br />
+                3. Periksa Persyaratan: Pastikan Anda telah memenuhi semua
+                persyaratan yang diperlukan untuk pendaftaran akun. Hal ini
+                mungkin termasuk pengisian semua kolom yang wajib di formulir
+                pendaftaran dan memilih kata sandi yang memenuhi kriteria
+                keamanan.
+                <br />
+                4. Clear Cache dan Cookies: Jika Anda mengalami masalah saat
+                menggunakan aplikasi di perangkat seluler atau komputer, coba
+                hapus cache dan cookies dari browser atau aplikasi Anda.
+                Kemudian, coba mendaftar kembali.
               </Typography>
             </AccordionDetails>
           </Accordion>
