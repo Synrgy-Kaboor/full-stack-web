@@ -1,8 +1,7 @@
 import { Box, Stack, Typography, Divider } from '@mui/material';
-import { useState } from 'react';
 import maskapai from '../../../assets/Logo Maskapai.png';
 import plane from '../../../assets/plane icon.png';
-
+import { Link } from 'react-router-dom';
 interface PesananCardProps {
   id: string;
   airport1: string;
@@ -26,7 +25,6 @@ const getStatusBackgroundColor = (status: string): string => {
 };
 
 const PesananCard: React.FC<PesananCardProps> = ({ id, airport1, airport2, Tanggal, Jam, status }) => {
-  const [popUpDetailVisible] = useState(false);
   
   return (
     <>
@@ -69,19 +67,12 @@ const PesananCard: React.FC<PesananCardProps> = ({ id, airport1, airport2, Tangg
                 <Typography variant="h6" fontWeight={600} color={'#505050'} sx={{ marginBottom: '19px' }}>
                   {Jam}
                 </Typography>
-                <Typography variant="h6" fontWeight={600} color={'#7B52AB'} >
-                  Selengkapnya
-                </Typography>
-
-                <Box borderRadius={1} border={'1px solid #C2C2C2'} sx={{ background: '#FFF' }} py={2.25} position={'absolute'} right={0} width={'max-content'} display={popUpDetailVisible ? 'flex' : 'none'}>
-                  <Stack gap={1}>
-                    {/* Additional details here */}
-                  </Stack>
-                </Box>
+                <Link to={`/profil/pesanan/${id}`} style={{ textDecoration: 'none', color: '#7B52AB' }}>
+                  <Typography variant="h6" fontWeight={600} color={'#7B52AB'} >
+                    Selengkapnya
+                  </Typography>
+                </Link>    
               </Box>
-            </Stack>
-            <Stack direction={'row'} gap={1.7}>
-              {/* Additional components here */}
             </Stack>
           </Stack>
         </Stack>
