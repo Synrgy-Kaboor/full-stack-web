@@ -1,5 +1,4 @@
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
-// import RegisterRoute from "./pages/Auth/register/registerRoutes";
 import LoginRoutes from './pages/Auth/Login/Login.Routes';
 import DetailPenumpang from './pages/Booking/DetailPenumpang';
 import { PilihJadwalSearch } from './pages/PilihJadwalSearch';
@@ -28,6 +27,7 @@ import Booking from './pages/Booking/Booking';
 import AuthLayout from './layouts/AuthLayout';
 import RegisterRoutes from './pages/Auth/RegisterV2/Register.Routes';
 import ForgetPasswordRoutes from './pages/Auth/ForgetPassword/ForgetPassword.Routes';
+import PesananDetail from './components/features/Profil/PesananDetail';
 
 const router = createBrowserRouter([
   {
@@ -75,6 +75,20 @@ const router = createBrowserRouter([
           { path: 'notifikasi', element: <Notification /> },
           { path: 'notifikasi/:notifId', element: <NotifDetail /> },
           { path: 'pesanan', element: <Pesanan /> },
+          {
+            path: 'pesanan/:id',
+            element: (
+              <PesananDetail
+                id={''}
+                airport1={''}
+                airport2={''}
+                Tanggal={''}
+                Jam={''}
+                status={''}
+                kode={''}
+              />
+            ),
+          },
         ],
       },
       {
@@ -101,19 +115,6 @@ const router = createBrowserRouter([
       },
     ],
   },
-  // {
-  //   path: "/register/*",
-  //   element: <RegisterRoute />,
-  // },
-  // {
-  //   path: "/login/*",
-  //   element: <LoginRoutes />,
-  // },
-  // {
-  //   path: "/profile-test",
-  //   element: <Profil />,
-  //   children: [{ index: true, element: <ChangeProfile /> }],
-  // },
 ]);
 
 function App() {

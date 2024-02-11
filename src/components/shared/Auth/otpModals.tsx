@@ -153,6 +153,7 @@ const Wrapper = styled(ModalsContainer)`
 
 interface OtpModalsProps {
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  // setOpen: React.Dispatch<React.SetStateAction<boolean>>;
   email: string;
   path: string;
 }

@@ -14,11 +14,13 @@ import {
 import { ArrowBackIosOutlined } from '@mui/icons-material';
 import { ModalClassSeatProps } from '../../types/ModalClassSeatProps';
 import { useState } from 'react';
+import { useAppDispatch } from '../../redux/hooks';
+import { getFlightClass } from '.';
+import { setClassCode } from '../../redux/slices/FlightSchedule';
 
 const ModalClassSeat = (props: ModalClassSeatProps) => {
   const theme = useTheme();
   const isSmallScreen = useMediaQuery(theme.breakpoints.down('md'));
-  const [valueChecked, setValueChecked] = useState<string>(props.valueChecked);
   const modalStyle = {
     position: 'absolute',
     top: '50%',
@@ -31,9 +33,13 @@ const ModalClassSeat = (props: ModalClassSeatProps) => {
     px: isSmallScreen ? 5 : 9,
     py: 3,
   };
-
+  const dispatch = useAppDispatch();
+  const [valueChecked, setValueChecked] = useState<string>(props.valueChecked);
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setValueChecked((event.target as HTMLInputElement).value);
+    dispatch(
+      setClassCode(getFlightClass((event.target as HTMLInputElement).value))
+    );
   };
   const handleClose = () => {
     setValueChecked(props.valueChecked);
@@ -47,9 +53,9 @@ const ModalClassSeat = (props: ModalClassSeatProps) => {
     <Modal
       open={props.open}
       onClose={handleClose}
-      aria-labelledby="modal-modal-title"
-      aria-describedby="modal-modal-description"
-      id="modal-passanger"
+      aria-labelledby='modal-modal-title'
+      aria-describedby='modal-modal-description'
+      id='modal-passanger'
     >
       <Box sx={modalStyle} width={isSmallScreen ? '100%' : 'auto'}>
         <Stack alignItems={'center'} width={'100%'} spacing={1}>
@@ -63,7 +69,7 @@ const ModalClassSeat = (props: ModalClassSeatProps) => {
               <ArrowBackIosOutlined></ArrowBackIosOutlined>
             </IconButton>
             <Typography
-              variant="h4"
+              variant='h4'
               fontWeight={700}
               textAlign={'center'}
               width={'100%'}
@@ -82,14 +88,14 @@ const ModalClassSeat = (props: ModalClassSeatProps) => {
               <Grid item xs={11}>
                 <Stack>
                   <Typography
-                    variant="h6"
+                    variant='h6'
                     fontWeight={600}
                     fontFamily={'Open Sans'}
                   >
                     Ekonomi
                   </Typography>
                   <Typography
-                    variant="subtitle1"
+                    variant='subtitle1'
                     fontWeight={400}
                     color={'#9E9E9E'}
                     fontFamily={'Open Sans'}
@@ -102,8 +108,8 @@ const ModalClassSeat = (props: ModalClassSeatProps) => {
                 <Radio
                   checked={valueChecked === 'Ekonomi'}
                   onChange={handleChange}
-                  value="Ekonomi"
-                  name="radio-buttons"
+                  value='Ekonomi'
+                  name='radio-buttons'
                   inputProps={{ 'aria-label': 'Ekonomi' }}
                 />
               </Grid>
@@ -119,14 +125,14 @@ const ModalClassSeat = (props: ModalClassSeatProps) => {
               <Grid item xs={11}>
                 <Stack>
                   <Typography
-                    variant="h6"
+                    variant='h6'
                     fontWeight={600}
                     fontFamily={'Open Sans'}
                   >
                     Ekonomi Premium
                   </Typography>
                   <Typography
-                    variant="subtitle1"
+                    variant='subtitle1'
                     fontWeight={400}
                     color={'#9E9E9E'}
                     fontFamily={'Open Sans'}
@@ -139,8 +145,8 @@ const ModalClassSeat = (props: ModalClassSeatProps) => {
                 <Radio
                   checked={valueChecked === 'Ekonomi P'}
                   onChange={handleChange}
-                  value="Ekonomi P"
-                  name="radio-buttons"
+                  value='Ekonomi P'
+                  name='radio-buttons'
                   inputProps={{ 'aria-label': 'Ekonomi P' }}
                 />
               </Grid>
@@ -156,14 +162,14 @@ const ModalClassSeat = (props: ModalClassSeatProps) => {
               <Grid item xs={11}>
                 <Stack>
                   <Typography
-                    variant="h6"
+                    variant='h6'
                     fontWeight={600}
                     fontFamily={'Open Sans'}
                   >
                     Bisnis
                   </Typography>
                   <Typography
-                    variant="subtitle1"
+                    variant='subtitle1'
                     fontWeight={400}
                     color={'#9E9E9E'}
                     fontFamily={'Open Sans'}
@@ -177,8 +183,8 @@ const ModalClassSeat = (props: ModalClassSeatProps) => {
                 <Radio
                   checked={valueChecked === 'Bisnis'}
                   onChange={handleChange}
-                  value="Bisnis"
-                  name="radio-buttons"
+                  value='Bisnis'
+                  name='radio-buttons'
                   inputProps={{ 'aria-label': 'Bisnis' }}
                 />
               </Grid>
@@ -194,14 +200,14 @@ const ModalClassSeat = (props: ModalClassSeatProps) => {
               <Grid item xs={11}>
                 <Stack>
                   <Typography
-                    variant="h6"
+                    variant='h6'
                     fontWeight={600}
                     fontFamily={'Open Sans'}
                   >
                     First Class
                   </Typography>
                   <Typography
-                    variant="subtitle1"
+                    variant='subtitle1'
                     fontWeight={400}
                     color={'#9E9E9E'}
                     fontFamily={'Open Sans'}
@@ -214,8 +220,8 @@ const ModalClassSeat = (props: ModalClassSeatProps) => {
                 <Radio
                   checked={valueChecked === 'First Class'}
                   onChange={handleChange}
-                  value="First Class"
-                  name="radio-buttons"
+                  value='First Class'
+                  name='radio-buttons'
                   inputProps={{ 'aria-label': 'First Class' }}
                 />
               </Grid>
@@ -226,7 +232,7 @@ const ModalClassSeat = (props: ModalClassSeatProps) => {
           <Divider sx={{ width: '100%', borderColor: '#FFF' }} />
           <Box width={'100%'}>
             <Button
-              variant="contained"
+              variant='contained'
               sx={{
                 background: `background: theme.palette.gradients?.diagonal`,
                 width: '100%',
