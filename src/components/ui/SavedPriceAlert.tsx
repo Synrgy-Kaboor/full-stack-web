@@ -54,7 +54,7 @@ const SavedPriceAlert = () => {
               right={0}
               sx={modalFilterOpen ? { display: 'flex' } : { display: 'none' }}
             >
-              <CardFilterPlaneSchedule sliderOn={true} onSubmit={handleSubmit} textSubmit='Simpan'/>
+              <CardFilterPlaneSchedule sliderOn={true} onSubmit={handleSubmit} textSubmit='Simpan' homecomingOn={false}/>
             </Box>
           </Box>
         </Stack>

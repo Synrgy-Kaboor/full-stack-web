@@ -68,6 +68,7 @@ const PilihJadwalSearch = () => {
             sliderOn={false}
             textSubmit='Cari'
             onSubmit={handleSubmit}
+            homecomingOn={true}
           />
         </Grid>
       </Grid>

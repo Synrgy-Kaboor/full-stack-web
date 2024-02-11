@@ -14,6 +14,7 @@ export interface CardFilterPlaneScheduleProps {
     sliderOn : boolean;
     textSubmit : string;
     onSubmit : (value: Partial<CardFilterPlaneScheduleType>) => void;
+    homecomingOn: boolean;
 }
 
 export interface FlightScheduleState {

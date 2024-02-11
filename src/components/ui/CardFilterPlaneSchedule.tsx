@@ -114,6 +114,7 @@ const CardFilterPlaneSchedule = (props: CardFilterPlaneScheduleProps) => {
       deparature: from.slice(-3),
       arrival: destination.slice(-3),
       deparatureDate: deparatureDateValue,
+      arrivalDateValue: props.homecomingOn ? arrivalDateValue : null,
       passanger: passangerValue,
       class: classSeatValue,
       priceRange: props.sliderOn ? sliderValue : null,
@@ -181,7 +182,6 @@ const CardFilterPlaneSchedule = (props: CardFilterPlaneScheduleProps) => {
                       </Typography>
                       <Autocomplete
                         options={listAirPort}
-                        value={from ? from : undefined}
                         inputValue={from}
                         onInputChange={(_event, newInputValue) => {
                           dispatch(setOriginAirportCode(newInputValue.slice(-3)));
@@ -239,7 +239,6 @@ const CardFilterPlaneSchedule = (props: CardFilterPlaneScheduleProps) => {
                         <Autocomplete
                           options={listAirPort}
                           popupIcon={null}
-                          value={destination ? destination : undefined}
                           inputValue={destination}
                           onInputChange={(_event, newInputValue) => {
                             dispatch(
@@ -311,7 +310,6 @@ const CardFilterPlaneSchedule = (props: CardFilterPlaneScheduleProps) => {
                     }}
                   ></CalendarMonthOutlined>
                   <Stack direction={'column'} flexGrow={1}>
-                    <Box>
                       <LocalizationProvider dateAdapter={adapterDate}>
                         <MobileDatePicker
                           value={deparatureDateValue}
@@ -325,9 +323,10 @@ const CardFilterPlaneSchedule = (props: CardFilterPlaneScheduleProps) => {
                           sx={{ border: '0px' }}
                         />
                       </LocalizationProvider>
-                    </Box>
                   </Stack>
-                  <IOSSwitch onChange={handleHomecomingVisible}></IOSSwitch>
+                  {props.homecomingOn && (
+                    <IOSSwitch onChange={handleHomecomingVisible}></IOSSwitch>
+                  )}
                 </Stack>
                 <Stack
                   direction={'row'}
