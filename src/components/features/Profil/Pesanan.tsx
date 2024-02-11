@@ -4,11 +4,10 @@ import { useState } from 'react';
 import { PesananCardsList } from '../Profil/PesananCard';
 import PesananData from './PesananData';
 
-const SavedPriceAlert = () => {
+const Pesanan = () => {
   const [modalFilterOpen] = useState(false);
-  const [filterStatus, setFilterStatus] = useState('all'); // 'all', 'Aktif', or 'Riwayat'
+  const [filterStatus, setFilterStatus] = useState('Aktif');
 
-  // Filter the data based on the selected status
   const filteredData = filterStatus === 'Aktif' 
     ? PesananData.filter(item => item.status !== 'Selesai') 
     : filterStatus === 'Riwayat' 
@@ -90,4 +89,4 @@ const SavedPriceAlert = () => {
   );
 };
 
-export default SavedPriceAlert;
+export default Pesanan;
