@@ -1,7 +1,9 @@
 import { useParams } from 'react-router-dom';
 import { Stack, Typography } from '@mui/material';
+import SliderPrice from '../../shared/Profil/sliderPrice';
 
 const NotifDetail = () => {
+  // get jadwal delay api with id
   const { notifId } = useParams();
   return (
     <>
@@ -30,6 +32,7 @@ const NotifDetail = () => {
         >
           {`${notifId}`}
         </Typography>
+        <SliderPrice />
       </Stack>
     </>
   );

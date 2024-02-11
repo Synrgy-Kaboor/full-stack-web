@@ -11,6 +11,16 @@ import {
   Slider,
   TextField,
 } from '@mui/material';
+import {
+  setReturnDate,
+  setDestinationAirportCode,
+  setDepartureDate,
+  setNumOfAdults,
+  setNumOfBabies,
+  setNumOfChildren,
+  setOriginAirportCode,
+} from './../../redux/slices/FlightSchedule';
+import { formatDate } from './index';
 import { useEffect, useState } from 'react';
 import {
   FlightTakeoffOutlined,
@@ -28,8 +38,12 @@ import theme from '../../config/theme';
 import { CardFilterPlaneScheduleProps } from '../../types/CardFilterPlaneScheduleProps';
 import { AdapterDateFns as adapterDate } from '@mui/x-date-pickers/AdapterDateFns';
 import { LocalizationProvider, MobileDatePicker } from '@mui/x-date-pickers';
+import { useAppDispatch } from '../../redux/hooks';
+import { IOSSwitch } from '../core/IOSSwitch';
 
 const CardFilterPlaneSchedule = (props: CardFilterPlaneScheduleProps) => {
+  const dispatch = useAppDispatch();
+  const [homecomingVisible, setHomecomingVisible] = useState(false);
   const [modalPassangerVisible, setModalPassangerVisible] = useState(false);
   const [modalClassSeatVisible, setModalClassSeatVisible] = useState(false);
   const [from, setFrom] = useState<string>('');
@@ -47,7 +61,10 @@ const CardFilterPlaneSchedule = (props: CardFilterPlaneScheduleProps) => {
   });
   const [classSeatValue, setClassSeatValue] = useState<string>('Ekonomi');
   const [sliderValue, setSliderValue] = useState<number[]>([0, 10000000]);
-  const [deparatureDateValue, setDeparatureDateValue] = useState<Date | null>(null);
+  const [deparatureDateValue, setDeparatureDateValue] = useState<Date | null>(
+    null
+  );
+  const [arrivalDateValue, setArrivalDateValue] = useState<Date | null>(null);
   const [listAirPort, setListAirPort] = useState<string[]>([]);
 
   const handleModalPassangerVisibleOpen = () => {
@@ -57,10 +74,18 @@ const CardFilterPlaneSchedule = (props: CardFilterPlaneScheduleProps) => {
     setModalPassangerVisible(false);
   };
 
+  const handleHomecomingVisible = () => {
+    setHomecomingVisible(!homecomingVisible);
+  };
+
   const handleModalPassagerSave = (data: PassangerSearch) => {
     setPassangerValue(data);
+    dispatch(setNumOfAdults(passangerValue.adult.value));
+    dispatch(setNumOfChildren(passangerValue.child.value));
+    dispatch(setNumOfBabies(passangerValue.baby.value));
     setModalPassangerVisible(false);
   };
+
   const handleModalClassSeatVisibleOpen = () => {
     setModalClassSeatVisible(true);
   };
@@ -73,6 +98,8 @@ const CardFilterPlaneSchedule = (props: CardFilterPlaneScheduleProps) => {
   };
 
   const handleSwapFromDestination = () => {
+    dispatch(setOriginAirportCode(destination.slice(-3)));
+    dispatch(setDestinationAirportCode(from.slice(-3)));
     setFrom(destination);
     setDestination(from);
   };
@@ -84,9 +111,10 @@ const CardFilterPlaneSchedule = (props: CardFilterPlaneScheduleProps) => {
 
   const handleSubmit = () => {
     const value = {
-      deparature: from,
-      arrival: destination,
+      deparature: from.slice(-3),
+      arrival: destination.slice(-3),
       deparatureDate: deparatureDateValue,
+      arrivalDateValue: props.homecomingOn ? arrivalDateValue : null,
       passanger: passangerValue,
       class: classSeatValue,
       priceRange: props.sliderOn ? sliderValue : null,
@@ -154,9 +182,9 @@ const CardFilterPlaneSchedule = (props: CardFilterPlaneScheduleProps) => {
                       </Typography>
                       <Autocomplete
                         options={listAirPort}
-                        value={from ? from : undefined}
-                        inputValue={from}
-                        onInputChange={(_event, newInputValue) => {
+                        value={from}
+                        onChange={(_event, newInputValue) => {
+                          dispatch(setOriginAirportCode(newInputValue.slice(-3)));
                           setFrom(newInputValue);
                         }}
                         popupIcon={null}
@@ -211,9 +239,11 @@ const CardFilterPlaneSchedule = (props: CardFilterPlaneScheduleProps) => {
                         <Autocomplete
                           options={listAirPort}
                           popupIcon={null}
-                          value={destination ? destination : undefined}
-                          inputValue={destination}
-                          onInputChange={(_event, newInputValue) => {
+                          value={destination}
+                          onChange={(_event, newInputValue) => {
+                            dispatch(
+                              setDestinationAirportCode(newInputValue.slice(-3))
+                            );
                             setDestination(newInputValue);
                           }}
                           disableClearable
@@ -262,34 +292,80 @@ const CardFilterPlaneSchedule = (props: CardFilterPlaneScheduleProps) => {
               border={'1px solid #C2C2C2'}
               sx={{ padding: '1rem 1.5rem' }}
             >
-              <Stack
-                direction={'row'}
-                alignItems={'center'}
-                spacing={2}
-              >
-                <CalendarMonthOutlined
-                  sx={{
-                    borderRadius: '50%',
-                    background: theme.palette.gradients?.diagonal,
-                    padding: '0.5rem',
-                    color: 'white',
-                    height: '3rem',
-                    width: '3rem',
-                  }}
-                ></CalendarMonthOutlined>
-                <Stack flexGrow={1}>
-                  <LocalizationProvider dateAdapter={adapterDate}>
-                    <MobileDatePicker
-                      value={deparatureDateValue}
-                      onChange={(value) => {
-                        setDeparatureDateValue(value);
-                      }}
-                      disablePast
-                      label="Keberangkatan"
-                      format="EEEE ,dd MMMM yyyy"
-                      sx={{ border: '0px' }}
-                    />
-                  </LocalizationProvider>
+              <Stack direction={'column'} spacing={1} width={'100%'}>
+                <Stack
+                  direction={'row'}
+                  alignItems={'center'}
+                  spacing={2}
+                  justifyContent={'space-between'}
+                >
+                  <CalendarMonthOutlined
+                    sx={{
+                      borderRadius: '50%',
+                      background: theme.palette.gradients?.diagonal,
+                      padding: '0.5rem',
+                      color: 'white',
+                      height: '3rem',
+                      width: '3rem',
+                    }}
+                  ></CalendarMonthOutlined>
+                  <Stack direction={'column'} flexGrow={1}>
+                      <LocalizationProvider dateAdapter={adapterDate}>
+                        <MobileDatePicker
+                          value={deparatureDateValue}
+                          onChange={(value) => {
+                            dispatch(setDepartureDate(formatDate(value)));
+                            setDeparatureDateValue(value);
+                          }}
+                          disablePast
+                          label="Keberangkatan"
+                          format="EEEE, dd MMMM yyyy"
+                          sx={{ border: '0px' }}
+                        />
+                      </LocalizationProvider>
+                  </Stack>
+                  {props.homecomingOn && (
+                    <IOSSwitch onChange={handleHomecomingVisible}></IOSSwitch>
+                  )}
+                </Stack>
+                <Stack
+                  direction={'row'}
+                  alignItems={'center'}
+                  spacing={2}
+                  display={
+                    homecomingVisible
+                      ? { display: 'flex' }
+                      : { display: 'none' }
+                  }
+                >
+                  <CalendarMonthOutlined
+                    sx={{
+                      borderRadius: '50%',
+                      background: theme.palette.gradients?.diagonal,
+                      padding: '0.5rem',
+                      color: 'white',
+                      height: '3rem',
+                      width: '3rem',
+                    }}
+                  ></CalendarMonthOutlined>
+                  <Stack direction={'column'} flexGrow={1}>
+                    <Box>
+                      <LocalizationProvider dateAdapter={adapterDate}>
+                        <MobileDatePicker
+                          value={arrivalDateValue}
+                          onChange={(value) => {
+                            setArrivalDateValue(value);
+                            dispatch(setReturnDate(formatDate(value)));
+                          }}
+                          disablePast
+                          label="Kepulangan"
+                          format="EEEE, dd MMMM yyyy"
+                          sx={{ borderTop: '0px' }}
+                          defaultValue={new Date()}
+                        />
+                      </LocalizationProvider>
+                    </Box>
+                  </Stack>
                 </Stack>
               </Stack>
             </Box>

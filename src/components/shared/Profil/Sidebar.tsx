@@ -10,7 +10,7 @@ import {
 import { sideBarItem1, exitItem } from '.';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
-import profileImg from '../../../assets/profile-img.svg';
+import { useAppSelector } from './../../../redux/hooks';
 // import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 
@@ -18,12 +18,12 @@ interface SidebarProp {
   pathname: string;
 }
 export default function Sidebar({ pathname }: SidebarProp) {
+  const navigate = useNavigate();
+  const userInfo = useAppSelector((state) => state.userInfo.user);
   const filterIcon =
     'brightness(0) invert(1) sepia(0) saturate(0) hue-rotate(0deg)';
   const theme = useTheme();
   console.log({ path: pathname });
-
-  const navigate = useNavigate();
   const [anchorElNav, setAnchorElNav] = useState<
     null | HTMLElement | SVGSVGElement
   >(null);
@@ -60,21 +60,21 @@ export default function Sidebar({ pathname }: SidebarProp) {
           padding={'26px 26px 26px 26px'}
         >
           <Avatar
-            alt="user-avatar"
-            src={profileImg}
+            alt='user-avatar'
+            src={userInfo.imageUrl}
             sx={{
               width: '70px',
               height: '70px',
-              '@media screen and (max-width: 600px)': {
+              '@media screen and (max-width: 768px)': {
                 width: '50px',
                 height: '50px',
               },
             }}
           />
           <Stack sx={{ cursor: 'pointer' }}>
-            <Typography variant="h6">Andre Huston</Typography>
-            <Typography variant="body2" color={'#9E9E9E'}>
-              Informasi pribadi 16% lengkap
+            <Typography variant='h6'>Andre Huston</Typography>
+            <Typography variant='body2' color={'#9E9E9E'}>
+              informasi pribadi 16% lengkap
             </Typography>
           </Stack>
           <KeyboardArrowDownIcon
@@ -150,7 +150,7 @@ export default function Sidebar({ pathname }: SidebarProp) {
             >
               <img
                 src={data.icon}
-                alt=""
+                alt=''
                 width={'32px'}
                 height={'32px'}
                 style={{
@@ -162,7 +162,7 @@ export default function Sidebar({ pathname }: SidebarProp) {
                 }}
               />
               <Typography
-                variant="body2"
+                variant='body2'
                 sx={{
                   color: pathname.includes(
                     `/profil${sideBarItem1[index].route}`
@@ -173,7 +173,7 @@ export default function Sidebar({ pathname }: SidebarProp) {
                   fontWeight: 400,
                   lineHeight: '26px',
                   letterSpacing: '-0.15px',
-                  '@media screen and (max-width: 600px)': {
+                  '@media screen and (max-width: 768px)': {
                     display: 'none',
                   },
                 }}
@@ -205,7 +205,7 @@ export default function Sidebar({ pathname }: SidebarProp) {
               >
                 <img
                   src={data.icon}
-                  alt=""
+                  alt=''
                   width={'32px'}
                   height={'32px'}
                   style={{
@@ -217,7 +217,7 @@ export default function Sidebar({ pathname }: SidebarProp) {
                   }}
                 />
                 <Typography
-                  variant="body2"
+                  variant='body2'
                   sx={{
                     color: pathname.includes(
                       `/profil${sideBarItem1[index].route}`
@@ -228,7 +228,7 @@ export default function Sidebar({ pathname }: SidebarProp) {
                     fontWeight: 400,
                     lineHeight: '26px',
                     letterSpacing: '-0.15px',
-                    '@media screen and (max-width: 600px)': {
+                    '@media screen and (max-width: 768px)': {
                       display: 'none',
                     },
                   }}
@@ -267,16 +267,16 @@ export default function Sidebar({ pathname }: SidebarProp) {
           }}
           onClick={handleLogout}
         >
-          <img src={exitItem.icon} alt="" width={'32px'} height={'32px'} />
+          <img src={exitItem.icon} alt='' width={'32px'} height={'32px'} />
           <Typography
-            variant="body2"
+            variant='body2'
             sx={{
               color: '#505050',
               fontSize: '18px',
               fontWeight: 400,
               lineHeight: '26px',
               letterSpacing: '-0.15px',
-              '@media screen and (max-width: 600px)': {
+              '@media screen and (max-width: 768px)': {
                 display: 'none',
               },
             }}
