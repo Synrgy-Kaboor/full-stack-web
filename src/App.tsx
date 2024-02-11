@@ -25,6 +25,7 @@ import NotifDetail from './components/features/Profil/NotifDetail';
 import ChangeProfile from './components/features/Profil/ChangeProfile';
 import Pesanan from './components/features/Profil/Pesanan';
 import Booking from './pages/Booking/Booking';
+import PesananDetail from './components/features/Profil/PesananDetail';
 
 const router = createBrowserRouter([
   {
@@ -72,6 +73,7 @@ const router = createBrowserRouter([
           { path: 'notifikasi', element: <Notification /> },
           { path: 'notifikasi/:notifId', element: <NotifDetail /> },
           { path: 'pesanan', element: <Pesanan /> },
+          { path: 'pesanan/:id', element: <PesananDetail id={''} airport1={''} airport2={''} Tanggal={''} Jam={''} status={''} kode={''} /> },
         ],
       },
       {
