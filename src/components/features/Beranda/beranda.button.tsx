@@ -3,6 +3,7 @@ import plane from '../../../assets/Kaboor Plane.svg';
 import food from '../../../assets/Kaboor Food.svg';
 import bagasi from '../../../assets/Kaboor Ekstra Bagasii.svg';
 import asuransi from '../../../assets/Kaboor Asuransi.svg';
+import { Link } from 'react-router-dom';
 
 export const BerandaButton = () => {
   return (
@@ -10,11 +11,14 @@ export const BerandaButton = () => {
       <Grid container justifyContent="center" spacing={8}>
       <Grid item>
         <Stack alignItems={'center'} gap={1} width={'98px'}>
+          <Link to="/pilih-jadwal-search" style={{width:'100%', height:'98px', borderRadius:'50%'}}>
           <IconButton sx={{background:'linear-gradient(270deg, #3A42FF 0%, #7B52AB 100%)', width:'100%', height:'98px'}}>
             <Stack width={'60px'}>
             <img src={plane} alt="plane icon" />
             </Stack>
           </IconButton>
+</Link>
+
           <Typography alignItems={'center'} variant='h6' sx={{ background: 'linear-gradient(270deg, #3A42FF 0%, #7B52AB 100%)',
   backgroundClip: 'text',
   WebkitBackgroundClip: 'text',

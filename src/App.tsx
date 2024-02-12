@@ -77,7 +77,7 @@ const router = createBrowserRouter([
         ],
       },
       {
-        path: '/beranda',
+        path: '/',
         element: <Beranda />,
       },
     ],
