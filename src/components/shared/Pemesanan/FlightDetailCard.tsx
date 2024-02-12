@@ -151,7 +151,7 @@ function ReturnFlightDetailCard() {
           </Stack>
           <Stack direction="row" justifyContent="center" mt={2}>
             <Box>
-              <Typography variant="body2">{flight.originAirport.code}</Typography>
+              <Typography variant="body2">{flight.originAirport.name}</Typography>
               <Typography variant="body1" sx={{ fontWeight: 'bold' }}>
                 {timeWithTimezone(new Date(flight.departureDateTime), flight.originAirport.timezone)}
               </Typography>
@@ -168,7 +168,7 @@ function ReturnFlightDetailCard() {
               </Typography>
             </Box>
             <Box sx={{ textAlign: 'end' }}>
-              <Typography variant="body2">{flight.destinationAirport.code}</Typography>
+              <Typography variant="body2">{flight.destinationAirport.name}</Typography>
               <Typography variant="body1" sx={{ fontWeight: 'bold' }}>
                 {flight ? timeWithTimezone(new Date(flight.arrivalDateTime), flight.originAirport.timezone): ''}
               </Typography>
