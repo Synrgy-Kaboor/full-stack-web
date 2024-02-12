@@ -15,6 +15,8 @@ import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 
 import { FormEvent, useState } from 'react';
 import { useNavigate } from 'react-router';
+import { useAppDispatch } from '../../../redux/hooks';
+import { setToken } from '../../../redux/slices/Auth';
 
 interface IEmailProps {
   email: string;
@@ -25,6 +27,7 @@ export default function LoginCredentials({ email }: IEmailProps) {
   const [loading, setLoading] = useState<boolean>(false);
   const [showPassword, setShowPassword] = useState<boolean>(false);
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
 
   const handleLogin = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -47,6 +50,7 @@ export default function LoginCredentials({ email }: IEmailProps) {
       .then((data) => {
         if (data.code === 200) {
           localStorage.setItem('token', data.data.auth.jwt);
+          dispatch(setToken(data.data.auth.jwt));
           navigate('/');
         } else {
           alert('Login Failed. Please try again');
