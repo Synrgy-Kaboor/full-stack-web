@@ -60,7 +60,6 @@ export default function TataCaraPembayaran() {
   }
 
   function resetFileHandler() {
-    if (file) { console.log('a')}
     setFile(null);
     setFileName('');
   }

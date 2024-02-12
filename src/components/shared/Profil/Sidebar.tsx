@@ -9,10 +9,12 @@ import {
 } from '@mui/material';
 import { sideBarItem1, exitItem } from '.';
 import { useNavigate } from 'react-router-dom';
-import { useState } from 'react';
-import { useAppSelector } from './../../../redux/hooks';
+import { useEffect, useState } from 'react';
+import { useAppDispatch, useAppSelector } from './../../../redux/hooks';
 // import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+import { fetchUser } from '../../../redux/slices/userInfo';
+import { setToken } from '../../../redux/slices/Auth';
 
 interface SidebarProp {
   pathname: string;
@@ -27,6 +29,11 @@ export default function Sidebar({ pathname }: SidebarProp) {
   const [anchorElNav, setAnchorElNav] = useState<
     null | HTMLElement | SVGSVGElement
   >(null);
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(fetchUser());
+  }, [dispatch]);
 
   const handleListItemClick = (index: number) => {
     navigate(`/profil${sideBarItem1[index].route}`);
@@ -34,8 +41,9 @@ export default function Sidebar({ pathname }: SidebarProp) {
 
   function handleLogout() {
     if (confirm('Are you sure you want to log out?')) {
+      dispatch(setToken(null));
       localStorage.removeItem('token');
-      navigate('/beranda');
+      navigate('/');
     }
   }
 
@@ -74,7 +82,7 @@ export default function Sidebar({ pathname }: SidebarProp) {
           <Stack sx={{ cursor: 'pointer' }}>
             <Typography variant='h6'>{userInfo.fullName}</Typography>
             <Typography variant='body2' color={'#9E9E9E'}>
-              informasi pribadi 16% lengkap
+              Detail Informasi Pribadi
             </Typography>
           </Stack>
           <KeyboardArrowDownIcon

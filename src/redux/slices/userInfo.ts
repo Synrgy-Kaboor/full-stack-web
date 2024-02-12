@@ -1,5 +1,5 @@
 import { User } from '../../types/User';
-import { createAsyncThunk, createSlice} from '@reduxjs/toolkit';
+import { PayloadAction, createAsyncThunk, createSlice} from '@reduxjs/toolkit';
 
 
 const jwtToken = localStorage.getItem('token')
@@ -82,13 +82,25 @@ const userRespond = await fetch(userApi,{
   Authorization: `Bearer ${jwtToken}`,
 }});
   const userInfo = await userRespond.json()
+  console.log(userInfo);
   return userInfo.data
 })
 
 export const userSlice = createSlice({
   name:'user',
   initialState,
-  reducers: {}, 
+  reducers: {
+    setImage: (state, action: PayloadAction<{imageName: string, imageUrl: string}>) => {
+      state.user.imageName = action.payload.imageName;
+      state.user.imageUrl = action.payload.imageUrl;
+    },
+    setTitle: (state, action: PayloadAction<string>) => {
+      state.user.title = action.payload
+    },
+    setGender: (state, action: PayloadAction<string>) => {
+      state.user.gender = action.payload
+    }
+  }, 
   extraReducers: (builder) => {
     builder.addCase(fetchUser.fulfilled, (state, action)=>{
       state.loading = false;
@@ -103,6 +115,10 @@ export const userSlice = createSlice({
   }
 })
 
-
+export const {
+  setImage,
+  setTitle,
+  setGender
+} = userSlice.actions;
 
 export default userSlice.reducer;

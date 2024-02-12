@@ -15,7 +15,7 @@ import HealthAndSafetyOutlinedIcon from '@mui/icons-material/HealthAndSafetyOutl
 import PlaneIcon from '../../../assets/plane icon.png';
 import theme from '../../../config/theme';
 import { useAppSelector } from '../../../redux/hooks';
-import { dateToVerboseString, durationString, numToRp, timeWithTimezone } from '../../../utils/formatter';
+import { dateToVerboseString, durationString, getSeatClass, numToRp, timeWithTimezone } from '../../../utils/formatter';
 
 // Card detail penerbangan
 export default function FlightDetailCard(props: { type: string }) {  
@@ -29,7 +29,7 @@ export default function FlightDetailCard(props: { type: string }) {
 
 function OutboundFlightDetailCard() {
   const flight = useAppSelector((state) => state.booking.outboundFlight);
-  const { totalAdults, totalChildren, totalBabies } = useAppSelector((state) => state.booking);
+  const { totalAdults, totalChildren, totalBabies, classCode } = useAppSelector((state) => state.booking);
 
   return (
     <>
@@ -48,12 +48,12 @@ function OutboundFlightDetailCard() {
               <Typography variant="body1" sx={{ fontWeight: 'bold' }}>
                 {flight.plane.airline.name}
               </Typography>
-              <Typography variant="body2">Ekonomi</Typography>
+              <Typography variant="body2">{getSeatClass(classCode)}</Typography>
             </Box>
           </Stack>
           <Stack direction="row" justifyContent="center" mt={2}>
             <Box>
-              <Typography variant="body2">Surabaya</Typography>
+              <Typography variant="body2">{flight.originAirport.name}</Typography>
               <Typography variant="body1" sx={{ fontWeight: 'bold' }}>
                 {timeWithTimezone(new Date(flight.departureDateTime), flight.originAirport.timezone)}
               </Typography>
@@ -70,7 +70,7 @@ function OutboundFlightDetailCard() {
               </Typography>
             </Box>
             <Box sx={{ textAlign: 'end' }}>
-              <Typography variant="body2">Jakarta</Typography>
+              <Typography variant="body2">{flight.destinationAirport.name}</Typography>
               <Typography variant="body1" sx={{ fontWeight: 'bold' }}>
                 {flight ? timeWithTimezone(new Date(flight.arrivalDateTime), flight.originAirport.timezone): ''}
               </Typography>
@@ -127,7 +127,7 @@ function OutboundFlightDetailCard() {
 
 function ReturnFlightDetailCard() {
   const flight = useAppSelector((state) => state.booking.returnFlight);
-  const { totalAdults, totalChildren, totalBabies } = useAppSelector((state) => state.booking);
+  const { totalAdults, totalChildren, totalBabies, classCode } = useAppSelector((state) => state.booking);
 
   return (
     <>
@@ -146,12 +146,12 @@ function ReturnFlightDetailCard() {
               <Typography variant="body1" sx={{ fontWeight: 'bold' }}>
                 {flight.plane.airline.name}
               </Typography>
-              <Typography variant="body2">Ekonomi</Typography>
+              <Typography variant="body2">{getSeatClass(classCode)}</Typography>
             </Box>
           </Stack>
           <Stack direction="row" justifyContent="center" mt={2}>
             <Box>
-              <Typography variant="body2">Surabaya</Typography>
+              <Typography variant="body2">{flight.originAirport.name}</Typography>
               <Typography variant="body1" sx={{ fontWeight: 'bold' }}>
                 {timeWithTimezone(new Date(flight.departureDateTime), flight.originAirport.timezone)}
               </Typography>
@@ -168,7 +168,7 @@ function ReturnFlightDetailCard() {
               </Typography>
             </Box>
             <Box sx={{ textAlign: 'end' }}>
-              <Typography variant="body2">Jakarta</Typography>
+              <Typography variant="body2">{flight.destinationAirport.name}</Typography>
               <Typography variant="body1" sx={{ fontWeight: 'bold' }}>
                 {flight ? timeWithTimezone(new Date(flight.arrivalDateTime), flight.originAirport.timezone): ''}
               </Typography>
