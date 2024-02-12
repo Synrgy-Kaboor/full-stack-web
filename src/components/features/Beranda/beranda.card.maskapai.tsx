@@ -1,12 +1,17 @@
 import React, { useState } from 'react';
-import { Typography as MuiTypography, Stack, TypographyProps, Button } from '@mui/material';
+import { Typography as MuiTypography, Stack, TypographyProps, Button, useMediaQuery, useTheme } from '@mui/material';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import { CardActionArea } from '@mui/material';
 import stargold from '../../../assets/star-on.png';
 import stargray from '../../../assets/star-off.png';
-import card from '../../../assets/cardberanda.png';
+import superair from '../../../assets/superairjet.jpg';
+import lionair from '../../../assets/lionair.jpg';
+import garudaair from '../../../assets/garudaindonesia.jpg';
+import batik from '../../../assets/batik.jpg';
+import citilink from '../../../assets/citilink.jpg';
+import transnusa from '../../../assets/transnusa.jpg';
 const generateStars = (rating: number) => {
   const fullStars = Math.floor(rating);
   const halfStar = rating % 1 !== 0;
@@ -18,7 +23,7 @@ const generateStars = (rating: number) => {
     stars.push(
       <img
         key={`star-${i}`}
-        src={stargold}        
+        src={stargold}
         alt="Gold Star"
         style={{ width: '14px', height: '14px' }}
       />
@@ -29,7 +34,7 @@ const generateStars = (rating: number) => {
     stars.push(
       <img
         key="half-star"
-        src={stargray}//belum ada            
+        src={stargray}
         alt="Half Star"
         style={{ width: '14px', height: '14px' }}
       />
@@ -40,7 +45,7 @@ const generateStars = (rating: number) => {
     stars.push(
       <img
         key={`empty-star-${i}`}
-        src={stargray}//belum ada             
+        src={stargray}
         alt="Empty Star"
         style={{ width: '14px', height: '14px' }}
       />
@@ -64,7 +69,7 @@ const Typography1 = ({ children, rating, review, ...props }: { children: string,
         letterSpacing: '-0.75px',
         overflow: 'hidden',
         textOverflow: 'ellipsis',
-        ...props, 
+        ...props,
       }}
     >
       {children}
@@ -84,21 +89,21 @@ const BerandaRentalCard = ({ imageUrl, text, genre, price, rating, review }: { i
   <Card sx={{ maxWidth: 325, width: '100%', height: 435, marginRight: '16px', borderRadius: '8px', boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.1)', position: 'relative' }}>
     <CardActionArea>
       <Stack sx={{
-        position: 'absolute', 
-        top: 10, 
-        right: 15, 
-        background:  'var(--Primary-01, linear-gradient(270deg, #3A42FF 0%, #7B52AB 100%))', 
-        color: 'white', 
-        padding: '8px', 
+        position: 'absolute',
+        top: 10,
+        right: 15,
+        background: 'var(--Primary-01, linear-gradient(270deg, #3A42FF 0%, #7B52AB 100%))',
+        color: 'white',
+        padding: '8px',
         borderRadius: '32px'
       }}>
         Promo Terbaik
       </Stack>
-     
+
       <CardMedia component="img" height="182" image={imageUrl} alt="Image" />
       <CardContent>
         <Stack sx={{
-        height: '225px',  display: 'flex', flexDirection: 'column', justifyContent: 'space-between'  
+          height: '225px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between'
         }}>
           <Stack>
             <Typography1
@@ -157,40 +162,32 @@ const BerandaRentalCard = ({ imageUrl, text, genre, price, rating, review }: { i
               Rp. {price}
             </MuiTypography>
           </Stack>
-          </Stack>
+        </Stack>
       </CardContent>
     </CardActionArea>
   </Card>
 );
 
-export const BerandaRental = () => {//data dummy 
+export const BerandaRental = () => {
   const [historyItems] = React.useState([
     {
-      imageUrl: card,
-      text: 'Toyota yariz',
-      genre: 'Ekonomi',
-      price: '1.000.000',
-      rating: '4',
-      review: '23',
-    },
-    {
-      imageUrl: card,      
+      imageUrl: superair,
       text: 'Super Jet Air',
       genre: 'Ekonomi',
-      price: '200.000',
+      price: '1.200.000',
       rating: '4',
       review: '23',
     },
     {
-      imageUrl: card,      
+      imageUrl: lionair,
       text: 'Lion Air',
       genre: 'Ekonomi',
-      price: '400.000',
+      price: '950.000',
       rating: '4',
       review: '23',
     },
     {
-      imageUrl: card,      
+      imageUrl: garudaair,
       text: 'Garuda Air',
       genre: 'Ekonomi',
       price: '1.000.000',
@@ -198,76 +195,45 @@ export const BerandaRental = () => {//data dummy
       review: '23',
     },
     {
-      imageUrl: card,      
-      text: 'Garuda Air',
+      imageUrl: batik,
+      text: 'Batik',
       genre: 'Ekonomi',
-      price: '200.000',
+      price: '1.400.000',
       rating: '4',
       review: '23',
     },
     {
-      imageUrl: card,      
-      text: 'Garuda Air',
+      imageUrl: citilink,
+      text: 'Citilink',
       genre: 'Ekonomi',
-      price: '400.000',
+      price: '1.200.000',
       rating: '4',
       review: '23',
     },
     {
-      imageUrl: card,      
-      text: 'Yaris',
+      imageUrl: transnusa,
+      text: 'TransNusa',
       genre: 'Ekonomi',
-      price: '200.000',
+      price: '940.000',
       rating: '4',
       review: '23',
     },
-    {
-      imageUrl: card,      
-      text: 'Yaris',
-      genre: 'Ekonomi',
-      price: '400.000',
-      rating: '4',
-      review: '23',
-    },
-    {
-      imageUrl: card,      
-      text: 'Yaris',
-      genre: 'Ekonomi',
-      price: '1.000.000',
-      rating: '4',
-      review: '23',
-    },
-    {
-      imageUrl: card,      
-      text: 'Yaris',
-      genre: 'Ekonomi',
-      price: '200.000',
-      rating: '4',
-      review: '23',
-    },
-    {
-      imageUrl: card,      
-      text: 'Yaris',
-      genre: 'Ekonomi',
-      price: '400.000',
-      rating: '4',
-      review: '23',
-    },
- 
-  ]);
+      ]);
 
-  
-  const [visibleItems, setVisibleItems] = useState(4);// inisial data yang muncul (4 item)
+  const theme = useTheme();
+  const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'));
+
+  const [visibleItems, setVisibleItems] = useState(4);
 
   const loadMoreItems = () => {
-    setVisibleItems((prevVisibleItems) => prevVisibleItems + 4); // menambah item (+4)
+    setVisibleItems((prevVisibleItems) => prevVisibleItems + 4);
   };
 
   const latestItems = historyItems.slice(0, visibleItems);
 
   return (
     <Stack>
-            <Stack sx={{display: 'grid', gridTemplateColumns: `repeat(auto-fill, minmax(calc(25% - 16px), 1fr))`, gap: '16px', margin: '16px 0'}}>
+      <Stack sx={{ display: isSmallScreen ? 'flex' : 'grid', gridTemplateColumns: isSmallScreen ? '1fr' : `repeat(auto-fill, minmax(calc(25% - 16px), 1fr))`, gap: '16px', margin: '16px 0' }}>
         {latestItems.map((item, index) => (
           <BerandaRentalCard
             key={index}
@@ -281,8 +247,9 @@ export const BerandaRental = () => {//data dummy
         ))}
       </Stack>
       {visibleItems < historyItems.length && (
-        <div style={{ display: 'flex', justifyContent: 'center', margin: '0 auto', marginTop:'40px'}}>
-          <Button size='medium'
+        <div style={{ display: 'flex', justifyContent: 'center', margin: '0 auto', marginTop: '40px' }}>
+          <Button
+            size="medium"
             style={{
               display: 'flex',
               padding: '12px 20px',
@@ -290,7 +257,7 @@ export const BerandaRental = () => {//data dummy
               alignItems: 'center',
               borderRadius: '8px',
               background: 'var(--Primary-01, linear-gradient(270deg, #3A42FF 0%, #7B52AB 100%))',
-              color: '#fff', 
+              color: '#fff',
               cursor: 'pointer',
               border: 'none',
             }}

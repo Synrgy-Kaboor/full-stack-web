@@ -1,7 +1,7 @@
 import { BerandaButton } from '../../components/features/Beranda/beranda.button';
 import { BerandaHistory } from '../../components/features/Beranda/beranda.card.history';
 import { BerandaDestinasi } from '../../components/features/Beranda/beranda.card.destinasi';
-import { Typography, Stack } from '@mui/material';
+import { Typography, Stack, useTheme,useMediaQuery } from '@mui/material';
 import { BerandaRental } from '../../components/features/Beranda/beranda.card.maskapai';
 import React from 'react';
 import bg from '../../assets/bgberanda.png';
@@ -19,14 +19,16 @@ import btn from '../../assets/btnfooter.png';
 import playstore from '../../assets/playstore.png';
 
 const Beranda = () => {
+  const theme = useTheme();
+  const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'));
   return (
     <>
 
-<Stack sx={{
+<Stack sx={{//Hero
   display: 'flex', 
   flexDirection: 'column', 
   alignItems: 'center'
-}}>
+}} gap={5}>
 <Stack sx={{
   background: `url(${bg}) center center / cover no-repeat`,
   backgroundSize: 'cover',
@@ -36,33 +38,40 @@ const Beranda = () => {
   width: '100%', 
   margin: '0',    
   marginTop: '-15px',
+  
 }}>
   <BerandaButton />
 </Stack>
 
 
-<Stack sx={{
-  height: '523px',
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-}}>
-<Stack sx={{
-  borderRadius: '12px',
-  overflow: 'hidden',
-  display: 'flex',
- }}>
-  <img
-  src={promo}
-  alt="Placeholder"
-  style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-  />
-</Stack>
-</Stack>
+<Stack
+      sx={{//promo
+        height: isSmallScreen ? 'auto' : 'auto',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+      }}
+    >
+      <Stack
+        sx={{
+          borderRadius: '12px',
+          overflow: 'hidden',
+          display: 'flex',
+          width: isSmallScreen ? '98%' : '100%',
+          maxHeight: '100%',
+        }}
+      >
+        <img
+          src={promo}
+          alt="Placeholder"
+          style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+        />
+      </Stack>
+    </Stack>
 
 <Stack sx={{
-    height: '305px',
-    width:'1300px',
+    height: 'auto',
+    width:'100%',
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'center', 
@@ -72,9 +81,9 @@ const Beranda = () => {
   <BerandaHistory />
 </Stack>
 
-  <Stack sx={{
+  <Stack sx={{//Destinasi dan Maskapai
     height: 'auto',
-    width :'1300px',
+    width :'100%',
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'flex-start', 
@@ -87,7 +96,8 @@ const Beranda = () => {
   </Typography>
   <BerandaDestinasi />
   <Stack sx={{
-    marginBottom:'60px'
+    marginBottom:'60px',
+    marginTop:'60px'
   }}>
   <Typography style={styles.texttitle}>Rekomendasi Maskapai Terbaik</Typography>
   <Typography sx={{ maxWidth: '698px' }} style={styles.textdesc}>
@@ -97,17 +107,19 @@ const Beranda = () => {
 
 </Stack>
 
-<Stack direction={'row'} sx={{
+<Stack direction={isSmallScreen ? 'column' : 'row'} gap={isSmallScreen ? 0 : 10} sx={{//Footer
   backgroundColor: '#7B52AB',
   width: '100%', 
-  height: '517px',
+  height: 'auto',
   margin: '0px',    
+  paddingTop:isSmallScreen ? '20px' : '90px',
+  paddingLeft: isSmallScreen ? '16px' : '0px',
   display: 'flex',
   justifyContent: 'center',
-  alignItems: 'center',
+  alignItems: isSmallScreen ? 'flex-start' : '', 
 }}>
         
-<Stack direction="row" useFlexGap flexWrap="wrap" marginRight="140px">
+<Stack direction="row" useFlexGap flexWrap="wrap" >
   <ul style={{listStyleType:'none'}}>
     <li>
       <img src={logo}/>
@@ -148,9 +160,9 @@ const Beranda = () => {
     </li>
   </ul>
  </Stack>
- <Stack direction="row" useFlexGap flexWrap="wrap">
+
     <ul style={{listStyleType:'none'}}>
-  <Stack direction="row" useFlexGap flexWrap="nowrap" marginBottom={'57px'} marginRight={'80px'}>
+  <Stack direction="row" useFlexGap flexWrap="nowrap" >
       <ul style={{listStyleType:'none'}}>
           <li style={styles.footerhead}>
               Tentang Kaboor
@@ -197,24 +209,9 @@ const Beranda = () => {
         </li>
         <li style={styles.footertext}>
           Pesawat
-        </li>
-        <li style={styles.footertext}>
-          Mobil
-        </li>
-        <li style={styles.footertext}>
-          Bus
-        </li>
-        <li style={styles.footertext}>
-          Kereta Bandara
-        </li>
-        <li style={styles.footertext}>
-          bundling Tiket
-        </li>
+          </li>
         <li style={styles.footertext}>
           Reservasi Makanan
-        </li>
-        <li style={styles.footertext}>
-          Airport Express
         </li>
         <li style={styles.footertext}>
           Tambah Bagasi
@@ -223,8 +220,8 @@ const Beranda = () => {
           Asuransi Perjalanan
         </li>
       </ul>
-      <ul style={{listStyleType:'none', marginLeft:'60px'}}>
-      <ul style={{marginLeft:'0px', listStyleType:'none', marginBottom:'57px'}}>
+      <ul style={{listStyleType:'none'}}>
+      <ul style={{listStyleType:'none', marginBottom:isSmallScreen ? '' : '57px'}}>
         <li style={styles.footerhead}>
           Dukungan
         </li>
@@ -239,7 +236,7 @@ const Beranda = () => {
       </ul>
     </Stack>
     </Stack>
-    </Stack>
+
     </>
   );
 };
@@ -283,6 +280,7 @@ const styles: {
     fontWeight:600,
     lineHeight:'24px',
     letterSpacing:'-0.1px',
+    marginBottom:'10px'
   },
 };
 

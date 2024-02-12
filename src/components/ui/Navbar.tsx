@@ -207,7 +207,7 @@ export default function Navbar(props: NavbarProps) {
                 <MenuIcon sx={{ color: 'gray' }} />
               </IconButton>
 
-              <Link href="/Beranda">
+              <Link href="/">
                 <img src={KaboorIcon} alt="" />
               </Link>
 
