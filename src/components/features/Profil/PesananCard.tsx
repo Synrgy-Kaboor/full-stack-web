@@ -26,7 +26,7 @@ const PesananCard: React.FC<{ data: UserBooking }> = (props) => {
       return 'Belum Selesai';
     } else if (!paymentCompleted) {
       return 'Sedang Diproses';
-    } else if (departureDateTime > new Date()) {
+    } else if (departureDateTime < new Date()) {
       return 'Selesai'
     } else {
       return 'E-Tiket Terbit';
