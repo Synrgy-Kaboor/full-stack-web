@@ -95,6 +95,8 @@ export default function JadwalKepulangan() {
             departureDatetime={departureFlight.departureDatetime}
             flightClass={classDetail[classCode]}
             from={departureFlight.originAirport.code}
+            originalTimezone={departureFlight.originAirport.timezone}
+            destinationTimezone={departureFlight.destinationAirport.timezone}
             to={departureFlight.destinationAirport.code}
           />
         </Stack>
@@ -139,6 +141,8 @@ export default function JadwalKepulangan() {
                       flightClass={classDetail[classCode]}
                       from={item.originAirport.code}
                       to={item.destinationAirport.code}
+                      originalTimezone={item.originAirport.timezone}
+                      destinationTimezone={item.destinationAirport.timezone}
                     />
                   );
                 })

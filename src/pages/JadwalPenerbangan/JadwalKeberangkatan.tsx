@@ -116,6 +116,8 @@ export default function JadwalKeberangkatan() {
                       departureDatetime={item.departureDatetime}
                       flightClass={classDetail[classCode]}
                       from={item.originAirport.code}
+                      originalTimezone={item.originAirport.timezone}
+                      destinationTimezone={item.destinationAirport.timezone}
                       to={item.destinationAirport.code}
                     />
                   );
