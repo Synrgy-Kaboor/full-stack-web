@@ -14,6 +14,7 @@ import { useAppDispatch, useAppSelector } from './../../../redux/hooks';
 // import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import { fetchUser } from '../../../redux/slices/userInfo';
+import { setToken } from '../../../redux/slices/Auth';
 
 interface SidebarProp {
   pathname: string;
@@ -40,6 +41,7 @@ export default function Sidebar({ pathname }: SidebarProp) {
 
   function handleLogout() {
     if (confirm('Are you sure you want to log out?')) {
+      dispatch(setToken(null));
       localStorage.removeItem('token');
       navigate('/');
     }

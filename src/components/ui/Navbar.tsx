@@ -21,6 +21,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 
 import { useNavigate } from 'react-router-dom';
 import React, { useState } from 'react';
+import { useAppSelector } from '../../redux/hooks';
 
 export interface NavbarProps {
   window?: () => Window;
@@ -56,6 +57,7 @@ function UserLoggedIn(props: INavbarMenu) {
         direction="row"
         spacing={1}
         alignItems="center"
+        onClick={() => navigate('/profil/notifikasi')}
         sx={{ display: { xs: 'none', sm: 'flex' } }}
       >
         <NotificationsNoneOutlinedIcon
@@ -78,10 +80,10 @@ function UserLoggedIn(props: INavbarMenu) {
         onClose={props.handleCloseNavMenu}
         sx={{ dislay: { xs: 'block', sm: 'none' } }}
       >
-        <MenuItem onClick={props.handleCloseNavMenu}>
+        <MenuItem onClick={() => navigate('/profil/notifikasi')}>
           <Typography>Notifikasi</Typography>
         </MenuItem>
-        <MenuItem onClick={() => navigate('pilih-jadwal-search')}>
+        <MenuItem onClick={() => navigate('/profil/pesanan')}>
           <Typography>Pesanan</Typography>
         </MenuItem>
       </Menu>
@@ -90,7 +92,7 @@ function UserLoggedIn(props: INavbarMenu) {
         direction="row"
         spacing={1}
         alignItems="center"
-        onClick={() => navigate('pilih-jadwal-search')}
+        onClick={() => navigate('/profil/pesanan')}
         sx={{
           '&:hover': { cursor: 'pointer' },
           display: { xs: 'none', sm: 'flex' },
@@ -167,6 +169,7 @@ function UserNotLoggedIn(props: INavbarMenu) {
 
 export default function Navbar(props: NavbarProps) {
   const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
+  const { token } = useAppSelector((state) => state.auth);
 
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget);
@@ -177,9 +180,6 @@ export default function Navbar(props: NavbarProps) {
   };
 
   const navbarProps = { anchorElNav, handleOpenNavMenu, handleCloseNavMenu };
-
-  const token = localStorage.getItem('token');
-  console.log(token);
 
   return (
     <HideOnScroll {...props}>
