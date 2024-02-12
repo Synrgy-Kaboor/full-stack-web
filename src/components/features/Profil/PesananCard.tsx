@@ -20,7 +20,7 @@ const getStatusBackgroundColor = (status: string): string => {
   }
 };
 
-const PesananCard: React.FC<{ data: UserBooking }> = (props: { data: UserBooking }) => {
+const PesananCard: React.FC<{ data: UserBooking }> = (props) => {
   function statusString(uploadedPaymentProof: boolean, paymentCompleted: boolean, departureDateTime: Date): string {
     if (!uploadedPaymentProof) {
       return 'Belum Selesai';
@@ -33,7 +33,6 @@ const PesananCard: React.FC<{ data: UserBooking }> = (props: { data: UserBooking
     }
   }
 
-  console.log(props.data);
   return (
     <>
       <Box borderRadius={'8px'} border={'1px solid #C2C2C2'} >
@@ -69,8 +68,8 @@ const PesananCard: React.FC<{ data: UserBooking }> = (props: { data: UserBooking
                     sx={{ 
                       backgroundColor: getStatusBackgroundColor(
                         statusString(
-                          props.data.paymentCompleted, 
                           props.data.uploadedProofOfPayment, 
+                          props.data.paymentCompleted, 
                           new Date(props.data.flight.departureDateTime)
                         )
                       ),
@@ -79,8 +78,8 @@ const PesananCard: React.FC<{ data: UserBooking }> = (props: { data: UserBooking
                     padding={'2px 11px'}
                   >
                     {statusString(
-                      props.data.paymentCompleted, 
                       props.data.uploadedProofOfPayment, 
+                      props.data.paymentCompleted, 
                       new Date(props.data.flight.departureDateTime)
                       )
                     }
@@ -95,11 +94,20 @@ const PesananCard: React.FC<{ data: UserBooking }> = (props: { data: UserBooking
                 <Typography variant="body1" fontWeight={600} color={'#505050'} sx={{ marginBottom: '19px' }}>
                   {timeWithTimezone(new Date(props.data.flight.departureDateTime), props.data.flight.originAirport.timezone)}
                 </Typography>
-                <Link to={`/profil/pesanan/${props.data.id}`} style={{ textDecoration: 'none', color: '#7B52AB' }}>
-                  <Typography variant="body1" fontWeight={600} color={'#7B52AB'} >
-                    Selengkapnya
-                  </Typography>
-                </Link>    
+                  {!props.data.uploadedProofOfPayment && 
+                    <Link to={`/booking/${props.data.id}/pembayaran`} style={{ textDecoration: 'none', color: '#7B52AB' }}>
+                      <Typography variant="body1" fontWeight={600} color={'#7B52AB'} >
+                        Lanjutkan Pembayaran
+                      </Typography>
+                    </Link>    
+                  }
+                  {props.data.uploadedProofOfPayment && 
+                    <Link to={props.data.type === 'return' ? `/profil/pesanan/${props.data.id}/kepulangan` : `/profil/pesanan/${props.data.id}/keberangkatan`} style={{ textDecoration: 'none', color: '#7B52AB' }}>
+                      <Typography variant="body1" fontWeight={600} color={'#7B52AB'} >
+                        Selengkapnya
+                      </Typography>
+                    </Link>    
+                  }
               </Stack>
             </Stack>
           </Stack>

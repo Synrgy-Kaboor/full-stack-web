@@ -1,53 +1,61 @@
 import { Box, Divider, Stack, Typography } from '@mui/material';
-import { useParams } from 'react-router-dom';
-import PesananData from '../Profil/PesananData';
-import { Penumpang } from '../Profil/Penumpang';
+import { useNavigate, useParams } from 'react-router-dom';
 import Copy from '../../../assets/Copy.svg';
 import logo1 from '../../../assets/Logo Pesanan 1.svg';
 import logo2 from '../../../assets/Logo Pesanan 2.svg';
 import logo3 from '../../../assets/Logo Pesanan 3.svg';
 import checker from '../../../assets/Checker.svg';
-import maskapai from '../../../assets/Logo Maskapai.png';
 import plane from '../../../assets/plane icon.png';
+import { useEffect, useState } from 'react';
+import { BookingData } from '../../../types/BookingData';
+import { httpFetch } from '../../../utils/http';
+import { BeResponse } from '../../../types/BeResponse';
+import HighlightOffIcon from '@mui/icons-material/HighlightOff';
+import { dateToVerboseString, durationString, getSeatClass, timeWithTimezone } from '../../../utils/formatter';
 
-interface Pesanan {
-  id: string;
-  airport1: string;
-  jam1: string;
-  airport2: string;
-  jam2: string;
-  Tanggal: string;
-  Jam: string;
-  status: string;
-  kode: string;
-  nama: string;
-  kelas: string;
-  durasi: string;
-  penumpang: Penumpang[];
-}
-
-interface PesananDetailProps {
-  id: string;
-  airport1: string;
-  airport2: string;
-  Tanggal: string;
-  Jam: string;
-  status: string;
-  kode: string;
-}
-
-const Pesanandetail: React.FC<PesananDetailProps> = () => {
+const PesananDetail: React.FC<{ type: string }> = (props) => {
   const { id } = useParams<{ id: string }>();
-  const pesanan: Pesanan | undefined = PesananData.find(item => item.id === id);
+  const [pesanan, setPesanan] = useState<BookingData | null>(null);
+  const navigate = useNavigate();
 
-  if (!pesanan) {
-    return <Typography>Pesanan not found</Typography>;
-  }
+  useEffect(() => {
+    httpFetch<BeResponse<BookingData>>(
+      `api/v1/booking/${id}/${props.type}`,
+      true,
+      {},
+      'fsw',
+    ).then(response => {
+      setPesanan(response.data);
+    }).catch(() => {
+      navigate('/profil/pesanan');
+    });
+  }, [id, navigate, props.type])
 
   const handleCopyClick = (text: string) => {
     navigator.clipboard.writeText(text);
     window.alert('Kode booking telah disalin.');
   };
+
+  const handleDownloadTicket = () => {
+    const headers: HeadersInit = {
+      Authorization: `Bearer ${localStorage.getItem('token')}`,
+    };
+
+    fetch(
+      `${import.meta.env['VITE_FSW_BE_URL']}/api/v1/booking/${id}/${props.type}/ticket`,
+      {
+        headers
+      }
+    )
+    .then(response => response.blob())
+    .then(blob => {
+      const hiddenA = document.createElement('a');
+      hiddenA.href = window.URL.createObjectURL(blob);
+      hiddenA.setAttribute('download', `ticket-${pesanan?.id}-${props.type}.pdf`);
+      document.body.appendChild(hiddenA);
+      hiddenA.click();
+    });
+  }
 
   return (
     <>
@@ -63,20 +71,9 @@ const Pesanandetail: React.FC<PesananDetailProps> = () => {
         }}
         gap={2}
       >
-        <Typography variant='h5' fontWeight={700}>ID : {pesanan.id}</Typography>
-        {pesanan.status == 'Selesai' && (
-  <Stack flexDirection={'unset'}>
-    <Typography
-      variant="body1"
-      fontWeight={400}
-      color={'white'}
-      sx={{ background: '#18AF5E', borderRadius: '16px' }}
-      padding={'3px 10px'}
-    >
-      Penerbangan {pesanan.status}
-    </Typography>
-  </Stack>
-)}
+        <Typography variant="h5" color={'#1C1C1E'} fontWeight={700}>
+          ID: {pesanan?.id}
+        </Typography>
         <Box borderRadius={'8px'} border={'1px solid #C2C2C2'}>
           <Stack sx={{ margin: '20px', marginTop: '14px', marginBottom: '16px' }}>
             <Typography variant='body2' fontWeight={400} color={'#757575'}>Kode Booking</Typography>
@@ -89,9 +86,9 @@ const Pesanandetail: React.FC<PesananDetailProps> = () => {
                   WebkitTextFillColor: 'transparent',
                 }}
               >
-                {pesanan.kode}
+                {pesanan?.bookingCode}
               </Typography>
-              <Stack width={'20px'} onClick={() => handleCopyClick(pesanan.kode)} style={{ cursor: 'pointer' }}>
+              <Stack width={'20px'} onClick={() => handleCopyClick(pesanan?.bookingCode || '')} style={{ cursor: 'pointer' }}>
                 <img src={Copy} alt="copy-icon" />
               </Stack>
             </Stack>
@@ -99,29 +96,29 @@ const Pesanandetail: React.FC<PesananDetailProps> = () => {
           <Divider />
           <Stack direction={'row'} justifyContent={'space-between'} sx={{ margin: '20px', marginTop: '16px', marginBottom: '9px' }}>
             <Stack direction={'column'}>
-              <Typography variant='body1' fontWeight={600} color={'black'}>{pesanan.nama}</Typography>
-              <Typography variant='body2' fontWeight={400} color={'#757575'}>{pesanan.kelas}</Typography>
+              <Typography variant='body1' fontWeight={600} color={'black'}>{pesanan?.flight.plane.airline.name}</Typography>
+              <Typography variant='body2' fontWeight={400} color={'#757575'}>{getSeatClass(pesanan?.classCode || '')}</Typography>
             </Stack>
             <Stack width={'52px'}>
-              <img src={maskapai} alt="maskapai-logo" />
+              <img src={pesanan?.flight.plane.airline.imageUrl} alt="maskapai-logo" />
             </Stack>
           </Stack>
           <Divider />
           <Stack direction={'row'} justifyContent={'space-between'} sx={{ margin: '20px', marginTop: '26px', marginBottom: '27px' }}>
             <Stack direction={'column'}>
-              <Typography variant='body2' fontWeight={400} color={'#757575'}>{pesanan.airport1}</Typography>
-              <Typography variant='body1' fontWeight={600} color={'black'}>{pesanan.jam1}</Typography>
+              <Typography variant='body2' fontWeight={400} color={'#757575'}>{pesanan?.flight.originAirport.code}</Typography>
+              <Typography variant='body1' fontWeight={600} color={'black'}>{timeWithTimezone(new Date(pesanan?.flight.departureDateTime || ''), pesanan?.flight.originAirport.timezone || 0)}</Typography>
             </Stack>
             <Stack direction={'column'} alignItems={'center'}>
-              <Typography variant='body2' fontWeight={400} color={'#757575'}>{pesanan.Tanggal}</Typography>
+              <Typography variant='body2' fontWeight={400} color={'#757575'}>{dateToVerboseString(new Date(pesanan?.flight.departureDateTime || ''), pesanan?.flight.originAirport.timezone)}</Typography>
               <Stack width={'26px'}>
                 <img src={plane} alt="plane-icon" />
               </Stack>
-              <Typography variant='body2' fontWeight={400} color={'#757575'}>{pesanan.durasi}</Typography>
+              <Typography variant='body2' fontWeight={400} color={'#757575'}>{durationString(new Date(pesanan?.flight.departureDateTime || ''), new Date(pesanan?.flight.arrivalDateTime || ''))}</Typography>
             </Stack>
             <Stack direction={'column'}>
-              <Typography variant='body2' fontWeight={400} color={'#757575'}>{pesanan.airport2}</Typography>
-              <Typography variant='body1' fontWeight={600} color={'black'}>{pesanan.jam2}</Typography>
+              <Typography variant='body2' fontWeight={400} color={'#757575'}>{pesanan?.flight.destinationAirport.code}</Typography>
+              <Typography variant='body1' fontWeight={600} color={'black'}>{timeWithTimezone(new Date(pesanan?.flight.arrivalDateTime || ''), pesanan?.flight.originAirport.timezone || 0)}</Typography>
             </Stack>
           </Stack>
         </Box>
@@ -131,7 +128,7 @@ const Pesanandetail: React.FC<PesananDetailProps> = () => {
           <Divider />
           <Stack>
             <ul style={{ listStyle: 'none' }}>
-              {pesanan.penumpang.map((penumpang, index) => (
+              {pesanan?.passengers.map((penumpang, index) => (
                 <li key={index}>
                   <Stack
                     direction={'row'}
@@ -148,32 +145,52 @@ const Pesanandetail: React.FC<PesananDetailProps> = () => {
                           {index + 1}.
                         </Typography>
                         <Typography variant='body1' fontWeight={600} color={'black'}>
-                          {penumpang.name}
+                          {penumpang.title}.{penumpang.fullName}
                         </Typography>
                       </Stack>
                       <Typography variant='body2' fontWeight={400} color={'#757575'}>
                         Bagasi Kabin 7 kg
                       </Typography>
-                      <Typography variant='body2' fontWeight={400} color={'#757575'}>
-                        Bagasi Tambahan
-                      </Typography>
+                      { pesanan?.addBaggage && 
+                        <Typography variant='body2' fontWeight={400} color={'#757575'}>
+                          Bagasi Tambahan
+                        </Typography>
+                      }
                     </Stack>
                     <Stack >
+                      { index < pesanan?.totalAdults &&  
                         <Typography sx={{
-                             background:
-                             penumpang.age === 'Dewasa'
-                               ? '#7B52AB'
-                               : penumpang.age === 'Anak'
-                               ? '#FFD43A'
-                               : penumpang.age === 'Bayi'
-                               ? '#117A42'
-                               : undefined,
-                            padding:'2px 11px',
-                            borderRadius:'16px',
-                            color:'white' 
+                          background: '#7B52AB',
+                          padding:'2px 11px',
+                          borderRadius:'16px',
+                          color:'white' 
                         }}>
-                            {penumpang.age}
-                        </Typography></Stack>
+                          Dewasa
+                        </Typography>
+                      }
+                      {
+                        index >= pesanan?.totalAdults && index < pesanan?.totalAdults + pesanan?.totalChildren &&
+                        <Typography sx={{
+                          background: '#FFD43A',
+                          padding:'2px 11px',
+                          borderRadius:'16px',
+                          color:'white' 
+                        }}>
+                          Anak
+                        </Typography>
+                      }
+                      {
+                        index >= pesanan?.totalAdults + pesanan?.totalChildren && 
+                        <Typography sx={{
+                          background: '#117A42',
+                          padding:'2px 11px',
+                          borderRadius:'16px',
+                          color:'white' 
+                        }}>
+                          Bayi
+                        </Typography>
+                      }
+                    </Stack>
                   </Stack>
                 </li>
               ))}
@@ -193,7 +210,8 @@ const Pesanandetail: React.FC<PesananDetailProps> = () => {
                 <Typography variant='body2' fontWeight={400} color={'#757575'}>Asuransi Perjalanan</Typography>
               </Stack>
               <Stack width={'20px'}>
-                <img src={checker} alt="checker" />
+                { pesanan?.addTravelInsurance && <img src={checker} alt="checker" />}
+                { !pesanan?.addTravelInsurance && <HighlightOffIcon/>}
               </Stack>
             </Stack>
             <Stack direction={'row'} justifyContent={'space-between'}>
@@ -204,7 +222,8 @@ const Pesanandetail: React.FC<PesananDetailProps> = () => {
                 <Typography variant='body2' fontWeight={400} color={'#757575'}>Asuransi Bagasi</Typography>
               </Stack>
               <Stack width={'20px'}>
-                <img src={checker} alt="checker" />
+                { pesanan?.addBaggageInsurance && <img src={checker} alt="checker" />}
+                { !pesanan?.addBaggageInsurance && <HighlightOffIcon/>}
               </Stack>
             </Stack>
             <Stack direction={'row'} justifyContent={'space-between'}>
@@ -215,35 +234,40 @@ const Pesanandetail: React.FC<PesananDetailProps> = () => {
                 <Typography variant='body2' fontWeight={400} color={'#757575'}>Asuransi Keterlambatan</Typography>
               </Stack>
               <Stack width={'20px'}>
-                <img src={checker} alt="checker" />
+                { pesanan?.addBaggageInsurance && <img src={checker} alt="checker" />}
+                { !pesanan?.addBaggageInsurance && <HighlightOffIcon/>}
               </Stack>
             </Stack>
           </Stack>
         </Box>
-        <Stack direction={'row'} justifyContent={'flex-end'}>
-        <button
-               style={{
-                display: 'flex',
-                width: '180px',
-                height: '48px',
-                padding: '12px 20px',
-                justifyContent: 'center',
-                alignItems: 'center',
-                borderRadius: '8px',
-                border: '1px solid var(--Primary-01, #3A42FF)',
-                background: 'white',
-                color: 'var(--Primary-01, #3A42FF)',
-                cursor: 'pointer',
-                fontWeight:'600',
-                right:'0%',
-              }}
-             >
-            Download E-Ticket
+        { pesanan?.paymentCompleted &&         
+          <Stack direction={'row'} justifyContent={'flex-end'}>
+            <button
+              style={{
+              display: 'flex',
+              width: '180px',
+              height: '48px',
+              padding: '12px 20px',
+              justifyContent: 'center',
+              alignItems: 'center',
+              borderRadius: '8px',
+              border: '1px solid var(--Primary-01, #3A42FF)',
+              background: 'white',
+              color: 'var(--Primary-01, #3A42FF)',
+              cursor: 'pointer',
+              fontWeight:'600',
+              right:'0%',
+            }}
+            onClick={handleDownloadTicket}
+            >
+              Download E-Ticket
             </button>
-            </Stack>
+          </Stack>
+        }
+
       </Stack>
     </>
   );
 };
 
-export default Pesanandetail;
+export default PesananDetail;
