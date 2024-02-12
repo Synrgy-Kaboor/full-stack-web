@@ -6,8 +6,12 @@ import CardMedia from '@mui/material/CardMedia';
 import { CardActionArea } from '@mui/material';
 import stargold from '../../../assets/star-on.png';
 import stargray from '../../../assets/star-off.png';
-import card from '../../../assets/cardberanda.png';
-
+import superair from '../../../assets/superairjet.jpg';
+import lionair from '../../../assets/lionair.jpg';
+import garudaair from '../../../assets/garudaindonesia.jpg';
+import batik from '../../../assets/batik.jpg';
+import citilink from '../../../assets/citilink.jpg';
+import transnusa from '../../../assets/transnusa.jpg';
 const generateStars = (rating: number) => {
   const fullStars = Math.floor(rating);
   const halfStar = rating % 1 !== 0;
@@ -167,15 +171,7 @@ const BerandaRentalCard = ({ imageUrl, text, genre, price, rating, review }: { i
 export const BerandaRental = () => {
   const [historyItems] = React.useState([
     {
-      imageUrl: card,
-      text: 'Toyota yariz',
-      genre: 'Ekonomi',
-      price: '1.000.000',
-      rating: '4',
-      review: '23',
-    },
-    {
-      imageUrl: card,
+      imageUrl: superair,
       text: 'Super Jet Air',
       genre: 'Ekonomi',
       price: '200.000',
@@ -183,7 +179,7 @@ export const BerandaRental = () => {
       review: '23',
     },
     {
-      imageUrl: card,
+      imageUrl: lionair,
       text: 'Lion Air',
       genre: 'Ekonomi',
       price: '400.000',
@@ -191,7 +187,7 @@ export const BerandaRental = () => {
       review: '23',
     },
     {
-      imageUrl: card,
+      imageUrl: garudaair,
       text: 'Garuda Air',
       genre: 'Ekonomi',
       price: '1.000.000',
@@ -199,62 +195,30 @@ export const BerandaRental = () => {
       review: '23',
     },
     {
-      imageUrl: card,
-      text: 'Garuda Air',
+      imageUrl: batik,
+      text: 'Batik',
       genre: 'Ekonomi',
       price: '200.000',
       rating: '4',
       review: '23',
     },
     {
-      imageUrl: card,
-      text: 'Garuda Air',
-      genre: 'Ekonomi',
-      price: '400.000',
-      rating: '4',
-      review: '23',
-    },
-    {
-      imageUrl: card,
-      text: 'Yaris',
+      imageUrl: citilink,
+      text: 'Citilink',
       genre: 'Ekonomi',
       price: '200.000',
       rating: '4',
       review: '23',
     },
     {
-      imageUrl: card,
-      text: 'Yaris',
+      imageUrl: transnusa,
+      text: 'TransNusa',
       genre: 'Ekonomi',
       price: '400.000',
       rating: '4',
       review: '23',
     },
-    {
-      imageUrl: card,
-      text: 'Yaris',
-      genre: 'Ekonomi',
-      price: '1.000.000',
-      rating: '4',
-      review: '23',
-    },
-    {
-      imageUrl: card,
-      text: 'Yaris',
-      genre: 'Ekonomi',
-      price: '200.000',
-      rating: '4',
-      review: '23',
-    },
-    {
-      imageUrl: card,
-      text: 'Yaris',
-      genre: 'Ekonomi',
-      price: '400.000',
-      rating: '4',
-      review: '23',
-    },
-  ]);
+      ]);
 
   const theme = useTheme();
   const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'));

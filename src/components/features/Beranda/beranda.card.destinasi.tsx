@@ -7,6 +7,13 @@ import { CardActionArea } from '@mui/material';
 import stargold from '../../../assets/star-on.png';
 import stargray from '../../../assets/star-off.png';
 import card from '../../../assets/cardberanda.png';
+import bali from '../../../assets/bali.jpg';
+import jogja from '../../../assets/jogja.jpg';
+import jakarta from '../../../assets/jakarta.jpg';
+import surabaya from '../../../assets/surabaya.jpg';
+import medan from '../../../assets/medan.jpg';
+import makassar from '../../../assets/makasar.jpg';
+import kalimantan from '../../../assets/kalimantan.jpg';
 
 const generateStars = (rating: number) => {
   const fullStars = Math.floor(rating);
@@ -164,92 +171,68 @@ export const BerandaDestinasi = () => {
 
   const [historyItems] = React.useState([
     {
-      imageUrl: card,         
-      text: 'Nusa Tenggara Timur',
+      imageUrl: bali,         
+      text: 'Bali',
       genre: 'Ekonomi',
-      price: '1.000.000',
-      rating: '1',
-      review: '23',
-    },
-    {
-      imageUrl: card,         
-      text: 'Nusa Tenggara Timur',
-      genre: 'Ekonomi',
-      price: '200.000',
-      rating: '2',
-      review: '23',
-    },
-    {
-      imageUrl: card,         
-      text: 'Nusa Tenggara Timur',
-      genre: 'Ekonomi',
-      price: '400.000',
-      rating: '3',
-      review: '23',
-    },
-    {
-      imageUrl: card,         
-      text: 'Nusa Tenggara Timur',
-      genre: 'Ekonomi',
-      price: '1.000.000',
+      price: '900.000',
       rating: '4',
-      review: '23',
+      review: '80',
     },
     {
-      imageUrl: card,         
-      text: 'Nusa Tenggara Timur',
+      imageUrl: jogja,         
+      text: 'Jogja',
       genre: 'Ekonomi',
-      price: '200.000',
-      rating: '5',
-      review: '23',
-    },
-    {
-      imageUrl: card,         
-      text: 'Nusa Tenggara Timur',
-      genre: 'Ekonomi',
-      price: '400.000',
+      price: '900.000',
       rating: '4',
-      review: '23',
+      review: '80',
+    },
+    {
+      imageUrl: jakarta,         
+      text: 'Jakarta',
+      genre: 'Ekonomi',
+      price: '900.000',
+      rating: '4',
+      review: '80',
     },
     {
       imageUrl: card,         
       text: 'Nusa Tenggara Timur',
       genre: 'Ekonomi',
-      price: '200.000',
+      price: '9.000.000',
       rating: '4',
-      review: '23',
+      review: '80',
     },
     {
-      imageUrl: card,         
-      text: 'Nusa Tenggara Timur',
+      imageUrl: surabaya,         
+      text: 'Surabaya',
       genre: 'Ekonomi',
-      price: '400.000',
+      price: '900.000',
       rating: '4',
-      review: '23',
+      review: '80',
     },
     {
-      imageUrl: card,         
-      text: 'Nusa Tenggara Timur',
+      imageUrl: medan,         
+      text: 'Medan',
       genre: 'Ekonomi',
-      price: '1.000.000',
+      price: '900.000',
       rating: '4',
-      review: '23',
+      review: '80',
     },
     {
-      imageUrl: card,         
-      text: 'Nusa Tenggara Timur',
+      imageUrl: makassar,         
+      text: 'Makassar',
       genre: 'Ekonomi',
-      price: '200.000',
+      price: '900.000',
       rating: '4',
-      review: '23',
+      review: '80',
     },
     {
-      imageUrl: card,         
-      text: 'Nusa Tenggara Timur',
+      imageUrl: kalimantan,         
+      text: 'Kalimantan',
       genre: 'Ekonomi',
-      price: '400.000',
+      price: '9.000.000',
       rating: '4',
-      review: '23',
+      review: '80',
     },
   ]);
 

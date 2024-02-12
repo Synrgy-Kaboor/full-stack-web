@@ -96,7 +96,8 @@ const Beranda = () => {
   </Typography>
   <BerandaDestinasi />
   <Stack sx={{
-    marginBottom:'60px'
+    marginBottom:'60px',
+    marginTop:'60px'
   }}>
   <Typography style={styles.texttitle}>Rekomendasi Maskapai Terbaik</Typography>
   <Typography sx={{ maxWidth: '698px' }} style={styles.textdesc}>
