@@ -1,18 +1,26 @@
 import { useState, useEffect } from 'react';
 import { Card, Typography, Box, IconButton, Stack } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 
-export default function AddOnsCard(props: { title: string; price: number; fontweight: string; label: string; item: string }) {
-  const [timeRemaining, setTimeRemaining] = useState(24 * 60 * 60); // 24 hours in seconds
+export default function CardInfoPembayaran(props: { title: string; fontweight: string; label: string; item: string; expiredTime?: number; startInterval?: boolean }) {
+  const [timeRemaining, setTimeRemaining] = useState<number>(Math.round(props.expiredTime || 0));
+  const navigate = useNavigate();
 
   useEffect(() => {
-    if (props.item === 'time') {
+    if (props.item === 'time' && props.startInterval && props.expiredTime) {
+      setTimeRemaining(props.expiredTime);
+
       const interval = setInterval(() => {
-        setTimeRemaining((prevTime) => Math.max(0, prevTime - 1));
+        setTimeRemaining((prevTime: number) => Math.max(0, Math.round(prevTime - 1)));
       }, 1000);
 
       return () => clearInterval(interval);
     }
-  }, [props.item]);
+
+    if (props.expiredTime === 0) {
+      navigate('/profil/pesanan');
+    }
+  }, [navigate, props.expiredTime, props.item, props.startInterval]);
 
   const formatTime = (timeInSeconds: number) => {
     const hours = Math.floor(timeInSeconds / 3600);

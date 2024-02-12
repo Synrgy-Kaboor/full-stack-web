@@ -1,6 +1,6 @@
 import {
   Box,
-  Link,
+  // Link,
   Card,
   Stack,
   Divider,
@@ -20,37 +20,92 @@ import {
   TableContainer,
 } from '@mui/material';
 
+// import theme from "../../config/theme";
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import ControlPointOutlinedIcon from '@mui/icons-material/ControlPointOutlined';
 import HealthAndSafetyOutlinedIcon from '@mui/icons-material/HealthAndSafetyOutlined';
-import { useState } from 'react';
 
-export default function AddOnsCard(props: { title: string; price: number }) {
+import { useState } from 'react';
+import { numToRp } from '../../utils/formatter';
+import { IDetailAsuransi } from '../../types/DetailAsuransi';
+
+interface IPopUpProps {
+  selectedInsurance: IDetailAsuransi;
+  setOpenPopUp: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+function AssuranceDetailPopUp({ selectedInsurance, setOpenPopUp }: IPopUpProps, ) {
+  return (
+    <>
+      <DialogTitle>
+        <Stack px={10} direction="row" justifyContent="center">
+          <ArrowBackIosNewIcon
+            onClick={() => setOpenPopUp(false)}
+            sx={{
+              position: 'absolute',
+              left: 20,
+              top: 20,
+              '&:hover': { cursor: 'pointer' },
+            }}
+          />
+          <Typography variant="h5" sx={{ fontWeight: 'bold' }}>
+            Perlindungan Ekstra
+          </Typography>
+        </Stack>
+      </DialogTitle>
+      <DialogContent dividers>
+        <Stack direction="row" spacing={2} mb={2} alignItems="center">
+          <HealthAndSafetyOutlinedIcon
+            fontSize="large"
+            sx={{ color: 'primary.main' }}
+          />
+          <Typography variant="h6" sx={{ fontWeight: 'bold' }}>
+            {selectedInsurance.title}
+          </Typography>
+        </Stack>
+        <TableContainer component={Paper}>
+          <Table>
+            <TableHead>
+              <TableRow sx={{ bgcolor: 'primary.main' }}>
+                <TableCell
+                  align="center"
+                  sx={{ color: 'white', fontSize: '1.5rem' }}
+                >
+                  Tanggungan
+                </TableCell>
+                <TableCell
+                  align="center"
+                  sx={{ color: 'white', fontSize: '1.5rem' }}
+                >
+                  Kompensasi
+                </TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {selectedInsurance.details.map(
+                (detail: { tanggungan: string; kompensasi: string }, i: number) => {
+                  return (
+                    <TableRow key={i}>
+                      <TableCell sx={{ width: '50%' }}>
+                        {detail.tanggungan}
+                      </TableCell>
+                      <TableCell>{detail.kompensasi}</TableCell>
+                    </TableRow>
+                  );
+                }
+              )}
+            </TableBody>
+          </Table>
+        </TableContainer>
+      </DialogContent>
+    </>
+  );
+}
+
+export default function AddOnsCard(props: IDetailAsuransi) {
   const [addOns, setAddOns] = useState<boolean>(false);
   const [openPopUp, setOpenPopUp] = useState<boolean>(false);
-
-  function formatPriceToIDR(price: number) {
-    const rupiah = new Intl.NumberFormat('en-ID', {
-      style: 'currency',
-      currency: 'IDR',
-      maximumSignificantDigits: 3,
-    });
-
-    return rupiah.format(price);
-  }
-
-  function handleModalPopUp() {
-    setOpenPopUp(true);
-  }
-
-  function handleModalClose() {
-    setOpenPopUp(false);
-  }
-
-  function onAddOnsClick() {
-    setAddOns(!addOns);
-  }
 
   return (
     <Card variant="outlined">
@@ -58,7 +113,7 @@ export default function AddOnsCard(props: { title: string; price: number }) {
         <Stack direction="row" m={2} alignItems="center">
           <HealthAndSafetyOutlinedIcon
             fontSize="medium"
-            sx={{ color: 'kaboor.main' }}
+            sx={{ color: 'primary.main' }}
           />
           <Typography sx={{ fontWeight: 'bold' }} ml={1}>
             {props.title}
@@ -66,99 +121,27 @@ export default function AddOnsCard(props: { title: string; price: number }) {
         </Stack>
         <Divider />
         <Box p={2}>
-          <Stack direction="row">
-            <CheckCircleIcon fontSize="small" color="success" />
-            <Typography ml={1}>
-              Kompensasi hingga Rp 500 Juta untuk berbagai resiko tak terduga
+          {props.descriptions.map((description: string, i: number) => {
+            return (
+              <Stack direction="row" key={i}>
+                <CheckCircleIcon fontSize="small" color="success" />
+                <Typography ml={1}>{description}</Typography>
+              </Stack>
+            );
+          })}
+          <Stack mt={2}>
+            <Typography
+              display="inline"
+              color="primary.main"
+              onClick={() => setOpenPopUp(true)}
+              sx={{ '&:hover': { cursor: 'pointer' } }}
+            >
+              Baca Selengkapnya
             </Typography>
           </Stack>
-          <Stack direction="row" mb={2}>
-            <CheckCircleIcon fontSize="small" color="success" />
-            <Typography ml={1}>
-              Kompensasi hingga Rp 500 Juta untuk berbagai resiko tak terduga
-            </Typography>
-          </Stack>
-          <Link href="#" underline="none" onClick={handleModalPopUp}>
-            <Typography color="kaboor.main">Baca Selengkapnya</Typography>
-          </Link>
+          {/* </Link> */}
           <Dialog open={openPopUp}>
-            <DialogTitle>
-              <Stack px={10} direction="row" justifyContent="center">
-                <ArrowBackIosNewIcon
-                  onClick={handleModalClose}
-                  sx={{ position: 'absolute', left: 20, top: 20 }}
-                />
-                <Typography variant="h5" sx={{ fontWeight: 'bold' }}>
-                  Perlindungan Ekstra
-                </Typography>
-              </Stack>
-            </DialogTitle>
-            <DialogContent dividers>
-              <Stack direction="row" spacing={2} mb={2} alignItems="center">
-                <HealthAndSafetyOutlinedIcon />
-                <Typography variant="h6" sx={{ fontWeight: 'bold' }}>
-                  Asuransi Perjalanan
-                </Typography>
-              </Stack>
-              <TableContainer component={Paper}>
-                <Table>
-                  <TableHead>
-                    <TableRow sx={{ bgcolor: 'kaboor.main' }}>
-                      <TableCell
-                        align="center"
-                        sx={{ color: 'white', fontSize: '1.5rem' }}
-                      >
-                        Tanggungan
-                      </TableCell>
-                      <TableCell
-                        align="center"
-                        sx={{ color: 'white', fontSize: '1.5rem' }}
-                      >
-                        Kompensasi
-                      </TableCell>
-                    </TableRow>
-                  </TableHead>
-                  <TableBody>
-                    <TableRow>
-                      <TableCell sx={{ width: '50%' }}>
-                        Santunan sebanyak satu kali jika Anda meninggal dunia
-                        atau cacat tetap akibat kecelakaan.
-                      </TableCell>
-                      <TableCell>Hingga Rp 150.000.000</TableCell>
-                    </TableRow>
-                    <TableRow>
-                      <TableCell sx={{ width: '50%' }}>
-                        Menanggung biaya perawatan medis selama perjalanan Anda
-                        yang dibutuhkan akibat kecelakaan.
-                      </TableCell>
-                      <TableCell>
-                        Dari Rp 37.500.000 sampai Rp. 150.000.000
-                      </TableCell>
-                    </TableRow>
-                    <TableRow>
-                      <TableCell sx={{ width: '50%' }}>
-                        Menanggung biaya perjalanan dan akomodasi yang hangus
-                        jika perjalanan Anda harus dibatalkan setidaknya 30 hari
-                        sebelum tanggal keberangkatan Anda, akibat risiko-risiko
-                        yang ditanggung.
-                      </TableCell>
-                      <TableCell>
-                        Dari Rp 1.000.000 sampai Rp. 5.000.000
-                      </TableCell>
-                    </TableRow>
-                    <TableRow>
-                      <TableCell sx={{ width: '50%' }}>
-                        Menanggung biaya perawatan medis selama perjalanan Anda
-                        yang dibutuhkan akibat kecelakaan.
-                      </TableCell>
-                      <TableCell>
-                        Dari Rp 37.500.000 sampai Rp. 150.000.000
-                      </TableCell>
-                    </TableRow>
-                  </TableBody>
-                </Table>
-              </TableContainer>
-            </DialogContent>
+            <AssuranceDetailPopUp setOpenPopUp={setOpenPopUp} selectedInsurance={props} />
           </Dialog>
         </Box>
       </CardContent>
@@ -178,17 +161,19 @@ export default function AddOnsCard(props: { title: string; price: number }) {
           }}
         >
           <Typography sx={{ fontWeight: 'bold', color: 'white' }}>
-            {formatPriceToIDR(props.price)}/pax
+            {numToRp(props.price)}/pax
           </Typography>
-          {addOns === true ? (
-            <IconButton onClick={onAddOnsClick}>
+          <IconButton onClick={() => {
+            const changedAddOns = !addOns;
+            setAddOns(changedAddOns);
+            props.changeState(changedAddOns);
+          }}>
+            {addOns === true ? (
               <CheckCircleIcon sx={{ color: 'success.light' }} />
-            </IconButton>
-          ) : (
-            <IconButton onClick={onAddOnsClick}>
+            ) : (
               <ControlPointOutlinedIcon sx={{ color: 'white' }} />
-            </IconButton>
-          )}
+            )}
+          </IconButton>
         </Stack>
       </CardActions>
     </Card>

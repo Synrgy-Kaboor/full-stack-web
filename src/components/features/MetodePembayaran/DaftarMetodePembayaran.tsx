@@ -1,13 +1,13 @@
 import { Box, Card, CardContent, Radio, RadioGroup, Stack, Typography } from '@mui/material';
 import { useAppDispatch, useAppSelector } from '../../../redux/hooks';
-import { selectPaymentMethod } from '../../../redux/slices/MetodePembayaran';
 import LogoBCA from '../../../assets/logo_bca.png';
 import LogoBRI from '../../../assets/logo_bri.png';
 import LogoBNI from '../../../assets/logo_bni.png';
 import LogoMandiri from '../../../assets/logo_mandiri.png';
+import { selectPaymentMethod } from '../../../redux/slices/Booking';
 
 export default function DaftarMetodePembayaran() {
-  const { selectedPaymentMethod } = useAppSelector((state) => state.metodePembayaran);
+  const selectedPaymentMethod = useAppSelector((state) => state.booking.booking.paymentMethod);
   const dispatch = useAppDispatch();
 
   return (
