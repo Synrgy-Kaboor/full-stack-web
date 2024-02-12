@@ -14,18 +14,15 @@ export function numToRp(number: number) {
 
 export function addHours(d: Date, hours: number): Date {
   const newDate = new Date(d);
-  newDate.setHours(d.getHours() + hours);
+  newDate.setUTCHours(d.getUTCHours() + hours);
 
   return newDate;
 }
 
 export function timeWithTimezone(d: Date, timezone: number): string {
-  let hours = d.getHours() - timezone;
-  const minutes = d.getMinutes();
-
-  if (hours < 0) {
-    hours = 24 - hours;
-  }
+  const newDate = addHours(d, timezone);
+  const hours = newDate.getUTCHours();
+  const minutes = newDate.getUTCMinutes();
 
   const hoursString = hours < 10 ? `0${hours}` : `${hours}`;
   const minutesString = minutes < 10 ? `0${minutes}` : `${minutes}`;
@@ -42,17 +39,17 @@ export function dateToVerboseString(d: Date, timezone: number = 0): string {
 
   const date = addHours(d, timezone);
 
-  return `${dayArr[date.getDay()]}, ${date.getDate()} ${monthArr[date.getMonth()]} ${date.getFullYear()}`;
+  return `${dayArr[date.getUTCDay()]}, ${date.getUTCDate()} ${monthArr[date.getUTCMonth()]} ${date.getUTCFullYear()}`;
 }
 
 export function durationString(start: Date, end: Date): string {
-  const startDate = start.getDate();
-  const endDate = end.getDate();
+  const startDate = start.getUTCDate();
+  const endDate = end.getUTCDate();
 
-  let hours = end.getHours() - start.getHours();
+  let hours = end.getUTCHours() - start.getUTCHours();
   if (endDate > startDate) hours += 24;
 
-  let minutes = end.getMinutes() - start.getMinutes();
+  let minutes = end.getUTCMinutes() - start.getUTCMinutes();
   if (minutes < 0) {
     hours -= 1;
     minutes = 60 - minutes;
