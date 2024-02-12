@@ -78,23 +78,21 @@ const router = createBrowserRouter([
           { path: 'notifikasi/:notifId', element: <NotifDetail /> },
           { path: 'pesanan', element: <Pesanan /> },
           {
-            path: 'pesanan/:id',
+            path: 'pesanan/:id/keberangkatan',
             element: (
-              <PesananDetail
-                id={''}
-                airport1={''}
-                airport2={''}
-                Tanggal={''}
-                Jam={''}
-                status={''}
-                kode={''}
-              />
+              <PesananDetail type='outbound'/>
             ),
           },
+          {
+            path: 'pesanan/:id/kepulangan',
+            element: (
+              <PesananDetail type='return'/>
+            )
+          }
         ],
       },
       {
-        path: '/beranda',
+        path: '/',
         element: <Beranda />,
       },
     ],
