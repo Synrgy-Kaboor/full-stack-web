@@ -153,10 +153,12 @@ const Wrapper = styled(ModalsContainer)`
 
 interface OtpModalsProps {
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  // setOpen: React.Dispatch<React.SetStateAction<boolean>>;
   email: string;
+  path: string;
 }
 
-export default function OtpModals({ setOpen, email }: OtpModalsProps) {
+export default function OtpModals({ setOpen, email, path }: OtpModalsProps) {
   const [otp, setOtp] = useState(['', '', '', '']);
   const [time, setTime] = useState(180);
 
@@ -214,7 +216,7 @@ export default function OtpModals({ setOpen, email }: OtpModalsProps) {
 
     if (otpStatus.code === 200) {
       setOpen(false);
-      navigate('/login');
+      navigate(path);
     } else {
       alert('Kode OTP milikmu sudah kadaluarsa');
     }
@@ -249,7 +251,7 @@ export default function OtpModals({ setOpen, email }: OtpModalsProps) {
               <OtpInput
                 key={index}
                 value={value}
-                type='text'
+                type="text"
                 onChange={(e) => handleChange(e, index)}
                 maxLength={1}
                 ref={inputRefs[index]}
@@ -266,10 +268,10 @@ export default function OtpModals({ setOpen, email }: OtpModalsProps) {
           </OtpDesc>
         </Wrapper>
         <Wrapper>
-          <FirstButton type='button' onClick={handleVerification}>
+          <FirstButton type="button" onClick={handleVerification}>
             Verifikasi
           </FirstButton>
-          <SecondButton type='button' onClick={sendOtp}>
+          <SecondButton type="button" onClick={sendOtp}>
             Kirim Lagi
           </SecondButton>
         </Wrapper>
