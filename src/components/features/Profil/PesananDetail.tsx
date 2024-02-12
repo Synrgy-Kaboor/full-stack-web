@@ -60,8 +60,8 @@ const PesananDetail: React.FC<{ type: string }> = (props) => {
   return (
     <>
       <Stack
-        px={6}
-        py={4}
+        px={{ md: 6, xs: 4 }}
+        py={{ md: 4, xs: 4 }}
         borderRadius={1}
         border={`1px solid ${'#C2C2C2'}`}
         width={'100%'}
@@ -105,20 +105,20 @@ const PesananDetail: React.FC<{ type: string }> = (props) => {
           </Stack>
           <Divider />
           <Stack direction={'row'} justifyContent={'space-between'} sx={{ margin: '20px', marginTop: '26px', marginBottom: '27px' }}>
-            <Stack direction={'column'}>
+            <Stack direction={'column'} justifyContent={'center'}>
               <Typography variant='body2' fontWeight={400} color={'#757575'}>{pesanan?.flight.originAirport.code}</Typography>
               <Typography variant='body1' fontWeight={600} color={'black'}>{timeWithTimezone(new Date(pesanan?.flight.departureDateTime || ''), pesanan?.flight.originAirport.timezone || 0)}</Typography>
             </Stack>
-            <Stack direction={'column'} alignItems={'center'}>
-              <Typography variant='body2' fontWeight={400} color={'#757575'}>{dateToVerboseString(new Date(pesanan?.flight.departureDateTime || ''), pesanan?.flight.originAirport.timezone)}</Typography>
-              <Stack width={'26px'}>
+            <Stack direction={'column'} alignItems={'center'} justifyContent={'center'}>
+              <Typography variant='body2' fontWeight={400} color={'#757575'} textAlign={'center'}>{dateToVerboseString(new Date(pesanan?.flight.departureDateTime || ''), pesanan?.flight.originAirport.timezone)}</Typography>
+              <Stack width={'26px'} my={1}>
                 <img src={plane} alt="plane-icon" />
               </Stack>
-              <Typography variant='body2' fontWeight={400} color={'#757575'}>{durationString(new Date(pesanan?.flight.departureDateTime || ''), new Date(pesanan?.flight.arrivalDateTime || ''))}</Typography>
+              <Typography variant='body2' fontWeight={400} color={'#757575'} textAlign={'center'}>{durationString(new Date(pesanan?.flight.departureDateTime || ''), new Date(pesanan?.flight.arrivalDateTime || ''))}</Typography>
             </Stack>
-            <Stack direction={'column'}>
-              <Typography variant='body2' fontWeight={400} color={'#757575'}>{pesanan?.flight.destinationAirport.code}</Typography>
-              <Typography variant='body1' fontWeight={600} color={'black'}>{timeWithTimezone(new Date(pesanan?.flight.arrivalDateTime || ''), pesanan?.flight.originAirport.timezone || 0)}</Typography>
+            <Stack direction={'column'} justifyContent={'center'}>
+              <Typography variant='body2' fontWeight={400} color={'#757575'} textAlign={'end'}>{pesanan?.flight.destinationAirport.code}</Typography>
+              <Typography variant='body1' fontWeight={600} color={'black'} textAlign={'end'}>{timeWithTimezone(new Date(pesanan?.flight.arrivalDateTime || ''), pesanan?.flight.originAirport.timezone || 0)}</Typography>
             </Stack>
           </Stack>
         </Box>
