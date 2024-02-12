@@ -41,7 +41,7 @@ export default function Sidebar({ pathname }: SidebarProp) {
   function handleLogout() {
     if (confirm('Are you sure you want to log out?')) {
       localStorage.removeItem('token');
-      navigate('/beranda');
+      navigate('/');
     }
   }
 
