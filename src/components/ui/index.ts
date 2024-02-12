@@ -22,3 +22,16 @@ export const formatDate = (date: Date | null | undefined) => {
     return formattedDate;
   }
 }
+
+
+export interface AlertType {
+  totalAdults: number;
+  totalChildren: number;
+  totalBabies: number;
+  classCode: string;
+  minimumPrice: number;
+  maximumPrice: number;
+  date: string;
+  originAirportId: number;
+  destinationAirportId: number;
+}

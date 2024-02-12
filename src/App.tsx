@@ -25,6 +25,7 @@ import ChangeProfile from './components/features/Profil/ChangeProfile';
 import Pesanan from './components/features/Profil/Pesanan';
 import Booking from './pages/Booking/Booking';
 import AuthLayout from './layouts/AuthLayout';
+import PriceAlertDetail from './components/ui/PriceAlertDetail';
 import RegisterRoutes from './pages/Auth/RegisterV2/Register.Routes';
 import ForgetPasswordRoutes from './pages/Auth/ForgetPassword/ForgetPassword.Routes';
 import PesananDetail from './components/features/Profil/PesananDetail';
@@ -71,6 +72,7 @@ const router = createBrowserRouter([
           { path: 'ganti-nomer', element: <ChangeNumber /> },
           { path: 'saved-price-alert', element: <SavedPriceAlert /> },
           { path: 'pusat-bantuan', element: <HelpCenter /> },
+          { path: 'saved-price-alert/:id', element: <PriceAlertDetail /> },
           { path: 'passport/*', element: <PassportRoutes /> },
           { path: 'notifikasi', element: <Notification /> },
           { path: 'notifikasi/:notifId', element: <NotifDetail /> },

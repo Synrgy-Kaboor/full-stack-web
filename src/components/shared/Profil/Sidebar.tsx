@@ -72,7 +72,7 @@ export default function Sidebar({ pathname }: SidebarProp) {
             }}
           />
           <Stack sx={{ cursor: 'pointer' }}>
-            <Typography variant='h6'>Andre Huston</Typography>
+            <Typography variant='h6'>{userInfo.fullName}</Typography>
             <Typography variant='body2' color={'#9E9E9E'}>
               informasi pribadi 16% lengkap
             </Typography>
