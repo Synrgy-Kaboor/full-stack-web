@@ -262,7 +262,7 @@ export default function RegisterForm({ email }: RegisterFormProps) {
           </InputContainer>
           <PrimaryButton type="submit" label='Buat Akun'/>
           <GlobalModals open={open} onClose={() => setOpen(false)}>
-            <OtpModals email={email} setOpen={setOpen}/>
+            <OtpModals email={email} setOpen={setOpen} path={'/auth/login'} />
           </GlobalModals>
         </Form>
         <PolicyContainer>
