@@ -139,6 +139,8 @@ const SavedPriceAlert = () => {
         </Stack>
         {priceNotifList.map((item, index) => (
           <InAppNotificationSavedBox
+            setReFetch={setReFetch}
+            reFetch={reFetch}
             navigate={() => navigate(`/profil/saved-price-alert/${item.id}`)}
             key={index}
             id={item.id}

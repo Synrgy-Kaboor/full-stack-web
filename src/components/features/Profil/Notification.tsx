@@ -25,7 +25,7 @@ const Notification = () => {
       }
     };
     fetchData();
-  }, []);
+  }, [jwtToken]);
 
   const navigate = useNavigate();
   return (

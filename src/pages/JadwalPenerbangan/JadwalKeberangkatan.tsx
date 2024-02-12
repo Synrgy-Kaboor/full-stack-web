@@ -103,7 +103,7 @@ export default function JadwalKeberangkatan() {
               {data.length ? (
                 data.map((item, index) => {
                   const price =
-                    (item.childPrice + item.adultPrice) * adults +
+                    (adults + childs) * item.adultPrice +
                     item.babyPrice * babies;
                   return (
                     <FlightTicket
