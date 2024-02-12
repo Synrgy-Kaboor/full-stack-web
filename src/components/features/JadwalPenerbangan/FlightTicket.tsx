@@ -1,9 +1,10 @@
 import { IconButton, Stack, Typography, Box, Divider } from '@mui/material';
 import BusinessCenterOutlinedIcon from '@mui/icons-material/BusinessCenterOutlined';
 import HealthAndSafetyOutlinedIcon from '@mui/icons-material/HealthAndSafetyOutlined';
-import { UTCtoLocalTime, getHourDiff } from '.';
+import { getHourDiff } from '.';
 import PlaneIcon from '../../../assets/plane icon.png';
 import theme from '../../../config/theme';
+import { timeWithTimezone } from '../../../utils/formatter';
 
 interface FlightList {
   airLine: string;
@@ -15,6 +16,8 @@ interface FlightList {
   airlineLogo: string;
   from: string;
   to: string;
+  originalTimezone: number;
+  destinationTimezone: number;
 }
 export default function FlightTicket(props: FlightList) {
   return (
@@ -53,7 +56,10 @@ export default function FlightTicket(props: FlightList) {
         <Box>
           <Typography variant='body2'>{props.from}</Typography>
           <Typography variant='body1' sx={{ fontWeight: 'bold' }}>
-            {UTCtoLocalTime(props.departureDatetime, 'Asia/Jakarta')} WIB
+            {timeWithTimezone(
+              new Date(props.departureDatetime),
+              props.originalTimezone
+            )}
           </Typography>
         </Box>
         <Box sx={{ width: '50%', textAlign: 'center' }} mx={2}>
@@ -68,7 +74,10 @@ export default function FlightTicket(props: FlightList) {
         <Box sx={{ textAlign: 'end' }}>
           <Typography variant='body2'>{props.to}</Typography>
           <Typography variant='body1' sx={{ fontWeight: 'bold' }}>
-            {UTCtoLocalTime(props.arrivedDatetime, 'Asia/Jakarta')} WIB
+            {timeWithTimezone(
+              new Date(props.arrivedDatetime),
+              props.destinationTimezone
+            )}
           </Typography>
         </Box>
       </Stack>

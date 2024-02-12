@@ -16,7 +16,7 @@ const initialState : FlightScheduleState = {
   highestPrice: 0,
   departureFlight: null,
   returnFlight: null,
-  isHomeComing: true,
+  isHomeComing: false,
 }
 
 export const searchJadwalSlice = createSlice({

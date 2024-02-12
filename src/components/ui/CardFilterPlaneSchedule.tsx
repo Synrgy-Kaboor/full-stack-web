@@ -20,6 +20,7 @@ import {
   setNumOfChildren,
   setOriginAirportCode,
   setIsHomeComing,
+  setClassCode,
 } from './../../redux/slices/FlightSchedule';
 import { formatDate } from './index';
 import { useEffect, useState } from 'react';
@@ -41,6 +42,7 @@ import { AdapterDateFns as adapterDate } from '@mui/x-date-pickers/AdapterDateFn
 import { LocalizationProvider, MobileDatePicker } from '@mui/x-date-pickers';
 import { useAppDispatch } from '../../redux/hooks';
 import { IOSSwitch } from '../core/IOSSwitch';
+import { getFlightClass } from '.';
 
 const CardFilterPlaneSchedule = (props: CardFilterPlaneScheduleProps) => {
   const dispatch = useAppDispatch();
@@ -121,6 +123,9 @@ const CardFilterPlaneSchedule = (props: CardFilterPlaneScheduleProps) => {
       class: classSeatValue,
       priceRange: props.sliderOn ? sliderValue : null,
     };
+
+    dispatch(setClassCode(getFlightClass(classSeatValue)));
+
     props.onSubmit(value);
   };
 

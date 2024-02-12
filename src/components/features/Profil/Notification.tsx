@@ -3,8 +3,30 @@ import { notificationData } from '.';
 import { formatDate } from '.';
 import Mail from './../../../assets/mail.svg';
 import { useNavigate } from 'react-router-dom';
+import { useEffect } from 'react';
 
 const Notification = () => {
+  const jwtToken = localStorage.getItem('token');
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch(
+          'https://fsw-backend.fly.dev/api/v1/user/notification/price',
+          {
+            headers: {
+              Authorization: `Bearer ${jwtToken}`,
+            },
+          }
+        );
+        const notifData = await response.json();
+        console.log('INI ADALAH Respondnya', notifData);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+    fetchData();
+  }, []);
+
   const navigate = useNavigate();
   return (
     <>
