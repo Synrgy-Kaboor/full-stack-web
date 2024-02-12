@@ -226,7 +226,10 @@ export default function ChangeProfile() {
                 Foto Profil
               </Typography>
               <Stack alignItems={'flex-end'}>
-                <RoundImage src={userInfo.imageUrl} alt='Round Image' />
+                <RoundImage
+                  src={userInfo ? userInfo.imageUrl : ''}
+                  alt='Round Image'
+                />
                 <label htmlFor='avatar'>
                   <SmallImage src={camera} alt='Round Image' />
                 </label>

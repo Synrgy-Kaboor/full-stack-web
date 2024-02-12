@@ -30,4 +30,5 @@ export interface FlightScheduleState {
     highestPrice: number;
     departureFlight: FlightType | null;
     returnFlight: FlightType | null;
+    isHomeComing : boolean;
   }

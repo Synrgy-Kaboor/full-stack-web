@@ -6,7 +6,7 @@ import { useSearchParams } from 'react-router-dom';
 import { getFlightDate, getRp } from '.';
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useAppDispatch } from '../../redux/hooks';
+import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import { setDepartureFlight } from '../../redux/slices/FlightSchedule';
 import CircularProgress from '@mui/material/CircularProgress';
 
@@ -16,6 +16,7 @@ export default function JadwalKeberangkatan() {
   const [isLoading, setIsLoading] = useState(true);
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
+  const homeComing = useAppSelector((state) => state.searchJadwal.isHomeComing);
 
   const originAirport = searchParams.get('from');
   const destinationAirport = searchParams.get('to');
@@ -25,12 +26,14 @@ export default function JadwalKeberangkatan() {
   const departureDate = searchParams.get('date')!;
   const classCode = searchParams.get('class')!;
   const passanger = adults + childs + babies;
+  const returnDate = useAppSelector((state) => state.searchJadwal.returnDate);
 
   const handleOnclick = (index: number) => {
     dispatch(setDepartureFlight(data[index]));
-    navigate(
-      `/jadwal-kepulangan/?from=${destinationAirport}&to=${originAirport}&adults=${adults}&kids=${childs}&babies=${babies}&date=${departureDate}&class=${classCode}`
-    );
+    const url = homeComing
+      ? `/jadwal-kepulangan/?from=${destinationAirport}&to=${originAirport}&adults=${adults}&kids=${childs}&babies=${babies}&date=${returnDate}&class=${classCode}`
+      : `/booking?totalAdults=${adults}&totalChildren=${childs}&totalBabies=${babies}&classCode=${classCode}&outboundFlightId=${data[index].id}`;
+    navigate(url);
   };
 
   useEffect(() => {

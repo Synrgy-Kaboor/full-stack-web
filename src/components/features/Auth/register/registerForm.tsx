@@ -28,7 +28,7 @@ const FormContainer = styled.div`
     justify-content: start;
     align-items: start;
     height: 140vh;
-    padding: 20px 12px; 
+    padding: 20px 12px;
   }
 `;
 
@@ -184,24 +184,30 @@ export default function RegisterForm({ email }: RegisterFormProps) {
       fullName: e.currentTarget.fullName.value,
       password: e.currentTarget.password.value,
     };
-    const registerResponse = await fetch('https://kaboor-api-dev.up.railway.app/api/v1/auth/register/user', {
+    const registerResponse = await fetch(
+      'https://fsw-backend.fly.dev/api/v1/auth/register/user',
+      {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(formData)
-      })
-    const registerStatus = await registerResponse.json()
-    console.log(registerStatus)
-    const sendtOtpResponse = await fetch('https://kaboor-api-dev.up.railway.app/api/v1/auth/otp/resend', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({email: email})
-    })
-    const sendOtpStatus = await sendtOtpResponse.json()
-    console.log(sendOtpStatus)
+        body: JSON.stringify(formData),
+      }
+    );
+    const registerStatus = await registerResponse.json();
+    console.log(registerStatus);
+    const sendtOtpResponse = await fetch(
+      'https://kaboor-api-dev.up.railway.app/api/v1/auth/otp/resend',
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email: email }),
+      }
+    );
+    const sendOtpStatus = await sendtOtpResponse.json();
+    console.log(sendOtpStatus);
     setOpen(true);
   };
 
@@ -210,19 +216,28 @@ export default function RegisterForm({ email }: RegisterFormProps) {
       <FormContainer>
         <Form onSubmit={handleSubmit}>
           <FormTitleContainer>
-            <BackIcon src={ChevronRight} alt="" onClick={() => {}} />
+            <BackIcon src={ChevronRight} alt='' onClick={() => {}} />
             <FormTitle>Isi Detail Akunmu</FormTitle>
           </FormTitleContainer>
           <InputContainer>
             <Label>Nomor Ponsel</Label>
-            <Input type="tel" pattern="[0-9,+]{10,}" placeholder="+62" minLength={10} defaultValue='' required name="phoneNumber"/>
+            <Input
+              type='tel'
+              pattern='[0-9,+]{10,}'
+              placeholder='+62'
+              minLength={10}
+              defaultValue=''
+              required
+              name='phoneNumber'
+            />
           </InputContainer>
           <InputContainer>
             <Label>Email</Label>
-            <Input required
-              name="email"
-              placeholder="admin@gmail.oom"
-              type="email"
+            <Input
+              required
+              name='email'
+              placeholder='admin@gmail.oom'
+              type='email'
               defaultValue={email}
               disabled
             />
@@ -230,26 +245,26 @@ export default function RegisterForm({ email }: RegisterFormProps) {
           <InputContainer>
             <Label>Nama Lengkap</Label>
             <Input
-              placeholder="Masukkan nama lengkap"
+              placeholder='Masukkan nama lengkap'
               required
-              name="fullName"
+              name='fullName'
             />
             <Description>Sesuai di KTP/SIM/Paspor</Description>
           </InputContainer>
           <InputContainer>
             <Label>Sandi</Label>
-            <PasswordContainer id="passContainer">
+            <PasswordContainer id='passContainer'>
               <PasswordInput
-                name="password"
+                name='password'
                 required
-                placeholder="Masukkan sandi"
+                placeholder='Masukkan sandi'
                 type={visibility ? 'text' : 'password'}
                 minLength={7}
               />
               <div onClick={() => setVisibility(!visibility)}>
                 <img
                   src={visibility ? UnVisible : Visible}
-                  alt=""
+                  alt=''
                   width={18}
                   height={18}
                 />
@@ -260,7 +275,7 @@ export default function RegisterForm({ email }: RegisterFormProps) {
               kecil
             </Description>
           </InputContainer>
-          <PrimaryButton type="submit" label='Buat Akun'/>
+          <PrimaryButton type='submit' label='Buat Akun' />
           <GlobalModals open={open} onClose={() => setOpen(false)}>
             <OtpModals email={email} setOpen={setOpen} path={'/auth/login'} />
           </GlobalModals>
@@ -268,7 +283,7 @@ export default function RegisterForm({ email }: RegisterFormProps) {
         <PolicyContainer>
           <PolicyDesc>
             Dengan membuat akun kamu menyetujui
-            <Policy href="#"> Syarat, Ketentuan dan Kebijakan</Policy> Privasi
+            <Policy href='#'> Syarat, Ketentuan dan Kebijakan</Policy> Privasi
             Kaboor
           </PolicyDesc>
         </PolicyContainer>

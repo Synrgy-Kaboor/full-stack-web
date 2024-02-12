@@ -2,14 +2,88 @@ import { Stack, Typography, Box, Button } from '@mui/material';
 import theme from '../../config/theme';
 import { NotificationAdd } from '@mui/icons-material';
 import CardFilterPlaneSchedule from './CardFilterPlaneSchedule';
-import {  useState } from 'react';
+import { getFlightClass } from '.';
+import { formatDate } from '.';
+import { useNavigate } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { NotifFlightInfo } from '../features/InAppNotification';
 import { InAppNotificationSavedBox } from '../features/InAppNotification/InAppNotificationSavedBox';
 import { type CardFilterPlaneScheduleType as filterType } from '../../types/CardFilterPlaneScheduleProps';
 
 const SavedPriceAlert = () => {
+  const [priceNotifList, setPriceNotifList] = useState<NotifFlightInfo[]>([]);
   const [modalFilterOpen, setModalFilterOpen] = useState(false);
-  const handleSubmit = (value: Partial<filterType>):void => {
-    console.log(value);
+  const [reFetch, setReFetch] = useState(true);
+  const navigate = useNavigate();
+  const AirportList: { [key: string]: number } = {
+    SUB: 1,
+    CGK: 2,
+    HLP: 3,
+    PDG: 4,
+    MKQ: 5,
+  };
+  const classDetail: Record<string, string> = {
+    E: 'Ekonomi',
+    B: 'Bisnis',
+    FC: 'First Class',
+    EP: 'Ekonomi Premium',
+  };
+  const jwtToken = localStorage.getItem('token');
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const priceListResponse = await fetch(
+          'https://fsw-backend.fly.dev/api/v1/user/notification/price',
+          {
+            headers: {
+              Authorization: `Bearer ${jwtToken}`,
+            },
+          }
+        );
+        const priceListData = await priceListResponse.json();
+        setPriceNotifList(priceListData.data);
+        console.log('INI ADALAH Respondnya', priceListData);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+    fetchData();
+  }, [jwtToken, reFetch]);
+
+  const handleSubmit = async (value: Partial<filterType>): Promise<void> => {
+    console.log('Ini Value', value);
+    const deparatureAirport = value.deparature!;
+    const destinationAirport = value.arrival!;
+    const originAirportId = AirportList[deparatureAirport];
+    const destinationAirportId = AirportList[destinationAirport];
+    const payload = {
+      totalAdults: value.passanger?.adult.value,
+      totalChildren: value.passanger?.child.value,
+      totalBabies: value.passanger?.baby.value,
+      classCode: getFlightClass(value.class!),
+      minimumPrice: value.priceRange![0],
+      maximumPrice: value.priceRange![1],
+      date: formatDate(value.deparatureDate),
+      originAirportId,
+      destinationAirportId,
+    };
+    console.log('INI Payload', payload);
+    const priceAlertPayload = await fetch(
+      'https://fsw-backend.fly.dev/api/v1/user/notification/price',
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${jwtToken}`,
+        },
+        body: JSON.stringify(payload),
+      }
+    );
+    const priceAlertResp = await priceAlertPayload.json();
+    setReFetch(!reFetch);
+    setModalFilterOpen(false);
+    console.log('Ini State', priceAlertResp);
   };
   return (
     <>
@@ -26,17 +100,17 @@ const SavedPriceAlert = () => {
         gap={2}
       >
         <Stack
-          direction="row"
+          direction='row'
           justifyContent={'space-between'}
           alignItems={'center'}
         >
-          <Typography variant="h5" color={'#1C1C1E'} fontWeight={700}>
+          <Typography variant='h5' color={'#1C1C1E'} fontWeight={700}>
             Notifikasi Harga
           </Typography>
           <Box position={'relative'}>
             <Button
-              id="button-price-alert"
-              variant="contained"
+              id='button-price-alert'
+              variant='contained'
               startIcon={<NotificationAdd />}
               sx={{
                 borderRadius: '1.5rem',
@@ -54,18 +128,34 @@ const SavedPriceAlert = () => {
               right={0}
               sx={modalFilterOpen ? { display: 'flex' } : { display: 'none' }}
             >
-              <CardFilterPlaneSchedule sliderOn={true} onSubmit={handleSubmit} textSubmit='Simpan' homecomingOn={false}/>
+              <CardFilterPlaneSchedule
+                sliderOn={true}
+                onSubmit={handleSubmit}
+                textSubmit='Simpan'
+                homecomingOn={false}
+              />
             </Box>
           </Box>
         </Stack>
-        <Typography variant="h6" fontWeight={600} color={'#505050'}>
-          Satu Arah
-        </Typography>
-        <InAppNotificationSavedBox />
-        <Typography variant="h6" fontWeight={600} color={'#505050'}>
+        {priceNotifList.map((item, index) => (
+          <InAppNotificationSavedBox
+            navigate={() => navigate(`/profil/saved-price-alert/${item.id}`)}
+            key={index}
+            id={item.id}
+            date={item.date}
+            originAirport={item.originAirport.code}
+            destinationAirport={item.destinationAirport.code}
+            minimumPrice={item.minimumPrice}
+            maximumPrice={item.maximumPrice}
+            totalAdults={item.totalAdults}
+            totalChilds={item.totalChildren}
+            totalBabies={item.totalBabies}
+            flightClass={classDetail[item.classCode]}
+          />
+        ))}
+        <Typography variant='h6' fontWeight={600} color={'#505050'}>
           Pulang Pergi
         </Typography>
-        <InAppNotificationSavedBox />
       </Stack>
     </>
   );
