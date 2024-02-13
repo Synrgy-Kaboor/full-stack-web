@@ -86,6 +86,7 @@ const userRespond = await fetch(userApi,{
   return userInfo.data
 })
 
+
 export const userSlice = createSlice({
   name:'user',
   initialState,

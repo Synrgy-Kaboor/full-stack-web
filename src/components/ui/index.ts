@@ -24,7 +24,15 @@ export const formatDate = (date: Date | null | undefined) => {
 }
 
 
+interface Airport {
+  id: number;
+  code: string;
+  name: string;
+  timezone: number;
+}
+
 export interface AlertType {
+  id: number;
   totalAdults: number;
   totalChildren: number;
   totalBabies: number;
@@ -32,6 +40,6 @@ export interface AlertType {
   minimumPrice: number;
   maximumPrice: number;
   date: string;
-  originAirportId: number;
-  destinationAirportId: number;
+  originAirport: Airport;
+  destinationAirport: Airport;
 }

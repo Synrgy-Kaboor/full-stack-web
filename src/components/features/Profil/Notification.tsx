@@ -1,17 +1,18 @@
 import { Stack, Typography } from '@mui/material';
-import { notificationData } from '.';
-import { formatDate } from '.';
+import { Notification } from '.';
 import Mail from './../../../assets/mail.svg';
-import { useNavigate } from 'react-router-dom';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import { getDayMonth } from '.';
 
 const Notification = () => {
   const jwtToken = localStorage.getItem('token');
+  const [data, setData] = useState<Notification[]>([]);
+  console.log('ini state Data', data);
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await fetch(
-          'https://fsw-backend.fly.dev/api/v1/user/notification/price',
+          'https://fsw-backend.fly.dev/api/v1/user/notification',
           {
             headers: {
               Authorization: `Bearer ${jwtToken}`,
@@ -20,14 +21,16 @@ const Notification = () => {
         );
         const notifData = await response.json();
         console.log('INI ADALAH Respondnya', notifData);
+        setData(notifData.data.notification);
+        console.log('ini data statae 2', data);
       } catch (error) {
         console.error('Error fetching data:', error);
       }
     };
     fetchData();
-  }, [jwtToken]);
+  }, [data, jwtToken]);
 
-  const navigate = useNavigate();
+  console.log(data);
   return (
     <>
       <Stack
@@ -55,54 +58,68 @@ const Notification = () => {
         >
           Notifikasi
         </Typography>
-        {notificationData.map((item, index) => (
-          <Stack
-            key={index}
-            direction={'row'}
-            justifyContent={'center'}
-            alignItems={'start'}
+        {!data.length ? (
+          <Typography
             sx={{
-              width: '100%',
-              height: '100%',
-              padding: '8px 16px',
-              borderRadius: '8px',
-              border: '1px solid #C2C2C2',
-              background: 'white',
-              cursor: 'pointer',
+              color: '#000',
+              fontFamily: 'Open Sans',
+              fontSize: '24px',
+              fontWeight: 700,
+              letterSpacing: '-0.5px',
             }}
-            gap={2}
-            onClick={() => navigate(`/profil/notifikasi/${item.id}`)}
           >
-            <img src={Mail} alt='icon' />
-            <Stack width={'100%'}>
-              <Stack
-                direction={'row'}
-                justifyContent={'space-between'}
-                width={'100%'}
-              >
-                <Typography>{`${item.title}`}</Typography>
+            Notifikasi
+          </Typography>
+        ) : (
+          data.map((item, index) => (
+            <Stack
+              key={index}
+              direction={'row'}
+              justifyContent={'center'}
+              alignItems={'start'}
+              sx={{
+                width: '100%',
+                height: '100%',
+                padding: '8px 16px',
+                borderRadius: '8px',
+                border: '1px solid #C2C2C2',
+                background: 'white',
+                cursor: 'pointer',
+              }}
+              gap={2}
+              onClick={() => {}}
+            >
+              <img src={Mail} alt='icon' />
+              <Stack width={'100%'}>
+                <Stack
+                  direction={'row'}
+                  justifyContent={'space-between'}
+                  width={'100%'}
+                >
+                  <Typography>{`${item.title}`}</Typography>
+                  <Typography
+                    sx={{
+                      color: '#9E9E9E',
+                      fontFamily: 'Open Sans',
+                      fontSize: '16px',
+                      fontWeight: 600,
+                      letterSpacing: '-0.75px',
+                    }}
+                  >{`${getDayMonth(item.created_at)}`}</Typography>
+                </Stack>
                 <Typography
                   sx={{
                     color: '#9E9E9E',
                     fontFamily: 'Open Sans',
-                    fontSize: '16px',
+                    fontSize: '18px',
                     fontWeight: 600,
                     letterSpacing: '-0.75px',
                   }}
-                >{`${formatDate(item.createdAt)}`}</Typography>
+                >{`${item.detail}`}</Typography>
               </Stack>
-              <Typography
-                sx={{
-                  color: '#9E9E9E',
-                  fontFamily: 'Open Sans',
-                  fontSize: '18px',
-                  fontWeight: 600,
-                  letterSpacing: '-0.75px',
-                }}
-              >{`${item.detail}`}</Typography>
             </Stack>
-          </Stack>
-        ))}
+          ))
+        )}
       </Stack>
     </>
   );

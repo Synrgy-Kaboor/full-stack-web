@@ -22,6 +22,7 @@ interface NotificationBox {
   flightClass: string;
   id: number;
   navigate?: () => void;
+  setReFetch: () => void;
 }
 const InAppNotificationSavedBox = (props: NotificationBox) => {
   const [popUpDetailVisible, setPopUpDetailVisible] = useState(false);
@@ -39,16 +40,12 @@ const InAppNotificationSavedBox = (props: NotificationBox) => {
     );
     const deleteStatus = await deleteRes.json();
     console.log(deleteStatus);
+    props.setReFetch();
     setPopUpDetailVisible(false);
   };
   return (
     <>
-      <Box
-        borderRadius={1}
-        border={'1px solid #C2C2C2'}
-        py={2}
-        onClick={props.navigate}
-      >
+      <Box borderRadius={1} border={'1px solid #C2C2C2'} py={2}>
         <Stack gap={1}>
           <Stack px={3}>
             <Stack
@@ -60,11 +57,11 @@ const InAppNotificationSavedBox = (props: NotificationBox) => {
             >
               <Stack direction={'row'} alignItems={'center'} gap={2.5}>
                 <Typography variant='h6' fontWeight={600} color={'#505050'}>
-                  (${props.originAirport})
+                  {props.originAirport}
                 </Typography>
                 <FlightTakeoffOutlined />
                 <Typography variant='h6' fontWeight={600} color={'#505050'}>
-                  (${props.destinationAirport})
+                  {props.destinationAirport}
                 </Typography>
               </Stack>
               <Box position={'relative'}>
@@ -80,6 +77,7 @@ const InAppNotificationSavedBox = (props: NotificationBox) => {
                   py={2.25}
                   position={'absolute'}
                   right={0}
+                  zIndex={4}
                   width={'max-content'}
                   display={popUpDetailVisible ? 'flex' : 'none'}
                 >
@@ -90,6 +88,7 @@ const InAppNotificationSavedBox = (props: NotificationBox) => {
                         background: theme.palette.gradients?.diagonal,
                         backgroundClip: 'text',
                         color: 'transparent',
+                        cursor: 'pointer',
                       }}
                       fontWeight={600}
                       px={3.5}
@@ -103,6 +102,7 @@ const InAppNotificationSavedBox = (props: NotificationBox) => {
                         background: '#CB3A31',
                         backgroundClip: 'text',
                         color: 'transparent',
+                        cursor: 'pointer',
                       }}
                       fontWeight={600}
                       px={3.5}
@@ -125,9 +125,8 @@ const InAppNotificationSavedBox = (props: NotificationBox) => {
                 <DirectionsWalkOutlined />
                 <Typography variant='subtitle1' fontWeight={600}>
                   {`${
-                    props.totalAdults + props.totalBabies + props.totalAdults
-                  }`}{' '}
-                  Orang
+                    props.totalAdults + props.totalBabies + props.totalChilds
+                  } Orang`}
                 </Typography>
               </Stack>
               <Stack direction={'row'} gap={0.5} color={'#9E9E9E'}>
@@ -140,12 +139,14 @@ const InAppNotificationSavedBox = (props: NotificationBox) => {
           </Stack>
           <Divider></Divider>
           <Typography
+            onClick={props.navigate}
             px={3}
             variant='subtitle1'
             sx={{
               background: theme.palette.gradients?.diagonal,
               backgroundClip: 'text',
               color: 'transparent',
+              cursor: 'pointer',
             }}
             fontWeight={700}
           >

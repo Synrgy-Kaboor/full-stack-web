@@ -25,7 +25,6 @@ export default function JadwalKepulangan() {
   const adults = parseInt(searchParams.get('adults')!);
   const childs = parseInt(searchParams.get('kids')!);
   const babies = parseInt(searchParams.get('babies')!);
-  const outboundFlightId = searchParams.get('outboundFlightId');
   const departureDate = searchParams.get('date')!;
   const classCode = searchParams.get('class')!;
   const passanger = adults + childs + babies;
@@ -33,7 +32,7 @@ export default function JadwalKepulangan() {
   const handleOnclick = (index: number) => {
     dispatch(setReturnFlight(data[index]));
     navigate(
-      `/booking?totalAdults=${adults}&totalChildren=${childs}&totalBabies=${babies}&classCode=${classCode}&outboundFlightId=${outboundFlightId}&returnFlightId=${data[index].id}`
+      `/booking?totalAdults=${adults}&totalChildren=${childs}&totalBabies=${babies}&classCode=${classCode}&outboundFlightId=${departureFlight.id}&returnFlightId=${data[index].id}`
     );
   };
 
@@ -72,6 +71,8 @@ export default function JadwalKepulangan() {
   const departurePrice =
     (adults + childs) * departureFlight!.adultPrice +
     departureFlight!.babyPrice * babies;
+
+  console.log(adults, childs, (adults + childs) * departureFlight!.adultPrice);
 
   return (
     <Box mb={4}>
@@ -127,7 +128,7 @@ export default function JadwalKepulangan() {
               {data.length ? (
                 data.map((item, index) => {
                   const price =
-                    (item.childPrice + item.adultPrice) * adults +
+                    (adults + childs) * item.adultPrice +
                     item.babyPrice * babies;
                   return (
                     <FlightTicket

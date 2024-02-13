@@ -1,20 +1,19 @@
 import { Stack, Typography } from '@mui/material';
 import { InAppNotificationSavedBox } from '../features/InAppNotification/InAppNotificationSavedBox';
-import { useParams } from 'react-router-dom';
-import { useState, useEffect } from 'react';
-import { AlertType } from '.';
+import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { FlightType } from '../../pages/JadwalPenerbangan';
+import { useAppSelector } from '../../redux/hooks';
+import FlightTicket from '../features/JadwalPenerbangan/FlightTicket';
+import CircularProgress from '@mui/material/CircularProgress';
+import { getRp } from '../../pages/JadwalPenerbangan';
+import { getSeatClass } from '../../utils/formatter';
 
 const PriceAlertDetail = () => {
-  const { id } = useParams();
-  console.log(id);
-  const [alert, setAlert] = useState<AlertType>();
-  const jwtToken = localStorage.getItem('token');
-  const classDetail: Record<string, string> = {
-    E: 'Ekonomi',
-    B: 'Bisnis',
-    FC: 'First Class',
-    EP: 'Ekonomi Premium',
-  };
+  const [isLoading, setIsLoading] = useState(false);
+  const navigate = useNavigate();
+  const flightAlert = useAppSelector((state) => state.priceNotification);
+  const [data, setData] = useState<FlightType[]>([]);
 
   const AirportList: { [key: number]: string } = {
     1: 'SUB',
@@ -24,26 +23,33 @@ const PriceAlertDetail = () => {
     5: 'MKQ',
   };
 
+  const classCode = getSeatClass(flightAlert.classCode);
+
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const alertResponse = await fetch(
-          `https://fsw-backend.fly.dev/api/v1/user/notification/price/${id}`,
-          {
-            headers: {
-              Authorization: `Bearer ${jwtToken}`,
-            },
-          }
+        const flightResponse = await fetch(
+          `https://fsw-backend.fly.dev/api/v1/flight?originAirportCode=${flightAlert.originAirport.code}&destinationAirportCode=${flightAlert.destinationAirport.code}&numOfAdults=${flightAlert.totalAdults}&numOfChildren=${flightAlert.totalChildren}&numOfBabies=${flightAlert.totalBabies}&classCode=${flightAlert.classCode}&date=${flightAlert.date}&=minimumPrice${flightAlert.minimumPrice}&=maximumPrice${flightAlert.maximumPrice}`
         );
-        const alertData = await alertResponse.json();
-        setAlert(alertData.data);
-        console.log('INI ADALAH Respondnya', alertData);
+        const flightData = await flightResponse.json();
+        setData(flightData.data);
+        setIsLoading(false);
       } catch (error) {
         console.error('Error fetching data:', error);
       }
     };
     fetchData();
-  }, [id, jwtToken]);
+  }, [
+    flightAlert.classCode,
+    flightAlert.date,
+    flightAlert.destinationAirport.code,
+    flightAlert.maximumPrice,
+    flightAlert.minimumPrice,
+    flightAlert.originAirport.code,
+    flightAlert.totalAdults,
+    flightAlert.totalBabies,
+    flightAlert.totalChildren,
+  ]);
 
   return (
     <>
@@ -65,24 +71,73 @@ const PriceAlertDetail = () => {
           alignItems={'center'}
         >
           <Typography variant='h5' color={'#1C1C1E'} fontWeight={700}>
-            Notifikasi Harga
+            Detail Notifikasi Harga
           </Typography>
         </Stack>
         <InAppNotificationSavedBox
-          id={parseInt(id!)}
-          date={alert!.date}
-          originAirport={AirportList[alert!.originAirportId]}
-          destinationAirport={AirportList[alert!.destinationAirportId]}
-          minimumPrice={alert!.minimumPrice}
-          maximumPrice={alert!.maximumPrice}
-          totalAdults={alert!.totalAdults}
-          totalChilds={alert!.totalChildren}
-          totalBabies={alert!.totalBabies}
-          flightClass={classDetail[alert!.classCode]}
+          setReFetch={() => navigate('/profil/saved-price-alert')}
+          id={flightAlert.id}
+          date={flightAlert.date}
+          originAirport={AirportList[flightAlert.originAirport.id]}
+          destinationAirport={AirportList[flightAlert.destinationAirport.id]}
+          minimumPrice={flightAlert.minimumPrice}
+          maximumPrice={flightAlert.maximumPrice}
+          totalAdults={flightAlert.totalAdults}
+          totalChilds={flightAlert.totalChildren}
+          totalBabies={flightAlert.totalBabies}
+          flightClass={classCode}
         />
-        <Typography variant='h6' fontWeight={600} color={'#505050'}>
-          Pulang Pergi
-        </Typography>
+        {isLoading ? (
+          <Stack
+            justifyContent={'center'}
+            alignItems={'center'}
+            height={'50vh'}
+          >
+            <CircularProgress color='secondary' />
+          </Stack>
+        ) : (
+          <Stack direction='column'>
+            <Typography variant='h6' color={'#1C1C1E'} fontWeight={700}>
+              Jadwal Keberangkatan & Harga yang Cocok
+            </Typography>
+            <Stack direction='column' spacing={2}>
+              {data && data.length ? (
+                data.map((item, index) => {
+                  const price =
+                    (flightAlert.totalAdults + flightAlert.totalChildren) *
+                      item.adultPrice +
+                    item.babyPrice * flightAlert.totalBabies;
+                  return (
+                    <FlightTicket
+                      forNotif={true}
+                      key={index}
+                      price={getRp(price)}
+                      airLine={item.plane.airline.name}
+                      airlineLogo={item.plane.airline.imageUrl}
+                      arrivedDatetime={item.arrivalDatetime}
+                      departureDatetime={item.departureDatetime}
+                      flightClass={classCode}
+                      from={item.originAirport.code}
+                      originalTimezone={item.originAirport.timezone}
+                      destinationTimezone={item.destinationAirport.timezone}
+                      to={item.destinationAirport.code}
+                    />
+                  );
+                })
+              ) : (
+                <Stack
+                  height={'50vh'}
+                  justifyContent={'center'}
+                  alignItems={'center'}
+                >
+                  <Typography>
+                    belum ada jadwal yang cocok untuk kamu
+                  </Typography>
+                </Stack>
+              )}
+            </Stack>
+          </Stack>
+        )}
       </Stack>
     </>
   );
