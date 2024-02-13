@@ -64,7 +64,7 @@ export default function JadwalKepulangan() {
   const classDetail: Record<string, string> = {
     E: 'EKONOMI',
     B: 'BISNIS',
-    FC: 'FIRST CLASS',
+    F: 'FIRST CLASS',
     EP: 'EKONOMI PREMIUM',
   };
 
