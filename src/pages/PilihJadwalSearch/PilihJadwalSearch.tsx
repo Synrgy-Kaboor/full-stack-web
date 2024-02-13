@@ -22,6 +22,7 @@ const PilihJadwalSearch = () => {
   const departureDate = useAppSelector(
     (state) => state.searchJadwal.departureDate
   );
+  const testTanggal = useAppSelector((state) => state.searchJadwal.returnDate);
   const handleSubmit = (value: Partial<filterType>): void => {
     console.log(value);
     console.log('global state', [
@@ -32,6 +33,7 @@ const PilihJadwalSearch = () => {
       originAirport,
       destinationAirport,
       departureDate,
+      testTanggal,
     ]);
     const url = `/jadwal-keberangkatan/?from=${originAirport}&to=${destinationAirport}&adults=${adults}&kids=${childs}&babies=${babies}&date=${departureDate}&class=${classCode}`;
     navigate(url);

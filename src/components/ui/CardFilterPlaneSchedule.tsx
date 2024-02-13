@@ -77,7 +77,6 @@ const CardFilterPlaneSchedule = (props: CardFilterPlaneScheduleProps) => {
   };
 
   const handleHomecomingVisible = () => {
-    dispatch(setIsHomeComing(!homecomingVisible));
     setHomecomingVisible(!homecomingVisible);
   };
 
@@ -123,6 +122,7 @@ const CardFilterPlaneSchedule = (props: CardFilterPlaneScheduleProps) => {
       class: classSeatValue,
       priceRange: props.sliderOn ? sliderValue : null,
     };
+    dispatch(setIsHomeComing(homecomingVisible));
     props.onSubmit(value);
   };
 
