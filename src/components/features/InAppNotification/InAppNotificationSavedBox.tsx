@@ -22,8 +22,7 @@ interface NotificationBox {
   flightClass: string;
   id: number;
   navigate?: () => void;
-  reFetch: boolean;
-  setReFetch: React.Dispatch<React.SetStateAction<boolean>>;
+  setReFetch: () => void;
 }
 const InAppNotificationSavedBox = (props: NotificationBox) => {
   const [popUpDetailVisible, setPopUpDetailVisible] = useState(false);
@@ -41,7 +40,7 @@ const InAppNotificationSavedBox = (props: NotificationBox) => {
     );
     const deleteStatus = await deleteRes.json();
     console.log(deleteStatus);
-    props.setReFetch(!props.reFetch);
+    props.setReFetch();
     setPopUpDetailVisible(false);
   };
   return (
@@ -58,11 +57,11 @@ const InAppNotificationSavedBox = (props: NotificationBox) => {
             >
               <Stack direction={'row'} alignItems={'center'} gap={2.5}>
                 <Typography variant='h6' fontWeight={600} color={'#505050'}>
-                  (${props.originAirport})
+                  {props.originAirport}
                 </Typography>
                 <FlightTakeoffOutlined />
                 <Typography variant='h6' fontWeight={600} color={'#505050'}>
-                  (${props.destinationAirport})
+                  {props.destinationAirport}
                 </Typography>
               </Stack>
               <Box position={'relative'}>
@@ -126,9 +125,8 @@ const InAppNotificationSavedBox = (props: NotificationBox) => {
                 <DirectionsWalkOutlined />
                 <Typography variant='subtitle1' fontWeight={600}>
                   {`${
-                    props.totalAdults + props.totalBabies + props.totalAdults
-                  }`}{' '}
-                  Orang
+                    props.totalAdults + props.totalBabies + props.totalChilds
+                  } Orang`}
                 </Typography>
               </Stack>
               <Stack direction={'row'} gap={0.5} color={'#9E9E9E'}>

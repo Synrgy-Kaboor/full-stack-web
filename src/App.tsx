@@ -72,23 +72,19 @@ const router = createBrowserRouter([
           { path: 'ganti-nomer', element: <ChangeNumber /> },
           { path: 'saved-price-alert', element: <SavedPriceAlert /> },
           { path: 'pusat-bantuan', element: <HelpCenter /> },
-          { path: 'saved-price-alert/:id', element: <PriceAlertDetail /> },
+          { path: 'saved-price-alert/detail', element: <PriceAlertDetail /> },
           { path: 'passport/*', element: <PassportRoutes /> },
           { path: 'notifikasi', element: <Notification /> },
-          { path: 'notifikasi/:notifId', element: <NotifDetail /> },
+          { path: 'notifikasi/notif-detail', element: <NotifDetail /> },
           { path: 'pesanan', element: <Pesanan /> },
           {
             path: 'pesanan/:id/keberangkatan',
-            element: (
-              <PesananDetail type='outbound'/>
-            ),
+            element: <PesananDetail type='outbound' />,
           },
           {
             path: 'pesanan/:id/kepulangan',
-            element: (
-              <PesananDetail type='return'/>
-            )
-          }
+            element: <PesananDetail type='return' />,
+          },
         ],
       },
       {

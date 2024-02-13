@@ -32,7 +32,7 @@ import {
   AirlineSeatReclineNormalOutlined,
   EventSeatOutlined,
 } from '@mui/icons-material';
-
+import { getFlightClass } from './index';
 import { PassangerSearch } from '../../types/ModalPassagerProps';
 import ModalPassanger from '../../components/ui/ModalPassanger';
 import ModalClassSeat from '../../components/ui/ModalClassSeat';
@@ -42,7 +42,6 @@ import { AdapterDateFns as adapterDate } from '@mui/x-date-pickers/AdapterDateFn
 import { LocalizationProvider, MobileDatePicker } from '@mui/x-date-pickers';
 import { useAppDispatch } from '../../redux/hooks';
 import { IOSSwitch } from '../core/IOSSwitch';
-import { getFlightClass } from '.';
 
 const CardFilterPlaneSchedule = (props: CardFilterPlaneScheduleProps) => {
   const dispatch = useAppDispatch();
@@ -83,10 +82,10 @@ const CardFilterPlaneSchedule = (props: CardFilterPlaneScheduleProps) => {
   };
 
   const handleModalPassagerSave = (data: PassangerSearch) => {
+    dispatch(setNumOfAdults(data.adult.value));
+    dispatch(setNumOfChildren(data.child.value));
+    dispatch(setNumOfBabies(data.baby.value));
     setPassangerValue(data);
-    dispatch(setNumOfAdults(passangerValue.adult.value));
-    dispatch(setNumOfChildren(passangerValue.child.value));
-    dispatch(setNumOfBabies(passangerValue.baby.value));
     setModalPassangerVisible(false);
   };
 
@@ -98,6 +97,7 @@ const CardFilterPlaneSchedule = (props: CardFilterPlaneScheduleProps) => {
     setModalClassSeatVisible(false);
   };
   const handleModalClassSeatSave = (data: string) => {
+    dispatch(setClassCode(getFlightClass(data)));
     setClassSeatValue(data);
   };
 
@@ -123,9 +123,6 @@ const CardFilterPlaneSchedule = (props: CardFilterPlaneScheduleProps) => {
       class: classSeatValue,
       priceRange: props.sliderOn ? sliderValue : null,
     };
-
-    dispatch(setClassCode(getFlightClass(classSeatValue)));
-
     props.onSubmit(value);
   };
 
