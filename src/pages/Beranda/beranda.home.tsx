@@ -1,7 +1,7 @@
 import { BerandaButton } from '../../components/features/Beranda/beranda.button';
 import { BerandaHistory } from '../../components/features/Beranda/beranda.card.history';
 import { BerandaDestinasi } from '../../components/features/Beranda/beranda.card.destinasi';
-import { Typography, Stack, useTheme,useMediaQuery } from '@mui/material';
+import { Typography, Stack, useTheme,useMediaQuery, Container } from '@mui/material';
 import { BerandaRental } from '../../components/features/Beranda/beranda.card.maskapai';
 import React from 'react';
 import bg from '../../assets/bgberanda.png';
@@ -43,69 +43,71 @@ const Beranda = () => {
   <BerandaButton />
 </Stack>
 
-
-<Stack
-      sx={{//promo
-        height: isSmallScreen ? 'auto' : 'auto',
+<Container>
+  <Stack
+    sx={{//promo
+      height: isSmallScreen ? 'auto' : 'auto',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+    }}
+  >
+    <Stack
+      sx={{
+        borderRadius: '12px',
+        overflow: 'hidden',
         display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
+        width: isSmallScreen ? '98%' : '100%',
+        maxHeight: '100%',
       }}
     >
-      <Stack
-        sx={{
-          borderRadius: '12px',
-          overflow: 'hidden',
-          display: 'flex',
-          width: isSmallScreen ? '98%' : '100%',
-          maxHeight: '100%',
-        }}
-      >
-        <img
-          src={promo}
-          alt="Placeholder"
-          style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-        />
-      </Stack>
+      <img
+        src={promo}
+        alt="Placeholder"
+        style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+      />
     </Stack>
+  </Stack>
 
-<Stack sx={{
-    height: 'auto',
-    width:'100%',
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'center', 
-    padding: '48px 24px', 
-  }}>
-  <Typography style={styles.texttitle}>Terakhir dilihat</Typography>
-  <BerandaHistory />
-</Stack>
+  <Stack sx={{
+      height: 'auto',
+      width:'100%',
+      display: 'flex',
+      flexDirection: 'column',
+      justifyContent: 'center', 
+      padding: '48px 0', 
+    }}>
+    <Typography style={styles.texttitle}>Terakhir dilihat</Typography>
+    <BerandaHistory />
+  </Stack>
 
   <Stack sx={{//Destinasi dan Maskapai
-    height: 'auto',
-    width :'100%',
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'flex-start', 
-    marginBottom: '20px',
-    padding: '48px 24px', 
-  }}>
-  <Typography style={styles.texttitle}>Destinasi Favorit</Typography>
-  <Typography sx={{ maxWidth: '525px' }} style={styles.textdesc}>
-    Terbang ke destinasi di Indonesia dan Internasional makin murah dengan promo akhir tahun
-  </Typography>
-  <BerandaDestinasi />
-  <Stack sx={{
-    marginBottom:'60px',
-    marginTop:'60px'
-  }}>
-  <Typography style={styles.texttitle}>Rekomendasi Maskapai Terbaik</Typography>
-  <Typography sx={{ maxWidth: '698px' }} style={styles.textdesc}>
-  Nikmati perjalanan Anda dengan rekomendasi maskapai terbaik kami. Pilih maskapai ideal untuk pengalaman terbang tak terlupakan!          </Typography>
-  <BerandaRental />
-</Stack>
+      height: 'auto',
+      width :'100%',
+      display: 'flex',
+      flexDirection: 'column',
+      justifyContent: 'flex-start', 
+      marginBottom: '20px',
+      padding: '48px 0px', 
+    }}>
+    <Typography style={styles.texttitle}>Destinasi Favorit</Typography>
+    <Typography sx={{ maxWidth: '525px' }} style={styles.textdesc}>
+      Terbang ke destinasi di Indonesia dan Internasional makin murah dengan promo akhir tahun
+    </Typography>
+    <BerandaDestinasi />
+    <Stack sx={{
+      marginBottom:'60px',
+      marginTop:'60px'
+    }}>
+    <Typography style={styles.texttitle}>Rekomendasi Maskapai Terbaik</Typography>
+    <Typography sx={{ maxWidth: '698px' }} style={styles.textdesc}>
+    Nikmati perjalanan Anda dengan rekomendasi maskapai terbaik kami. Pilih maskapai ideal untuk pengalaman terbang tak terlupakan!          </Typography>
+    <BerandaRental />
+  </Stack>
 
-</Stack>
+  </Stack>
+</Container>
+
 
 <Stack direction={isSmallScreen ? 'column' : 'row'} gap={isSmallScreen ? 0 : 10} sx={{//Footer
   backgroundColor: '#7B52AB',

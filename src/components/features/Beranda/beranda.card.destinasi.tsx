@@ -89,7 +89,7 @@ const Typography1 = ({ children, rating, review, ...props }: {children: string, 
 );
 
 const BerandaDestinasiCard = ({ imageUrl, text, genre, price, rating, review }: { imageUrl: string, text: string, genre: string, price: string, rating: string, review: string }) => (
-  <Card sx={{ maxWidth: 325, width: '100%', height: 435, marginRight: '16px', borderRadius: '8px', boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.1)' }}>
+  <Card sx={{ width: '100%', height: 435, borderRadius: '8px', boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.1)' }}>
     <CardActionArea>
       <Stack style={{ position: 'absolute', top: 10, right: 15, background: 'var(--Primary-01, linear-gradient(270deg, #3A42FF 0%, #7B52AB 100%))', color: 'white', padding: '8px', borderRadius: '32px' }}>
         Promo Terbaik
