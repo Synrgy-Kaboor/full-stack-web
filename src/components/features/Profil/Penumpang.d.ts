@@ -1,4 +1,4 @@
 export type Penumpang = {
     name: string;
-    honorific: string;
+    age: string;
 }

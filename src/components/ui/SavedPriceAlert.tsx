@@ -4,9 +4,13 @@ import { NotificationAdd } from '@mui/icons-material';
 import CardFilterPlaneSchedule from './CardFilterPlaneSchedule';
 import {  useState } from 'react';
 import { InAppNotificationSavedBox } from '../features/InAppNotification/InAppNotificationSavedBox';
+import { type CardFilterPlaneScheduleType as filterType } from '../../types/CardFilterPlaneScheduleProps';
 
 const SavedPriceAlert = () => {
   const [modalFilterOpen, setModalFilterOpen] = useState(false);
+  const handleSubmit = (value: Partial<filterType>):void => {
+    console.log(value);
+  };
   return (
     <>
       <Stack
@@ -50,7 +54,7 @@ const SavedPriceAlert = () => {
               right={0}
               sx={modalFilterOpen ? { display: 'flex' } : { display: 'none' }}
             >
-              <CardFilterPlaneSchedule />
+              <CardFilterPlaneSchedule sliderOn={true} onSubmit={handleSubmit} textSubmit='Simpan' homecomingOn={false}/>
             </Box>
           </Box>
         </Stack>

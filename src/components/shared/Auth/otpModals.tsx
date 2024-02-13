@@ -1,10 +1,9 @@
 import Button from '@mui/material/Button';
-import { useState, useRef, ChangeEvent} from 'react';
+import { useState, useRef, ChangeEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { styled as muiStyled } from '@mui/material/styles';
 import styled from 'styled-components';
 import Countdown from './timer';
-
 
 const FirstButton = styled(Button)`
   color: var(--shadow, #fff);
@@ -152,16 +151,15 @@ const Wrapper = styled(ModalsContainer)`
   gap: 8px;
 `;
 
-
 interface OtpModalsProps {
-  setOpen : React.Dispatch<React.SetStateAction<boolean>>;
+  setOpen: React.Dispatch<React.SetStateAction<boolean>>;
   email: string;
 }
 
-export default function OtpModals({setOpen, email}: OtpModalsProps) {
+export default function OtpModals({ setOpen, email }: OtpModalsProps) {
   const [otp, setOtp] = useState(['', '', '', '']);
-  const [time, setTime] = useState(180)
-  
+  const [time, setTime] = useState(180);
+
   const navigate = useNavigate();
 
   const inputRefs = [
@@ -171,8 +169,7 @@ export default function OtpModals({setOpen, email}: OtpModalsProps) {
     useRef<HTMLInputElement>(null),
   ];
 
-  const handleTimeout = () => {
-  };
+  const handleTimeout = () => {};
   const handleChange = (e: ChangeEvent<HTMLInputElement>, index: number) => {
     const newOtp = [...otp];
     const inputChar = e.target.value;
@@ -194,45 +191,50 @@ export default function OtpModals({setOpen, email}: OtpModalsProps) {
     }
   };
 
-  let otpReq = ''
-  for(let i=0; i<4; i++){
-    otpReq += otp[i]
+  let otpReq = '';
+  for (let i = 0; i < 4; i++) {
+    otpReq += otp[i];
   }
-  
-  const handleVerification = async () =>{
-    const otpPayload = {
-      otp: otpReq
-    };
-    const otpResponse = await fetch('https://kaboor-api-dev.up.railway.app/api/v1/auth/otp/verify', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(otpPayload)
-    });
-    const otpStatus = await otpResponse.json()
 
-    if(otpStatus.code === 200){
+  const handleVerification = async () => {
+    const otpPayload = {
+      otp: otpReq,
+    };
+    const otpResponse = await fetch(
+      'https://kaboor-api-dev.up.railway.app/api/v1/auth/otp/verify',
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(otpPayload),
+      }
+    );
+    const otpStatus = await otpResponse.json();
+
+    if (otpStatus.code === 200) {
       setOpen(false);
-      navigate('/')
+      navigate('/login');
+    } else {
+      alert('Kode OTP milikmu sudah kadaluarsa');
     }
-    else {
-      alert('Kode OTP milikmu sudah kadaluarsa')
-    }
-  }
+  };
 
   const sendOtp = async () => {
-    const sendtOtpResponse = await fetch('https://kaboor-api-dev.up.railway.app/api/v1/auth/otp/resend', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({email: email})
-    })
-    const sentOtpStatus = await sendtOtpResponse.json()
-    console.log(sentOtpStatus)
+    const sendtOtpResponse = await fetch(
+      'https://kaboor-api-dev.up.railway.app/api/v1/auth/otp/resend',
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email: email }),
+      }
+    );
+    const sentOtpStatus = await sendtOtpResponse.json();
+    console.log(sentOtpStatus);
     setTime(180);
-  } 
+  };
 
   return (
     <>
@@ -247,7 +249,7 @@ export default function OtpModals({setOpen, email}: OtpModalsProps) {
               <OtpInput
                 key={index}
                 value={value}
-                type="text"
+                type='text'
                 onChange={(e) => handleChange(e, index)}
                 maxLength={1}
                 ref={inputRefs[index]}
@@ -256,12 +258,20 @@ export default function OtpModals({setOpen, email}: OtpModalsProps) {
           </OtpContainer>
           <OtpDesc>
             Kode OTP kadaluwarsa pada{' '}
-            <Countdown time={time} setTime={setTime} onTimeout={handleTimeout} />
+            <Countdown
+              time={time}
+              setTime={setTime}
+              onTimeout={handleTimeout}
+            />
           </OtpDesc>
         </Wrapper>
         <Wrapper>
-          <FirstButton type='button' onClick={handleVerification}>Verifikasi</FirstButton>
-          <SecondButton type='button'  onClick={sendOtp}>Kirim Lagi</SecondButton>
+          <FirstButton type='button' onClick={handleVerification}>
+            Verifikasi
+          </FirstButton>
+          <SecondButton type='button' onClick={sendOtp}>
+            Kirim Lagi
+          </SecondButton>
         </Wrapper>
       </ModalsContainer>
     </>
