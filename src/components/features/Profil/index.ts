@@ -29,7 +29,7 @@ export  const formatDate = (date: { toLocaleString: (arg0: string, arg1: { day: 
 
 } 
 
-export interface Notification {
+export interface NotificationData {
   id: string;
   type: string;
   title: string;

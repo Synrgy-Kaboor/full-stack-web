@@ -1,12 +1,12 @@
 import { Stack, Typography } from '@mui/material';
-import { Notification } from '.';
+import { NotificationData } from '.';
 import Mail from './../../../assets/mail.svg';
 import { useEffect, useState } from 'react';
 import { getDayMonth } from '.';
 
 const Notification = () => {
   const jwtToken = localStorage.getItem('token');
-  const [data, setData] = useState<Notification[]>([]);
+  const [data, setData] = useState<NotificationData[]>([]);
   console.log('ini state Data', data);
   useEffect(() => {
     const fetchData = async () => {
@@ -20,15 +20,13 @@ const Notification = () => {
           }
         );
         const notifData = await response.json();
-        console.log('INI ADALAH Respondnya', notifData);
         setData(notifData.data.notification);
-        console.log('ini data statae 2', data);
       } catch (error) {
         console.error('Error fetching data:', error);
       }
     };
     fetchData();
-  }, [data, jwtToken]);
+  }, [jwtToken]);
 
   console.log(data);
   return (
