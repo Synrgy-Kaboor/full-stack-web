@@ -28,7 +28,7 @@ const SavedPriceAlert = () => {
   const classDetail: Record<string, string> = {
     E: 'Ekonomi',
     B: 'Bisnis',
-    FC: 'First Class',
+    F: 'First Class',
     EP: 'Ekonomi Premium',
   };
   const jwtToken = localStorage.getItem('token');
@@ -90,8 +90,8 @@ const SavedPriceAlert = () => {
   return (
     <>
       <Stack
-        px={6}
-        py={4}
+        px={{ md: 6, xs: 4 }}
+        py={{ md: 4, xs: 4 }}
         borderRadius={1}
         border={`1px solid ${'#C2C2C2'}`}
         width={'100%'}
