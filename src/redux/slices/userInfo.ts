@@ -2,7 +2,7 @@ import { User } from '../../types/User';
 import { PayloadAction, createAsyncThunk, createSlice} from '@reduxjs/toolkit';
 
 
-const jwtToken = localStorage.getItem('token')
+
 const userApi = 'https://fsw-backend.fly.dev/api/v1/user'
 
 
@@ -76,15 +76,16 @@ const initialState: InitialState = {
 }
 
 export const fetchUser = createAsyncThunk('user/fetchUser', async ()=>{
-const userRespond = await fetch(userApi,{
-  headers: {
-  'Content-Type': 'application/json',
-  Authorization: `Bearer ${jwtToken}`,
-}});
+  const jwtToken = localStorage.getItem('token')
+  const userRespond = await fetch(userApi,{
+    headers: {
+    'Content-Type': 'application/json',
+    Authorization: `Bearer ${jwtToken}`,
+  }});
   const userInfo = await userRespond.json()
   console.log(userInfo);
   return userInfo.data
-})
+});
 
 
 export const userSlice = createSlice({
