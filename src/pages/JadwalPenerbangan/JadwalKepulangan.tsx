@@ -25,13 +25,16 @@ export default function JadwalKepulangan() {
   const adults = parseInt(searchParams.get('adults')!);
   const childs = parseInt(searchParams.get('kids')!);
   const babies = parseInt(searchParams.get('babies')!);
+  const outboundFlightId = searchParams.get('outboundFlightId');
   const departureDate = searchParams.get('date')!;
   const classCode = searchParams.get('class')!;
   const passanger = adults + childs + babies;
 
   const handleOnclick = (index: number) => {
     dispatch(setReturnFlight(data[index]));
-    navigate('/detail-penumpang');
+    navigate(
+      `/booking?totalAdults=${adults}&totalChildren=${childs}&totalBabies=${babies}&classCode=${classCode}&outboundFlightId=${outboundFlightId}&returnFlightId=${data[index].id}`
+    );
   };
 
   useEffect(() => {
@@ -92,6 +95,8 @@ export default function JadwalKepulangan() {
             departureDatetime={departureFlight.departureDatetime}
             flightClass={classDetail[classCode]}
             from={departureFlight.originAirport.code}
+            originalTimezone={departureFlight.originAirport.timezone}
+            destinationTimezone={departureFlight.destinationAirport.timezone}
             to={departureFlight.destinationAirport.code}
           />
         </Stack>
@@ -136,6 +141,8 @@ export default function JadwalKepulangan() {
                       flightClass={classDetail[classCode]}
                       from={item.originAirport.code}
                       to={item.destinationAirport.code}
+                      originalTimezone={item.originAirport.timezone}
+                      destinationTimezone={item.destinationAirport.timezone}
                     />
                   );
                 })

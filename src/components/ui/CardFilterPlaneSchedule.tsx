@@ -19,6 +19,8 @@ import {
   setNumOfBabies,
   setNumOfChildren,
   setOriginAirportCode,
+  setIsHomeComing,
+  setClassCode,
 } from './../../redux/slices/FlightSchedule';
 import { formatDate } from './index';
 import { useEffect, useState } from 'react';
@@ -40,6 +42,7 @@ import { AdapterDateFns as adapterDate } from '@mui/x-date-pickers/AdapterDateFn
 import { LocalizationProvider, MobileDatePicker } from '@mui/x-date-pickers';
 import { useAppDispatch } from '../../redux/hooks';
 import { IOSSwitch } from '../core/IOSSwitch';
+import { getFlightClass } from '.';
 
 const CardFilterPlaneSchedule = (props: CardFilterPlaneScheduleProps) => {
   const dispatch = useAppDispatch();
@@ -75,6 +78,7 @@ const CardFilterPlaneSchedule = (props: CardFilterPlaneScheduleProps) => {
   };
 
   const handleHomecomingVisible = () => {
+    dispatch(setIsHomeComing(!homecomingVisible));
     setHomecomingVisible(!homecomingVisible);
   };
 
@@ -119,6 +123,9 @@ const CardFilterPlaneSchedule = (props: CardFilterPlaneScheduleProps) => {
       class: classSeatValue,
       priceRange: props.sliderOn ? sliderValue : null,
     };
+
+    dispatch(setClassCode(getFlightClass(classSeatValue)));
+
     props.onSubmit(value);
   };
 
@@ -138,7 +145,7 @@ const CardFilterPlaneSchedule = (props: CardFilterPlaneScheduleProps) => {
   return (
     <>
       <Card
-        id="main-search-card"
+        id='main-search-card'
         sx={{ background: '#FFF', zIndex: 2, width: 'max-content' }}
       >
         <CardContent sx={{ padding: '2rem' }}>
@@ -168,7 +175,7 @@ const CardFilterPlaneSchedule = (props: CardFilterPlaneScheduleProps) => {
                     ></FlightTakeoffOutlined>
                     <Stack direction={'column'} flexGrow={1}>
                       <Typography
-                        variant="subtitle1"
+                        variant='subtitle1'
                         sx={{
                           width: '100%',
                           color: '#9E9E9E',
@@ -184,7 +191,9 @@ const CardFilterPlaneSchedule = (props: CardFilterPlaneScheduleProps) => {
                         options={listAirPort}
                         value={from}
                         onChange={(_event, newInputValue) => {
-                          dispatch(setOriginAirportCode(newInputValue.slice(-3)));
+                          dispatch(
+                            setOriginAirportCode(newInputValue.slice(-3))
+                          );
                           setFrom(newInputValue);
                         }}
                         popupIcon={null}
@@ -192,8 +201,8 @@ const CardFilterPlaneSchedule = (props: CardFilterPlaneScheduleProps) => {
                         renderTags={() => null}
                         renderInput={(params) => (
                           <TextField
-                            variant="standard"
-                            placeholder="Masukkan Bandara Asal"
+                            variant='standard'
+                            placeholder='Masukkan Bandara Asal'
                             {...params}
                             required
                             sx={{
@@ -223,7 +232,7 @@ const CardFilterPlaneSchedule = (props: CardFilterPlaneScheduleProps) => {
                     ></FlightLandOutlined>
                     <Stack direction={'column'} flexGrow={1}>
                       <Typography
-                        variant="subtitle1"
+                        variant='subtitle1'
                         sx={{
                           width: '100%',
                           color: '#9E9E9E',
@@ -251,8 +260,8 @@ const CardFilterPlaneSchedule = (props: CardFilterPlaneScheduleProps) => {
                           sx={{ width: '100%' }}
                           renderInput={(params) => (
                             <TextField
-                              variant="standard"
-                              placeholder="Masukkan Bandara Kepergian"
+                              variant='standard'
+                              placeholder='Masukkan Bandara Kepergian'
                               {...params}
                               required
                               sx={{
@@ -310,19 +319,19 @@ const CardFilterPlaneSchedule = (props: CardFilterPlaneScheduleProps) => {
                     }}
                   ></CalendarMonthOutlined>
                   <Stack direction={'column'} flexGrow={1}>
-                      <LocalizationProvider dateAdapter={adapterDate}>
-                        <MobileDatePicker
-                          value={deparatureDateValue}
-                          onChange={(value) => {
-                            dispatch(setDepartureDate(formatDate(value)));
-                            setDeparatureDateValue(value);
-                          }}
-                          disablePast
-                          label="Keberangkatan"
-                          format="EEEE, dd MMMM yyyy"
-                          sx={{ border: '0px' }}
-                        />
-                      </LocalizationProvider>
+                    <LocalizationProvider dateAdapter={adapterDate}>
+                      <MobileDatePicker
+                        value={deparatureDateValue}
+                        onChange={(value) => {
+                          dispatch(setDepartureDate(formatDate(value)));
+                          setDeparatureDateValue(value);
+                        }}
+                        disablePast
+                        label='Keberangkatan'
+                        format='EEEE, dd MMMM yyyy'
+                        sx={{ border: '0px' }}
+                      />
+                    </LocalizationProvider>
                   </Stack>
                   {props.homecomingOn && (
                     <IOSSwitch onChange={handleHomecomingVisible}></IOSSwitch>
@@ -358,8 +367,8 @@ const CardFilterPlaneSchedule = (props: CardFilterPlaneScheduleProps) => {
                             dispatch(setReturnDate(formatDate(value)));
                           }}
                           disablePast
-                          label="Kepulangan"
-                          format="EEEE, dd MMMM yyyy"
+                          label='Kepulangan'
+                          format='EEEE, dd MMMM yyyy'
                           sx={{ borderTop: '0px' }}
                           defaultValue={new Date()}
                         />
@@ -391,7 +400,7 @@ const CardFilterPlaneSchedule = (props: CardFilterPlaneScheduleProps) => {
                       ></AirlineSeatReclineNormalOutlined>
                       <Stack>
                         <Typography
-                          variant="subtitle1"
+                          variant='subtitle1'
                           sx={{
                             width: '100%',
                             color: '#9E9E9E',
@@ -404,7 +413,7 @@ const CardFilterPlaneSchedule = (props: CardFilterPlaneScheduleProps) => {
                           Penumpang
                         </Typography>
                         <Typography
-                          variant="subtitle1"
+                          variant='subtitle1'
                           sx={{
                             width: '100%',
                             color: '#1C1C1E',
@@ -443,7 +452,7 @@ const CardFilterPlaneSchedule = (props: CardFilterPlaneScheduleProps) => {
                       ></EventSeatOutlined>
                       <Stack>
                         <Typography
-                          variant="subtitle1"
+                          variant='subtitle1'
                           sx={{
                             width: '100%',
                             color: '#9E9E9E',
@@ -456,7 +465,7 @@ const CardFilterPlaneSchedule = (props: CardFilterPlaneScheduleProps) => {
                           Kelas
                         </Typography>
                         <Typography
-                          variant="subtitle1"
+                          variant='subtitle1'
                           sx={{
                             width: '100%',
                             color: '#1C1C1E',
@@ -484,14 +493,14 @@ const CardFilterPlaneSchedule = (props: CardFilterPlaneScheduleProps) => {
                 getAriaLabel={() => 'price range'}
                 value={sliderValue}
                 onChange={handleSliderChange}
-                valueLabelDisplay="auto"
+                valueLabelDisplay='auto'
                 getAriaValueText={(value: number) => `Rp.${value}`}
                 max={10000000}
               ></Slider>
             </Box>
             <Box>
               <Button
-                variant="contained"
+                variant='contained'
                 sx={{
                   background: theme.palette.gradients?.diagonal,
                   width: '100%',

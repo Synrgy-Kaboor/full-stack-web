@@ -232,7 +232,7 @@ export default function Register({ setEmail }: RegisterProps) {
           <Input name="email" type="email" required />
           <PrimaryButton type="submit" label="Buat Akun" />
           <GlobalModals open={openOtpModal} onClose={() => setOpenOtpModal(false)}>
-            <OtpModals email={myEmail} setOpen={setOpenOtpModal}/>
+            <OtpModals email={myEmail} setOpen={setOpenOtpModal} path={'/auth/login'}/>
           </GlobalModals>
         </Form>
         <Divider sx={{color: '#9E9E9E', width: '100%', marginTop: '16px', maxWidth: '381px' } }>atau login dengan</Divider>

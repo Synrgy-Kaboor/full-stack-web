@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Typography as MuiTypography, Stack, TypographyProps, Button } from '@mui/material';
+import { Typography as MuiTypography, Stack, TypographyProps, Button, useMediaQuery, useTheme } from '@mui/material';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
@@ -7,6 +7,13 @@ import { CardActionArea } from '@mui/material';
 import stargold from '../../../assets/star-on.png';
 import stargray from '../../../assets/star-off.png';
 import card from '../../../assets/cardberanda.png';
+import bali from '../../../assets/bali.jpg';
+import jogja from '../../../assets/jogja.jpg';
+import jakarta from '../../../assets/jakarta.jpg';
+import surabaya from '../../../assets/surabaya.jpg';
+import medan from '../../../assets/medan.jpg';
+import makassar from '../../../assets/makasar.jpg';
+import kalimantan from '../../../assets/kalimantan.jpg';
 
 const generateStars = (rating: number) => {
   const fullStars = Math.floor(rating);
@@ -30,7 +37,7 @@ const generateStars = (rating: number) => {
     stars.push(
       <img
         key="half-star"
-        src={stargray}//belum ada        
+        src={stargray}
         alt="Half Star"
         style={{ width: '14px', height: '14px' }}
       />
@@ -41,7 +48,7 @@ const generateStars = (rating: number) => {
     stars.push(
       <img
         key={`empty-star-${i}`}
-        src={stargray}           
+        src={stargray}        
         alt="Empty Star"
         style={{ width: '14px', height: '14px' }}
       />
@@ -82,12 +89,11 @@ const Typography1 = ({ children, rating, review, ...props }: {children: string, 
 );
 
 const BerandaDestinasiCard = ({ imageUrl, text, genre, price, rating, review }: { imageUrl: string, text: string, genre: string, price: string, rating: string, review: string }) => (
-  <Card sx={{ maxWidth: 325, width: '100%', height: 435, marginRight: '16px', borderRadius: '8px', boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.1)' }}>
+  <Card sx={{ width: '100%', height: 435, borderRadius: '8px', boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.1)' }}>
     <CardActionArea>
-    <Stack style={{ position: 'absolute', top: 10, right: 15, background:  'var(--Primary-01, linear-gradient(270deg, #3A42FF 0%, #7B52AB 100%))', color: 'white', padding: '8px', borderRadius: '32px' }}>
-    
+      <Stack style={{ position: 'absolute', top: 10, right: 15, background: 'var(--Primary-01, linear-gradient(270deg, #3A42FF 0%, #7B52AB 100%))', color: 'white', padding: '8px', borderRadius: '32px' }}>
         Promo Terbaik
-    </Stack>
+      </Stack>
       <CardMedia component="img" height="182" image={imageUrl} alt="Image" />
       <CardContent>
         <Stack sx={{
@@ -96,7 +102,7 @@ const BerandaDestinasiCard = ({ imageUrl, text, genre, price, rating, review }: 
           flexDirection: 'column', 
           justifyContent: 'space-between'
         }}>
-<Stack>
+          <Stack>
             <Typography1
               gutterBottom
               overflow="hidden"
@@ -159,110 +165,88 @@ const BerandaDestinasiCard = ({ imageUrl, text, genre, price, rating, review }: 
   </Card>
 );
 
-export const BerandaDestinasi = () => {//data dummy
+export const BerandaDestinasi = () => {
+  const theme = useTheme();
+  const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm')); // Check if the screen size is small
+
   const [historyItems] = React.useState([
     {
-      imageUrl: card,         
-      text: 'Nusa Tenggara Timur',
+      imageUrl: bali,         
+      text: 'Bali',
       genre: 'Ekonomi',
-      price: '1.000.000',
-      rating: '1',
-      review: '23',
-    },
-    {
-      imageUrl: card,         
-      text: 'Nusa Tenggara Timur',
-      genre: 'Ekonomi',
-      price: '200.000',
-      rating: '2',
-      review: '23',
-    },
-    {
-      imageUrl: card,         
-      text: 'Nusa Tenggara Timur',
-      genre: 'Ekonomi',
-      price: '400.000',
-      rating: '3',
-      review: '23',
-    },
-    {
-      imageUrl: card,         
-      text: 'Nusa Tenggara Timur',
-      genre: 'Ekonomi',
-      price: '1.000.000',
+      price: '900.000',
       rating: '4',
-      review: '23',
+      review: '80',
     },
     {
-      imageUrl: card,         
-      text: 'Nusa Tenggara Timur',
+      imageUrl: jogja,         
+      text: 'Jogja',
       genre: 'Ekonomi',
-      price: '200.000',
-      rating: '5',
-      review: '23',
-    },
-    {
-      imageUrl: card,         
-      text: 'Nusa Tenggara Timur',
-      genre: 'Ekonomi',
-      price: '400.000',
+      price: '900.000',
       rating: '4',
-      review: '23',
+      review: '80',
+    },
+    {
+      imageUrl: jakarta,         
+      text: 'Jakarta',
+      genre: 'Ekonomi',
+      price: '900.000',
+      rating: '4',
+      review: '80',
     },
     {
       imageUrl: card,         
       text: 'Nusa Tenggara Timur',
       genre: 'Ekonomi',
-      price: '200.000',
+      price: '9.000.000',
       rating: '4',
-      review: '23',
+      review: '80',
     },
     {
-      imageUrl: card,         
-      text: 'Nusa Tenggara Timur',
+      imageUrl: surabaya,         
+      text: 'Surabaya',
       genre: 'Ekonomi',
-      price: '400.000',
+      price: '900.000',
       rating: '4',
-      review: '23',
+      review: '80',
     },
     {
-      imageUrl: card,         
-      text: 'Nusa Tenggara Timur',
+      imageUrl: medan,         
+      text: 'Medan',
       genre: 'Ekonomi',
-      price: '1.000.000',
+      price: '900.000',
       rating: '4',
-      review: '23',
+      review: '80',
     },
     {
-      imageUrl: card,         
-      text: 'Nusa Tenggara Timur',
+      imageUrl: makassar,         
+      text: 'Makassar',
       genre: 'Ekonomi',
-      price: '200.000',
+      price: '900.000',
       rating: '4',
-      review: '23',
+      review: '80',
     },
     {
-      imageUrl: card,         
-      text: 'Nusa Tenggara Timur',
+      imageUrl: kalimantan,         
+      text: 'Kalimantan',
       genre: 'Ekonomi',
-      price: '400.000',
+      price: '9.000.000',
       rating: '4',
-      review: '23',
+      review: '80',
     },
   ]);
 
-  
-  const [visibleItems, setVisibleItems] = useState(4); //inisial data yang ada
+  const [visibleItems, setVisibleItems] = useState(4);
 
   const loadMoreItems = () => {
-    setVisibleItems((prevVisibleItems) => prevVisibleItems + 4); // add 4 item lagi
+    setVisibleItems((prevVisibleItems) => prevVisibleItems + 4);
   };
 
   const latestItems = historyItems.slice(0, visibleItems);
 
   return (
     <Stack>
-      <Stack style={{ display: 'grid', gridTemplateColumns: `repeat(auto-fill, minmax(calc(25% - 16px), 1fr))`, gap: '16px', margin: '16px 0' }}>
+      <Stack style={{ display: 'grid', gridTemplateColumns: isSmallScreen ? '1fr' : `repeat(auto-fill, minmax(calc(25% - 16px), 1fr))`, gap: '16px', margin: '16px 0' }}>
         {latestItems.map((item, index) => (
           <BerandaDestinasiCard
             key={index}
@@ -276,7 +260,7 @@ export const BerandaDestinasi = () => {//data dummy
         ))}
       </Stack>
       {visibleItems < historyItems.length && (
-        <div style={{ display: 'flex', justifyContent: 'center', margin: '0 auto', marginTop:'40px'}}>
+        <div style={{ display: 'flex', justifyContent: 'center', margin: '0 auto', marginTop: '40px' }}>
           <Button
             style={{
               display: 'flex',
@@ -287,7 +271,7 @@ export const BerandaDestinasi = () => {//data dummy
               background: 'var(--Primary-01, linear-gradient(270deg, #3A42FF 0%, #7B52AB 100%))',
               color: '#fff',
               cursor: 'pointer',
-              border: 'none', 
+              border: 'none',
             }}
             onClick={loadMoreItems}
           >

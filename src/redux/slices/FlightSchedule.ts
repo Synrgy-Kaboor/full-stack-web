@@ -15,7 +15,8 @@ const initialState : FlightScheduleState = {
   lowestPrice: 0,
   highestPrice: 0,
   departureFlight: null,
-  returnFlight: null
+  returnFlight: null,
+  isHomeComing: false,
 }
 
 export const searchJadwalSlice = createSlice({
@@ -40,6 +41,9 @@ export const searchJadwalSlice = createSlice({
         setClassCode : (state, action: PayloadAction<string>)=>{
           state.classCode = action.payload
         },
+        setIsHomeComing : (state, action: PayloadAction<boolean>)=>{
+          state.isHomeComing = action.payload
+        },
         setDepartureDate : (state, action: PayloadAction<string>)=>{
           state.departureDate = action.payload
         },
@@ -63,7 +67,7 @@ export const searchJadwalSlice = createSlice({
 });
 
 export const { 
-    setClassCode, setDepartureFlight, setReturnFlight, setHighestPrice, setLowestPrice, setReturnDate, setDestinationAirportCode, setDepartureDate,  setNumOfAdults, setNumOfBabies, setNumOfChildren, setOriginAirportCode
+    setClassCode, setDepartureFlight, setIsHomeComing, setReturnFlight, setHighestPrice, setLowestPrice, setReturnDate, setDestinationAirportCode, setDepartureDate,  setNumOfAdults, setNumOfBabies, setNumOfChildren, setOriginAirportCode
 } = searchJadwalSlice.actions;
 
 export default searchJadwalSlice.reducer;

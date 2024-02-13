@@ -7,7 +7,9 @@ import Box from '@mui/material/Box';
 import icon from '../../../assets/Chevron-Down.svg';
 import camera from '../../../assets/camera icon.png';
 import { useAppDispatch, useAppSelector } from './../../../redux/hooks';
-import { fetchUser } from '../../../redux/slices/userInfo';
+import { fetchUser, setGender, setImage, setTitle } from '../../../redux/slices/userInfo';
+import { BeResponse } from '../../../types/BeResponse';
+import { httpFetchMultipart } from '../../../utils/http';
 
 const Select = styled.select`
   max-width: 794px;
@@ -109,9 +111,30 @@ export default function ChangeProfile() {
   const userInfo = useAppSelector((state) => state.userInfo.user);
   const loading = useAppSelector((state) => state.userInfo.loading);
 
+  const handleAvatarChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const selectedFiles = event.target.files as FileList;
+    const formData = new FormData();
+    formData.append('image', selectedFiles?.[0]);
+
+    httpFetchMultipart<BeResponse<{ imageName: string, imageUrl: string }>>(
+      'api/v1/user/image',
+      true,
+      {},
+      'fsw',
+      {
+        method: 'POST',
+        body: formData
+      }
+    ).then(response => {
+      dispatch(setImage({
+        imageName: response.data.imageName,
+        imageUrl: response.data.imageUrl
+      }));
+    });
+  }
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const avatar = e.currentTarget.avatar.files[0];
     const title = e.currentTarget.userTitle.value;
     const fullName = e.currentTarget.userName.value;
     const nik = e.currentTarget.nik.value;
@@ -125,23 +148,6 @@ export default function ChangeProfile() {
     const isWni = e.currentTarget.citizen.value === 'WNI' ? true : false;
     const jwtToken = localStorage.getItem('token');
 
-    const formData = new FormData();
-    formData.append('image', avatar);
-    console.log('yang mau gue liat', formData.getAll('image'));
-    const response = await fetch(
-      'https://fsw-backend.fly.dev/api/v1/user/image',
-      {
-        method: 'POST',
-        body: formData,
-        headers: {
-          Authorization: `Bearer ${jwtToken}`,
-        },
-      }
-    );
-
-    const data = await response.json();
-    console.log('Image uploaded successfully:', data.imageName);
-
     const payload = {
       title,
       fullName,
@@ -152,7 +158,7 @@ export default function ChangeProfile() {
       city,
       address,
       isWni,
-      imageName: data.imageName,
+      imageName: userInfo.imageName,
     };
 
     const updateProfile = await fetch(
@@ -220,16 +226,20 @@ export default function ChangeProfile() {
                 Foto Profil
               </Typography>
               <Stack alignItems={'flex-end'}>
-                <RoundImage src={userInfo.imageUrl} alt='Round Image' />
+                <RoundImage
+                  src={userInfo ? userInfo.imageUrl : ''}
+                  alt='Round Image'
+                />
                 <label htmlFor='avatar'>
                   <SmallImage src={camera} alt='Round Image' />
                 </label>
                 <input
                   type='file'
-                  accept='image/jpeg'
+                  accept='.png, .jpg, .jpeg'
                   name='avatar'
                   id='avatar'
                   style={{ display: 'none' }}
+                  onChange={handleAvatarChange}
                 />
               </Stack>
             </Stack>
@@ -250,7 +260,9 @@ export default function ChangeProfile() {
               >
                 Title
               </Typography>
-              <Select defaultValue={userInfo.title} name='userTitle'>
+              <Select value={userInfo.title} name='userTitle' onChange={(event) => {
+                dispatch(setTitle(event.target.value));
+              }}>
                 <option value='' disabled selected hidden>
                   Pilih Title
                 </option>
@@ -322,7 +334,7 @@ export default function ChangeProfile() {
               >
                 Jenis Kelamin
               </Typography>
-              <Select defaultValue={userInfo.gender} name='gender'>
+              <Select value={userInfo.gender} name='gender' onChange={(event) => dispatch(setGender(event.target.value))}>
                 <option value='' disabled selected hidden>
                   Pilih Jenis Kelamin
                 </option>
