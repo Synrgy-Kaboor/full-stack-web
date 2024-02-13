@@ -117,13 +117,13 @@ const InAppNotificationSavedBox = (props: NotificationBox) => {
             <Stack direction={'row'} gap={1.7}>
               <Stack direction={'row'} gap={0.5} color={'#9E9E9E'}>
                 <CalendarMonthOutlined />
-                <Typography variant='subtitle1' fontWeight={600}>
+                <Typography variant='subtitle1' fontWeight={600} fontSize={{ xs: 12, md: 16 }} >
                   {`${getShortDate(props.date)}`}
                 </Typography>
               </Stack>
               <Stack direction={'row'} gap={0.5} color={'#9E9E9E'}>
                 <DirectionsWalkOutlined />
-                <Typography variant='subtitle1' fontWeight={600}>
+                <Typography variant='subtitle1' fontWeight={600} fontSize={{ xs: 12, md: 16 }} >
                   {`${
                     props.totalAdults + props.totalBabies + props.totalChilds
                   } Orang`}
@@ -131,7 +131,7 @@ const InAppNotificationSavedBox = (props: NotificationBox) => {
               </Stack>
               <Stack direction={'row'} gap={0.5} color={'#9E9E9E'}>
                 <FlightClassOutlined />
-                <Typography variant='subtitle1' fontWeight={600}>
+                <Typography variant='subtitle1' fontWeight={600} fontSize={{ xs: 12, md: 16 }} >
                   {props.flightClass}
                 </Typography>
               </Stack>
