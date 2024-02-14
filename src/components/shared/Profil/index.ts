@@ -18,3 +18,21 @@ export const sideBarItem1 = [
 ];
 
 export const exitItem = { icon: ExitIcon, text: 'Keluar' };
+
+export interface PaymentInfo {
+  methodName: string;
+  totalPrice: number;
+  expiredTime: string;
+  paymentCompleted: boolean;
+  paymentDateTime: string;
+  invoiceNumber: string;
+}
+
+export const emptyPayment: PaymentInfo = {
+  methodName: '',
+  totalPrice: 0,
+  expiredTime: '',
+  paymentCompleted: false,
+  paymentDateTime: '',
+  invoiceNumber: ''
+};

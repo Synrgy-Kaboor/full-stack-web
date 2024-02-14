@@ -55,7 +55,13 @@ const InAppNotificationSavedBox = (props: NotificationBox) => {
               gap={1.25}
               mb={1}
             >
-              <Stack direction={'row'} alignItems={'center'} gap={2.5}>
+              <Stack
+                direction={'row'}
+                alignItems={'center'}
+                gap={2.5}
+                sx={{ cursor: 'pointer' }}
+                onClick={props.navigate}
+              >
                 <Typography variant='h6' fontWeight={600} color={'#505050'}>
                   {props.originAirport}
                 </Typography>
@@ -114,7 +120,12 @@ const InAppNotificationSavedBox = (props: NotificationBox) => {
                 </Box>
               </Box>
             </Stack>
-            <Stack direction={'row'} gap={1.7}>
+            <Stack
+              direction={'row'}
+              gap={1.7}
+              sx={{ cursor: 'pointer' }}
+              onClick={props.navigate}
+            >
               <Stack direction={'row'} gap={0.5} color={'#9E9E9E'}>
                 <CalendarMonthOutlined />
                 <Typography variant='subtitle1' fontWeight={600}>

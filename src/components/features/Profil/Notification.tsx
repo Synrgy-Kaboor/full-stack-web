@@ -1,13 +1,17 @@
-import { Stack, Typography } from '@mui/material';
+import { Dialog, Stack, Typography, Button } from '@mui/material';
 import { Notification } from '.';
-import Mail from './../../../assets/mail.svg';
+import PaymentNotif from './../../../assets/paymentNotif.svg';
+import CloseIcon from './../../../assets/close.svg';
 import { useEffect, useState } from 'react';
 import { getDayMonth } from '.';
+import PaymentDetail from '../../shared/Profil/PaymentDetail';
+import { PaymentInfo, emptyPayment } from '../../shared/Profil';
 
 const Notification = () => {
   const jwtToken = localStorage.getItem('token');
   const [data, setData] = useState<Notification[]>([]);
-  console.log('ini state Data', data);
+  const [paymentInfo, setPaymentInfo] = useState<PaymentInfo>(emptyPayment);
+  const [isOpen, setIsOpen] = useState(false);
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -20,9 +24,7 @@ const Notification = () => {
           }
         );
         const notifData = await response.json();
-        console.log('INI ADALAH Respondnya', notifData);
         setData(notifData.data.notification);
-        console.log('ini data statae 2', data);
       } catch (error) {
         console.error('Error fetching data:', error);
       }
@@ -30,7 +32,29 @@ const Notification = () => {
     fetchData();
   }, [data, jwtToken]);
 
-  console.log(data);
+  const handlePopUp = (id: number) => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch(
+          `https://fsw-backend.fly.dev/api/v1/booking/${id}/status`,
+          {
+            headers: {
+              Authorization: `Bearer ${jwtToken}`,
+            },
+          }
+        );
+        const notifData = await response.json();
+        setPaymentInfo(notifData.data);
+        console.log(notifData.data);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+    fetchData();
+    setIsOpen(true);
+
+    console.log(paymentInfo);
+  };
   return (
     <>
       <Stack
@@ -67,9 +91,7 @@ const Notification = () => {
               fontWeight: 700,
               letterSpacing: '-0.5px',
             }}
-          >
-            Notifikasi
-          </Typography>
+          ></Typography>
         ) : (
           data.map((item, index) => (
             <Stack
@@ -87,16 +109,24 @@ const Notification = () => {
                 cursor: 'pointer',
               }}
               gap={2}
-              onClick={() => {}}
+              onClick={() => handlePopUp(Number(item.id))}
             >
-              <img src={Mail} alt='icon' />
+              <img src={PaymentNotif} alt='icon' />
               <Stack width={'100%'}>
                 <Stack
                   direction={'row'}
                   justifyContent={'space-between'}
                   width={'100%'}
                 >
-                  <Typography>{`${item.title}`}</Typography>
+                  <Typography
+                    sx={{
+                      color: '#1C1C1E',
+                      fontFamily: 'Open Sans',
+                      fontSize: '20px',
+                      fontWeight: 600,
+                      letterSpacing: '-0.75px',
+                    }}
+                  >{`${item.title}`}</Typography>
                   <Typography
                     sx={{
                       color: '#9E9E9E',
@@ -117,6 +147,25 @@ const Notification = () => {
                   }}
                 >{`${item.detail}`}</Typography>
               </Stack>
+              <Dialog open={isOpen}>
+                <Stack padding={2} gap={2}>
+                  <img
+                    src={CloseIcon}
+                    alt='icon'
+                    style={{ alignSelf: 'flex-end' }}
+                    onClick={() => setIsOpen(false)}
+                  />
+                  <PaymentDetail
+                    methodName={paymentInfo!.methodName}
+                    paymentDateTime={paymentInfo!.paymentDateTime}
+                    totalPrice={paymentInfo!.totalPrice}
+                    invoiceNumber={paymentInfo!.invoiceNumber}
+                  />
+                  <Button variant='outlined' color='secondary'>
+                    Download
+                  </Button>
+                </Stack>
+              </Dialog>
             </Stack>
           ))
         )}
