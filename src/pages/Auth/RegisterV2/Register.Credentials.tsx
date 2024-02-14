@@ -68,6 +68,7 @@ export default function RegisterCredentials({ email }: IEmailProps) {
           body: JSON.stringify({ email: email }),
         }
       ).then(() => {
+        alert('Register berhasil! Silakan Login menggunakan akunmu.');
         setOpen(true);
       });
     });
