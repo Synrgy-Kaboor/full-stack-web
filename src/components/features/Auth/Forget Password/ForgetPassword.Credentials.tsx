@@ -29,47 +29,41 @@ export default function ForgetPasswordCredentials({ email }: IEmail) {
     useState<boolean>(false);
   const navigate = useNavigate();
 
-  // console.log(retypedPassword);
-  // console.log(password);
-  // console.log(email);
-
   const handleLogin = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setLoading(true);
 
-    if (password === retypedPassword) {
-      await fetch(
-        'https://kaboor-api-dev.up.railway.app/api/v1/auth/password/change',
-        {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            email: email,
-            newPassword: password,
-          }),
+    // console.log(email);
+    // console.log(password);
+    // console.log(retypedPassword);
+
+    await fetch('https://fsw-backend.fly.dev/api/v1/auth/user/password', {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        email: email,
+        password: password,
+        rePassword: retypedPassword,
+      }),
+    })
+      .then((response) => {
+        setLoading(false);
+        // console.log(email);
+        // console.log(password);
+        return response.json();
+      })
+      .then((data) => {
+        console.log(data);
+        if (data.code === 200) {
+          // localStorage.setItem("token", data.data.auth.jwt);
+          alert('Change password success!');
+          navigate('/auth/login');
+        } else {
+          alert('Change password failed. Please try again');
         }
-      )
-        .then((response) => {
-          setLoading(false);
-          console.log(email);
-          console.log(password);
-          return response.json();
-        })
-        .then((data) => {
-          console.log(data);
-          if (data.code === 200) {
-            // localStorage.setItem("token", data.data.auth.jwt);
-            alert('Change password success!');
-            navigate('/auth/login');
-          } else {
-            alert('Change password failed. Please try again');
-          }
-        });
-    } else {
-      alert('Change password failed. Please try again');
-    }
+      });
   };
 
   return (

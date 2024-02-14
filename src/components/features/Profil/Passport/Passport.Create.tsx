@@ -1,4 +1,10 @@
-import { Stack, Typography, OutlinedInput, Button } from '@mui/material';
+import {
+  Stack,
+  Typography,
+  OutlinedInput,
+  Button,
+  CircularProgress,
+} from '@mui/material';
 
 import { DemoItem } from '@mui/x-date-pickers/internals/demo';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
@@ -7,14 +13,54 @@ import { DesktopDatePicker } from '@mui/x-date-pickers/DesktopDatePicker';
 
 import theme from '../../../../config/theme';
 import { useNavigate } from 'react-router-dom';
-import { FormEvent } from 'react';
+import { useState, FormEvent } from 'react';
+// import { Navigate } from "react-router-dom";
 
 export default function CreatePassport() {
   const navigate = useNavigate();
+  const [fullname, setFullname] = useState<string>('');
+  const [passportNumber, setPassportNumber] = useState<string>('');
+  const [passportExpiredDate, setPassportExpiredDate] = useState<Date>(
+    new Date()
+  );
+  const [country, setCountry] = useState<string>('');
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    navigate(-1);
+    setIsLoading(true);
+
+    fetch('https://fsw-backend.fly.dev/api/v1/user/passport', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${localStorage.getItem('token')}`,
+      },
+      body: JSON.stringify({
+        passportNumber: passportNumber,
+        fullName: fullname,
+        expiredDate: passportExpiredDate,
+        nation: country,
+      }),
+    })
+      .then((res) => {
+        return res.json();
+      })
+      .then((data) => {
+        setIsLoading(false);
+        console.log(data);
+        if (data.code !== 201) {
+          alert('Penambahan Passport Gagal. Coba lagi');
+        } else {
+          alert('Penambahan passport berhasil');
+          navigate('/profil/passport');
+        }
+      });
+    // console.log(fullname);
+    // console.log(passportNumber);
+    // console.log(passportExpiredDate);
+    // console.log(country);
+    // navigate(-1);
   }
 
   return (
@@ -22,7 +68,8 @@ export default function CreatePassport() {
       p={4}
       bgcolor={'white'}
       borderRadius={2}
-      sx={{ border: '1px solid #C2C2C2' }}
+      maxWidth={'880px'}
+      sx={{ width: '100%', border: '1px solid #C2C2C2' }}
     >
       <Typography variant="h6" fontWeight={'bold'}>
         Paspor
@@ -41,6 +88,8 @@ export default function CreatePassport() {
           size="medium"
           placeholder="Masukkan Nama Lengkap"
           fullWidth
+          required
+          onChange={(e) => setFullname(e.target.value)}
         />
 
         <Typography mt={2} gutterBottom>
@@ -50,6 +99,8 @@ export default function CreatePassport() {
           size="medium"
           placeholder="Masukkan nomor paspor"
           fullWidth
+          required
+          onChange={(e) => setPassportNumber(e.target.value)}
         />
 
         <Typography mt={2} gutterBottom>
@@ -57,14 +108,26 @@ export default function CreatePassport() {
         </Typography>
         <LocalizationProvider dateAdapter={AdapterDayjs}>
           <DemoItem>
-            <DesktopDatePicker sx={{ width: '100%' }} />
+            <DesktopDatePicker
+              sx={{ width: '100%' }}
+              onChange={(e) => {
+                console.log(e.$d);
+                setPassportExpiredDate(new Date(e.$d));
+              }}
+            />
           </DemoItem>
         </LocalizationProvider>
 
         <Typography mt={2} gutterBottom>
           Negara yang Menerbitkan
         </Typography>
-        <OutlinedInput size="medium" placeholder="Masukkan Negara" fullWidth />
+        <OutlinedInput
+          size="medium"
+          placeholder="Masukkan Negara"
+          fullWidth
+          required
+          onChange={(e) => setCountry(e.target.value)}
+        />
 
         <Stack alignItems={'end'} sx={{ width: '100%' }} my={2}>
           <Button
@@ -75,7 +138,12 @@ export default function CreatePassport() {
               background: theme.palette.gradients?.horizontal,
             }}
           >
-            Simpan
+            {/* Simpan */}
+            {isLoading ? (
+              <CircularProgress sx={{ color: 'white' }} />
+            ) : (
+              'Simpan'
+            )}
           </Button>
         </Stack>
       </form>

@@ -34,8 +34,6 @@ export default function RegisterCredentials({ email }: IEmailProps) {
   const [open, setOpen] = useState<boolean>(false);
   const navigate = useNavigate();
 
-  console.log(password);
-
   const handleRegister = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setLoading(true);
@@ -47,19 +45,16 @@ export default function RegisterCredentials({ email }: IEmailProps) {
       password: password,
     };
 
-    await fetch(
-      'https://kaboor-api-dev.up.railway.app/api/v1/auth/register/user',
-      {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
-      }
-    ).then(async () => {
+    await fetch('https://fsw-backend.fly.dev/api/v1/auth/register/user', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(formData),
+    }).then(async () => {
       setLoading(false);
       await fetch(
-        'https://kaboor-api-dev.up.railway.app/api/v1/auth/otp/verify',
+        'https://fsw-backend.fly.dev/api/v1/auth/register/user/otp/verify',
         {
           method: 'POST',
           headers: {
@@ -107,6 +102,7 @@ export default function RegisterCredentials({ email }: IEmailProps) {
         <OutlinedInput
           sx={{ width: '100%' }}
           onChange={(e) => setPhoneNumber(e.target.value)}
+          required
           startAdornment={<InputAdornment position="start">+62</InputAdornment>}
         />
 
@@ -127,6 +123,7 @@ export default function RegisterCredentials({ email }: IEmailProps) {
           Nama Lengkap
         </Typography>
         <OutlinedInput
+          required
           sx={{ width: '100%' }}
           placeholder="Masukkan nama lengkap"
           onChange={(e) => setFullname(e.target.value)}
@@ -141,6 +138,7 @@ export default function RegisterCredentials({ email }: IEmailProps) {
           placeholder="Kata Sandi"
           sx={{ width: '100%' }}
           type={showPassword ? 'text' : 'password'}
+          required
           endAdornment={
             <InputAdornment position="end">
               {showPassword ? (
@@ -185,7 +183,7 @@ export default function RegisterCredentials({ email }: IEmailProps) {
       </Typography>
 
       <GlobalModals open={open} onClose={() => setOpen(false)}>
-        <OtpModals email={email} setOpen={setOpen} path={'/auth/login'} />
+        <OtpModals email={email} setOpen={setOpen} path={'register'} />
       </GlobalModals>
     </Box>
   );

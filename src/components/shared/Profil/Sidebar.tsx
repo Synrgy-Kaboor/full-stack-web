@@ -68,7 +68,7 @@ export default function Sidebar({ pathname }: SidebarProp) {
           padding={'26px 26px 26px 26px'}
         >
           <Avatar
-            alt='user-avatar'
+            alt="user-avatar"
             src={userInfo.imageUrl}
             sx={{
               width: '70px',
@@ -80,8 +80,8 @@ export default function Sidebar({ pathname }: SidebarProp) {
             }}
           />
           <Stack sx={{ cursor: 'pointer' }}>
-            <Typography variant='h6'>{userInfo.fullName}</Typography>
-            <Typography variant='body2' color={'#9E9E9E'}>
+            <Typography variant="h6">{userInfo.fullName}</Typography>
+            <Typography variant="body2" color={'#9E9E9E'}>
               Detail Informasi Pribadi
             </Typography>
           </Stack>
@@ -158,7 +158,7 @@ export default function Sidebar({ pathname }: SidebarProp) {
             >
               <img
                 src={data.icon}
-                alt=''
+                alt=""
                 width={'32px'}
                 height={'32px'}
                 style={{
@@ -170,7 +170,7 @@ export default function Sidebar({ pathname }: SidebarProp) {
                 }}
               />
               <Typography
-                variant='body2'
+                variant="body2"
                 sx={{
                   color: pathname.includes(
                     `/profil${sideBarItem1[index].route}`
@@ -213,7 +213,7 @@ export default function Sidebar({ pathname }: SidebarProp) {
               >
                 <img
                   src={data.icon}
-                  alt=''
+                  alt=""
                   width={'32px'}
                   height={'32px'}
                   style={{
@@ -225,7 +225,7 @@ export default function Sidebar({ pathname }: SidebarProp) {
                   }}
                 />
                 <Typography
-                  variant='body2'
+                  variant="body2"
                   sx={{
                     color: pathname.includes(
                       `/profil${sideBarItem1[index].route}`
@@ -259,25 +259,26 @@ export default function Sidebar({ pathname }: SidebarProp) {
           sx={{
             width: '100%',
             color: '#C2C2C2',
-            margin: '10px 0',
+            // margin: "10px 0",
             display: { xs: 'none', sm: 'flex' },
           }}
         />
         <Stack
           gap={2}
           direction={'row'}
+          // py={2}
           sx={{
             alignItems: 'center',
-            padding: '10px 45px',
+            padding: '15px 45px',
             cursor: 'pointer',
             width: '100%',
             display: { xs: 'none', sm: 'flex' },
           }}
           onClick={handleLogout}
         >
-          <img src={exitItem.icon} alt='' width={'32px'} height={'32px'} />
+          <img src={exitItem.icon} alt="" width={'32px'} height={'32px'} />
           <Typography
-            variant='body2'
+            variant="body2"
             sx={{
               color: '#505050',
               fontSize: '18px',
