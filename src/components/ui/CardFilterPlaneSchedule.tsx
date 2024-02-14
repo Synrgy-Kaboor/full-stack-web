@@ -10,6 +10,8 @@ import {
   IconButton,
   Slider,
   TextField,
+  useTheme,
+  useMediaQuery,
 } from '@mui/material';
 import {
   setReturnDate,
@@ -44,6 +46,9 @@ import { useAppDispatch } from '../../redux/hooks';
 import { IOSSwitch } from '../core/IOSSwitch';
 
 const CardFilterPlaneSchedule = (props: CardFilterPlaneScheduleProps) => {
+  
+  const newTheme = useTheme();
+  const isSmallScreen = useMediaQuery(newTheme.breakpoints.down('md'));
   const dispatch = useAppDispatch();
   const [homecomingVisible, setHomecomingVisible] = useState(false);
   const [modalPassangerVisible, setModalPassangerVisible] = useState(false);
@@ -143,7 +148,7 @@ const CardFilterPlaneSchedule = (props: CardFilterPlaneScheduleProps) => {
     <>
       <Card
         id='main-search-card'
-        sx={{ background: '#FFF', zIndex: 2, width: 'max-content' }}
+        sx={isSmallScreen ? { background: '#FFF', zIndex: 2}: { background: '#FFF', zIndex: 2 , width: 'max-content' }}
       >
         <CardContent sx={{ padding: '2rem' }}>
           <Stack direction={'column'} spacing={2}>

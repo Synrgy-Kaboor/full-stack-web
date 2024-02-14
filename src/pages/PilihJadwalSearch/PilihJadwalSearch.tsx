@@ -5,6 +5,8 @@ import {
   Button,
   Container,
   Box,
+  useTheme,
+  useMediaQuery,
 } from '@mui/material';
 import bgPesawat from '../../assets/ikhroma-bg-pesawat.jpg';
 import CardFilterPlaneSchedule from '../../components/ui/CardFilterPlaneSchedule';
@@ -14,6 +16,9 @@ import { useNavigate } from 'react-router-dom';
 import { NotificationAddOutlined } from '@mui/icons-material';
 
 const PilihJadwalSearch = () => {
+  const newTheme = useTheme();
+  const isSmallScreen = useMediaQuery(newTheme.breakpoints.down('md'));
+  const isTabletScreen = useMediaQuery(newTheme.breakpoints.down('lg'));
   const navigate = useNavigate();
   const originAirport = useAppSelector(
     (state) => state.searchJadwal.originAirportCode
@@ -74,7 +79,7 @@ url(${bgPesawat})`,
             item
             md={6}
             justifyContent={'center'}
-            alignItems={'flex-end'}
+            alignItems={isTabletScreen? 'center' :'flex-end'}
             position={'relative'}
             direction={'column'}
           >
@@ -84,7 +89,7 @@ url(${bgPesawat})`,
               onSubmit={handleSubmit}
               homecomingOn={true}
             />
-            <Stack direction={'row'} alignItems={'center'} spacing={4} mt={1.5}>
+            <Stack direction={isSmallScreen ? `column`: `row`} alignItems={'center'} spacing={4} mt={1.5}>
               <Typography
                 variant="h6"
                 fontWeight={600}
