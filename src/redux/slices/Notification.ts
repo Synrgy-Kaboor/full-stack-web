@@ -28,7 +28,9 @@ export const FlightAlertSlice = createSlice({
   name: 'filghtAlert',
   initialState: initialState,
   reducers: {
-    setFlightAlert : (state, action: PayloadAction<AlertType>) => state = action.payload
+    setFlightAlert : (_, action: PayloadAction<AlertType>) => {
+      return {...action.payload}
+    }
   }
 })
 

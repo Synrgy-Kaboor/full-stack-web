@@ -1,6 +1,5 @@
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import LoginRoutes from './pages/Auth/Login/Login.Routes';
-import DetailPenumpang from './pages/Booking/DetailPenumpang';
 import { PilihJadwalSearch } from './pages/PilihJadwalSearch';
 import JadwalKeberangkatan from './pages/JadwalPenerbangan/JadwalKeberangkatan';
 import JadwalKepulangan from './pages/JadwalPenerbangan/JadwalKepulangan';
@@ -29,11 +28,15 @@ import PriceAlertDetail from './components/ui/PriceAlertDetail';
 import RegisterRoutes from './pages/Auth/RegisterV2/Register.Routes';
 import ForgetPasswordRoutes from './pages/Auth/ForgetPassword/ForgetPassword.Routes';
 import PesananDetail from './components/features/Profil/PesananDetail';
+import ProtectedRoute from './components/features/Auth/ProtectedRoutes';
 
 const router = createBrowserRouter([
   {
     path: '',
-    element: <DefaultLayout />,
+    element: 
+      <ProtectedRoute>
+        <DefaultLayout />
+      </ProtectedRoute>,
     children: [
       {
         path: '/booking',
@@ -48,24 +51,26 @@ const router = createBrowserRouter([
         element: <StatusPembayaran />,
       },
       {
-        path: '/detail-penumpang',
-        element: <DetailPenumpang />,
-      },
-      {
         path: '/pilih-jadwal-search',
-        element: <PilihJadwalSearch />,
+        element: 
+            <PilihJadwalSearch />
       },
       {
         path: '/jadwal-keberangkatan',
-        element: <JadwalKeberangkatan />,
+        element: 
+          <JadwalKeberangkatan />,
       },
       {
         path: '/jadwal-kepulangan',
-        element: <JadwalKepulangan />,
+        element: 
+          <JadwalKepulangan />,
       },
       {
         path: '/profil',
-        element: <Profil />,
+        element: 
+          <ProtectedRoute>
+            <Profil />   
+          </ProtectedRoute>,
         children: [
           { index: true, element: <ChangeProfile /> },
           { path: 'ganti-email', element: <ChangeEmail /> },

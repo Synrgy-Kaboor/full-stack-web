@@ -117,11 +117,11 @@ export const bookingSlice = createSlice({
   } as BookingSliceState,
   reducers: {
     // Set Initial Data
-    setOutboundFlight: (state, action: PayloadAction<Flight>) => {
+    setOutboundFlight: (state, action: PayloadAction<Flight|null>) => {
       state.outboundFlight = action.payload;
       state.totalPrice = calculateTotalPrice(state);
     },
-    setReturnFlight: (state, action: PayloadAction<Flight>) => {
+    setReturnFlight: (state, action: PayloadAction<Flight|null>) => {
       state.returnFlight = action.payload;
       state.totalPrice = calculateTotalPrice(state);
     },

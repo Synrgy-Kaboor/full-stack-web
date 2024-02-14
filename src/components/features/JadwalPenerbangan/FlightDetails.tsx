@@ -16,40 +16,42 @@ export default function FlightDetails(props: FilterValue) {
       direction='row'
       alignItems='center'
       justifyContent='space-between'
-      p={2}
+      p={1}
       sx={{ bgcolor: 'white', boxShadow: 1, borderRadius: 1 }}
     >
       {/* Pesawat */}
       <Stack
-        direction='row'
+        direction={{ xs: 'column', md: 'row' }}
         spacing={1}
         justifyContent='center'
+        alignItems={'center'}
         sx={{ width: '100%' }}
+        p={1}
       >
-        <Typography>{props.from}</Typography>
+        <Typography fontSize={{ xs: 12, md: 16 }}>{props.from}</Typography>
         <ArrowForwardIcon sx={{ color: 'gray' }} />
-        <Typography>{props.to}</Typography>
+        <Typography fontSize={{ xs: 12, md: 16 }}>{props.to}</Typography>
       </Stack>
 
       <Divider orientation='vertical' flexItem />
 
       {/* Tanggal */}
-      <Stack direction='row' justifyContent='center' sx={{ width: '100%' }}>
-        <Typography>{props.date}</Typography>
+      <Stack direction='row' justifyContent='center' sx={{ width: '100%' }} p={1}>
+        <Typography textAlign={'center'} fontSize={{ xs: 12, md: 16 }}>{props.date}</Typography>
       </Stack>
 
       <Divider orientation='vertical' flexItem />
 
       {/* Jumlah Penumpang */}
-      <Stack direction='row' justifyContent='center' sx={{ width: '100%' }}>
-        <Typography>{`${props.passenger} Orang`}</Typography>
+      <Stack direction='row' justifyContent='center' sx={{ width: '100%' }} p={1}>
+        <Typography textAlign={'center'} fontSize={{ xs: 12, md: 16 }}>{`${props.passenger} Orang`}</Typography>
       </Stack>
 
       <Divider orientation='vertical' flexItem />
 
       {/* Kelas Pesawat */}
-      <Stack direction='row' justifyContent='center' sx={{ width: '100%' }}>
-        <Typography>{props.flightClass}</Typography>
+      <Stack direction='row' justifyContent='center' sx={{ width: '100%' }} p={1}>
+        <Typography textAlign={'center'} fontSize={{ xs: 12, md: 16 }}>{props.flightClass}</Typography>
       </Stack>
     </Stack>
   );

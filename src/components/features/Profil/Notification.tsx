@@ -1,6 +1,6 @@
 import { Dialog, Stack, Typography, Button } from '@mui/material';
-import { Notification } from '.';
 import PaymentNotif from './../../../assets/paymentNotif.svg';
+import { NotificationData } from '.';
 import CloseIcon from './../../../assets/close.svg';
 import { useEffect, useState } from 'react';
 import { getDayMonth } from '.';
@@ -9,7 +9,7 @@ import { PaymentInfo, emptyPayment } from '../../shared/Profil';
 
 const Notification = () => {
   const jwtToken = localStorage.getItem('token');
-  const [data, setData] = useState<Notification[]>([]);
+  const [data, setData] = useState<NotificationData[]>([]);
   const [paymentInfo, setPaymentInfo] = useState<PaymentInfo>(emptyPayment);
   const [isOpen, setIsOpen] = useState(false);
   useEffect(() => {
@@ -30,7 +30,7 @@ const Notification = () => {
       }
     };
     fetchData();
-  }, [data, jwtToken]);
+  }, [jwtToken]);
 
   const handlePopUp = (id: number) => {
     const fetchData = async () => {
