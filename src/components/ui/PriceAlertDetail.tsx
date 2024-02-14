@@ -109,6 +109,11 @@ const PriceAlertDetail = () => {
                     item.babyPrice * flightAlert.totalBabies;
                   return (
                     <FlightTicket
+                      onClick={() =>
+                        navigate(
+                          `/booking?totalAdults=${flightAlert.totalAdults}&totalChildren=${flightAlert.totalChildren}&totalBabies=${flightAlert.totalBabies}&classCode=${flightAlert.classCode}&outboundFlightId=${item.id}`
+                        )
+                      }
                       forNotif={true}
                       key={index}
                       price={getRp(price)}
