@@ -35,13 +35,15 @@ export default function ForgetPasswordMain({ setEmail }: SetEmailProps) {
     setLoading(true);
 
     await fetch(
-      'https://kaboor-api-dev.up.railway.app/api/v1/auth/password/forget',
+      'https://fsw-backend.fly.dev/api/v1/auth/user/password/forget',
       {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(inputEmail),
+        body: JSON.stringify({
+          email: inputEmail,
+        }),
       }
     )
       .then((response) => {
@@ -49,12 +51,12 @@ export default function ForgetPasswordMain({ setEmail }: SetEmailProps) {
         return response.json();
       })
       .then(async (data) => {
-        console.log(data);
-        if (data.code !== 200) {
+        console.log(data.code);
+        if (data.code === 200) {
           setEmailStatus(false);
           setEmail(inputEmail);
           await fetch(
-            'https://kaboor-api-dev.up.railway.app/api/v1/auth/otp/verify',
+            'https://fsw-backend.fly.dev/api/v1/auth/user/password/otp/verify',
             {
               method: 'POST',
               headers: {
@@ -164,7 +166,11 @@ export default function ForgetPasswordMain({ setEmail }: SetEmailProps) {
       </Dialog>
 
       <GlobalModals open={open} onClose={() => setOpen(false)}>
-        <OtpModals email={inputEmail} setOpen={setOpen} path={'credentials'} />
+        <OtpModals
+          email={inputEmail}
+          setOpen={setOpen}
+          path={'forget-password'}
+        />
       </GlobalModals>
     </Box>
   );
