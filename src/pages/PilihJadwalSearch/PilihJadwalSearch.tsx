@@ -4,11 +4,11 @@ import CardFilterPlaneSchedule from '../../components/ui/CardFilterPlaneSchedule
 import { type CardFilterPlaneScheduleType as filterType } from '../../types/CardFilterPlaneScheduleProps';
 import { useAppSelector } from '../../redux/hooks';
 import { useNavigate } from 'react-router-dom';
+
 const PilihJadwalSearch = () => {
   const navigate = useNavigate();
   const newTheme = useTheme();
   const sizeScreen = useMediaQuery(newTheme.breakpoints.up('md'));
-
   const originAirport = useAppSelector(
     (state) => state.searchJadwal.originAirportCode
   );
@@ -22,8 +22,19 @@ const PilihJadwalSearch = () => {
   const departureDate = useAppSelector(
     (state) => state.searchJadwal.departureDate
   );
+  const testTanggal = useAppSelector((state) => state.searchJadwal.returnDate);
   const handleSubmit = (value: Partial<filterType>): void => {
     console.log(value);
+    console.log('global state', [
+      adults,
+      childs,
+      babies,
+      classCode,
+      originAirport,
+      destinationAirport,
+      departureDate,
+      testTanggal,
+    ]);
     const url = `/jadwal-keberangkatan/?from=${originAirport}&to=${destinationAirport}&adults=${adults}&kids=${childs}&babies=${babies}&date=${departureDate}&class=${classCode}`;
     navigate(url);
   };

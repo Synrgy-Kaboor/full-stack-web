@@ -18,11 +18,11 @@ interface FlightList {
   to: string;
   originalTimezone: number;
   destinationTimezone: number;
+  forNotif?: boolean;
 }
 export default function FlightTicket(props: FlightList) {
   return (
     <Stack
-      direction='row'
       justifyContent='space-between'
       alignItems='center'
       p={2}
@@ -36,10 +36,22 @@ export default function FlightTicket(props: FlightList) {
           cursor: 'pointer',
           border: '1px solid purple',
         },
+        flexDirection: props.forNotif ? 'column' : { xs: 'column', sm: 'row' },
+        gap: { xs: '16px' },
       }}
     >
       {/* Maskapai */}
-      <Stack direction='row' alignItems='center' spacing={2}>
+      <Stack
+        direction='row'
+        alignItems='center'
+        spacing={2}
+        sx={{
+          justifyContent: props.forNotif
+            ? 'space-between'
+            : { xs: 'space-between', sm: 'center' },
+          width: { xs: '100%', sm: 'fit-content' },
+        }}
+      >
         <img src={props.airlineLogo} height={'50px'} width={'50px'} />
         <Stack direction='column'>
           <Typography variant='body1' sx={{ fontWeight: 'bold' }}>
@@ -52,7 +64,15 @@ export default function FlightTicket(props: FlightList) {
       </Stack>
 
       {/* Rute */}
-      <Stack direction='row' justifyContent='center' sx={{ width: '40%' }}>
+      <Stack
+        direction='row'
+        sx={{
+          width: props.forNotif ? '100%' : { sm: '40%', xs: '100%' },
+          justifyContent: props.forNotif
+            ? 'space-between'
+            : { xs: 'space-between', sm: 'center' },
+        }}
+      >
         <Box>
           <Typography variant='body2'>{props.from}</Typography>
           <Typography variant='body1' sx={{ fontWeight: 'bold' }}>

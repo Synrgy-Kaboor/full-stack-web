@@ -65,7 +65,7 @@ export default function JadwalKeberangkatan() {
   const classDetail: Record<string, string> = {
     E: 'EKONOMI',
     B: 'BISNIS',
-    FC: 'FIRST CLASS',
+    F: 'FIRST CLASS',
     EP: 'EKONOMI PREMIUM',
   };
 
@@ -103,7 +103,7 @@ export default function JadwalKeberangkatan() {
               {data.length ? (
                 data.map((item, index) => {
                   const price =
-                    (item.childPrice + item.adultPrice) * adults +
+                    (adults + childs) * item.adultPrice +
                     item.babyPrice * babies;
                   return (
                     <FlightTicket

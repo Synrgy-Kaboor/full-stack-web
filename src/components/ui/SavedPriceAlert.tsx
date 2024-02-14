@@ -6,15 +6,18 @@ import { getFlightClass } from '.';
 import { formatDate } from '.';
 import { useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
+import { useAppDispatch } from '../../redux/hooks';
 import { NotifFlightInfo } from '../features/InAppNotification';
 import { InAppNotificationSavedBox } from '../features/InAppNotification/InAppNotificationSavedBox';
 import { type CardFilterPlaneScheduleType as filterType } from '../../types/CardFilterPlaneScheduleProps';
+import { setFlightAlert } from '../../redux/slices/Notification';
 
 const SavedPriceAlert = () => {
   const [priceNotifList, setPriceNotifList] = useState<NotifFlightInfo[]>([]);
   const [modalFilterOpen, setModalFilterOpen] = useState(false);
   const [reFetch, setReFetch] = useState(true);
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
   const AirportList: { [key: string]: number } = {
     SUB: 1,
     CGK: 2,
@@ -25,7 +28,7 @@ const SavedPriceAlert = () => {
   const classDetail: Record<string, string> = {
     E: 'Ekonomi',
     B: 'Bisnis',
-    FC: 'First Class',
+    F: 'First Class',
     EP: 'Ekonomi Premium',
   };
   const jwtToken = localStorage.getItem('token');
@@ -50,7 +53,6 @@ const SavedPriceAlert = () => {
     };
     fetchData();
   }, [jwtToken, reFetch]);
-
   const handleSubmit = async (value: Partial<filterType>): Promise<void> => {
     console.log('Ini Value', value);
     const deparatureAirport = value.deparature!;
@@ -88,8 +90,8 @@ const SavedPriceAlert = () => {
   return (
     <>
       <Stack
-        px={6}
-        py={4}
+        px={{ md: 6, xs: 4 }}
+        py={{ md: 4, xs: 4 }}
         borderRadius={1}
         border={`1px solid ${'#C2C2C2'}`}
         width={'100%'}
@@ -139,7 +141,13 @@ const SavedPriceAlert = () => {
         </Stack>
         {priceNotifList.map((item, index) => (
           <InAppNotificationSavedBox
-            navigate={() => navigate(`/profil/saved-price-alert/${item.id}`)}
+            setReFetch={() => setReFetch(!reFetch)}
+            navigate={() => {
+              console.log(item);
+              dispatch(setFlightAlert(item));
+              console.log('updated STATE');
+              navigate(`/profil/saved-price-alert/detail`);
+            }}
             key={index}
             id={item.id}
             date={item.date}
@@ -153,9 +161,6 @@ const SavedPriceAlert = () => {
             flightClass={classDetail[item.classCode]}
           />
         ))}
-        <Typography variant='h6' fontWeight={600} color={'#505050'}>
-          Pulang Pergi
-        </Typography>
       </Stack>
     </>
   );

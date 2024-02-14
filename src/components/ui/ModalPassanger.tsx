@@ -49,9 +49,9 @@ const ModalPassanger = (props: ModalPassagerProps) => {
     <Modal
       open={props.open}
       onClose={handleOnClose}
-      aria-labelledby="modal-modal-title"
-      aria-describedby="modal-modal-description"
-      id="modal-passanger"
+      aria-labelledby='modal-modal-title'
+      aria-describedby='modal-modal-description'
+      id='modal-passanger'
     >
       <Box sx={modalStyle} width={isSmallScreen ? '100%' : 'auto'}>
         <Stack alignItems={'center'} width={'100%'} spacing={2}>
@@ -65,7 +65,7 @@ const ModalPassanger = (props: ModalPassagerProps) => {
               <ArrowBackIosOutlined></ArrowBackIosOutlined>
             </IconButton>
             <Typography
-              variant="h4"
+              variant='h4'
               fontWeight={700}
               textAlign={'center'}
               width={'100%'}
@@ -84,14 +84,14 @@ const ModalPassanger = (props: ModalPassagerProps) => {
               <Grid item xs={10}>
                 <Stack>
                   <Typography
-                    variant="h6"
+                    variant='h6'
                     fontWeight={600}
                     fontFamily={'Open Sans'}
                   >
                     Dewasa
                   </Typography>
                   <Typography
-                    variant="subtitle1"
+                    variant='subtitle1'
                     fontWeight={400}
                     color={'#9E9E9E'}
                     fontFamily={'Open Sans'}
@@ -114,7 +114,7 @@ const ModalPassanger = (props: ModalPassagerProps) => {
                     ></AddCircleOutlined>
                   </IconButton>
                   <Typography
-                    variant="h6"
+                    variant='h6'
                     fontWeight={600}
                     fontFamily={'Open Sans'}
                   >
@@ -148,14 +148,14 @@ const ModalPassanger = (props: ModalPassagerProps) => {
               <Grid item xs={10}>
                 <Stack>
                   <Typography
-                    variant="h6"
+                    variant='h6'
                     fontWeight={600}
                     fontFamily={'Open Sans'}
                   >
                     Anak
                   </Typography>
                   <Typography
-                    variant="subtitle1"
+                    variant='subtitle1'
                     fontWeight={400}
                     color={'#9E9E9E'}
                     fontFamily={'Open Sans'}
@@ -182,7 +182,7 @@ const ModalPassanger = (props: ModalPassagerProps) => {
                     ></AddCircleOutlined>
                   </IconButton>
                   <Typography
-                    variant="h6"
+                    variant='h6'
                     fontWeight={600}
                     fontFamily={'Open Sans'}
                   >
@@ -217,14 +217,14 @@ const ModalPassanger = (props: ModalPassagerProps) => {
               <Grid item xs={10}>
                 <Stack>
                   <Typography
-                    variant="h6"
+                    variant='h6'
                     fontWeight={600}
                     fontFamily={'Open Sans'}
                   >
                     Bayi
                   </Typography>
                   <Typography
-                    variant="subtitle1"
+                    variant='subtitle1'
                     fontWeight={400}
                     color={'#9E9E9E'}
                     fontFamily={'Open Sans'}
@@ -249,7 +249,7 @@ const ModalPassanger = (props: ModalPassagerProps) => {
                     ></AddCircleOutlined>
                   </IconButton>
                   <Typography
-                    variant="h6"
+                    variant='h6'
                     fontWeight={600}
                     fontFamily={'Open Sans'}
                   >
@@ -276,7 +276,7 @@ const ModalPassanger = (props: ModalPassagerProps) => {
           <Divider sx={{ width: '100%' }} />
           <Box width={'100%'}>
             <Typography
-              variant="subtitle1"
+              variant='subtitle1'
               fontWeight={400}
               color={'#9E9E9E'}
               fontFamily={'Open Sans'}
@@ -285,7 +285,7 @@ const ModalPassanger = (props: ModalPassagerProps) => {
               pajak, harga dapat bervariasi tergantung jenis penumpang.
             </Typography>
             <Typography
-              variant="subtitle1"
+              variant='subtitle1'
               fontWeight={600}
               sx={{
                 background: `background: theme.palette.gradients?.diagonal`,
@@ -300,7 +300,7 @@ const ModalPassanger = (props: ModalPassagerProps) => {
           <Divider sx={{ width: '100%', borderColor: '#FFF' }} />
           <Box width={'100%'}>
             <Button
-              variant="contained"
+              variant='contained'
               sx={{
                 background: `background: theme.palette.gradients?.diagonal`,
                 width: '100%',

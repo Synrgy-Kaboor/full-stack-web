@@ -62,6 +62,8 @@ export default function Booking() {
           arrivalDateTime: response.data.arrivalDatetime
         }));
       });
+    } else {
+      dispatch(setOutboundFlight(null))
     }
 
     if (returnFlightId) {
@@ -80,6 +82,8 @@ export default function Booking() {
           arrivalDateTime: response.data.arrivalDatetime
         }));
       });
+    } else {
+      dispatch(setReturnFlight(null))
     }
   }, [dispatch, navigate, searchParams]);
 
