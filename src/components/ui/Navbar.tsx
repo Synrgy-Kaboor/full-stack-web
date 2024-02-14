@@ -20,8 +20,9 @@ import NotificationsNoneOutlinedIcon from '@mui/icons-material/NotificationsNone
 import MenuIcon from '@mui/icons-material/Menu';
 
 import { useNavigate } from 'react-router-dom';
-import React, { useState } from 'react';
-import { useAppSelector } from '../../redux/hooks';
+import React, { useEffect, useState } from 'react';
+import { useAppDispatch, useAppSelector } from '../../redux/hooks';
+import { fetchUser } from '../../redux/slices/userInfo';
 
 export interface NavbarProps {
   window?: () => Window;
@@ -49,6 +50,12 @@ function HideOnScroll(props: NavbarProps) {
 
 function UserLoggedIn(props: INavbarMenu) {
   const navigate = useNavigate();
+  const { imageUrl, fullName } = useAppSelector((state) => state.userInfo.user);
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(fetchUser());
+  }, [dispatch])
 
   return (
     <Stack direction="row" spacing={5} alignItems="center">
@@ -58,7 +65,10 @@ function UserLoggedIn(props: INavbarMenu) {
         spacing={1}
         alignItems="center"
         onClick={() => navigate('/profil/notifikasi')}
-        sx={{ display: { xs: 'none', sm: 'flex' } }}
+        sx={{ 
+          '&:hover': { cursor: 'pointer' },
+          display: { xs: 'none', sm: 'flex' } 
+        }}
       >
         <NotificationsNoneOutlinedIcon
           fontSize="large"
@@ -103,15 +113,43 @@ function UserLoggedIn(props: INavbarMenu) {
       </Stack>
 
       {/* Avatar */}
-      <Avatar
-        sx={{
-          bgcolor: 'primary.main',
-          '&:hover': { cursor: 'pointer' },
-        }}
-        onClick={() => navigate('/profil')}
-      >
-        A
-      </Avatar>
+      {
+        imageUrl && 
+        <Avatar
+          sx={{
+            bgcolor: 'primary.main',
+            '&:hover': { cursor: 'pointer' },
+          }}
+          onClick={() => navigate('/profil')}
+        >
+          <img src={imageUrl} width={'100%'} height={'100%'}/>
+        </Avatar>
+      }
+      {
+        !imageUrl && fullName[0] &&
+        <Avatar
+          sx={{
+            bgcolor: 'primary.main',
+            '&:hover': { cursor: 'pointer' },
+          }}
+          onClick={() => navigate('/profil')}
+        >
+          {fullName[0]}
+        </Avatar>
+      }
+      {
+        !imageUrl && !fullName && 
+        <Avatar
+          sx={{
+            bgcolor: 'primary.main',
+            '&:hover': { cursor: 'pointer' },
+          }}
+          onClick={() => navigate('/profil')}
+        >
+          .
+        </Avatar>
+      }
+
     </Stack>
   );
 }
