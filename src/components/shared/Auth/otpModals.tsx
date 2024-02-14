@@ -197,6 +197,25 @@ export default function OtpModals({ setOpen, email, path }: OtpModalsProps) {
     console.log(otpResendEndpoint);
   }, [path, otpResendEndpoint, otpVerifyEndpoint]);
 
+  useEffect(() => {
+    let otpReq = '';
+    for (let i = 0; i < 4; i++) {
+      otpReq += otp[i];
+    }
+    if (path === 'register') {
+      setOtpSubmit({
+        ...otpSubmit,
+        otp: otpReq,
+      });
+    } else if (path === 'forget-password') {
+      setOtpSubmit({
+        ...otpSubmit,
+        email: email,
+        otp: otpReq,
+      });
+    }
+  }, [email, path, otp, otpSubmit]);
+
   const inputRefs = [
     useRef<HTMLInputElement>(null),
     useRef<HTMLInputElement>(null),
@@ -226,27 +245,21 @@ export default function OtpModals({ setOpen, email, path }: OtpModalsProps) {
     }
   };
 
-  let otpReq = '';
-  for (let i = 0; i < 4; i++) {
-    otpReq += otp[i];
-  }
-
   const handleVerification = async () => {
     setIsLoading(true);
 
-    if (path === 'register') {
-      setOtpSubmit({
-        ...otpSubmit,
-        otp: otpReq,
-      });
-    } else if (path === 'forget-password') {
-      setOtpSubmit({
-        ...otpSubmit,
-        email: email,
-        otp: otpReq,
-      });
-    }
-
+    // if (path === "register") {
+    //   setOtpSubmit({
+    //     ...otpSubmit,
+    //     otp: otpReq,
+    //   });
+    // } else if (path === "forget-password") {
+    //   setOtpSubmit({
+    //     ...otpSubmit,
+    //     email: email,
+    //     otp: otpReq,
+    //   });
+    // }
     console.log(otpSubmit);
 
     const otpResponse = await fetch(otpVerifyEndpoint, {
