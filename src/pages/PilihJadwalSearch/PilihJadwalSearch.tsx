@@ -57,12 +57,11 @@ const PilihJadwalSearch = () => {
 linear-gradient(270deg, rgba(58, 66, 255, 0.50) 0%, rgba(123, 82, 171, 0.50) 100%),
 url(${bgPesawat})`,
         backgroundRepeat: 'no-repeat',
-        backgroundSize: 'cover',
-        height: '100vh',
+        backgroundSize: 'cover'
       }}
     >
       <Container>
-        <Grid container rowSpacing={2} alignItems={'center'}>
+        <Grid container rowSpacing={2} alignItems={'center'} height={'95vh'}>
           <Grid container item md={6}>
             <Typography
               variant="h3"
