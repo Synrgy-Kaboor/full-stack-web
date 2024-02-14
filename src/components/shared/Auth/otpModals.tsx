@@ -1,9 +1,10 @@
 import Button from '@mui/material/Button';
-import { useState, useRef, ChangeEvent } from 'react';
+import { useState, useRef, ChangeEvent, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { styled as muiStyled } from '@mui/material/styles';
 import styled from 'styled-components';
 import Countdown from './timer';
+import { CircularProgress } from '@mui/material';
 
 const FirstButton = styled(Button)`
   color: var(--shadow, #fff);
@@ -158,11 +159,43 @@ interface OtpModalsProps {
   path: string;
 }
 
+interface OtpSubmitProps {
+  email?: string;
+  otp: string;
+}
+
 export default function OtpModals({ setOpen, email, path }: OtpModalsProps) {
   const [otp, setOtp] = useState(['', '', '', '']);
+  const [otpSubmit, setOtpSubmit] = useState<OtpSubmitProps>({
+    otp: '',
+  });
+  const [otpVerifyEndpoint, setOtpVerifyEndpoint] = useState<string>('');
+  const [otpResendEndpoint, setOtpResendEndpoint] = useState<string>('');
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const [time, setTime] = useState(180);
 
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (path === 'register') {
+      setOtpVerifyEndpoint(
+        'https://kaboor-api-dev.up.railway.app/api/v1/auth/otp/verify'
+      );
+      setOtpResendEndpoint(
+        'https://fsw-backend.fly.dev/api/v1/auth/register/user/otp/resend'
+      );
+    } else if (path === 'forget-password') {
+      setOtpVerifyEndpoint(
+        'https://fsw-backend.fly.dev/api/v1/auth/user/password/otp/verify'
+      );
+      setOtpResendEndpoint(
+        'https://fsw-backend.fly.dev/api/v1/auth/user/password/otp/resend'
+      );
+    }
+
+    console.log(otpVerifyEndpoint);
+    console.log(otpResendEndpoint);
+  }, [path, otpResendEndpoint, otpVerifyEndpoint]);
 
   const inputRefs = [
     useRef<HTMLInputElement>(null),
@@ -199,42 +232,58 @@ export default function OtpModals({ setOpen, email, path }: OtpModalsProps) {
   }
 
   const handleVerification = async () => {
-    const otpPayload = {
-      otp: otpReq,
-    };
-    const otpResponse = await fetch(
-      'https://kaboor-api-dev.up.railway.app/api/v1/auth/otp/verify',
-      {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(otpPayload),
-      }
-    );
+    setIsLoading(true);
+
+    if (path === 'register') {
+      setOtpSubmit({
+        ...otpSubmit,
+        otp: otpReq,
+      });
+    } else if (path === 'forget-password') {
+      setOtpSubmit({
+        ...otpSubmit,
+        email: email,
+        otp: otpReq,
+      });
+    }
+
+    console.log(otpSubmit);
+
+    const otpResponse = await fetch(otpVerifyEndpoint, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(otpSubmit),
+    });
     const otpStatus = await otpResponse.json();
 
     if (otpStatus.code === 200) {
+      setIsLoading(false);
       setOpen(false);
-      navigate(path);
+      if (path === 'register') {
+        alert('Register berhasil. Silakan Login menggunakan akunmu');
+        navigate('/auth/login');
+      } else if (path === 'forget-password') {
+        navigate('credentials');
+      }
     } else {
+      setIsLoading(false);
       alert('Kode OTP milikmu sudah kadaluarsa');
     }
   };
 
   const sendOtp = async () => {
-    const sendtOtpResponse = await fetch(
-      'https://kaboor-api-dev.up.railway.app/api/v1/auth/otp/resend',
-      {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ email: email }),
-      }
-    );
+    const sendtOtpResponse = await fetch(otpResendEndpoint, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ email: email }),
+    });
     const sentOtpStatus = await sendtOtpResponse.json();
     console.log(sentOtpStatus);
+    alert('Kode OTP mu sudah kami kirim ulang ke email, ya...');
     setTime(180);
   };
 
@@ -269,7 +318,11 @@ export default function OtpModals({ setOpen, email, path }: OtpModalsProps) {
         </Wrapper>
         <Wrapper>
           <FirstButton type="button" onClick={handleVerification}>
-            Verifikasi
+            {isLoading ? (
+              <CircularProgress sx={{ color: 'white' }} />
+            ) : (
+              'Verifikasi'
+            )}
           </FirstButton>
           <SecondButton type="button" onClick={sendOtp}>
             Kirim Lagi
