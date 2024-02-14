@@ -1,24 +1,15 @@
-import { Dialog, Stack, Typography, Button } from '@mui/material';
+import { Stack, Typography } from '@mui/material';
 import PaymentNotif from './../../../assets/paymentNotif.svg';
 import { NotificationData } from '.';
-import CloseIcon from './../../../assets/close.svg';
-import { useEffect, useState, useRef } from 'react';
+// import CloseIcon from './../../../assets/close.svg';
+import { useEffect, useState } from 'react';
 import { getDayMonth } from '.';
-import PaymentDetail from '../../shared/Profil/PaymentDetail';
-import { PaymentInfo } from '../../shared/Profil';
-import { useReactToPrint } from 'react-to-print';
+import { useNavigate } from 'react-router-dom';
 
 const Notification = () => {
   const jwtToken = localStorage.getItem('token');
   const [data, setData] = useState<NotificationData[]>([]);
-  const [paymentInfo, setPaymentInfo] = useState<PaymentInfo>();
-  const [isOpen, setIsOpen] = useState(false);
-
-  const printRef = useRef<HTMLDivElement>(null);
-  const handlePrint = useReactToPrint({
-    content: () => printRef.current,
-    onAfterPrint: () => setIsOpen(false),
-  });
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -40,34 +31,10 @@ const Notification = () => {
     fetchData();
   }, [jwtToken]);
 
-  const fetchingData = async (id: number) => {
-    try {
-      const response = await fetch(
-        `https://fsw-backend.fly.dev/api/v1/booking/${id}/status`,
-        {
-          headers: {
-            Authorization: `Bearer ${jwtToken}`,
-          },
-        }
-      );
-      const notifData = await response.json();
-      console.log('ini yang mau gua liat', notifData);
-      return notifData.data;
-    } catch (error) {
-      console.error('Error fetching data:', error);
-    }
-  };
-
-  const handlePopUp = async (id: number) => {
-    setPaymentInfo(await fetchingData(id));
-    console.log('1', await fetchingData(id));
-    console.log('2', paymentInfo);
-    setIsOpen(true);
-  };
-
-  const handleClose = () => {
-    setIsOpen(false);
-    console.log('ini isOpen', isOpen);
+  const handleOnClick = (type: string) => {
+    type === 'approval'
+      ? navigate('/profil/pesanan')
+      : navigate('/profil/saved-price-alert');
   };
   return (
     <>
@@ -124,7 +91,7 @@ const Notification = () => {
                   cursor: 'pointer',
                 }}
                 gap={2}
-                onClick={() => handlePopUp(Number(item.id))}
+                onClick={() => handleOnClick(item.type)}
               >
                 <img src={PaymentNotif} alt='icon' />
                 <Stack width={'100%'}>
@@ -163,37 +130,6 @@ const Notification = () => {
                   >{`${item.detail}`}</Typography>
                 </Stack>
               </Stack>
-              {paymentInfo ? (
-                <Dialog open={isOpen} hideBackdrop>
-                  <Stack padding={2} gap={2}>
-                    <img
-                      src={CloseIcon}
-                      alt='icon'
-                      style={{ alignSelf: 'flex-end', cursor: 'pointer' }}
-                      onClick={handleClose}
-                    />
-                    <div ref={printRef}>
-                      <PaymentDetail
-                        methodName={paymentInfo!.methodName}
-                        paymentDateTime={
-                          paymentInfo!.paymentDateTime
-                            ? paymentInfo!.paymentDateTime
-                            : paymentInfo.expiredTime
-                        }
-                        totalPrice={paymentInfo!.totalPrice}
-                        invoiceNumber={paymentInfo!.invoiceNumber}
-                      />
-                    </div>
-                    <Button
-                      variant='outlined'
-                      color='secondary'
-                      onClick={handlePrint}
-                    >
-                      Download
-                    </Button>
-                  </Stack>
-                </Dialog>
-              ) : null}
             </>
           ))
         )}
