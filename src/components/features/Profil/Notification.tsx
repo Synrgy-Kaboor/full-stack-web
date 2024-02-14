@@ -1,5 +1,6 @@
 import { Stack, Typography } from '@mui/material';
 import PaymentNotif from './../../../assets/paymentNotif.svg';
+import PriceNotif from './../../../assets/notifPrice.svg';
 import { NotificationData } from '.';
 // import CloseIcon from './../../../assets/close.svg';
 import { useEffect, useState } from 'react';
@@ -93,7 +94,10 @@ const Notification = () => {
                 gap={2}
                 onClick={() => handleOnClick(item.type)}
               >
-                <img src={PaymentNotif} alt='icon' />
+                <img
+                  src={item.type === 'approval' ? PaymentNotif : PriceNotif}
+                  alt='icon'
+                />
                 <Stack width={'100%'}>
                   <Stack
                     direction={'row'}
