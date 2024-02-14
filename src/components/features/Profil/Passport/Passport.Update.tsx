@@ -11,6 +11,7 @@ import { DemoItem } from '@mui/x-date-pickers/internals/demo';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { DesktopDatePicker } from '@mui/x-date-pickers/DesktopDatePicker';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { Dayjs } from 'dayjs';
 
 import theme from '../../../../config/theme';
 import { useNavigate, useParams } from 'react-router-dom';
@@ -20,8 +21,8 @@ export default function UpdatePassport() {
   const navigate = useNavigate();
   const [fullname, setFullname] = useState<string>('');
   const [passportNumber, setPassportNumber] = useState<string>('');
-  const [passportExpiredDate, setPassportExpiredDate] = useState<Date>(
-    new Date()
+  const [passportExpiredDate, setPassportExpiredDate] = useState<Dayjs | null>(
+    null
   );
   const [country, setCountry] = useState<string>('');
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -132,9 +133,9 @@ export default function UpdatePassport() {
             <DesktopDatePicker
               sx={{ width: '100%' }}
               value={dayjs(passportExpiredDate)}
-              onChange={(e) => {
-                console.log(e.$d);
-                setPassportExpiredDate(new Date(e.$d));
+              onChange={(e: Dayjs | null) => {
+                // console.log(e.$d);
+                setPassportExpiredDate(e);
               }}
             />
           </DemoItem>
