@@ -5,7 +5,7 @@ import LayananTambahan from './LayananTambahan';
 import MetodePembayaran from './MetodePembayaran';
 import { httpFetch } from '../../utils/http';
 import { useNavigate, useSearchParams } from 'react-router-dom';
-import { setClassCode, setInitialOrderer, setNumberOfPassengers, setOutboundFlight, setReturnFlight } from '../../redux/slices/Booking';
+import { resetState, setClassCode, setInitialOrderer, setNumberOfPassengers, setOutboundFlight, setReturnFlight } from '../../redux/slices/Booking';
 import { BeResponse } from '../../types/BeResponse';
 import { UserPersonalData } from '../../types/UserPersonalData';
 import { FlightResponseBody } from '../../types/FlightResponseBody';
@@ -17,6 +17,9 @@ export default function Booking() {
   const navigate = useNavigate(); 
 
   useEffect(() => {
+    // Reset redux state
+    dispatch(resetState());
+
     // Set class code
     dispatch(setClassCode(searchParams.get('classCode') || ''));
 
