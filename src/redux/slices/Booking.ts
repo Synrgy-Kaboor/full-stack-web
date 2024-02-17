@@ -83,40 +83,53 @@ interface BookingSliceState {
   totalBabies: number,
   classCode: string
 }
+const initialState: BookingSliceState = {
+  outboundFlight: null,
+  returnFlight: null,
+  booking: {
+    orderer: pemesanInitialState,
+    passengers: [],
+    addBaggage: false,
+    addTravelInsurance: false,
+    addBaggageInsurance: false,
+    addDelayProtection: false,
+    paymentMethod: 'BCA',
+    voucher: null,
+  },
+  detailPenumpang: {
+    pemesanPopupOpened: false,
+    penumpangPopupOpened: false,
+    selectedPenumpangOrder: 0
+  },
+  metodePembayaran: {
+    voucherPopupOpened: false,
+    vouchers: [],
+  },
+  totalPrice: 0,
+  totalAdults: 0,
+  totalChildren: 0,
+  totalBabies: 0,
+  currentPage: 1,
+  classCode: ''
+}
 
 export const bookingSlice = createSlice({
   name: 'booking',
-  initialState: {
-    outboundFlight: null,
-    returnFlight: null,
-    booking: {
-      orderer: pemesanInitialState,
-      passengers: [],
-      addBaggage: false,
-      addTravelInsurance: false,
-      addBaggageInsurance: false,
-      addDelayProtection: false,
-      paymentMethod: 'BCA',
-      voucher: null,
-    },
-    detailPenumpang: {
-      pemesanPopupOpened: false,
-      penumpangPopupOpened: false,
-      selectedPenumpangOrder: 0
-    },
-    metodePembayaran: {
-      voucherPopupOpened: false,
-      vouchers: [],
-    },
-    totalPrice: 0,
-    totalAdults: 0,
-    totalChildren: 0,
-    totalBabies: 0,
-    currentPage: 1,
-    classCode: ''
-  } as BookingSliceState,
+  initialState: initialState,
   reducers: {
     // Set Initial Data
+    resetState: (state) => {
+      state.outboundFlight = initialState.outboundFlight;
+      state.returnFlight = initialState.returnFlight;
+      state.booking = initialState.booking;
+      state.detailPenumpang = initialState.detailPenumpang;
+      state.metodePembayaran = initialState.metodePembayaran;
+      state.totalPrice = initialState.totalPrice;
+      state.totalAdults = initialState.totalAdults;
+      state.totalChildren = initialState.totalChildren;
+      state.currentPage = initialState.currentPage;
+      state.classCode = initialState.classCode;
+    },
     setOutboundFlight: (state, action: PayloadAction<Flight|null>) => {
       state.outboundFlight = action.payload;
       state.totalPrice = calculateTotalPrice(state);
@@ -224,6 +237,7 @@ export const bookingSlice = createSlice({
 });
 
 export const { 
+  resetState,
   setOutboundFlight,
   setReturnFlight,
   setNumberOfPassengers,
