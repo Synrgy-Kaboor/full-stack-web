@@ -498,6 +498,7 @@ const CardFilterPlaneSchedule = (props: CardFilterPlaneScheduleProps) => {
                 valueLabelDisplay='auto'
                 getAriaValueText={(value: number) => `Rp.${value}`}
                 max={10000000}
+                step={50000}
               ></Slider>
             </Box>
             <Box>
