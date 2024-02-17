@@ -91,20 +91,6 @@ const InAppNotificationSavedBox = (props: NotificationBox) => {
                     <Typography
                       variant='h6'
                       sx={{
-                        background: theme.palette.gradients?.diagonal,
-                        backgroundClip: 'text',
-                        color: 'transparent',
-                        cursor: 'pointer',
-                      }}
-                      fontWeight={600}
-                      px={3.5}
-                    >
-                      Edit Notifikasi Harga
-                    </Typography>
-                    <Divider />
-                    <Typography
-                      variant='h6'
-                      sx={{
                         background: '#CB3A31',
                         backgroundClip: 'text',
                         color: 'transparent',

@@ -9,11 +9,10 @@ import {
 } from '@mui/material';
 import { sideBarItem1, exitItem } from '.';
 import { useNavigate } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useAppDispatch, useAppSelector } from './../../../redux/hooks';
 // import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
-import { fetchUser } from '../../../redux/slices/userInfo';
 import { setToken } from '../../../redux/slices/Auth';
 
 interface SidebarProp {
@@ -30,10 +29,6 @@ export default function Sidebar({ pathname }: SidebarProp) {
     null | HTMLElement | SVGSVGElement
   >(null);
   const dispatch = useAppDispatch();
-
-  useEffect(() => {
-    dispatch(fetchUser());
-  }, [dispatch]);
 
   const handleListItemClick = (index: number) => {
     navigate(`/profil${sideBarItem1[index].route}`);
