@@ -55,7 +55,8 @@ function UserLoggedIn(props: INavbarMenu) {
 
   useEffect(() => {
     dispatch(fetchUser());
-  }, [dispatch])
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <Stack direction="row" spacing={5} alignItems="center">

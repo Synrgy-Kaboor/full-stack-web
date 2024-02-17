@@ -18,7 +18,9 @@ const Pesanan = () => {
       {},
       'fsw',
     ).then(response => {
-      setPesananAktif(response.data);
+      setPesananAktif(response.data.sort((p1, p2) => {
+        return Number(p2.id) - Number(p1.id);
+      }));
     });
 
     httpFetch<BeResponse<UserBooking[]>>(
@@ -27,7 +29,9 @@ const Pesanan = () => {
       {},
       'fsw',
     ).then(response => {
-      setPesananSelesai(response.data);
+      setPesananSelesai(response.data.sort((p1, p2) => {
+        return Number(p2.id) - Number(p1.id);
+      }));
     });
   }, []);
 
