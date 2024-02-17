@@ -6,6 +6,7 @@ import { NotificationData } from '.';
 import { useEffect, useState } from 'react';
 import { getDayMonth } from '.';
 import { useNavigate } from 'react-router-dom';
+import { BeResponse } from '../../../types/BeResponse';
 
 const Notification = () => {
   const jwtToken = localStorage.getItem('token');
@@ -23,8 +24,10 @@ const Notification = () => {
             },
           }
         );
-        const notifData = await response.json();
-        setData(notifData.data.notification);
+        const notifData = (await response.json()) as BeResponse<{notification: NotificationData[]}>;
+        setData(notifData.data.notification.sort((p1, p2) => {
+          return Number(p2.id) - Number(p1.id);
+        }));
       } catch (error) {
         console.error('Error fetching data:', error);
       }
@@ -84,7 +87,6 @@ const Notification = () => {
                 alignItems={'start'}
                 sx={{
                   width: '100%',
-                  height: '100%',
                   padding: '8px 16px',
                   borderRadius: '8px',
                   border: '1px solid #C2C2C2',
